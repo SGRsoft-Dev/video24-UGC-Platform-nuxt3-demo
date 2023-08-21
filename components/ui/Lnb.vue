@@ -1,11 +1,12 @@
 <template>
   <div class="relative h-full">
     <div class="relative h-full overflow-auto pb-[40px]">
-      <div class="sticky top-0 bg-white/10 backdrop-blur">
+      <div class="sticky top-0 backdrop-blur">
         <div class="p-3 text-center">
+
           <NuxtLink to="/dashboard">
             <img
-              src="~/assets/image/logo.svg"
+              :src="logo"
               class="px-5 w-full h-10 object-contain"
               alt=""
             >
@@ -69,12 +70,12 @@
             </div>
             <div v-else>
               <NuxtLink
-                :class="{'router-link-exact-active': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2]}"
+                :class="{'router-link-exact-active': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2]  }"
                 :to="mm.to"
               >
                 <div
                   class="flex text-[14px] py-3 pl-4 pr-3 hover:bg-gray-100 transition"
-                  :class="{'text-[#6366f1]': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2] || route.path.indexOf(mm.toPath) > -1 }"
+                  :class="{'text-[#6366f1]': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2] || route.path.indexOf(mm.toPath) > -1 , 'dark' : isDark , 'light' : !isDark }"
                 >
                   <i
                     :class="mm.icon"
@@ -90,7 +91,7 @@
         </div>
       </transition-group>
     </div>
-    <div class="absolute w-full p-3 border-t bottom-0 bg-white/30 backdrop-blur">
+    <div class="absolute w-full p-3  bottom-0  backdrop-blur">
       <a
         href="https://ncloud.com"
         target="_blank"
@@ -106,6 +107,21 @@
 </template>
 
 <script setup>
+import darkLogo from '@/assets/image/logo_dark.svg';
+import lightLogo from '@/assets/image/logo.svg';
+const colorMode = useColorMode();
+const isDark = computed({
+	get () {
+		return colorMode.value === 'dark'
+	},
+	set () {
+		colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+	}
+});
+
+const logo = computed(() => {
+	return isDark.value ? darkLogo : lightLogo;
+});
 // Composable 선언
 const route = useRoute();
 
@@ -166,11 +182,21 @@ dashboardLeftMenu.value = menus.value;
 
 <style scoped>
 .router-link-exact-active > div {
-  background-color: #eff6ff;
-  color: #6366f1;
-  border-right: 2px solid #6366f1;
+
   font-weight: bold;
+	border-radius: 0 10px 10px 0;
 }
+
+.router-link-exact-active > div.light {
+	background-color: rgba(238, 238, 238, 0.5);
+	color: #ff4b5f;
+}
+
+.router-link-exact-active > div.dark {
+	background-color: rgba(238, 238, 238, 0.2);
+	color: #fa1029;
+}
+
 
 .fade-move,
 .fade-enter-active,

@@ -17,7 +17,7 @@
 								{{v.channel_name}}
 							</div>
 							<div class="text-xs text-gray-400 pt-1">
-								조회수 {{v.view_cnt || 0}}<i class="ph ph-dot "></i>{{$util.textTime(v.created_at)}}
+								조회수 {{v.view_cnt || 0}}회<i class="ph ph-dot "></i>{{$util.textTime(v.created_at)}}
 							</div>
 
 						</div>

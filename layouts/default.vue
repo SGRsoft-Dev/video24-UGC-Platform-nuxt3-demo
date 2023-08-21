@@ -4,7 +4,7 @@
   >
 	  <UiGnb/>
     <div
-      class="w-[220px] h-full fixed top-0 left-0 bg-white border-r border-[#64646419] z-20"
+      class="w-[220px] h-full fixed top-0 left-0  z-20 backdrop-blur"
     >
       <UiLnb />
     </div>

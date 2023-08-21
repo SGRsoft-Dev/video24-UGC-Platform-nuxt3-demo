@@ -5,7 +5,6 @@ import  utc from 'dayjs/plugin/utc.js'
 dayjs.extend(timezone) // use plugin
 dayjs.extend(utc) // use plugin
 
-import noimg from '~/assets/img/no_screen.jpeg'
 
 const util = {
     /**
@@ -53,13 +52,6 @@ const util = {
     },
     dateFormat2:(date) => {
         return dayjs(date).tz('asia/Seoul').format('YYYY.MM.DD HH:mm');
-    },
-    /**
-     * 이미지 에러시 대체 이미지
-     * @param e
-     */
-    imageError:(e)=>{
-        e.target.src = noimg
     },
 
 
