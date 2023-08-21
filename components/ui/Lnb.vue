@@ -1,13 +1,15 @@
 <template>
-  <div class="relative h-full">
+  <div class="relative h-full pl-3">
     <div class="relative h-full overflow-auto pb-[40px]">
       <div class="sticky top-0 backdrop-blur">
-        <div class="p-3 text-center">
+        <div class="p-4 text-center flex items-center text-[16px]">
+
+	        <i class="ph ph-list mr-1"></i>
 
           <NuxtLink to="/dashboard">
             <img
               :src="logo"
-              class="px-5 w-full h-10 object-contain"
+              class="px-2 w-full h-10 object-contain"
               alt=""
             >
           </NuxtLink>
@@ -26,7 +28,7 @@
             <div v-if="mm.subs">
               <div @click="mm.isOpen = !mm.isOpen; closeOthers(mm)">
                 <div
-                  class="flex text-[14px] py-3 pl-4 pr-3 hover:bg-gray-100 transition text-bold"
+                  class="flex text-[14px] py-3 pl-4 pr-3 transition text-bold"
                   :class="{'text-[#6366f1]' : route.path.indexOf(mm.toPath) > -1}"
                 >
                   <i
@@ -52,7 +54,7 @@
                   <div
                     v-for="mmm in mm.subs"
                     :key="mmm.index"
-                    class="hover:bg-gray-100 transition"
+                    class=" transition"
                   >
                     <NuxtLink :to="mmm.to">
                       <div class="pl-4 py-3 text-[13px] flex">
@@ -74,7 +76,7 @@
                 :to="mm.to"
               >
                 <div
-                  class="flex text-[14px] py-3 pl-4 pr-3 hover:bg-gray-100 transition"
+                  class="flex text-[16px] py-2 pl-4 pr-3 mb-2 hover:font-bold transition"
                   :class="{'text-[#6366f1]': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2] || route.path.indexOf(mm.toPath) > -1 , 'dark' : isDark , 'light' : !isDark }"
                 >
                   <i
@@ -184,7 +186,7 @@ dashboardLeftMenu.value = menus.value;
 .router-link-exact-active > div {
 
   font-weight: bold;
-	border-radius: 0 10px 10px 0;
+	border-radius: 10px;
 }
 
 .router-link-exact-active > div.light {

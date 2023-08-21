@@ -1,5 +1,5 @@
 <template>
-	<div class="p-3">
+	<div class="p-5">
 
 		<div class="videoRoot">
 			<div v-for="(v , i) in VOD" class="videoItem">

@@ -8,7 +8,7 @@
     >
       <UiLnb />
     </div>
-    <div class="pl-[220px] h-full">
+    <div class="pl-[240px] h-full ">
       <slot />
     </div>
   </div>
