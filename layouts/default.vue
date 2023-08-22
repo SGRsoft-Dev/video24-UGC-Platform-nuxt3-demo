@@ -58,7 +58,7 @@ const colorMode = useColorMode();
 
 
 watch(()=>route.path,(path)=>{
-	if(path == '/watch') {
+	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;
 	}else{
@@ -81,7 +81,7 @@ const closeVideo = ()=>{
 }
 
 onMounted(()=>{
-	if(route.path == '/watch') {
+	if(route.path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false
 		watchMode.value = true;
 	}else{
