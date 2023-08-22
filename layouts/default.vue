@@ -1,17 +1,17 @@
 <template>
-  <div class=" relative">
-	  <UiGnb/>
-    <div class=" h-full fixed top-0 left-0  z-20 backdrop-blur  " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode }">
-      <UiLnb />
-    </div>
-    <div class=" h-full  mt-[74px] " :class="{'pl-[240px]' : leftMenuOpen , 'pl-[60px]' : !leftMenuOpen && !watchMode}">
-      <slot />
-    </div>
-  </div>
+	<div class=" relative h-full  " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
+		<UiGnb/>
+		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode }">
+			<UiLnb />
+		</div>
+		<div class=" h-full  mt-[72px] " :class="{'pl-[240px]' : leftMenuOpen , 'pl-[60px]' : !leftMenuOpen && !watchMode}">
+			<slot />
+		</div>
+	</div>
 
 
 
-	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode}">
+	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode , 'container mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
 
 			<div class="relative">
 				<div class="playerFrame">
@@ -34,8 +34,8 @@
 				</div>
 			</div>
 
-			<div v-if="!watchMode" class="p-3 " :class="{'bg-black' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
-				<div class="text-base">
+			<div v-if="!watchMode" class="p-3 " :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
+				<div class="text-base el">
 					{{VIDEO.title}}
 				</div>
 				<div class="text-sm text-gray-400">
@@ -55,7 +55,7 @@ const route = useRoute();
 const router = useRouter();
 
 const colorMode = useColorMode();
-
+const fullMode = useState('fullMode');
 
 watch(()=>route.path,(path)=>{
 	if(path.split('/')[1] == 'watch'  ) {

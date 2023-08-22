@@ -6,6 +6,22 @@
 </template>
 
 <script setup>
-const VOD = useState('VOD');
-const TOTAL = useState('TOTAL');
+import lscache from 'lscache';
+window.player = null;
+const VOD = useState('VOD',()=>[]);
+const TOTAL = useState('TOTAL',()=>0);
+const VIDEO = useState('VIDEO',);
+const fullMode = useState('fullMode',()=>false);
+
+watch(fullMode,(v)=>{
+	if(v){
+		lscache.set('fullMode',true);
+	}else{
+		lscache.set('fullMode',false);
+	}
+});
+if(lscache.get('fullMode')){
+	fullMode.value = true;
+}
+
 </script>

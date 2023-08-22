@@ -49,7 +49,7 @@ useHead({
  * VOD 가져오기
  * @type {*[]}
  */
-const getVodList = async ()=>{
+const getVod = async ()=>{
 
 	let {data} = await axios.get(`https://mediaplus.co.kr/openApi/v1/vod/${route.query.v}`,{
 		headers:{
@@ -59,7 +59,7 @@ const getVodList = async ()=>{
 
 	if(data.code == 200){
 		if(VIDEO.value) {
-			//console.log('!!', VIDEO.value.video_id, data.result.data.video_id);
+
 			if(VIDEO.value.video_id != data.result.data.video_id){
 				VIDEO.value = data.result.data;
 			}
@@ -70,9 +70,14 @@ const getVodList = async ()=>{
 }
 
 useAsyncData(async ()=>{
-	await getVodList();
+	await getVod();
+	window.scrollTo(0, 0);
 });
 
+watch(()=>route.query.v,async ()=>{
+	await getVod();
+	window.scrollTo(0, 0);
+});
 
 
 </script>

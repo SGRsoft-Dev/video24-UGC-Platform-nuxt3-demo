@@ -1,13 +1,21 @@
 <template>
-	<div class="playerWrap">
 
-		<div class="playerBody"  v-show="!loading">
-			<div id="vpePlayer"></div>
+	<div :class="{'fullMode' : fullMode && watchMode , 'basicMode' : !fullMode && watchMode}">
+		<div class="leftWrap" >
+			<div class="playerWrap">
+				<div class="playerBody"  v-show="!loading">
+					<div id="vpePlayer" ></div>
+				</div>
+			</div>
+
+			<div v-if="watchMode" class="flex mt-3" :class="{'container mx-auto' : fullMode   }">
+				<UiVideoMeta class="flex3"/>
+				<UiPlaylist v-if="fullMode" class="flex1 pt-3 pl-5" style="max-width:420px"/>
+			</div>
 		</div>
-	</div>
-
-	<div v-if="watchMode">
-		<UiVideoMeta/>
+		<div class="rightWrap" v-if="!fullMode && watchMode">
+			<UiPlaylist class="ml-4"/>
+		</div>
 	</div>
 </template>
 
@@ -15,9 +23,10 @@
 const VIDEO = useState('VIDEO');
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
-window.player = null;
+
 let loading = ref(true);
 const watchMode = useState('watchMode');
+const fullMode = useState('fullMode');
 const route = useRoute();
 
 const setupVPE = ()=>{
@@ -35,6 +44,7 @@ const setupVPE = ()=>{
 			}
 		],
 		autostart:true,
+		muted:false,
 		keyboardShortcut:true,
 		controls:true,
 
@@ -57,6 +67,17 @@ const setupVPE = ()=>{
 		repeat:false,
 		lowLatencyMode:true,
 		descriptionNotVisible:true,
+
+		customBtns:[
+			{
+				ui:'pc',
+				position:'right-bottom',
+				icon:'/image/slideshow.svg',
+				callback(){
+					fullMode.value = fullMode.value ? false : true;
+				}
+			},
+		]
 	});
 	window.player.on('ready',()=>{
 		loading.value = false;
@@ -81,19 +102,41 @@ watch(()=>VIDEO.value,(v)=>{
 <style scoped>
 .playerWrap{
 	width: 100%;
-	height: 100%;
+
 	background-color: #000;
 	color:#fff;
 
-	max-height:80vh;
-	display: flex;
-	justify-content: center;
-	aspect-ratio: 3/1;
-
 }
 .playerBody{
-	height: 100%;
+	width:100%;
+
 	background-color: rgba(205, 205, 205, 0.09);
+
+}
+#vpePlayer{
+	width:100%;
+	height:100%;
+}
+.fullMode{
+	display: block;
+}
+.fullMode .playerBody{
+	max-height:80vh;
 	aspect-ratio: 16/9;
+}
+.basicMode{
+	display:flex
+}
+.basicMode .rightWrap{
+	width:380px;
+
+}
+.basicMode .leftWrap{
+
+	width:calc(100% - 320px);
+}
+.basicMode .playerWrap{
+	aspect-ratio: 16/9;
+
 }
 </style>

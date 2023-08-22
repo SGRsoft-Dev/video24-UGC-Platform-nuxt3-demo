@@ -40,7 +40,7 @@
         target="_blank"
       >
         <img
-          src="~/assets/image/ncloud-logo.png"
+          src="/image/ncloud-logo.png"
           class="h-[20px]"
           alt=""
         >
