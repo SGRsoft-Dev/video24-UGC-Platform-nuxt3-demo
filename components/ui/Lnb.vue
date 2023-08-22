@@ -1,20 +1,7 @@
 <template>
   <div class="relative h-full pl-3">
-    <div class="relative h-full overflow-auto pb-[40px]">
-      <div class="sticky top-0 backdrop-blur">
-        <div class="p-4 text-center flex items-center text-[16px]">
+    <div class="relative h-full overflow-auto pb-[40px] pt-[80px]">
 
-	        <i class="ph ph-list mr-1"></i>
-
-          <NuxtLink to="/dashboard">
-            <img
-              :src="logo"
-              class="px-2 w-full h-10 object-contain"
-              alt=""
-            >
-          </NuxtLink>
-        </div>
-      </div>
       <transition-group name="fade">
         <div
           v-for="m in menus"
@@ -25,65 +12,19 @@
             :key="mm"
             class="cursor-pointer"
           >
-            <div v-if="mm.subs">
-              <div @click="mm.isOpen = !mm.isOpen; closeOthers(mm)">
-                <div
-                  class="flex text-[14px] py-3 pl-4 pr-3 transition text-bold"
-                  :class="{'text-[#6366f1]' : route.path.indexOf(mm.toPath) > -1}"
-                >
-                  <i
-                    :class="mm.icon"
-                    class="self-center mr-2"
-                  />
-                  <div class="flex-1">
-                    {{ mm.title }}
-                  </div>
-                  <div type="button">
-                    <i
-                      class="ph"
-                      :class="mm.isOpen ? 'ph-caret-up' : 'ph-caret-down'"
-                    />
-                  </div>
-                </div>
-              </div>
-              <transition name="slide-fade">
-                <div
-                  v-if="mm.isOpen"
-                  class="mb-3 bg-[#f8f8f8] w-full"
-                >
-                  <div
-                    v-for="mmm in mm.subs"
-                    :key="mmm.index"
-                    class=" transition"
-                  >
-                    <NuxtLink :to="mmm.to">
-                      <div class="pl-4 py-3 text-[13px] flex">
-                        <i
-                          class="ph ph-dot-outline self-center"
-                        />
-                        <div class="pl-1.5">
-                          {{ mmm.title }}
-                        </div>
-                      </div>
-                    </NuxtLink>
-                  </div>
-                </div>
-              </transition>
-            </div>
-            <div v-else>
-              <NuxtLink
-                :class="{'router-link-exact-active': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2]  }"
-                :to="mm.to"
-              >
+
+            <div >
+
+              <NuxtLink :to="mm.to">
                 <div
                   class="flex text-[16px] py-2 pl-4 pr-3 mb-2 hover:font-bold transition"
                   :class="{'text-[#6366f1]': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2] || route.path.indexOf(mm.toPath) > -1 , 'dark' : isDark , 'light' : !isDark }"
                 >
                   <i
-                    :class="mm.icon"
+                    :class=" route.path == mm.to ? 'ph-fill '+mm.icon : 'ph '+mm.icon"
                     class="self-center mr-2"
                   />
-                  <div class="flex-1">
+                  <div class="flex-1 transition" v-show="leftMenuOpen">
                     {{ mm.title }}
                   </div>
                 </div>
@@ -93,7 +34,7 @@
         </div>
       </transition-group>
     </div>
-    <div class="absolute w-full p-3  bottom-0  backdrop-blur">
+    <div class="absolute w-full p-3  bottom-0  backdrop-blur" v-show="leftMenuOpen">
       <a
         href="https://ncloud.com"
         target="_blank"
@@ -121,14 +62,15 @@ const isDark = computed({
 	}
 });
 
-const logo = computed(() => {
-	return isDark.value ? darkLogo : lightLogo;
-});
+
 // Composable 선언
 const route = useRoute();
 
 // 전역 상태 선언
-const dashboardLeftMenu = useState('dashboardLeftMenu');
+const leftMenu = useState('leftMenu');
+
+const leftMenuOpen = useState('leftMenuOpen');
+
 
 // ref 선언
 const menus = ref();
@@ -151,7 +93,7 @@ menus.value = [
     subs: [
       {
         title: 'HOME',
-        icon: 'ph ph-house-simple',
+        icon: ' ph-house-simple',
         to: '/',
       },
     ],
@@ -161,7 +103,7 @@ menus.value = [
 		subs: [
 			{
 				title: 'LIVE',
-				icon: 'ph ph-broadcast',
+				icon: ' ph-broadcast',
 				to: '/live',
 			}
 		],
@@ -170,7 +112,7 @@ menus.value = [
     subs: [
 	    {
 		    title: 'VOD',
-		    icon: 'ph ph-monitor-play',
+		    icon: ' ph-monitor-play',
 		    to: '/vod',
 	    }
     ],
@@ -179,7 +121,7 @@ menus.value = [
 
 ];
 
-dashboardLeftMenu.value = menus.value;
+leftMenu.value = menus.value;
 </script>
 
 <style scoped>

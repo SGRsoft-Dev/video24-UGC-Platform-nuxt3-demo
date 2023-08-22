@@ -3,15 +3,26 @@
 
 		<div class="videoRoot">
 			<div v-for="(v , i) in VOD" class="videoItem">
-				<UiVideoCard :v="v" />
+				<img :src="v.thumb_url" :alt="v.title" class="videoThumb">
+				<div class="text-base pt-2">
+					<div class="flex">
+						<div class="pr-3">
+							<img :src="v.channel_profile_image_url" alt="" class="rounded-full w-10 h-10 object-cover">
+						</div>
+						<div>
+							<div>
+								{{v.title}}
+							</div>
+							<div class="text-sm text-gray-400 pt-1">
+								{{v.channel_name}}
+							</div>
+							<div class="text-xs text-gray-400 pt-1">
+								조회수 {{v.view_cnt || 0}}회<i class="ph ph-dot "></i>{{$util.textTime(v.created_at)}}
+							</div>
 
-			</div>
-			<div v-for="(v , i) in VOD" class="videoItem">
-				<UiVideoCard :v="v" />
-
-			</div>
-			<div v-for="(v , i) in VOD" class="videoItem">
-				<UiVideoCard :v="v" />
+						</div>
+					</div>
+				</div>
 
 			</div>
 
