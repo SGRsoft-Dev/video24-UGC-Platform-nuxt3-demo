@@ -11,7 +11,7 @@
 
 
 
-	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-2xl' : !watchMode}">
+	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode}">
 
 			<div class="relative">
 				<div class="playerFrame">
@@ -76,7 +76,7 @@ const closeVideo = ()=>{
 	try{
 		window.player.destroy();
 	}catch (e) {
-		
+
 	}
 }
 

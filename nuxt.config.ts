@@ -6,7 +6,7 @@ export default defineNuxtConfig({
             viewport: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
-                { src: 'https://player.vpe.naverncp.com/ncplayer.js?access_key=a2ddf478c54399215f72f56e8d66da14' },
+                { src: 'https://player.vpe.naverncp.com/ncplayer.js?access_key=37ef75318db7723005e62c4042ad5d59' },
             ],
         },
 
