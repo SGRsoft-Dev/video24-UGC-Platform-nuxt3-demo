@@ -36,6 +36,12 @@ watch(()=>route.path,(path)=>{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
 	}
+
+	try{
+		window.player.controlBarDeactive();
+	}catch (e) {
+		
+	}
 });
 
 const VIDEO = useState('VIDEO');
