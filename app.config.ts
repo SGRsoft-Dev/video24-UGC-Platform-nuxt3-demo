@@ -1,6 +1,9 @@
 export default defineAppConfig({
     ui: {
         primary: 'green',
-        gray: 'cool'
+        gray: 'cool',
+        input:{
+            rounded:'rounded-full'
+        }
     }
 })

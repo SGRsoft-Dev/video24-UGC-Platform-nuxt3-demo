@@ -1,53 +1,21 @@
 <template>
 	<div class=" relative h-full  " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
 		<UiGnb/>
-		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode }">
+		<div class=" h-full fixed top-0 left-0  z-20 md:inline hidden  " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode }">
 			<UiLnb />
 		</div>
-		<div class=" h-full  mt-[72px] " :class="{'pl-[240px]' : leftMenuOpen , 'pl-[60px]' : !leftMenuOpen && !watchMode}">
+		<div class=" h-full  mt-[72px] " :class="{'md:pl-[240px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
 			<slot />
 		</div>
 	</div>
 
 
 
-	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'container mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
-
-			<div class="relative">
-				<div class="playerFrame">
-					<UiPlayer/>
-				</div>
-
-				<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] cursor-pointer hover:bg-black/50 hoverBtnArea " v-if="!watchMode" >
-					<div class="flex justify-between hoverBtns">
-						<div class="p-2">
-							<button type="button" @click="backVideo()">
-								<i class="ph ph-arrow-square-up-left text-white text-2xl"></i>
-							</button>
-						</div>
-						<div class="p-2">
-							<button type="button" @click="closeVideo()">
-								<i class="ph ph-x text-white text-2xl"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div v-if="!watchMode" class="p-3 " :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
-				<div class="text-base el">
-					{{VIDEO.title}}
-				</div>
-				<div class="text-xs text-gray-400 mt-2 mb-2">
-					{{ VIDEO.channel_name }}
-				</div>
-			</div>
-
-	</div>
+	<UiFloatPlayer/>
 </template>
 
 <script setup>
-import lscache from "lscache";
+
 
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
@@ -71,18 +39,6 @@ watch(()=>route.path,(path)=>{
 });
 
 const VIDEO = useState('VIDEO');
-const backVideo = ()=>{
-	router.replace(`/watch?v=${VIDEO.value.video_id}`);
-}
-const closeVideo = ()=>{
-	VIDEO.value = null;
-	try{
-		window.player.destroy();
-	}catch (e) {
-
-	}
-}
-
 
 
 onMounted(()=>{
@@ -100,24 +56,6 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-	.floatPlayer{
-		position: fixed;
-		bottom:0;
-		right:25px;
-		z-index: 9999;
-		width:500px;
-		max-width: 20vw;
-	}
 
-	.floatPlayer .playerFrame{
-		aspect-ratio: 16/9;
-		overflow: hidden;
-	}
 
-	.hoverBtnArea .hoverBtns{
-		display: none;
-	}
-	.hoverBtnArea:hover .hoverBtns{
-		display: flex;
-	}
 </style>

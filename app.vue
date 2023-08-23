@@ -13,6 +13,12 @@ const TOTAL = useState('TOTAL',()=>0);
 const VIDEO = useState('VIDEO',);
 const fullMode = useState('fullMode',()=>false);
 const floatPlayer = useState('floatPlayer',()=>false);
+const windowSize = useState('windowSize',()=> {
+		return {
+			width:0,
+			height:0
+		}
+});
 
 watch(fullMode,(v)=>{
 	if(v){
@@ -24,5 +30,13 @@ watch(fullMode,(v)=>{
 if(lscache.get('fullMode')){
 	fullMode.value = true;
 }
+
+windowSize.value.width = window.innerWidth;
+windowSize.value.height = window.innerHeight;
+
+document.addEventListener('resize',()=>{
+	windowSize.value.width = window.innerWidth;
+	windowSize.value.height = window.innerHeight;
+});
 
 </script>

@@ -5,22 +5,22 @@
 			<div class=" flex items-center">
 				<div class="w-48 flex pl-2">
 
-					<button @click="setLeftMenuOpen" class="mr-2" type="button" >
+					<button @click="setLeftMenuOpen" class="mr-2 hidden md:inline" type="button" >
 						<i class="ph ph-list mr-1 text-2xl" :class="setDark ? 'text-white' : 'text-black'"></i>
 					</button>
 
 					<NuxtLink to="/">
 						<img
 							:src="logo"
-							class=" w-full h-10 object-contain"
+							class="  h-10 object-contain  md:w-full w-40"
 							alt=""
 						>
 					</NuxtLink>
 
 				</div>
 				<div class="flex-1"></div>
-				<div class="w-4/12 gnbSearchInput">
-					<UInput icon="i-heroicons-magnifying-glass-20-solid  " style="border-radius: 30px" variant="outline" size="lg" color="white" :trailing="false" placeholder="검색하기" />
+				<div class="w-4/12 gnbSearchInput hidden md:inline">
+					<UInput icon="i-heroicons-magnifying-glass-20-solid  "  variant="outline" size="lg" color="white" :trailing="false" placeholder="검색하기" />
 				</div>
 				<div class="flex-1 text-right">
 					<i class="ph-fill mr-2" :class="setDark ? 'ph-moon text-white' : 'ph-sun-dim text-dark'"></i>

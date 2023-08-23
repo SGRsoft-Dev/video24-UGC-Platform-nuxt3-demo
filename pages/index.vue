@@ -1,16 +1,16 @@
 <template>
-	<div class="p-5">
+	<div class="p-0 md:p-5">
 
 		<div class="videoRoot">
-			<div v-for="(v , i) in VOD" class="videoCol px-3 mb-10">
+			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
 				<UiVideoCard :v="v" />
 
 			</div>
-			<div v-for="(v , i) in VOD" class="videoCol px-3 mb-10">
+			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
 				<UiVideoCard :v="v" />
 
 			</div>
-			<div v-for="(v , i) in VOD" class="videoCol px-3 mb-10">
+			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
 				<UiVideoCard :v="v" />
 			</div>
 		</div>

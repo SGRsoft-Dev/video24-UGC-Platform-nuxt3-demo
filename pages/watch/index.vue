@@ -16,7 +16,7 @@ const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
 const route = useRoute();
 const floatPlayer = useState('floatPlayer');
-
+const windowSize = useState('windowSize');
 const VIDEO = useState('VIDEO');
 
 
@@ -81,7 +81,11 @@ watch(()=>route.query.v,async ()=>{
 });
 
 onMounted(()=>{
-	floatPlayer.value = false;
+	if(windowSize.value.width <=640){
+		floatPlayer.value = true;
+	}else {
+		floatPlayer.value = false;
+	}
 })
 onUnmounted(()=>{
 

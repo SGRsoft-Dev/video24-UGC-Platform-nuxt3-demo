@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink :to="`/watch?v=${v.video_id}`">
 		<img :src="v.thumb_url" :alt="v.title" class="videoThumb">
-		<div class="text-base pt-2">
+		<div class="text-base pt-2 px-4 md:px-0">
 			<div class="flex">
 				<div class="pr-3  ">
 					<UAvatar :src="v.channel_profile_image_url" v-if="v.channel_profile_image_url"  :alt="v.channel_name" class="profileThumb" />

@@ -5,7 +5,7 @@
 				{{VIDEO.title}}
 			</div>
 
-			<div class="flex justify-between">
+			<div class="md:flex justify-between">
 				<div>
 					<div class="flex items-center">
 						<div class="pr-3 pl-2 w-18 ">
@@ -22,7 +22,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="">
+				<div class="px-2 md:px-0 pt-3 md:pt-0 pb-3 md:pb-0">
 					<div class="flex items-center">
 						<div class=" rounded-full px-2 pl-3 pr-3 pt-1 pb-1 text-sm mr-3"
 							 :class="{'bg-gray-700/40' : colorMode.value=='dark', 'bg-gray-200' : colorMode.value=='light'}">
@@ -37,8 +37,8 @@
 			</div>
 
 			<div class="mt-3">
-				<div class=" text-sm p-3  rounded-lg min-h-100" v-if="VIDEO.description" :class="{'bg-gray-700/20' : colorMode.value == 'dark' , 'bg-gray-100' : colorMode.value == 'light'}">
-					<div v-html="$util.nl2br(VIDEO.description)" class="px-3"></div>
+				<div class=" text-sm p-3   md:rounded-lg min-h-100  " style="max-width:100vw" v-if="VIDEO.description" :class="{'bg-gray-700/20' : colorMode.value == 'dark' , 'bg-gray-100' : colorMode.value == 'light'}">
+					<div v-html="$util.nl2br(VIDEO.description)" class="px-3 break-words"></div>
 				</div>
 			</div>
 		</div>

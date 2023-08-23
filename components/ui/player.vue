@@ -8,12 +8,12 @@
 				</div>
 			</div>
 
-			<div v-if="watchMode" class="flex mt-3" :class="{'container mx-auto' : fullMode   }">
+			<div v-if="watchMode" class="flex mt-3" :class="{'md:container md:mx-auto' : fullMode   }">
 				<UiVideoMeta class="flex3"/>
 				<UiPlaylist v-if="fullMode" class="flex1 pt-3 pl-5" style="max-width:420px"/>
 			</div>
 		</div>
-		<div class="rightWrap" v-if="!fullMode && watchMode">
+		<div class="rightWrap  " v-if="!fullMode && watchMode">
 			<UiPlaylist class="ml-4"/>
 		</div>
 	</div>
@@ -87,13 +87,11 @@ const setupVPE = ()=>{
 		override:{
 			pip:{
 				on(){
-					//console.log('pip on');
 					floatPlayer.value = true;
 					router.push('/')
 				},
 				off(){
 					floatPlayer.value = false;
-					//console.log('pip off')
 				}
 			}
 		}
@@ -156,6 +154,17 @@ watch(()=>VIDEO.value,(v)=>{
 }
 .basicMode .playerWrap{
 	aspect-ratio: 16/9;
+}
+
+@media (max-width: 640px) {
+	.fullMode  , .basicMode{
+		display:inline;
+	}
+
+	.fullMode .leftWrap , .basicMode .leftWrap{
+		width:100%;
+	}
 
 }
+
 </style>
