@@ -1,7 +1,7 @@
 <template>
 	<div class=" relative h-full  " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
 		<UiGnb/>
-		<div class=" h-full fixed top-0 left-0  z-20 md:inline hidden  " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode }">
+		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode ,'md:inline hidden' : !watchMode }">
 			<UiLnb />
 		</div>
 		<div class=" h-full  mt-[72px] " :class="{'md:pl-[240px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
@@ -40,7 +40,7 @@ watch(()=>route.path,(path)=>{
 	try{
 		window.player.controlBarDeactive();
 	}catch (e) {
-		
+
 	}
 });
 
