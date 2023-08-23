@@ -1,17 +1,19 @@
 <template>
 	<div class="p-5">
-
-		<div class="videoRoot">
-			<div v-for="(v , i) in VOD" class="videoCol px-3 mb-10">
-				<UiVideoCard :v="v" />
-
-			</div>
-			<div v-for="(v , i) in VOD" class="videoCol px-3 mb-10">
-				<UiVideoCard :v="v" />
+		<div class="px-1">
+			<strong class="text-2xl">LIVE</strong>
+		</div>
+		<div class=" mt-5">
+			<div v-for="(v , i) in VOD" class="  mb-5">
+				<UiVideoCardCol :v="v" />
 
 			</div>
-			<div v-for="(v , i) in VOD" class="videoCol px-3 mb-10">
-				<UiVideoCard :v="v" />
+			<div v-for="(v , i) in VOD" class="  mb-5">
+				<UiVideoCardCol :v="v" />
+
+			</div>
+			<div v-for="(v , i) in VOD" class="  mb-5">
+				<UiVideoCardCol :v="v" />
 			</div>
 		</div>
 
@@ -21,21 +23,7 @@
 
 <style scoped>
 
-.videoRoot{
-	display: flex;
-	flex-wrap: wrap;
-	margin-left:-5px;
-	margin-right:-5px;
-	box-sizing: inherit;
-}
-.videoItem{
-	width: 20%;
-	padding:10px;
-}
-.videoThumb{
-	aspect-ratio: 16/9;
-	object-fit: cover;
-}
+
 </style>
 
 <script setup>

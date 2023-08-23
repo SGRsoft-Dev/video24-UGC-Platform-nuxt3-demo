@@ -15,6 +15,7 @@ const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
 const route = useRoute();
+const floatPlayer = useState('floatPlayer');
 
 const VIDEO = useState('VIDEO');
 
@@ -79,5 +80,19 @@ watch(()=>route.query.v,async ()=>{
 	window.scrollTo(0, 0);
 });
 
+onMounted(()=>{
+	floatPlayer.value = false;
+})
+onUnmounted(()=>{
+
+	if(!floatPlayer.value) {
+		VIDEO.value = null;
+		try {
+			window.player.destroy();
+		} catch (e) {
+
+		}
+	}
+});
 
 </script>

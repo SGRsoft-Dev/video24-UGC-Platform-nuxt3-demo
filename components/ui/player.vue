@@ -23,10 +23,11 @@
 const VIDEO = useState('VIDEO');
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
-
+const router = useRouter();
 let loading = ref(true);
 const watchMode = useState('watchMode');
 const fullMode = useState('fullMode');
+const floatPlayer = useState('floatPlayer');
 const route = useRoute();
 
 const setupVPE = ()=>{
@@ -72,12 +73,30 @@ const setupVPE = ()=>{
 			{
 				ui:'pc',
 				position:'right-bottom',
-				icon:'/image/slideshow.svg',
+				icon:'/image/frame-corners-off.svg',
+				activeIcon:'/image/frame-corners.svg',
+				tooltip:'기본 모드',
+				activeTooltip:'몰입 모드',
+				flow:'left',
+				default:fullMode.value ? true : false,
 				callback(){
 					fullMode.value = fullMode.value ? false : true;
 				}
 			},
-		]
+		],
+		override:{
+			pip:{
+				on(){
+					//console.log('pip on');
+					floatPlayer.value = true;
+					router.push('/')
+				},
+				off(){
+					floatPlayer.value = false;
+					//console.log('pip off')
+				}
+			}
+		}
 	});
 	window.player.on('ready',()=>{
 		loading.value = false;

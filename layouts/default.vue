@@ -11,7 +11,7 @@
 
 
 
-	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode , 'container mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
+	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'container mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
 
 			<div class="relative">
 				<div class="playerFrame">
@@ -38,8 +38,8 @@
 				<div class="text-base el">
 					{{VIDEO.title}}
 				</div>
-				<div class="text-sm text-gray-400">
-					channelName
+				<div class="text-xs text-gray-400 mt-2 mb-2">
+					{{ VIDEO.channel_name }}
 				</div>
 			</div>
 
@@ -47,10 +47,13 @@
 </template>
 
 <script setup>
+import lscache from "lscache";
+
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const leftMenuOpen = useState('leftMenuOpen',()=>true);
 const watchMode = useState('watchMode',()=>false);
+const floatPlayer = useState('floatPlayer');
 const route = useRoute();
 const router = useRouter();
 
@@ -79,6 +82,8 @@ const closeVideo = ()=>{
 
 	}
 }
+
+
 
 onMounted(()=>{
 	if(route.path.split('/')[1] == 'watch'  ) {

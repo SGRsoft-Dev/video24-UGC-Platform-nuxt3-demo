@@ -12,6 +12,7 @@ const VOD = useState('VOD',()=>[]);
 const TOTAL = useState('TOTAL',()=>0);
 const VIDEO = useState('VIDEO',);
 const fullMode = useState('fullMode',()=>false);
+const floatPlayer = useState('floatPlayer',()=>false);
 
 watch(fullMode,(v)=>{
 	if(v){

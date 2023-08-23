@@ -38,10 +38,23 @@
 
 <script setup>
 import axios from "axios";
+
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
+
+
+useHead({
+	title: runtimeConfig.public.appName,
+	meta:[
+		{
+			name:'description',
+			content:runtimeConfig.public.appName,
+		}
+	],
+})
+
 
 /**
  * VOD 리스트 가져오기
