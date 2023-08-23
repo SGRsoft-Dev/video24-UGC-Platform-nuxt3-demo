@@ -1,0 +1,645 @@
+/*****************************************************************
+*
+*  SGRSOFT Developer : now17
+*  Date : 2022/02/15
+*  Filename : assets/css/bootstrap_dnone.css
+*  Description : 부트스트랩 display
+*
+*****************************************************************/
+
+.d-none {
+    display: none !important;
+}
+
+.d-inline {
+    display: inline !important;
+}
+
+.d-inline-block {
+    display: inline-block !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.d-table {
+    display: table !important;
+}
+
+.d-table-row {
+    display: table-row !important;
+}
+
+.d-table-cell {
+    display: table-cell !important;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.d-inline-flex {
+    display: inline-flex !important;
+}
+
+@media (min-width: 720px) {
+    .d-sm-none {
+        display: none !important;
+    }
+
+    .d-sm-inline {
+        display: inline !important;
+    }
+
+    .d-sm-inline-block {
+        display: inline-block !important;
+    }
+
+    .d-sm-block {
+        display: block !important;
+    }
+
+    .d-sm-table {
+        display: table !important;
+    }
+
+    .d-sm-table-row {
+        display: table-row !important;
+    }
+
+    .d-sm-table-cell {
+        display: table-cell !important;
+    }
+
+    .d-sm-flex {
+        display: flex !important;
+    }
+
+    .d-sm-inline-flex {
+        display: inline-flex !important;
+    }
+}
+
+@media (min-width: 980px) {
+    .d-md-none {
+        display: none !important;
+    }
+
+    .d-md-inline {
+        display: inline !important;
+    }
+
+    .d-md-inline-block {
+        display: inline-block !important;
+    }
+
+    .d-md-block {
+        display: block !important;
+    }
+
+    .d-md-table {
+        display: table !important;
+    }
+
+    .d-md-table-row {
+        display: table-row !important;
+    }
+
+    .d-md-table-cell {
+        display: table-cell !important;
+    }
+
+    .d-md-flex {
+        display: flex !important;
+    }
+
+    .d-md-inline-flex {
+        display: inline-flex !important;
+    }
+}
+
+@media (min-width: 1480px) {
+    .d-lg-none {
+        display: none !important;
+    }
+
+    .d-lg-inline {
+        display: inline !important;
+    }
+
+    .d-lg-inline-block {
+        display: inline-block !important;
+    }
+
+    .d-lg-block {
+        display: block !important;
+    }
+
+    .d-lg-table {
+        display: table !important;
+    }
+
+    .d-lg-table-row {
+        display: table-row !important;
+    }
+
+    .d-lg-table-cell {
+        display: table-cell !important;
+    }
+
+    .d-lg-flex {
+        display: flex !important;
+    }
+
+    .d-lg-inline-flex {
+        display: inline-flex !important;
+    }
+}
+
+@media (min-width: 1680px) {
+    .d-xl-none {
+        display: none !important;
+    }
+
+    .d-xl-inline {
+        display: inline !important;
+    }
+
+    .d-xl-inline-block {
+        display: inline-block !important;
+    }
+
+    .d-xl-block {
+        display: block !important;
+    }
+
+    .d-xl-table {
+        display: table !important;
+    }
+
+    .d-xl-table-row {
+        display: table-row !important;
+    }
+
+    .d-xl-table-cell {
+        display: table-cell !important;
+    }
+
+    .d-xl-flex {
+        display: flex !important;
+    }
+
+    .d-xl-inline-flex {
+        display: inline-flex !important;
+    }
+}
+
+@media print {
+    .d-print-none {
+        display: none !important;
+    }
+
+    .d-print-inline {
+        display: inline !important;
+    }
+
+    .d-print-inline-block {
+        display: inline-block !important;
+    }
+
+    .d-print-block {
+        display: block !important;
+    }
+
+    .d-print-table {
+        display: table !important;
+    }
+
+    .d-print-table-row {
+        display: table-row !important;
+    }
+
+    .d-print-table-cell {
+        display: table-cell !important;
+    }
+
+    .d-print-flex {
+        display: flex !important;
+    }
+
+    .d-print-inline-flex {
+        display: inline-flex !important;
+    }
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.table {
+    width: 100%;
+	border: 1px solid #e9ecef;
+    color: #212529;
+}
+
+.table th,
+.table td {
+    padding: 1rem;
+    vertical-align: top;
+    border-top: 1px solid #e9ecef;
+}
+
+.table thead th {
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table tbody + tbody {
+    border-top: 1px solid #e9ecef;
+}
+
+.table-sm th,
+.table-sm td {
+    padding: 0.5rem;
+	font-size:13px;
+	text-align:left;
+}
+
+.table-bordered {
+    border: 1px solid #e9ecef;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #e9ecef;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+    border-bottom-width: 1px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+    border: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: #f8f9fa;
+}
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+    background-color: #feeae4;
+}
+
+.table-primary th,
+.table-primary td,
+.table-primary thead th,
+.table-primary tbody + tbody {
+    border-color: #fdc8b9;
+}
+
+.table-hover .table-primary:hover {
+    background-color: #fdd7cb;
+}
+
+.table-hover .table-primary:hover > td,
+.table-hover .table-primary:hover > th {
+    background-color: #fdd7cb;
+}
+
+.table-secondary,
+.table-secondary > th,
+.table-secondary > td {
+    background-color: #fefefe;
+}
+
+.table-secondary th,
+.table-secondary td,
+.table-secondary thead th,
+.table-secondary tbody + tbody {
+    border-color: #fbfcfc;
+}
+
+.table-hover .table-secondary:hover {
+    background-color: #f1f1f1;
+}
+
+.table-hover .table-secondary:hover > td,
+.table-hover .table-secondary:hover > th {
+    background-color: #f1f1f1;
+}
+
+.table-success,
+.table-success > th,
+.table-success > td {
+    background-color: #ccf3e9;
+}
+
+.table-success th,
+.table-success td,
+.table-success thead th,
+.table-success tbody + tbody {
+    border-color: #7adfc6;
+}
+
+.table-hover .table-success:hover {
+    background-color: #b7eee0;
+}
+
+.table-hover .table-success:hover > td,
+.table-hover .table-success:hover > th {
+    background-color: #b7eee0;
+}
+
+.table-info,
+.table-info > th,
+.table-info > td {
+    background-color: #cdeefd;
+}
+
+.table-info th,
+.table-info td,
+.table-info thead th,
+.table-info tbody + tbody {
+    border-color: #7cd2f9;
+}
+
+.table-hover .table-info:hover {
+    background-color: #b4e6fc;
+}
+
+.table-hover .table-info:hover > td,
+.table-hover .table-info:hover > th {
+    background-color: #b4e6fc;
+}
+
+.table-warning,
+.table-warning > th,
+.table-warning > td {
+    background-color: #fff3cd;
+}
+
+.table-warning th,
+.table-warning td,
+.table-warning thead th,
+.table-warning tbody + tbody {
+    border-color: #fedf7e;
+}
+
+.table-hover .table-warning:hover {
+    background-color: #ffedb4;
+}
+
+.table-hover .table-warning:hover > td,
+.table-hover .table-warning:hover > th {
+    background-color: #ffedb4;
+}
+
+.table-danger,
+.table-danger > th,
+.table-danger > td {
+    background-color: #fae1e4;
+}
+
+.table-danger th,
+.table-danger td,
+.table-danger thead th,
+.table-danger tbody + tbody {
+    border-color: #f1b2b8;
+}
+
+.table-hover .table-danger:hover {
+    background-color: #f6cbd0;
+}
+
+.table-hover .table-danger:hover > td,
+.table-hover .table-danger:hover > th {
+    background-color: #f6cbd0;
+}
+
+.table-light,
+.table-light > th,
+.table-light > td {
+    background-color: #fefefe;
+}
+
+.table-light th,
+.table-light td,
+.table-light thead th,
+.table-light tbody + tbody {
+    border-color: #fbfcfc;
+}
+
+.table-hover .table-light:hover {
+    background-color: #f1f1f1;
+}
+
+.table-hover .table-light:hover > td,
+.table-hover .table-light:hover > th {
+    background-color: #f1f1f1;
+}
+
+.table-dark,
+.table-dark > th,
+.table-dark > td {
+    background-color: #d6d8d9;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th,
+.table-dark tbody + tbody {
+    border-color: #95999c;
+}
+
+.table-hover .table-dark:hover {
+    background-color: #c9cbcd;
+}
+
+.table-hover .table-dark:hover > td,
+.table-hover .table-dark:hover > th {
+    background-color: #c9cbcd;
+}
+
+.table-cyan,
+.table-cyan > th,
+.table-cyan > td {
+    background-color: #ccf2f4;
+}
+
+.table-cyan th,
+.table-cyan td,
+.table-cyan thead th,
+.table-cyan tbody + tbody {
+    border-color: #7bdee2;
+}
+
+.table-hover .table-cyan:hover {
+    background-color: #b7edef;
+}
+
+.table-hover .table-cyan:hover > td,
+.table-hover .table-cyan:hover > th {
+    background-color: #b7edef;
+}
+
+.table-purple,
+.table-purple > th,
+.table-purple > td {
+    background-color: #eee8fa;
+}
+
+.table-purple th,
+.table-purple td,
+.table-purple thead th,
+.table-purple tbody + tbody {
+    border-color: #d3c3f1;
+}
+
+.table-hover .table-purple:hover {
+    background-color: #dfd3f5;
+}
+
+.table-hover .table-purple:hover > td,
+.table-hover .table-purple:hover > th {
+    background-color: #dfd3f5;
+}
+
+.table-active,
+.table-active > th,
+.table-active > td {
+    background-color: #f8f9fa;
+}
+
+.table-hover .table-active:hover {
+    background-color: #e9ecef;
+}
+
+.table-hover .table-active:hover > td,
+.table-hover .table-active:hover > th {
+    background-color: #e9ecef;
+}
+
+.table .thead-dark th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+}
+
+.table .thead-light th {
+    color: #4F5467;
+    background-color: #e9ecef;
+    border-color: #e9ecef;
+}
+
+.table-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th {
+    border-color: #454d55;
+}
+
+.table-dark.table-bordered {
+    border: 0;
+}
+
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table-dark.table-hover tbody tr:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+@media (max-width: 575.98px) {
+    .table-responsive-sm {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-sm > .table-bordered {
+        border: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .table-responsive-md {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-md > .table-bordered {
+        border: 0;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .table-responsive-lg {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-lg > .table-bordered {
+        border: 0;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .table-responsive-xl {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-xl > .table-bordered {
+        border: 0;
+    }
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive > .table-bordered {
+    border: 0;
+}

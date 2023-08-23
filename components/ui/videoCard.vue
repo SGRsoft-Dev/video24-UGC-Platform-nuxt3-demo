@@ -3,10 +3,9 @@
 		<img :src="v.thumb_url" :alt="v.title" class="videoThumb">
 		<div class="text-base pt-2">
 			<div class="flex">
-				<div class="pr-3 w-14 ">
-					<UAvatar :src="v.channel_profile_image_url" v-if="v.channel_profile_image_url"  alt="Avatar" class="profileThumb" />
-					<UAvatar  src="~/assets/image/non-profile.png" v-else  alt="Avatar" class="profileThumb object-contain"/>
-
+				<div class="pr-3  ">
+					<UAvatar :src="v.channel_profile_image_url" v-if="v.channel_profile_image_url"  :alt="v.channel_name" class="profileThumb" />
+					<UAvatar  src="~/assets/image/non-profile.png" v-else  :alt="v.channel_name" class="profileThumb object-contain"/>
 				</div>
 				<div>
 					<div class="el">

@@ -10,14 +10,14 @@
 					<div class="flex items-center">
 						<div class="pr-3 pl-2 w-18 ">
 
-							<UAvatar :src="VIDEO.channel_profile_image_url" v-if="VIDEO.channel_profile_image_url" size="lg" alt="Avatar" class="profileThumb" />
-							<UAvatar src="/image/non-profile.png" v-else  alt="Avatar" class="profileThumb object-contain" size="lg"/>
+							<UAvatar :src="VIDEO.channel_profile_image_url" v-if="VIDEO.channel_profile_image_url" size="lg" :alt="VIDEO.channel_name" class="profileThumb" />
+							<UAvatar src="/image/non-profile.png" v-else  :alt="VIDEO.channel_name" class="profileThumb object-contain" size="lg"/>
 
 						</div>
 						<div>
-							<div>ChannelName</div>
+							<div>{{ VIDEO.channel_name }}</div>
 							<div class="text-xs text-gray-400">
-								바로가기
+								@{{ VIDEO.channel_adm_id}}
 							</div>
 						</div>
 					</div>

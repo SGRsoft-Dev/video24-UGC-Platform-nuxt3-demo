@@ -50,8 +50,7 @@
 </template>
 
 <script setup>
-import darkLogo from '@/assets/image/logo_dark.svg';
-import lightLogo from '@/assets/image/logo.svg';
+
 const colorMode = useColorMode();
 const isDark = computed({
 	get () {

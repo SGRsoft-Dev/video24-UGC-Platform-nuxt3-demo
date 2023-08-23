@@ -68,3 +68,84 @@
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
+
+
+.scrollBar {
+    overflow-y: scroll;
+}
+.scrollBar::-webkit-scrollbar {
+    display: block !important;
+    width: 10px !important;  /* 스크롤바의 너비 */
+}
+
+.scrollBar:hover::-webkit-scrollbar {
+    width: 10px !important;  /* 스크롤바의 너비 */
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+    background: rgba(98, 98, 98, 0.22) !important; /* 스크롤바의 색상 */
+    min-height:20% !important;
+    max-height:30% !important;
+    border-radius: 10px !important;
+
+}
+.scrollBar::-webkit-scrollbar-track {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    background: rgba(68, 68, 68, 0.1) !important;  /*스크롤바 뒷 배경 색상*/
+}
+
+
+.scrollBarHover {
+    overflow-y: scroll;
+
+}
+
+.scrollBarHover.xs::-webkit-scrollbar {
+    width: 4px !important;  /* 스크롤바의 너비 */
+}
+
+.scrollBarHover.xs:hover::-webkit-scrollbar {
+    display: block !important;
+    width: 4px !important;  /* 스크롤바의 너비 */
+    transition: all 0.2s ease;
+}
+
+.scrollBarHover.xs::-webkit-scrollbar-thumb {
+    background: rgba(98, 98, 98, 0.22) !important; /* 스크롤바의 색상 */
+    min-height:10% !important;
+    max-height:10% !important;
+    border-radius: 10px !important;
+
+
+}
+.scrollBarHover.xs::-webkit-scrollbar-track {
+    background: rgba(68, 68, 68, 0.02) !important;  /*스크롤바 뒷 배경 색상*/
+
+}
+
+
+.scrollBarHover::-webkit-scrollbar {
+    width: 10px !important;  /* 스크롤바의 너비 */
+}
+
+.scrollBarHover:hover::-webkit-scrollbar {
+    display: block !important;
+    width: 10px !important;  /* 스크롤바의 너비 */
+    transition: all 0.2s ease;
+}
+
+
+
+.scrollBarHover::-webkit-scrollbar-thumb {
+    background: rgba(98, 98, 98, 0.22) !important; /* 스크롤바의 색상 */
+    min-height:20% !important;
+    max-height:30% !important;
+    border-radius: 10px !important;
+
+
+}
+.scrollBarHover::-webkit-scrollbar-track {
+    background: rgba(68, 68, 68, 0.1) !important;  /*스크롤바 뒷 배경 색상*/
+
+}

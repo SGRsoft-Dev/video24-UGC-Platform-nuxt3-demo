@@ -6,7 +6,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "deploy": "nuxt generate && firebase deploy --only hosting:mediaplus-broadcast-player-nuxt3-demo"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

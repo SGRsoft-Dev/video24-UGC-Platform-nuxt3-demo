@@ -6,13 +6,15 @@ export default defineNuxtConfig({
             viewport: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
-                { src: 'https://player.vpe.naverncp.com/ncplayer.js?access_key=37ef75318db7723005e62c4042ad5d59' },
+                { src:  process.env.NODE_ENV === 'development' ?  'http://localhost:9000/ncplayer.js?access_key=37ef75318db7723005e62c4042ad5d59' : 'https://player.vpe.naverncp.com/ncplayer.js?access_key=37ef75318db7723005e62c4042ad5d59' },
             ],
         },
 
     },
     css:[
         '~/assets/css/base.css',
+        '~/assets/css/bootstrap_dnone.css',
+        '~/assets/css/bootstrap_grids.css',
     ],
     devtools: { enabled: true },
     modules: ['@nuxthq/ui'],
