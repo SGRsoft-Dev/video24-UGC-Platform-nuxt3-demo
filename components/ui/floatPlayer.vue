@@ -23,7 +23,7 @@
 			</div>
 		</div>
 
-		<div v-if="!watchMode" class="p-3 " :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
+		<div v-if="!watchMode" class="p-3 flex-auto" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
 			<div class="md:text-base text-[12px] el">
 				{{VIDEO.title}}
 			</div>
@@ -32,11 +32,11 @@
 			</div>
 		</div>
 
-		<div class="md:hidden flex ">
+		<div class="md:hidden flex " v-if="windowSize.width <= 640" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
 
 			<div class="p-2">
 				<button type="button" @click="closeVideo()">
-					<i class="ph ph-x text-white text-xl"></i>
+					<i class="ph ph-x  text-xl"></i>
 				</button>
 			</div>
 		</div>
