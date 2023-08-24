@@ -6,7 +6,7 @@ export default defineNuxtConfig({
             viewport: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
-                { src:  process.env.NODE_ENV === 'development' ?  'http://localhost:9000/ncplayer.js?access_key=37ef75318db7723005e62c4042ad5d59' : 'https://player.vpe.naverncp.com/ncplayer.1.1.1.js?access_key=37ef75318db7723005e62c4042ad5d59' },
+                { src: 'https://player.vpe.naverncp.com/ncplayer.1.1.1.js?access_key=37ef75318db7723005e62c4042ad5d59' },
             ],
         },
 
@@ -21,10 +21,9 @@ export default defineNuxtConfig({
 
     runtimeConfig:{
         public:{
-            appName:'My broadcast app',
+            appName:'My UGC app',
             mediaPlusApiKey:'f507591002f8fd5a39db1a98fdf68c7b10fd0168b771d3ff244e2812e5cc57a5',
         },
-
 
     },
     colorMode: {
