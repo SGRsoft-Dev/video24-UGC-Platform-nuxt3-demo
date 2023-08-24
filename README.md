@@ -16,7 +16,6 @@
 ## 실행방법
 
 ```bash
-# install dependencies
 $ yarn install
 $ yarn run dev
 ```
