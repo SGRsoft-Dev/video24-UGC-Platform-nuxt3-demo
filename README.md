@@ -27,9 +27,29 @@ MEDIA PLUS는 이러한 번거로운 연동 작업을 단축시켜, 동영상 �
 
 
 ## 데모페이지 소스코드
-[https://github.com/SGRsoft-Dev/mediaplus-broadcast-player-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-broadcast-player-nuxt3-demo)
+[https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo)
 
+***
 
+## 사전 준비사항
+UGC 데모는 미디어플러스의 UGC 스트리밍 서비스를 이용하기 위해, 네이버클라우드 일부 제품의 SDK , 미디어플러스의 계정이 필요합니다.
+
+***
+
+## 필수
+- 네이버클라우드 플랫폼 Video Player Enhancement SDK URL (v1.1.1 이상)
+- 네이버클라우드 플랫폼 Video Player Enhancement SDK KEY
+- 미디어플러스 프로젝트 API KEY
+
+***
+
+## 제한사항
+
+현재 데모코드에 사용된 필수 요소들은 개발자 로컬 테스트에서만 동작합니다. (http://localhost:3000)
+
+실제 서비스를 위해서는 미디어플러스의 계정을 발급받아야 합니다. (2023년 9월 BETA 서비스 오픈 예정)
+
+***
 
 
 ## 개발환경 구성
@@ -38,6 +58,29 @@ MEDIA PLUS는 이러한 번거로운 연동 작업을 단축시켜, 동영상 �
 - Node v16 이상 필요
 - TypeScript
 - Tailwind CSS
+
+***
+
+## 참고 사이트 
+### NAVERCLOUD PLATFORM Video Player Enhancement
+
+https://guide.ncloud-docs.com/docs/ko/vpe-overview
+
+### Nuxt 3 Introduction
+
+https://nuxt.com/docs/getting-started/introduction
+
+### Nuxt 3 UI
+
+https://ui.nuxtlabs.com/getting-started
+
+### Tailwind CSS
+https://tailwindcss.com/docs/installation
+
+### Nuxt 3 Tailwind CSS
+https://tailwindcss.nuxtjs.org/
+
+***
 
 ## 실행방법
 
