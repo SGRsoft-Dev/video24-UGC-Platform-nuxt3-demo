@@ -1,15 +1,14 @@
 <template>
 	<div class="p-0 md:p-5">
 
-		<div class="videoRoot">
-			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
-				<UiVideoCard :v="v" />
 
+		<div class="videoRoot" v-if="loading">
+			<div v-for="(v , i) in skelCnt" class="videoCol px-0 md:px-3 mb-10">
+				<SkeletonVideoCard  />
 			</div>
-			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
-				<UiVideoCard :v="v" />
+		</div>
 
-			</div>
+		<div class="videoRoot" v-else>
 			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
 				<UiVideoCard :v="v" />
 			</div>
@@ -44,6 +43,8 @@ const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
 
+const loading = ref(true);
+const skelCnt = ref(20);
 
 useHead({
 	title: runtimeConfig.public.appName,
@@ -62,22 +63,59 @@ useHead({
  */
 const VOD = useState('VOD');
 const TOTAL = useState('TOTAL');
+const pageNo = ref(1);
 
 const getVodList = async ()=>{
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod',{
+		params:{
+			pageNo:pageNo.value,
+			limit:20,
+
+		},
 		headers:{
 			'Authorization':mpKey
 		}
 	});
 
 	if(data.code == 200){
-		VOD.value = data.result.data;
+
 		TOTAL.value = data.result.totalCnt;
+
+		if(TOTAL.value >0){
+			for (let i = 0; i < data.result.data.length; i++) {
+				let v = data.result.data[i];
+				v.created_at = $util.dateFormat2(v.created_at);
+				v.view_cnt = $util.numberToKorean(v.view_cnt);
+				if(pageNo.value > 1){
+					VOD.value.push(v);
+				}
+			}
+
+			if(pageNo.value == 1){
+				VOD.value = data.result.data;
+			}
+
+			setTimeout(()=>{
+				loading.value = false;
+			},300)
+
+		}else{
+			loading.value = false;
+		}
+
+
+
 	}
+
 
 }
 
 useAsyncData(async ()=>{
-	await getVodList();
+	if(VOD.value.length == 0){
+		await getVodList();
+	}else{
+		loading.value = false;
+	}
+	//await getVodList();
 });
 </script>

@@ -7,7 +7,15 @@
 
 <script setup>
 import lscache from 'lscache';
+import { v4 as uuidv4 } from 'uuid';
+lscache.setExpiryMilliseconds(1000);
+
 window.player = null;
+
+window.uuid = lscache.get('UUID') ? lscache.get('UUID') : uuidv4();
+lscache.set('UUID', window.uuid, 3600);
+
+const UUID = useState('UUID',()=>window.uuid);
 const VOD = useState('VOD',()=>[]);
 const TOTAL = useState('TOTAL',()=>0);
 const VIDEO = useState('VIDEO',);

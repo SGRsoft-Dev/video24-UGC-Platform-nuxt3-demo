@@ -8,13 +8,7 @@
 				<UiVideoCardCol :v="v" />
 
 			</div>
-			<div v-for="(v , i) in VOD" class="  mb-5">
-				<UiVideoCardCol :v="v" />
 
-			</div>
-			<div v-for="(v , i) in VOD" class="  mb-5">
-				<UiVideoCardCol :v="v" />
-			</div>
 		</div>
 
 

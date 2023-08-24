@@ -28,81 +28,88 @@ const floatPlayer = useState('floatPlayer');
 const windowSize = useState('windowSize');
 const loading = ref(true);
 
-const setupVPE = ()=>{
-	window.player = new ncplayer('vpePlayer',{
-		playlist:[
-			{
-				"file": VIDEO.value.hls_play_url,
-				"poster": VIDEO.value.thumb_url,
-				"description": {
-					"title": VIDEO.value.title,
+let options = {
+	playlist:[
+		{
+			"file": VIDEO.value.hls_play_url,
+			"poster": VIDEO.value.thumb_url,
+			"description": {
+				"title": VIDEO.value.title,
 
-				}
-			}
-		],
-		autostart:true,
-		muted:false,
-		keyboardShortcut:true,
-		controls:true,
-
-		controlBtn:{
-			play:true,
-			fullscreen:true,
-			volume:true,
-			times:true,
-			pictureInPicture:true,
-			setting:true,
-			subtitle:false,
-		},
-		progressBarColor:"#ff0000",
-		controlActiveTime:3000,
-		startMutedInfoNotVisible:false,
-		aspectRatio:"16/9",
-		objectFit:"contain",
-		playRateSetting:[0.5,0.75,1,1.5,2],
-		autoPause:false,
-		repeat:false,
-		lowLatencyMode:true,
-		descriptionNotVisible:windowSize.value.width <= 640 ? false :true,
-
-		customBtns:[
-			{
-				ui:'pc',
-				position:'right-bottom',
-				icon:'/image/frame-corners-off.svg',
-				activeIcon:'/image/frame-corners.svg',
-				tooltip:'기본 모드',
-				activeTooltip:'몰입 모드',
-				flow:'left',
-				default:fullMode.value ? true : false,
-				callback(){
-					fullMode.value = fullMode.value ? false : true;
-				}
-			},
-
-			{
-				ui:'mobile',
-				position:'left-top',
-				icon:'/image/caret-down.svg',
-				flow:'left',
-				callback(){
-					floatPlayer.value = true;
-					router.go(-1);
-				}
-			},
-		],
-		override:{
-			pip:{
-				on(){
-					floatPlayer.value = true;
-					router.push('/')
-				},
-				off(){
-					floatPlayer.value = false;
-				}
 			}
 		}
-	});
+	],
+	autostart:true,
+	muted:false,
+	keyboardShortcut:true,
+	controls:true,
+
+	controlBtn:{
+		play:true,
+		fullscreen:true,
+		volume:true,
+		times:true,
+		pictureInPicture:true,
+		setting:true,
+		subtitle:false,
+	},
+	progressBarColor:"#ff0000",
+	controlActiveTime:3000,
+	startMutedInfoNotVisible:false,
+	aspectRatio:"16/9",
+	objectFit:"contain",
+	playRateSetting:[0.5,0.75,1,1.5,2],
+	autoPause:false,
+	repeat:false,
+	lowLatencyMode:true,
+	descriptionNotVisible:windowSize.value.width <= 640 ? false :true,
+	customBtns:[
+		{
+			ui:'pc',
+			position:'right-bottom',
+			icon:'/image/frame-corners-off.svg',
+			activeIcon:'/image/frame-corners.svg',
+			tooltip:'기본 모드',
+			activeTooltip:'몰입 모드',
+			flow:'left',
+			default:fullMode.value ? true : false,
+			callback(){
+				fullMode.value = fullMode.value ? false : true;
+			}
+		},
+
+		{
+			ui:'mobile',
+			position:'left-top',
+			icon:'/image/caret-down.svg',
+			flow:'left',
+			callback(){
+				floatPlayer.value = true;
+				router.go(-1);
+			}
+		},
+	],
+	override:{
+		pip:{
+			on(){
+				floatPlayer.value = true;
+				router.push('/')
+			},
+			off(){
+				floatPlayer.value = false;
+			}
+		}
+	}
+};
+
+if(VIDEO.value.open_datetime && VIDEO.value.visible == 'N'){
+	options.setStartTime = VIDEO.value.open_datetime  !='Invalid Date' ? VIDEO.value.open_datetime : null;
+}
+
+
+
+const setupVPE = ()=>{
+	window.player = new ncplayer('vpePlayer',options);
 	window.player.on('ready',()=>{
 		loading.value = false;
 	});

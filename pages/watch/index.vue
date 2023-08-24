@@ -1,4 +1,21 @@
 <template>
+	<div v-if="!VIDEO" class="flex justify-center items-center h-screen">
+		<div class="text-center">
+			<div v-if="loading">
+				<div :class="colorMode.value == 'dark' ? 'loader-dark' : 'loader-light'"></div>
+			</div>
+			<div v-else>
+				<div class="mb-4">
+					<i class="ph ph-selection-slash text-[40px]"></i>
+				</div>
+				<div>
+					비디오가 존재하지 않습니다.
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 
 </template>
 
@@ -9,16 +26,19 @@
 <script setup>
 import axios from "axios";
 
+
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
-
 const config = ref(runtimeConfig);
-const {$util} = useNuxtApp();
+
 const route = useRoute();
 const floatPlayer = useState('floatPlayer');
 const windowSize = useState('windowSize');
 const VIDEO = useState('VIDEO');
+const loading = useState('loading',()=>true);
+const UUID = useState('UUID');
 
+const colorMode = useColorMode();
 
 const pageTitle = computed(()=>{
 	try {
@@ -67,8 +87,38 @@ const getVod = async ()=>{
 		}else {
 			VIDEO.value = data.result.data;
 		}
+		await vodViewCountUpate(VIDEO.value);
 	}
+
+	loading.value = false;
 }
+
+/**
+ * VOD 조회수 업데이트
+ * @returns {Promise<void>}
+ */
+const vodViewCountUpate = async (vod)=>{
+	if(!vod) return false;
+
+	let {data} = await axios.post(`https://mediaplus.co.kr/openApi/v1/analytics`,{
+		uid:UUID,
+		oid:vod.oid,
+		ovp_channel_id:vod.channel_id,
+		video_id:vod.video_id,
+		type:'vod',
+		currentTime:0,
+		duration:vod.duration,
+		viewingTime:0,
+		percent:0,
+
+
+	},{
+		headers:{
+			'Authorization':mpKey
+		}
+	});
+}
+
 
 useAsyncData(async ()=>{
 	await getVod();
