@@ -82,14 +82,8 @@ https://tailwindcss.nuxtjs.org/
 
 ***
 
-## 실행방법
 
-```bash
-$ yarn install
-$ yarn run dev
-```
-
-## NCP Video Player Enhancement SDK URL, KEY 설정
+## NCP Video Player Enhancement SDK 설정
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/7a602c53cc6a0b69759031e44ad8e5d9.png)
 
 네이버클라우드 콘솔에서 Video Player Enhancement 진입
@@ -129,6 +123,12 @@ export default defineNuxtConfig({
 ```
 nuxt.config.js 파일에 SDK URL을 추가합니다.
 
+## 실행방법
+
+```bash
+$ yarn install
+$ yarn run dev
+```
 
 
 ## 빌드
