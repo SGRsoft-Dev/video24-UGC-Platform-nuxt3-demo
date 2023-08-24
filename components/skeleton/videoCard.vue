@@ -1,12 +1,14 @@
 <template>
 
-	<USkeleton class="videoThumb mb-3" />
+	<USkeleton class="videoThumb mb-2" />
 
-	<div class="flex items-center space-x-2">
-		<USkeleton class="h-12 w-12" :ui="{ rounded: 'rounded-full' }" />
-		<div class="space-y-2">
-			<USkeleton class="h-4 w-[250px]" />
-			<USkeleton class="h-4 w-[200px]" />
+	<div class="px-4 md:px-0">
+		<div class="flex    ">
+			<USkeleton class="h-8 w-8 " :ui="{ rounded: 'rounded-full' }" />
+			<div class="space-y-2 pl-2 ">
+				<USkeleton class="h-4 w-[250px]" />
+				<USkeleton class="h-4 w-[200px]" />
+			</div>
 		</div>
 	</div>
 </template>
