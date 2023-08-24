@@ -91,13 +91,16 @@ $ yarn run dev
 
 ## NCP Video Player Enhancement SDK URL, KEY 설정
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/7a602c53cc6a0b69759031e44ad8e5d9.png)
+
 네이버클라우드 콘솔에서 Video Player Enhancement 진입
 
 
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/bc8f9b9850f93396e7e07ca2c1c9cd4d.png)
-플레이어르 신규로 생성합니다.
+
+플레이어를 신규로 생성합니다.
 
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/37fc51c8dccfdf2711ba7500203c685c.png)
+
 플래이어 생성시 아래 도메인을 필수로 추가합니다.
 
 ```bash
