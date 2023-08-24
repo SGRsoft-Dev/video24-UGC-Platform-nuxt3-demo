@@ -1,3 +1,24 @@
+## UGC Streaming / VOD Platform DEMO
+
+미디어플러스를 이용한 UGC 플랫폼을 구현한 FrontEnd 데모코드입니다.
+
+
+
+
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/639de76eff35933850360e675624236d.png)
+
+
+
+## 데모페이지
+[UGC 플랫폼 데모](https://mediaplus-ugc-platform-nuxt3-demo.web.app/)
+
+
+## 데모페이지 소스코드
+[https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo)
+
+
+*** 
+
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/851b6ea05f1fcc1cb827d841ca32346d.png)
 
 # MEDIA PLUS for NAVERCLOUD PLATFORM
@@ -16,22 +37,7 @@ MEDIA PLUS는 이러한 번거로운 연동 작업을 단축시켜, 동영상 �
 ***
 
 
-## UGC Streaming / VOD Platform DEMO
 
-미디어플러스를 이용한 UGC 플랫폼을 구현한 FrontEnd 데모코드입니다.
-
-![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/639de76eff35933850360e675624236d.png)
-
-
-
-## 데모페이지
-[UGC 플랫폼 데모](https://mediaplus-ugc-platform-nuxt3-demo.web.app/)
-
-
-## 데모페이지 소스코드
-[https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo)
-
-***
 
 ## 사전 준비사항
 UGC 데모는 미디어플러스의 UGC 스트리밍 서비스를 이용하기 위해, 네이버클라우드 일부 제품의 SDK , 미디어플러스의 계정이 필요합니다.
@@ -63,7 +69,7 @@ UGC 데모는 미디어플러스의 UGC 스트리밍 서비스를 이용하기 �
 
 ***
 
-## 참고 사이트 
+## 참고 사이트
 ### NAVERCLOUD PLATFORM Video Player Enhancement
 
 https://guide.ncloud-docs.com/docs/ko/vpe-overview
@@ -119,15 +125,15 @@ https://mediaplus.co.kr
 ```javascript
 // nuxt.config.js
 export default defineNuxtConfig({
-  // ...
-  head: {
-    script: [
-      {
-          src: '{VPE SDK URL}'
-      },
-    ],
-  },
-  // ...
+    // ...
+    head: {
+        script: [
+            {
+                src: '{VPE SDK URL}'
+            },
+        ],
+    },
+    // ...
 })
 ```
 nuxt.config.js 파일에 SDK URL을 추가합니다.
@@ -136,7 +142,7 @@ nuxt.config.js 파일에 SDK URL을 추가합니다.
 ```javascript
 // nuxt.config.js
 export default defineNuxtConfig({
-  // ...
+    // ...
     runtimeConfig:{
         public:{
             appName:'My UGC app',
@@ -144,7 +150,7 @@ export default defineNuxtConfig({
         },
 
     },
-  // ...
+    // ...
 })
 ```
 nuxt.config.js 파일에 미디어플러스 프로젝트 API KEY를 추가합니다.
@@ -178,11 +184,15 @@ $ npx serve .output/public
 
 ## 문의하기
 
+
 SGRSOFT 개발팀  : dev@sgrsoft.com
 
 채널톡 : https://sgrsoft.channel.io/home
 
-영업 문의 : biz@sgrsoft.com
+영업 및 네이버클라우드 가입 문의 : biz@sgrsoft.com
+
+SGRSOFT를 통하여 네이버클라우드 플랫폼 크래딧을 지원 받을 수 있습니다. (최대 300만원)
+
 
 미디어플러스 웹사이트 :
 [https://mediaplus.co.kr/](https://mediaplus.co.kr/)
