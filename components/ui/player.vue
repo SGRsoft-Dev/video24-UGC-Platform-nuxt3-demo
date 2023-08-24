@@ -1,10 +1,10 @@
 <template>
 
-	<div :class="{'fullMode' : fullMode && watchMode , 'basicMode' : !fullMode && watchMode}">
+	<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode}">
 		<div class="leftWrap" >
 			<div class="playerWrap">
 				<div class="playerBody"  v-show="!loading">
-					<div id="vpePlayer" ></div>
+					<div id="vpePlayer" class="tra200"></div>
 				</div>
 			</div>
 
@@ -21,14 +21,11 @@
 
 <script setup>
 const VIDEO = useState('VIDEO');
-const runtimeConfig = useRuntimeConfig();
-const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const router = useRouter();
-
 const watchMode = useState('watchMode');
 const fullMode = useState('fullMode');
 const floatPlayer = useState('floatPlayer');
-const route = useRoute();
+const windowSize = useState('windowSize');
 const loading = ref(true);
 
 const setupVPE = ()=>{
@@ -39,9 +36,7 @@ const setupVPE = ()=>{
 				"poster": VIDEO.value.thumb_url,
 				"description": {
 					"title": VIDEO.value.title,
-					"created_at": VIDEO.value.created_at,
-					"profile_name": "네이버클라우드",
-					"profile_image": "https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202208/d127c8db642716d84b3201f1d152e52a.png"
+
 				}
 			}
 		],
@@ -68,7 +63,7 @@ const setupVPE = ()=>{
 		autoPause:false,
 		repeat:false,
 		lowLatencyMode:true,
-		descriptionNotVisible:true,
+		descriptionNotVisible:windowSize.value.width <= 640 ? false :true,
 
 		customBtns:[
 			{
@@ -82,6 +77,17 @@ const setupVPE = ()=>{
 				default:fullMode.value ? true : false,
 				callback(){
 					fullMode.value = fullMode.value ? false : true;
+				}
+			},
+
+			{
+				ui:'mobile',
+				position:'left-top',
+				icon:'/image/caret-down.svg',
+				flow:'left',
+				callback(){
+					floatPlayer.value = true;
+					router.go(-1);
 				}
 			},
 		],

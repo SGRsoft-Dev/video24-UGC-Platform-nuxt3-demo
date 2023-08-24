@@ -1,27 +1,28 @@
 <template>
 	<div class=" relative h-full  " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
-		<UiGnb/>
+
+		<div class="mb-[72px]" v-show="windowSize.width > 640 || !watchMode">
+			<UiGnb/>
+		</div>
+
+
 		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode ,'md:inline hidden' : !watchMode }">
 			<UiLnb />
 		</div>
-		<div class=" h-full  mt-[72px] " :class="{'md:pl-[240px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
-			<slot />
+		<div class=" h-full   " :class="{'md:pl-[240px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
+			<slot class="tra100"/>
 		</div>
 	</div>
 
-
-
-	<UiFloatPlayer/>
+	<UiFloatPlayer :class="{'tra100':floatPlayer}"/>
 </template>
 
 <script setup>
 
-
-const runtimeConfig = useRuntimeConfig();
-const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const leftMenuOpen = useState('leftMenuOpen',()=>true);
 const watchMode = useState('watchMode',()=>false);
 const floatPlayer = useState('floatPlayer');
+const windowSize = useState('windowSize');
 const route = useRoute();
 const router = useRouter();
 

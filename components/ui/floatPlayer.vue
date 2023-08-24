@@ -1,10 +1,10 @@
 <template>
-	<div v-if="VIDEO " class="" :class="{'floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
+	<div v-if="VIDEO " class="" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
 
 		<div class="relative">
 			<div class="playerFrame relative" >
 				<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] md:hidden inline " @click="goVideo"  v-if="!watchMode"></div>
-				<UiPlayer/>
+				<UiPlayer class="tra100"/>
 			</div>
 
 			<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] cursor-pointer hover:bg-black/50 hoverBtnArea hidden md:inline" v-if="!watchMode" >
@@ -32,10 +32,10 @@
 			</div>
 		</div>
 
-		<div class="md:hidden flex " v-if="windowSize.width <= 640" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
+		<div class="md:hidden flex " v-if="windowSize.width <= 640 && !watchMode" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
 
 			<div class="p-2">
-				<button type="button" @click="closeVideo()">
+				<button type="button p-3" @click="closeVideo()">
 					<i class="ph ph-x  text-xl"></i>
 				</button>
 			</div>
@@ -107,6 +107,7 @@ const goVideo = ()=>{
 		z-index: 9999;
 		max-width:100vw;
 		width:100%;
+
 	}
 
 	.floatPlayer{

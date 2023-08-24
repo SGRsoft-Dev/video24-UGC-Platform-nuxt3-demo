@@ -81,11 +81,7 @@ watch(()=>route.query.v,async ()=>{
 });
 
 onMounted(()=>{
-	if(windowSize.value.width <=640){
-		floatPlayer.value = true;
-	}else {
-		floatPlayer.value = false;
-	}
+	floatPlayer.value = false;
 })
 onUnmounted(()=>{
 
