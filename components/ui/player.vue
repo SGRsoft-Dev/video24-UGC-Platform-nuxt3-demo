@@ -100,13 +100,14 @@ const setupVPE = ()=>{
 		loading.value = false;
 	});
 
-	setTimeout(()=>{
-		loading.value = true;
-	},3000);
+
 }
 
 onMounted(()=>{
 	setupVPE();
+	setTimeout(()=>{
+		loading.value = true;
+	},3000);
 });
 
 watch(()=>VIDEO.value,(v)=>{
