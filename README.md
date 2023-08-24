@@ -23,7 +23,7 @@ MEDIA PLUS는 이러한 번거로운 연동 작업을 단축시켜, 동영상 �
 
 
 ## 데모페이지
-[UGC 플랫폼 데모](https://mediaplus-broadcast-player-nuxt3-demo.web.app/)
+[UGC 플랫폼 데모](https://mediaplus-ugc-platform-nuxt3-demo.web.app/)
 
 
 ## 데모페이지 소스코드
