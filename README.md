@@ -1,63 +1,54 @@
-# Nuxt 3 Minimal Starter
+# MEDIA PLUS
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## UGC Streaming / VOD Platform DEMO
 
-## Setup
+미디어플러스를 이용한 UGC 플랫폼을 구현한 FrontEnd 데모코드입니다.
 
-Make sure to install the dependencies:
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/639de76eff35933850360e675624236d.png)
 
-```bash
-# npm
-npm install
+## 개발환경 구성
 
-# pnpm
-pnpm install
+- Vue3 + Nuxt 3  를 이용한 CSR 방식의 웹사이트
+- Node v16 이상 필요
+- TypeScript
+- Tailwind CSS
 
-# yarn
-yarn install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## 실행방법
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
+# install dependencies
+$ yarn install
+$ yarn run dev
 ```
 
-## Production
-
-Build the application for production:
-
+## 빌드
+    
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
+$ yarn run generate
 ```
 
-Locally preview production build:
-
+## 빌드 미리보기
+    
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
+$ npx serve .output/public
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+
+## 데모페이지
+[UGC 플랫폼 데모](https://mediaplus-broadcast-player-nuxt3-demo.web.app/)
+
+
+## 데모페이지 소스코드
+[https://github.com/SGRsoft-Dev/mediaplus-broadcast-player-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-broadcast-player-nuxt3-demo)
+
+## 문의하기
+
+SGRSOFT 개발팀  : dev@sgrsoft.com
+
+채널톡 : https://sgrsoft.channel.io/home
+
+영업 문의 : biz@sgrsoft.com
+
+미디어플러스 웹사이트 : 
+[https://mediaplus.co.kr/](https://mediaplus.co.kr/)
