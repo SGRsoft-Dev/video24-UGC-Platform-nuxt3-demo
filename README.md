@@ -1,4 +1,4 @@
-![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/729c01764f9b38569d05b26bb049c026.png)
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/851b6ea05f1fcc1cb827d841ca32346d.png)
 
 # MEDIA PLUS for NAVERCLOUD PLATFORM
 미디어플러스는 네이버클라우드 플랫폼에서 동작하는 클라우드 네이티브앱입니다.
