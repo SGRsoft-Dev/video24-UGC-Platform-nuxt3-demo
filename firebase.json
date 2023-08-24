@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "mediaplus-broadcast-player-nuxt3-demo",
+    "site": "mediaplus-ugc-platform-nuxt3-demo",
     "public": ".output/public",
     "ignore": [
       "firebase.json",

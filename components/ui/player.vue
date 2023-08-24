@@ -24,11 +24,12 @@ const VIDEO = useState('VIDEO');
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const router = useRouter();
-let loading = ref(true);
+
 const watchMode = useState('watchMode');
 const fullMode = useState('fullMode');
 const floatPlayer = useState('floatPlayer');
 const route = useRoute();
+const loading = ref(true);
 
 const setupVPE = ()=>{
 	window.player = new ncplayer('vpePlayer',{
@@ -100,15 +101,18 @@ const setupVPE = ()=>{
 		loading.value = false;
 	});
 
+	window.player.on('error',(e)=>{
+
+		if(e.code){
+			loading.value = false;
+		}
+	});
+
 
 }
 
 onMounted(()=>{
-	try {
-		setupVPE();
-	}catch (e) {
-		loading.value = true;
-	}
+	setupVPE();
 
 });
 
