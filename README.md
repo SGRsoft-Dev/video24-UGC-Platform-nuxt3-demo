@@ -88,10 +88,13 @@ https://tailwindcss.nuxtjs.org/
 
 네이버클라우드 콘솔에서 Video Player Enhancement 진입
 
+***
 
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/bc8f9b9850f93396e7e07ca2c1c9cd4d.png)
 
 플레이어를 신규로 생성합니다.
+
+***
 
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/37fc51c8dccfdf2711ba7500203c685c.png)
 
@@ -103,9 +106,13 @@ https://mediaplus.co.kr
 ```
 나머지는 서비스를 운영할 도메인을 입력합니다.
 
+***
+
 ![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/6ad95ea2ed84a4412224a68f17d22c1b.png)
 
 생성된 플레이어의 SDK URL를 복사합니다.
+
+## Nuxt 3 설정 수정
 
 ```javascript
 // nuxt.config.js
@@ -122,6 +129,25 @@ export default defineNuxtConfig({
 })
 ```
 nuxt.config.js 파일에 SDK URL을 추가합니다.
+
+***
+```javascript
+// nuxt.config.js
+export default defineNuxtConfig({
+  // ...
+    runtimeConfig:{
+        public:{
+            appName:'My UGC app',
+            mediaPlusApiKey:'{미디어플러스 프로젝트 API KEY}',
+        },
+
+    },
+  // ...
+})
+```
+nuxt.config.js 파일에 미디어플러스 프로젝트 API KEY를 추가합니다.
+
+***
 
 ## 실행방법
 
