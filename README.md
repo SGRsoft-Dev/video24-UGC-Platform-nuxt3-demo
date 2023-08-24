@@ -38,7 +38,7 @@ UGC 데모는 미디어플러스의 UGC 스트리밍 서비스를 이용하기 �
 
 ## 필수
 - 네이버클라우드 플랫폼 Video Player Enhancement SDK URL (v1.1.1 이상)
-- 네이버클라우드 플랫폼 Video Player Enhancement SDK KEY
+- 네이버클라우드 플랫폼 Video Player Enhancement SDK KEY (유료 라이선스 필요)
 - 미디어플러스 프로젝트 API KEY
 
 ***
@@ -88,6 +88,45 @@ https://tailwindcss.nuxtjs.org/
 $ yarn install
 $ yarn run dev
 ```
+
+## NCP Video Player Enhancement SDK URL, KEY 설정
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/7a602c53cc6a0b69759031e44ad8e5d9.png)
+네이버클라우드 콘솔에서 Video Player Enhancement 진입
+
+
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/bc8f9b9850f93396e7e07ca2c1c9cd4d.png)
+플레이어르 신규로 생성합니다.
+
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/37fc51c8dccfdf2711ba7500203c685c.png)
+플래이어 생성시 아래 도메인을 필수로 추가합니다.
+
+```bash
+http://localhost.com
+https://mediaplus.co.kr
+```
+나머지는 서비스를 운영할 도메인을 입력합니다.
+
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/6ad95ea2ed84a4412224a68f17d22c1b.png)
+
+생성된 플레이어의 SDK URL를 복사합니다.
+
+```javascript
+// nuxt.config.js
+export default defineNuxtConfig({
+  // ...
+  head: {
+    script: [
+      {
+          src: '{VPE SDK URL}'
+      },
+    ],
+  },
+  // ...
+})
+```
+nuxt.config.js 파일에 SDK URL을 추가합니다.
+
+
 
 ## 빌드
 
