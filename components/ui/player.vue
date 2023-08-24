@@ -99,6 +99,10 @@ const setupVPE = ()=>{
 	window.player.on('ready',()=>{
 		loading.value = false;
 	});
+
+	setTimeout(()=>{
+		loading.value = true;
+	},3000);
 }
 
 onMounted(()=>{
