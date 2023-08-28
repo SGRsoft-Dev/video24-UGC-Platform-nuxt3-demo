@@ -95,7 +95,7 @@ const getVod = async (video_id)=>{
 		}else {
 			VIDEO.value = data.result.data;
 		}
-		//await vodViewCountUpdate(VIDEO.value);
+		await vodViewCountUpdate(VIDEO.value);
 	}
 
 	loading.value = false;
@@ -106,6 +106,7 @@ const getVod = async (video_id)=>{
  * @returns {Promise<void>}
  */
 const vodViewCountUpdate = async (vod)=>{
+
 	if(!vod) return false;
 
 	let {data} = await axios.post(`https://mediaplus.co.kr/openApi/v1/analytics`,{
