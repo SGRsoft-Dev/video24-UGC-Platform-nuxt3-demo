@@ -1,5 +1,5 @@
 <template>
-	<div class="p-0 md:p-5 ">
+	<div class="p-0 md:p-5  pt-5 md:pr-0">
 
 
 		<div class="videoRoot" v-if="loading">
@@ -8,7 +8,7 @@
 			</div>
 		</div>
 
-		<div v-else class="space-y-5">
+		<div v-else class="space-y-5 ">
 
 			<div class="px-1 ">
 				<strong class="text-2xl">Reels</strong>
