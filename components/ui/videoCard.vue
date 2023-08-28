@@ -1,7 +1,9 @@
 <template>
 	<NuxtLink :to="`/watch?v=${v.video_id}`">
-		<div class="videoThumb bg-gray-200/15">
-			<img :src="v.thumb_url" :alt="v.title" class="w-full h-full" loading="lazy">
+		<div class="videoThumb bg-gray-200/15 " :style="{background:`url(${v.thumb_url}) `}">
+			<div class="backdrop-blur-cu1">
+				<img :src="v.thumb_url" :alt="v.title" class="w-full h-full object-contain " loading="lazy">
+			</div>
 		</div>
 		<div class="text-base pt-2 px-4 md:px-0">
 			<div class="flex">

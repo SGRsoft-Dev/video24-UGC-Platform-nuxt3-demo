@@ -1,5 +1,5 @@
 <template>
-	<NuxtLayout class="tra200">
+	<NuxtLayout>
 		<NuxtLoadingIndicator :color="'red'"/>
 		<NuxtPage />
 	</NuxtLayout>

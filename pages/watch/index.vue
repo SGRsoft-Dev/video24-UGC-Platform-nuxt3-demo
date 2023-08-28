@@ -70,7 +70,11 @@ useHead({
  * VOD 가져오기
  * @type {*[]}
  */
-const getVod = async ()=>{
+const getVod = async (video_id)=>{
+
+	if(!video_id && route.query.v){
+		video_id = route.query.v;
+	}
 
 	let {data} = await axios.get(`https://mediaplus.co.kr/openApi/v1/vod/${route.query.v}`,{
 		headers:{
@@ -81,13 +85,17 @@ const getVod = async ()=>{
 	if(data.code == 200){
 		if(VIDEO.value) {
 
-			if(VIDEO.value.video_id != data.result.data.video_id){
+			try {
+				if (VIDEO.value.video_id != data.result.data.video_id) {
+					VIDEO.value = data.result.data;
+				}
+			}catch (e) {
 				VIDEO.value = data.result.data;
 			}
 		}else {
 			VIDEO.value = data.result.data;
 		}
-		await vodViewCountUpate(VIDEO.value);
+		//await vodViewCountUpdate(VIDEO.value);
 	}
 
 	loading.value = false;
@@ -97,7 +105,7 @@ const getVod = async ()=>{
  * VOD 조회수 업데이트
  * @returns {Promise<void>}
  */
-const vodViewCountUpate = async (vod)=>{
+const vodViewCountUpdate = async (vod)=>{
 	if(!vod) return false;
 
 	let {data} = await axios.post(`https://mediaplus.co.kr/openApi/v1/analytics`,{
@@ -121,13 +129,21 @@ const vodViewCountUpate = async (vod)=>{
 
 
 useAsyncData(async ()=>{
+
 	await getVod();
 	window.scrollTo(0, 0);
 });
 
-watch(()=>route.query.v,async ()=>{
-	await getVod();
+const changePlayer = async (video_id)=>{
+	loading.value = true;
+	VIDEO.value = null;
+	window.player.destroy();
+	await getVod(video_id);
+	//console.log('!!! useAsyncData')
 	window.scrollTo(0, 0);
+}
+watch(()=>route.query.v, (to)=>{
+	changePlayer(to);
 });
 
 onMounted(()=>{

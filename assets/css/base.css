@@ -28,6 +28,16 @@ body{
 .videoThumb{
     aspect-ratio: 16/9;
     object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300%;
+
+}
+.backdrop-blur-cu1{
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    width:100%;
+    height:100%;
 }
 
 .tra100{

@@ -1,8 +1,10 @@
 <template>
 	<NuxtLink :to="`/watch?v=${v.video_id}`">
 		<div class="flex mb-4">
-			<div class="thumbWrap">
-				<img :src="v.thumb_url" :alt="v.title" class="">
+			<div class="thumbWrap" :style="{background:`url(${v.thumb_url}) `}">
+				<div class="backdrop-blur-cu1">
+					<img :src="v.thumb_url" :alt="v.title" class="w-full h-full object-contain " loading="lazy">
+				</div>
 			</div>
 			<div class="text-base pl-2  infoWrap">
 				<div>
@@ -34,10 +36,16 @@ defineProps({
 
 <style scoped>
 
+	.thumbWrap{
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 300%;
+	}
+
 	.thumbWrap img{
 		width:140px;
 
-		object-fit: cover;
+		object-fit: contain;
 		aspect-ratio: 16/9;
 	}
 	.infoWrap{

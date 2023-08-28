@@ -10,7 +10,7 @@
 			<UiLnb />
 		</div>
 		<div class=" h-full   " :class="{'md:pl-[240px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
-			<slot class="tra100"/>
+			<slot/>
 		</div>
 	</div>
 

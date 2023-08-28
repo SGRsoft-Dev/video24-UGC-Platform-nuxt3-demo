@@ -13,6 +13,12 @@
 				<UiVideoCard :v="v" />
 			</div>
 		</div>
+
+
+		<div class="moreLoader videoRoot pt-5" >
+			<!--Observer-->
+		</div>
+
 	</div>
 </template>
 
@@ -44,7 +50,8 @@ const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
 
 const loading = ref(true);
-const skelCnt = ref(20);
+const skelCnt = ref(50);
+const initLoad = ref(false);
 
 useHead({
 	title: runtimeConfig.public.appName,
@@ -64,8 +71,11 @@ useHead({
 const VOD = useState('VOD');
 const TOTAL = useState('TOTAL');
 const pageNo = ref(1);
+const endPage = ref(false);
 
 const getVodList = async ()=>{
+	if(endPage.value) return;
+
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod',{
 		params:{
 			pageNo:pageNo.value,
@@ -97,10 +107,17 @@ const getVodList = async ()=>{
 
 			setTimeout(()=>{
 				loading.value = false;
-			},300)
+
+				initLoad.value = true;
+				setObserver();
+			},500)
 
 		}else{
 			loading.value = false;
+		}
+
+		if(pageNo.value > 1 && data.result.data.length == 0){
+			endPage.value = true;
 		}
 
 
@@ -116,6 +133,20 @@ useAsyncData(async ()=>{
 	}else{
 		loading.value = false;
 	}
-	//await getVodList();
 });
+
+const setObserver = ()=>{
+	const io = new IntersectionObserver(ioCallback, { threshold: 0.9 });
+	io.observe(document.querySelector('.moreLoader') );
+}
+const ioCallback = async ()=>{
+	pageNo.value++;
+	await getVodList();
+}
+
+
+onMounted(()=>{
+
+
+})
 </script>
