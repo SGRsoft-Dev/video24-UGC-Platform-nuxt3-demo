@@ -1,5 +1,5 @@
 <template>
-	<div class="p-0 md:p-5">
+	<div class="p-0 md:p-5 ">
 
 
 		<div class="videoRoot" v-if="loading">
@@ -8,11 +8,33 @@
 			</div>
 		</div>
 
-		<div class="videoRoot" v-else>
-			<div v-for="(v , i) in VOD" class="videoCol px-0 md:px-3 mb-10">
-				<UiVideoCard :v="v" />
+		<div v-else class="space-y-5">
+
+			<div class="px-1 ">
+				<strong class="text-2xl">Reels</strong>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3" >
+				<template v-for="(v , i) in VOD">
+					<div  class=" px-0 md:px-3 mb-10 videoItems" v-if="v.height > v.width">
+						<UiVideoCardShortForm :v="v" />
+					</div>
+				</template>
+			</div>
+
+			<div class="px-1 ">
+				<strong class="text-2xl">VOD</strong>
+			</div>
+
+			<div class="videoRoot" >
+				<template v-for="(v , i) in VOD">
+					<div class="videoCol px-0 md:px-3 mb-10" v-if="v.height < v.width">
+						<UiVideoCard :v="v" />
+					</div>
+				</template>
 			</div>
 		</div>
+
 
 
 		<div class="moreLoader videoRoot pt-5" >
@@ -38,6 +60,30 @@
 .videoThumb{
 	aspect-ratio: 16/9;
 	object-fit: cover;
+}
+
+.slickBody{
+	display: flex;
+	flex-wrap: nowrap;
+	scroll-snap-type: x mandatory;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	& > div {
+		scroll-snap-align: start;
+	}
+
+}
+.slickBody .videoItems{
+	max-width:240px;
+	min-width:240px;
+	padding-left: 5px;
+	padding-right: 5px;
+	aspect-ratio: 9/10;
 }
 </style>
 

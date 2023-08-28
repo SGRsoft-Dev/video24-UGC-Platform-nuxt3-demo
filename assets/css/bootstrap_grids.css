@@ -39,6 +39,10 @@
     flex: 0 0 100%;
     max-width: 100%;
 }
+.videoColSf{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
 
 .col {
     flex-basis: 0;
@@ -221,6 +225,10 @@
     .videoCol{
         flex: 0 0 50%;
         max-width: 50%;
+    }
+    .videoColSf{
+        flex: 0 0 20%;
+        max-width: 20%;
     }
 
     .col-sm {
