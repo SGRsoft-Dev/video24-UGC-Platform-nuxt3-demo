@@ -1,5 +1,5 @@
 <template>
-	<div class=" relative h-full  px-0" :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
+	<div class=" relative  w-full   " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
 
 		<div class="mb-[72px]" v-show="windowSize.width > 640 || !watchMode">
 			<UiGnb/>
@@ -9,7 +9,7 @@
 		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode ,'md:inline hidden' : !watchMode }">
 			<UiLnb />
 		</div>
-		<div class=" h-full px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
+		<div class="  px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
 			<slot/>
 		</div>
 	</div>

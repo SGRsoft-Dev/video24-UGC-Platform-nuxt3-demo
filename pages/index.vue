@@ -81,7 +81,7 @@
 }
 .slickBody .videoItems{
 	max-width:240px;
-	min-width:240px;
+	min-width:180px;
 	padding-left: 5px;
 	padding-right: 5px;
 	aspect-ratio: 9/10;
