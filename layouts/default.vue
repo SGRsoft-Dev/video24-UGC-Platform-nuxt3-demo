@@ -1,5 +1,5 @@
 <template>
-	<div class=" relative h-full  " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
+	<div class=" relative h-full  px-0" :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
 
 		<div class="mb-[72px]" v-show="windowSize.width > 640 || !watchMode">
 			<UiGnb/>
@@ -9,7 +9,7 @@
 		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode ,'md:inline hidden' : !watchMode }">
 			<UiLnb />
 		</div>
-		<div class=" h-full   " :class="{'md:pl-[240px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
+		<div class=" h-full px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
 			<slot/>
 		</div>
 	</div>
@@ -48,6 +48,14 @@ watch(()=>route.path,(path)=>{
 const VIDEO = useState('VIDEO');
 
 
+watch(colorMode,()=>{
+	if(colorMode.value == 'dark'){
+		document.body.classList.add('bg-neutral-900')
+	}else{
+		document.body.classList.remove('bg-neutral-900')
+	}
+})
+
 onMounted(()=>{
 	if(route.path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false
@@ -55,6 +63,12 @@ onMounted(()=>{
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
+	}
+
+	if(colorMode.value == 'dark'){
+		document.body.classList.add('bg-neutral-900')
+	}else{
+		document.body.classList.remove('bg-neutral-900')
 	}
 
 

@@ -2,15 +2,16 @@
 	<div class="p-0 md:p-5  pt-5 md:pr-0">
 
 
-		<div class="videoRoot" v-if="loading">
-			<div v-for="(v , i) in skelCnt" class="videoCol px-0 md:px-3 mb-10">
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5" v-if="loading">
+			<div v-for="(v , i) in skelCnt" class=" px-0 md:px-3 mb-10">
 				<SkeletonVideoCard  />
 			</div>
 		</div>
 
+
 		<div v-else class="space-y-5 ">
 
-			<div class="px-1 ">
+			<div class="px-2 ">
 				<strong class="text-2xl">Reels</strong>
 			</div>
 
@@ -22,13 +23,13 @@
 				</template>
 			</div>
 
-			<div class="px-1 ">
+			<div class="px-2 ">
 				<strong class="text-2xl">VOD</strong>
 			</div>
 
-			<div class="videoRoot" >
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 " >
 				<template v-for="(v , i) in VOD">
-					<div class="videoCol px-0 md:px-3 mb-10" v-if="v.height < v.width">
+					<div class=" px-0 md:px-3 mb-10" v-if="v.height < v.width">
 						<UiVideoCard :v="v" />
 					</div>
 				</template>
