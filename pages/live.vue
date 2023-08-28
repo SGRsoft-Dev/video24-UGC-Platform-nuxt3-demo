@@ -1,5 +1,5 @@
 <template>
-	<div class="p-0 md:p-5 space-y-5">
+	<div class="p-5 md:p-5 space-y-5">
 		<div class="px-1 ">
 			<strong class="text-2xl">LIVE</strong>
 		</div>
@@ -8,7 +8,7 @@
 			<UiVideoCardCol :v="v" />
 		</div>
 
-		<div v-if="TOTAL <1" class="h-full flex justify-center items-center h-[500px]">
+		<div v-if="TOTAL <1" class="h-full flex justify-center items-center h-[600px] md:h-[500px]">
 			<div class="text-center" v-if="!loading">
 				<div class="mb-4">
 					<i class="ph ph-selection-slash text-[40px]"></i>
