@@ -74,51 +74,8 @@ const leftMenuOpen = useState('leftMenuOpen');
 // ref 선언
 const menus = ref();
 
-/**
- * @description 하위 메뉴를 제외한 모든 메뉴를 닫는다.
- * @param {Object} menu 클릭한 메뉴
- */
-const closeOthers = (menu) => {
-  menus.value.forEach((m) => {
-    if (m.subs[0] !== menu) {
-      // eslint-disable-next-line no-param-reassign
-      m.subs[0].isOpen = false;
-    }
-  });
-};
-
-menus.value = [
-  {
-    subs: [
-      {
-        title: 'HOME',
-        icon: ' ph-house-simple',
-        to: '/',
-      },
-    ],
-  },
-
-	{
-		subs: [
-			{
-				title: 'LIVE',
-				icon: ' ph-broadcast',
-				to: '/live',
-			}
-		],
-	},
-  {
-    subs: [
-	    {
-		    title: 'VOD',
-		    icon: ' ph-monitor-play',
-		    to: '/vod',
-	    }
-    ],
-  },
-
-
-];
+const appConfig = useAppConfig();
+menus.value = appConfig.siteMenu;
 
 leftMenu.value = menus.value;
 </script>

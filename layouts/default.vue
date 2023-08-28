@@ -1,7 +1,7 @@
 <template>
-	<div class=" relative  w-full   " :class="{'bg-neutral-900' : colorMode.value == 'dark'}">
+	<div class=" relative  w-full  dark:bg-neutral-900 " >
 
-		<div class="mb-[72px]" v-show="windowSize.width > 640 || !watchMode">
+		<div class="mb-[72px] " v-show="windowSize.width > 640 || !watchMode">
 			<UiGnb/>
 		</div>
 
@@ -9,10 +9,19 @@
 		<div class=" h-full fixed top-0 left-0  z-20   " :class="{'w-[220px]' : leftMenuOpen , 'w-[60px]' : !leftMenuOpen ,'hidden' : watchMode ,'md:inline hidden' : !watchMode }">
 			<UiLnb />
 		</div>
-		<div class="  px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
+		<div class="  px-0 pb-[40px] md:pb-[20px]" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
 			<slot/>
 		</div>
+
+
+		<div class="fixed bottom-0 w-full z-20 h-20 dark:bg-neutral-900 md:hidden">
+			<UiFooter/>
+		</div>
+
+
 	</div>
+
+
 
 	<UiFloatPlayer :class="{'tra100':floatPlayer}"/>
 </template>
