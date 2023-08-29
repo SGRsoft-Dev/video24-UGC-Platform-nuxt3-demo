@@ -29,10 +29,7 @@ html {
 
 #__nuxt{
     width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch; /* enables “momentum” (smooth) scrolling */
+    -webkit-overflow-scrolling: touch;
     padding:0 !important;
 }
 
@@ -57,8 +54,7 @@ body::-webkit-scrollbar {
 
 html,
 body {
-    position: fixed;
-    overflow: hidden;
+
 }
 
 .profileThumb{
