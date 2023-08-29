@@ -81,7 +81,7 @@ const getVodList = async (params)=>{
 				}
 			}
 
-			shuffle(VOD.value);
+
 
 			TOTAL.value = data.result.totalCnt;
 		}
@@ -100,9 +100,13 @@ onMounted(async ()=>{
 		limit:20,
 	});
 
+	shuffle(VOD.value);
+
 	await getVodList({
 		limt:10,
 	});
+
+
 
 
 	setTimeout(()=>{
