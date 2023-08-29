@@ -47,6 +47,17 @@ const playerAddNextSource = (data)=>{
 	}
 }
 
+//비디오 중복 체크
+const chkDuvideo = (video_id)=>{
+	for (let i = 0; i < VOD.value.length; i++) {
+		let v = VOD.value[i];
+		if (v.video_id == video_id) {
+			return true;
+		}
+	}
+	return false;
+}
+
 const getVodList = async (params)=>{
 	try {
 		let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod', {
@@ -64,7 +75,9 @@ const getVodList = async (params)=>{
 				v.view_cnt = $util.numberToKorean(v.view_cnt);
 
 				if (route.query.v != v.video_id) {
-					VOD.value.push(v);
+					if(chkDuvideo(v.video_id) == false){
+						VOD.value.push(v);
+					}
 				}
 			}
 
@@ -83,12 +96,13 @@ onMounted(async ()=>{
 
 	VOD.value = [];
 	await getVodList({
-		channelId:VIDEO.value.channel_id
+		channelId:VIDEO.value.channel_id,
+		limit:20,
 	});
 
-	if(VOD.value.length < 1){
-		await getVodList();
-	}
+	await getVodList({
+		limt:10,
+	});
 
 
 	setTimeout(()=>{
