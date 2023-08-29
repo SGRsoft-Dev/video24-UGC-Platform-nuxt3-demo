@@ -34,8 +34,8 @@
 
 		<div class="md:hidden flex " v-if="windowSize.width <= 640 && !watchMode" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
 
-			<div class="p-2">
-				<button type="button p-3" @click="closeVideo()">
+			<div class="">
+				<button type="button" class=" p-3" @click="closeVideo()">
 					<i class="ph ph-x  text-xl"></i>
 				</button>
 			</div>
@@ -101,7 +101,7 @@ const goVideo = ()=>{
 @media (max-width: 640px) {
 	.floatPlayer  {
 		position: fixed;
-		bottom:0;
+		bottom:80px;
 		left:0;
 		right:0;
 		z-index: 9999;

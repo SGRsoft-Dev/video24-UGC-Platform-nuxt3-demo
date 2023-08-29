@@ -8,7 +8,7 @@
 			<UiVideoCardCol :v="v" />
 		</div>
 
-		<div v-if="TOTAL <1" class="h-full flex justify-center items-center h-[600px] md:h-[500px]">
+		<div v-if="TOTAL <1" class="h-full flex justify-center items-center h-[500px]">
 			<div class="text-center" v-if="!loading">
 				<div class="mb-4">
 					<i class="ph ph-selection-slash text-[40px]"></i>
