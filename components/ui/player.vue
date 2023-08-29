@@ -126,7 +126,6 @@ const setupVPE = ()=>{
 
 onMounted(()=>{
 	setupVPE();
-
 });
 
 watch(()=>VIDEO.value,(v)=>{

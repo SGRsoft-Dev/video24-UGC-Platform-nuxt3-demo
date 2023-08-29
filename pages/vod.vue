@@ -24,7 +24,7 @@
 		</div>
 
 
-		<div class="moreLoader videoRoot pt-5" >
+		<div class="moreLoader videoRoot pt-5" v-if="TOTAL > LIST.length">
 			<!--Observer-->
 		</div>
 
@@ -78,10 +78,11 @@ useHead({
  * VOD 리스트 가져오기
  * @type {*[]}
  */
-const LIST = useState('VOD_LIST');
+const LIST = useState('VOD_LIST',()=>[]);
 const TOTAL = useState('VOD_TOTAL',()=>0);
 const pageNo = ref(1);
 const endPage = ref(false);
+const limit = ref(20);
 
 const getVodList = async ()=>{
 	if(endPage.value) return;
@@ -89,7 +90,7 @@ const getVodList = async ()=>{
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod',{
 		params:{
 			pageNo:pageNo.value,
-			limit:20,
+			limit:limit.value,
 
 		},
 		headers:{
@@ -106,6 +107,9 @@ const getVodList = async ()=>{
 				let v = data.result.data[i];
 				v.created_at = $util.dateFormat2(v.created_at);
 				v.view_cnt = $util.numberToKorean(v.view_cnt);
+
+
+
 				if(pageNo.value > 1){
 					LIST.value.push(v);
 				}
@@ -132,6 +136,7 @@ const getVodList = async ()=>{
 
 
 
+
 	}
 
 
@@ -142,8 +147,12 @@ useAsyncData(async ()=>{
 });
 
 const setObserver = ()=>{
-	const io = new IntersectionObserver(ioCallback, { threshold: 0.9 });
-	io.observe(document.querySelector('.moreLoader') );
+	try {
+		const io = new IntersectionObserver(ioCallback, {threshold: 0.9});
+		io.observe(document.querySelector('.moreLoader'));
+	} catch (e) {
+
+	}
 }
 const ioCallback = async ()=>{
 	pageNo.value++;

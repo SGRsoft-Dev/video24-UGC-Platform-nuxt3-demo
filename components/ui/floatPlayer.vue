@@ -1,5 +1,5 @@
 <template>
-	<div v-if="VIDEO " class="" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto ' : !fullMode , 'bg-neutral-900' : colorMode.value == 'dark'}">
+	<div v-if="VIDEO " class="pt-0 md:pt-5 dark:bg-neutral-900" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto ' : !fullMode} ">
 
 		<div class="relative">
 			<div class="playerFrame relative" >
@@ -101,7 +101,7 @@ const goVideo = ()=>{
 @media (max-width: 640px) {
 	.floatPlayer  {
 		position: fixed;
-		bottom:80px;
+		bottom:76px;
 		left:0;
 		right:0;
 		z-index: 9999;
@@ -117,5 +117,14 @@ const goVideo = ()=>{
 	.floatPlayer .playerFrame{
 		width:140px;
 	}
+}
+
+
+.floatPlayer .ncp_player_root .controls-body{
+	display: none;
+}
+
+.floatPlayer .ncp_player_root .description_frame{
+	display: none;
 }
 </style>
