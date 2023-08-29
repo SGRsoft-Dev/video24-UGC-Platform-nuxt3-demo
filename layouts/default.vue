@@ -15,7 +15,7 @@
 
 
 		<div class="fixed bottom-0 w-full z-20 h-20 dark:bg-neutral-900 md:hidden" v-if="!watchMode">
-			<UiFooter/>
+			<UiBottom/>
 		</div>
 
 

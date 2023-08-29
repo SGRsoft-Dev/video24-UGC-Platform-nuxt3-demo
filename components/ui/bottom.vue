@@ -39,7 +39,7 @@ const leftMenuOpen = useState('leftMenuOpen');
 const menus = ref();
 
 const appConfig = useAppConfig();
-menus.value = appConfig.siteMenu;
+menus.value = appConfig.mobileBottomMenu;
 
 leftMenu.value = menus.value;
 </script>
