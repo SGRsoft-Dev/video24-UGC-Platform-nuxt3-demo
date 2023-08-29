@@ -98,7 +98,18 @@ let options = {
 			off(){
 				floatPlayer.value = false;
 			}
-		}
+		},
+		nextSource(){
+
+			if(VIDEO.value.next_video_id) {
+				router.push(`/watch?v=${VIDEO.value.next_video_id}`);
+			}
+		},
+		prevSource(){
+			if(VIDEO.value.prev_video_id) {
+				router.push(`/watch?v=${VIDEO.value.prev_video_id}`);
+			}
+		},
 	}
 };
 
