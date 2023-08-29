@@ -16,13 +16,17 @@ const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
 
-const VOD = useState('VOD');
-const TOTAL = useState('TOTAL');
+const VOD = useState('PLAYLIST_LIST');
+const TOTAL = useState('PLAYLIST_TOTAL');
+const VIDEO = useState('VIDEO');
 
 
 
 const getVodList = async ()=>{
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod',{
+		params:{
+			channelId:VIDEO.value.channel_id
+		},
 		headers:{
 			'Authorization':mpKey
 		}
@@ -36,9 +40,7 @@ const getVodList = async ()=>{
 }
 
 onMounted(async ()=>{
-	if(VOD.value.length == 0){
-		await getVodList();
-	}
+	await getVodList();
 });
 
 </script>

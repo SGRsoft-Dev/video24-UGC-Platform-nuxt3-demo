@@ -130,7 +130,7 @@ const vodViewCountUpdate = async (vod)=>{
 
 
 useAsyncData(async ()=>{
-
+	loading.value = true;
 	await getVod();
 	window.scrollTo(0, 0);
 });
