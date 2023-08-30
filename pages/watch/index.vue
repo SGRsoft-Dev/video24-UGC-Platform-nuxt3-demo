@@ -1,7 +1,5 @@
 <template>
-	<div v-if="loading" >
-		<SkeletonPlayer/>
-	</div>
+
 	<div v-if="!VIDEO" >
 		<div class="text-center">
 			<div class="flex justify-center items-center h-[500px]">
@@ -102,7 +100,9 @@ const getVod = async (video_id)=>{
 
 	setTimeout(()=>{
 		loading.value = false;
-		window.scrollTo(0, 0);
+		setTimeout(()=>{
+			window.scrollTo(0, 0);
+		},200);
 	},200);
 
 }

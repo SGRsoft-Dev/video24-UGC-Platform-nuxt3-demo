@@ -1,9 +1,13 @@
 <template>
 
+	<div v-if="loading" >
+		<SkeletonPlayer/>
+	</div>
+
 	<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode}">
 		<div class="leftWrap" >
 			<div class="playerWrap relative">
-				<div class="playerBody"  v-show="!loading">
+				<div class="playerBody"  >
 					<div id="vpePlayer" class="tra200"></div>
 				</div>
 				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">

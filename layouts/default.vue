@@ -66,6 +66,8 @@ watch(()=>route.path,(path , oldPath)=>{
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;
+
+
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
@@ -99,6 +101,7 @@ onMounted(()=>{
 	}
 
 	loading.value = false;
+
 
 });
 
