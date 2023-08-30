@@ -8,7 +8,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "firebaseBuild": "NITRO_PRESET=firebase && nuxt build",
-    "firebaseDeploy": "firebase deploy"
+    "firebaseDeploy": "NITRO_PRESET=firebase && nuxt build && npx firebase deploy"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

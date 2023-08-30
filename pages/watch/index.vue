@@ -102,6 +102,7 @@ const getVod = async (video_id)=>{
 
 	setTimeout(()=>{
 		loading.value = false;
+		window.scrollTo(0, 0);
 	},200);
 
 }
@@ -116,7 +117,7 @@ useAsyncData(async ()=>{
 
 	}
 	await getVod();
-	window.scrollTo(0, 0);
+
 });
 
 const changePlayer = async (video_id)=>{
@@ -124,7 +125,7 @@ const changePlayer = async (video_id)=>{
 	VIDEO.value = null;
 	window.player.destroy();
 	await getVod(video_id);
-	window.scrollTo(0, 0);
+
 }
 watch(()=>route.query.v, (to,from)=>{
 	if(from && to != from) {
@@ -136,6 +137,7 @@ watch(()=>route.query.v, (to,from)=>{
 onMounted(()=>{
 
 	floatPlayer.value = false;
+	window.scrollTo(0, 0);
 	try{
 		window.player.uiVisible();
 	}catch (e) {
