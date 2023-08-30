@@ -1,6 +1,6 @@
 <template>
 
-	<div class="fixed top-0 w-full backdrop-blur z-[999999] md:drop-shadow-none drop-shadow-lg border-b border-[#eeeeee] dark:border-[#252424] " :class="{'bg-neutral-900' : setDark , 'bg-white' : !setDark , }">
+	<div class="fixed top-0 w-full backdrop-blur z-[999999] md:drop-shadow-none drop-shadow-lg border-b   " :class="{'bg-neutral-900 border-[#252424]' : setDark , 'bg-white ' : !setDark , }">
 		<div class="p-4 ">
 			<div class=" flex items-center">
 				<div class="w-48 flex pl-2">

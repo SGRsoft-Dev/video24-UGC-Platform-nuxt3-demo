@@ -1,5 +1,5 @@
 <template>
-	<div v-if="VIDEO " class="pt-0  dark:bg-neutral-900" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : watchMode} ">
+	<div v-if="VIDEO " class="pt-0  dark:bg-neutral-900" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : !fullMode && watchMode} ">
 
 		<div class="relative">
 			<div class="playerFrame relative" >

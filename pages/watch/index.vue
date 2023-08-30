@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!VIDEO" class="flex justify-center items-center h-screen">
+	<div v-if="!VIDEO" class="flex justify-center items-center h-[500px]">
 		<div class="text-center">
 			<div v-if="loading">
 				<div :class="colorMode.value == 'dark' ? 'loader-dark' : 'loader-light'"></div>
@@ -152,7 +152,7 @@ onMounted(()=>{
 	try{
 		window.player.uiVisible();
 	}catch (e) {
-		
+
 	}
 })
 onUnmounted(()=>{

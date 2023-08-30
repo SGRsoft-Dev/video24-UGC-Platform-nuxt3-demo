@@ -2,9 +2,19 @@
 
 	<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode}">
 		<div class="leftWrap" >
-			<div class="playerWrap">
+			<div class="playerWrap relative">
 				<div class="playerBody"  v-show="!loading">
 					<div id="vpePlayer" class="tra200"></div>
+				</div>
+				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
+					<div class="bg-black text-center p-4 rounded">
+						<div>
+							<i class="ph-fill text-3xl ph-warning"></i>
+						</div>
+						<div class="text-[12px] mt-2">
+							동영상 재생중 에러가 발생하였습니다.
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -28,6 +38,7 @@ const floatPlayer = useState('floatPlayer');
 const windowSize = useState('windowSize');
 const loading = ref(true);
 const VOD = useState('PLAYLIST_LIST',()=>[]);
+const ERROR = useState('ERROR',()=>null);
 
 
 let options = {
@@ -120,6 +131,9 @@ let options = {
 				}
 			}
 		},
+		error(err){
+			ERROR.value = err;
+		}
 	}
 };
 
@@ -147,6 +161,7 @@ const playerAddNextSource = (data)=>{
 
 
 const setupVPE = ()=>{
+	ERROR.value = null;
 	window.player = new ncplayer('vpePlayer',options);
 	window.player.on('ready',()=>{
 		loading.value = false;
