@@ -14,8 +14,12 @@
 		</div>
 
 
-		<div class="fixed bottom-0 w-full z-20 h-20 dark:bg-neutral-900 md:hidden" v-if="!watchMode">
-			<UiBottom/>
+		<div class="fixed bottom-0 w-full z-20 tra200  border-t border-[#eeeeee] dark:border-[#252424] bg-white dark:bg-neutral-900  md:hidden" v-if="!watchMode">
+			<div class=" pb-safe" style="min-height:80px">
+				<div class="pt-2 ">
+					<UiBottom />
+				</div>
+			</div>
 		</div>
 		<div class="md:hidden h-[100px]" v-if="!watchMode">
 			<!--margin-->
