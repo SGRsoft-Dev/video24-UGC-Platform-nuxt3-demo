@@ -42,7 +42,18 @@
 				</div>
 			</div>
 		</div>
+
+		<div>
+			<!-- 라이브리 시티 설치 코드 -->
+			<div id="lv-container" data-id="city" data-uid="MTAyMC81ODkyNS8zNTM4Nw==" >
+
+			</div>
+			<!-- 시티 설치 코드 끝 -->
+		</div>
 	</div>
+
+
+
 
 </template>
 
@@ -50,6 +61,30 @@
 const VIDEO = useState('VIDEO');
 const colorMode = useColorMode();
 const {$util} = useNuxtApp();
+const route = useRoute();
+
+const commentPlugin = ()=>{
+	window.livereOptions ={
+		refer:route.fullPath,
+	};
+	(function(d, s) {
+		var j, e = d.getElementsByTagName(s)[0];
+
+		if (typeof LivereTower === 'function') { return; }
+
+		j = d.createElement(s);
+		j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		j.async = true;
+
+		e.parentNode.insertBefore(j, e);
+	})(document, 'script');
+}
+
+onMounted(()=>{
+
+	commentPlugin();
+
+})
 </script>
 
 <style scoped>
