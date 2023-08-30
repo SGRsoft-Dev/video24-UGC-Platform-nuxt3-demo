@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     app: {
         head: {
             charset: 'utf-8',
-            viewport: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0',
+            viewport: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover',
             link: [
                 { rel: 'icon', type: 'image/x-icon', href: '/app-union.png' }
             ],

@@ -9,7 +9,7 @@
 <script setup>
 import lscache from 'lscache';
 import { v4 as uuidv4 } from 'uuid';
-import _ from 'lodash';
+
 
 lscache.setExpiryMilliseconds(1000);
 
@@ -25,9 +25,11 @@ const windowSize = useState('windowSize',()=> {
 			width:0,
 			height:0,
 			scroll:0,
+			lastScroll:0,
 		}
 });
 
+const scrollY = ref(0)
 const scrollState = useState('scrollState',()=>'up');
 
 watch(fullMode,(v)=>{
@@ -38,6 +40,17 @@ watch(fullMode,(v)=>{
 	}
 });
 
+watch(scrollY,(to,from)=>{
+	console.log('!!!',to , from)
+	if(to > from){
+		scrollState.value = 'down';
+	}else{
+		scrollState.value = 'up';
+	}
+	if(to <50){
+		scrollState.value = 'up';
+	}
+});
 
 //ssr , csr 호환을 위한 조치
 try{
@@ -53,7 +66,6 @@ onMounted(()=>{
 	window.uuid = lscache.get('UUID') ? lscache.get('UUID') : uuidv4();
 	lscache.set('UUID', window.uuid, 3600);
 
-
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
 
@@ -64,17 +76,8 @@ onMounted(()=>{
 
 	document.addEventListener('scroll',()=>{
 
-		if(windowSize.value.scroll > window.scrollY){
-			scrollState.value = 'up';
-		}else{
-			scrollState.value = 'down';
-		}
-		if(window.scrollY < 100){
-			scrollState.value = 'up';
-		}
-		_.debounce(()=>{
-			windowSize.value.scroll = window.scrollY;
-		},300)();
+		windowSize.value.scroll = window.scrollY;
+		scrollY.value = window.scrollY;
 	});
 
 	if(lscache.get('fullMode')){
