@@ -131,7 +131,7 @@ let options = {
 				}
 			}
 		},
-		error(err){
+		error1(err){
 			ERROR.value = err;
 		}
 	}
