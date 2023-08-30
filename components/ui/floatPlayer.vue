@@ -59,7 +59,8 @@ const VIDEO = useState('VIDEO');
 const {$util} = useNuxtApp();
 const backVideo = ()=>{
 	floatPlayer.value = false;
-	router.replace(`/watch?v=${VIDEO.value.video_id}`);
+	router.push(`/watch?v=${VIDEO.value.video_id}`);
+	window.player.uiVisible();
 }
 const closeVideo = ()=>{
 	VIDEO.value = null;

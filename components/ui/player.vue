@@ -259,8 +259,7 @@ watch(()=>VIDEO.value,(v)=>{
 }
 .playerBody{
 	width:100%;
-
-	background-color: rgba(205, 205, 205, 0.09);
+	background-color: #000;
 
 }
 #vpePlayer{

@@ -1,5 +1,5 @@
 <template>
-	<div class=" relative  w-full  dark:bg-neutral-900 " >
+	<div class=" relative  w-full  dark:bg-neutral-900 " v-if="!loading">
 
 		<div class="mb-[72px] " v-show="windowSize.width > 640 || !watchMode">
 			<UiGnb/>
@@ -41,7 +41,7 @@ const lastRouterPath = useState('lastRouterPath',()=>null);
 
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
-
+const loading = ref(true)
 
 const VIDEO = useState('VIDEO');
 
@@ -79,6 +79,11 @@ watch(()=>route.path,(path , oldPath)=>{
 });
 
 onMounted(()=>{
+
+	windowSize.value.width = window.innerWidth;
+	windowSize.value.height = window.innerHeight;
+
+
 	if(route.path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false
 		watchMode.value = true;
@@ -93,6 +98,7 @@ onMounted(()=>{
 		document.body.classList.remove('bg-neutral-900')
 	}
 
+	loading.value = false;
 
 });
 

@@ -1,5 +1,8 @@
 export default defineNuxtConfig({
     ssr: false,
+    experimental: {
+        viewTransition: true
+    },
     app: {
         head: {
             charset: 'utf-8',
@@ -14,7 +17,6 @@ export default defineNuxtConfig({
 
             ],
         },
-
     },
     css:[
         '~/assets/css/base.css',

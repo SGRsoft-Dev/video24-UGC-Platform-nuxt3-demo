@@ -1,10 +1,10 @@
 <template>
-	<div v-if="!VIDEO" class="flex justify-center items-center h-[500px]">
+	<div v-if="loading" >
+		<SkeletonPlayer/>
+	</div>
+	<div v-if="!VIDEO" >
 		<div class="text-center">
-			<div v-if="loading">
-				<div :class="colorMode.value == 'dark' ? 'loader-dark' : 'loader-light'"></div>
-			</div>
-			<div v-else>
+			<div class="flex justify-center items-center h-[500px]">
 				<div class="mb-4">
 					<i class="ph ph-selection-slash text-[40px]"></i>
 				</div>
@@ -38,6 +38,7 @@ const VIDEO = useState('VIDEO');
 const loading = useState('loading',()=>true);
 const UUID = useState('UUID');
 const lastRouterPath = useState('lastRouterPath');
+
 
 const colorMode = useColorMode();
 
@@ -99,7 +100,10 @@ const getVod = async (video_id)=>{
 
 	}
 
-	loading.value = false;
+	setTimeout(()=>{
+		loading.value = false;
+	},200);
+
 }
 
 
@@ -120,12 +124,13 @@ const changePlayer = async (video_id)=>{
 	VIDEO.value = null;
 	window.player.destroy();
 	await getVod(video_id);
-	//console.log('!!! useAsyncData')
 	window.scrollTo(0, 0);
 }
-watch(()=>route.query.v, (to)=>{
-	changePlayer(to);
-	lastRouterPath.value = null;
+watch(()=>route.query.v, (to,from)=>{
+	if(from && to != from) {
+		changePlayer(to);
+		lastRouterPath.value = null;
+	}
 });
 
 onMounted(()=>{

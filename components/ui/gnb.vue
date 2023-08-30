@@ -1,6 +1,6 @@
 <template>
 
-	<div class="fixed top-0 w-full backdrop-blur z-[999999] md:drop-shadow-none drop-shadow-lg border-b   " :class="{'bg-neutral-900 border-[#252424]' : setDark , 'bg-white ' : !setDark , }">
+	<div class="main-header fixed top-0 w-full backdrop-blur z-[99999] md:drop-shadow-none drop-shadow-lg border-b   " :class="{'bg-neutral-900 border-[#252424]' : setDark , 'bg-white ' : !setDark , }">
 		<div class="p-4 ">
 			<div class=" flex items-center">
 				<div class="w-48 flex pl-2">
@@ -20,7 +20,7 @@
 				</div>
 				<div class="flex-1"></div>
 				<div class="w-4/12 gnbSearchInput hidden md:inline">
-					<UInput icon="i-heroicons-magnifying-glass-20-solid  "  variant="outline" size="lg" color="white" :trailing="false" placeholder="검색하기" />
+					<UInput icon="i-heroicons-magnifying-glass-20-solid  "   variant="outline" size="lg" :color="setDark ? 'black' : 'white'" :trailing="false" placeholder="검색하기" />
 				</div>
 				<div class="flex-1 text-right">
 					<i class="ph-fill mr-2" :class="setDark ? 'ph-moon text-white' : 'ph-sun-dim text-dark'"></i>

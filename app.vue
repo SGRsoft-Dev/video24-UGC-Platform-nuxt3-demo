@@ -5,17 +5,15 @@
 	</NuxtLayout>
 </template>
 
+
 <script setup>
 import lscache from 'lscache';
 import { v4 as uuidv4 } from 'uuid';
+
 lscache.setExpiryMilliseconds(1000);
 
-window.player = null;
 
-window.uuid = lscache.get('UUID') ? lscache.get('UUID') : uuidv4();
-lscache.set('UUID', window.uuid, 3600);
-
-const UUID = useState('UUID',()=>window.uuid);
+const UUID = useState('UUID',()=>null);
 const VOD = useState('VOD',()=>[]);
 const TOTAL = useState('TOTAL',()=>0);
 const VIDEO = useState('VIDEO',);
@@ -35,18 +33,28 @@ watch(fullMode,(v)=>{
 		lscache.set('fullMode',false);
 	}
 });
-if(lscache.get('fullMode')){
-	if(windowSize.value.width > 640) {
-		fullMode.value = true;
-	}
-}
 
-windowSize.value.width = window.innerWidth;
-windowSize.value.height = window.innerHeight;
 
-document.addEventListener('resize',()=>{
+onMounted(()=>{
+	window.player = null;
+
+	window.uuid = lscache.get('UUID') ? lscache.get('UUID') : uuidv4();
+	lscache.set('UUID', window.uuid, 3600);
+
+
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
-});
 
+	document.addEventListener('resize',()=>{
+		windowSize.value.width = window.innerWidth;
+		windowSize.value.height = window.innerHeight;
+	});
+
+	if(lscache.get('fullMode')){
+		if(windowSize.value.width > 640) {
+			fullMode.value = true;
+		}
+	}
+
+})
 </script>
