@@ -43,12 +43,15 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="px-3 mt-5">
 			<!-- 라이브리 시티 설치 코드 -->
-			<div id="lv-container" data-id="city" data-uid="MTAyMC81ODkyNS8zNTM4Nw==" >
+<!--			<div id="lv-container" data-id="city" data-uid="MTAyMC81ODkyNS8zNTM4Nw==" >
 
-			</div>
+			</div>-->
 			<!-- 시티 설치 코드 끝 -->
+
+
+			<div id="disqus_thread" ></div>
 		</div>
 	</div>
 
@@ -63,7 +66,8 @@ const colorMode = useColorMode();
 const {$util} = useNuxtApp();
 const route = useRoute();
 
-const commentPlugin = ()=>{
+//라이브라 댓글 프러그인
+const livereCommentPlugin = ()=>{
 	window.livereOptions ={
 		refer:route.fullPath,
 	};
@@ -80,10 +84,20 @@ const commentPlugin = ()=>{
 	})(document, 'script');
 }
 
+const disqusPlugin = ()=>{
+	(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://mediaplus-ugc-demo.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+	})();
+}
+
 onMounted(()=>{
 
-	commentPlugin();
+	//livereCommentPlugin();
 
+	disqusPlugin();
 })
 </script>
 

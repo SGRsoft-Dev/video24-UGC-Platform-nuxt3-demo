@@ -36,7 +36,9 @@ watch(fullMode,(v)=>{
 	}
 });
 if(lscache.get('fullMode')){
-	fullMode.value = true;
+	if(windowSize.value.width > 640) {
+		fullMode.value = true;
+	}
 }
 
 windowSize.value.width = window.innerWidth;
