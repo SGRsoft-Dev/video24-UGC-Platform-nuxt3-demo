@@ -39,7 +39,7 @@ const windowSize = useState('windowSize');
 const loading = ref(true);
 const VOD = useState('PLAYLIST_LIST',()=>[]);
 const ERROR = useState('ERROR',()=>null);
-
+const lastRouterPath = useState('lastRouterPath');
 
 let options = {
 	playlist:[
@@ -106,7 +106,11 @@ let options = {
 			on(){
 				floatPlayer.value = true;
 				window.player.uiHidden();
-				router.push('/')
+				if(lastRouterPath.value){
+					router.go(-1);
+				}else {
+					router.push('/')
+				}
 			},
 			off(){
 				floatPlayer.value = false;
@@ -117,7 +121,7 @@ let options = {
 
 			if(VIDEO.value.next_video_id) {
 				if(watchMode.value) {
-					router.push(`/watch?v=${VIDEO.value.next_video_id}`);
+					router.replace(`/watch?v=${VIDEO.value.next_video_id}`);
 				}else{
 
 				}
@@ -126,7 +130,7 @@ let options = {
 		prevSource(){
 			if(VIDEO.value.prev_video_id) {
 				if(watchMode.value) {
-					router.push(`/watch?v=${VIDEO.value.prev_video_id}`);
+					router.replace(`/watch?v=${VIDEO.value.prev_video_id}`);
 				}
 			}
 		},

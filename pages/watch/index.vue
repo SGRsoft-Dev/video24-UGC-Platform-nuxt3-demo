@@ -131,6 +131,12 @@ const vodViewCountUpdate = async (vod)=>{
 
 useAsyncData(async ()=>{
 	loading.value = true;
+	VIDEO.value = null;
+	try{
+		window.player.destroy();
+	}catch (e) {
+
+	}
 	await getVod();
 	window.scrollTo(0, 0);
 });
@@ -156,7 +162,6 @@ onMounted(()=>{
 	}
 })
 onUnmounted(()=>{
-
 	if(!floatPlayer.value) {
 		VIDEO.value = null;
 		try {

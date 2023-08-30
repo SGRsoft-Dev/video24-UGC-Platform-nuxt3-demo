@@ -26,7 +26,7 @@
 
 
 
-	<UiFloatPlayer :class="{'tra100':floatPlayer}"/>
+	<UiFloatPlayer class="tra100"/>
 </template>
 
 <script setup>
@@ -37,11 +37,15 @@ const floatPlayer = useState('floatPlayer');
 const windowSize = useState('windowSize');
 const route = useRoute();
 const router = useRouter();
+const lastRouterPath = useState('lastRouterPath',()=>null);
 
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
 
-watch(()=>route.path,(path)=>{
+watch(()=>route.path,(path , oldPath)=>{
+
+	lastRouterPath.value = oldPath;
+
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;

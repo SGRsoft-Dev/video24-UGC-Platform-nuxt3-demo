@@ -101,11 +101,7 @@ const getLiveList = async ()=>{
 
 
 	if(data.code == 200){
-
-
-
 		TOTAL.value = data.result.totalCnt;
-
 
 		if(TOTAL.value >0){
 			for (let i = 0; i < data.result.data.length; i++) {
@@ -113,9 +109,7 @@ const getLiveList = async ()=>{
 				v.created_at = $util.dateFormat2(v.created_at);
 				v.view_cnt = $util.numberToKorean(v.view_cnt);
 
-				if(v.live_state=='online'){
-					v.thumb_url = v.live_thumb_url[0]['resizeUrl'][1]['url'];
-				}
+
 
 				if(pageNo.value > 1){
 					LIST.value.push(v);
@@ -140,6 +134,8 @@ const getLiveList = async ()=>{
 		if(pageNo.value > 1 && data.result.data.length == 0){
 			endPage.value = true;
 		}
+
+
 
 
 
