@@ -106,7 +106,11 @@ let options = {
 			icon:'/image/caret-left.svg',
 			flow:'left',
 			callback(){
-				router.push('/')
+				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
+					router.go(-1);
+				}else {
+					router.push('/?floatPlayer=true')
+				}
 			}
 		},
 	],
