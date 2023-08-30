@@ -30,6 +30,10 @@
 </template>
 
 <script setup>
+import axios from "axios";
+
+const runtimeConfig = useRuntimeConfig();
+const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const VIDEO = useState('VIDEO');
 const router = useRouter();
 const watchMode = useState('watchMode');
@@ -40,6 +44,8 @@ const loading = ref(true);
 const VOD = useState('PLAYLIST_LIST',()=>[]);
 const ERROR = useState('ERROR',()=>null);
 const lastRouterPath = useState('lastRouterPath');
+const route = useRoute();
+const UUID = useState('UUID');
 
 let options = {
 	playlist:[
@@ -106,7 +112,7 @@ let options = {
 			on(){
 				floatPlayer.value = true;
 				window.player.uiHidden();
-				if(lastRouterPath.value){
+				if(lastRouterPath.value && route.path.indexOf('/watch') < 1){
 					router.go(-1);
 				}else {
 					router.push('/')
@@ -143,6 +149,36 @@ let options = {
 if(VIDEO.value.open_datetime && VIDEO.value.visible == 'N'){
 	options.setStartTime = VIDEO.value.open_datetime  !='Invalid Date' ? VIDEO.value.open_datetime : null;
 }
+
+
+
+/**
+ * VOD 조회수 업데이트
+ * @returns {Promise<void>}
+ */
+const vodViewCountUpdate = async (vod)=>{
+
+	if(!vod) return false;
+
+	let {data} = await axios.post(`https://mediaplus.co.kr/openApi/v1/analytics`,{
+		uid:UUID.value,
+		oid:vod.oid,
+		ovp_channel_id:vod.channel_id,
+		video_id:vod.video_id,
+		type:'vod',
+		currentTime:0,
+		duration:vod.duration,
+		viewingTime:0,
+		percent:0,
+
+
+	},{
+		headers:{
+			'Authorization':mpKey
+		}
+	});
+}
+
 
 
 const playerAddNextSource = (data)=>{
@@ -183,6 +219,9 @@ const setupVPE = ()=>{
 			pictureInPicture:false,
 			setting:false,
 		})*/
+
+
+		vodViewCountUpdate(VIDEO.value);
 	});
 
 
