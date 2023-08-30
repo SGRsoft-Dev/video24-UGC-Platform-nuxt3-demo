@@ -109,14 +109,21 @@ const getVod = async (video_id)=>{
 
 
 useAsyncData(async ()=>{
-	loading.value = true;
-	VIDEO.value = null;
-	try{
-		window.player.destroy();
-	}catch (e) {
+	if(route.query.back && VIDEO.value) {
+		setTimeout(()=>{
+			window.player.uiVisible();
+		},200);
 
+	}else {
+		loading.value = true;
+		VIDEO.value = null;
+		try {
+			window.player.destroy();
+		} catch (e) {
+
+		}
+		await getVod();
 	}
-	await getVod();
 
 });
 

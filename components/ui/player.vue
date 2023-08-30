@@ -7,7 +7,7 @@
 	<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode}">
 		<div class="leftWrap" >
 			<div class="playerWrap relative">
-				<div class="playerBody"  >
+				<div class="playerBody"  v-show="!loading">
 					<div id="vpePlayer" class="tra200"></div>
 				</div>
 				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
@@ -84,7 +84,7 @@ let options = {
 	autoPause:false,
 	repeat:false,
 	lowLatencyMode:true,
-	descriptionNotVisible:windowSize.value.width <= 640 ? false :true,
+	descriptionNotVisible:true,
 	customBtns:[
 		{
 			ui:'pc',
@@ -126,8 +126,13 @@ let options = {
 				}
 			},
 			off(){
-				floatPlayer.value = false;
-				window.player.uiVisible();
+				floatPlayer.value = true;
+				window.player.uiHidden();
+				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
+					router.go(-1);
+				}else {
+					router.push('/?floatPlayer=true')
+				}
 			}
 		},
 		nextSource(){
@@ -221,8 +226,7 @@ const setupVPE = ()=>{
 			});
 		},500);
 
-		//시작시 컨트롤바를 보여줌
-		window.player.controlBarActive();
+
 		vodViewCountUpdate(VIDEO.value);
 	});
 

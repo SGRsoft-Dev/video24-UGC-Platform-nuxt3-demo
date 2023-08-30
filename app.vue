@@ -9,6 +9,7 @@
 <script setup>
 import lscache from 'lscache';
 import { v4 as uuidv4 } from 'uuid';
+import _ from 'lodash';
 
 lscache.setExpiryMilliseconds(1000);
 
@@ -22,9 +23,12 @@ const floatPlayer = useState('floatPlayer',()=>false);
 const windowSize = useState('windowSize',()=> {
 		return {
 			width:0,
-			height:0
+			height:0,
+			scroll:0,
 		}
 });
+
+const scrollState = useState('scrollState',()=>'up');
 
 watch(fullMode,(v)=>{
 	if(v){
@@ -33,6 +37,7 @@ watch(fullMode,(v)=>{
 		lscache.set('fullMode',false);
 	}
 });
+
 
 //ssr , csr 호환을 위한 조치
 try{
@@ -55,6 +60,21 @@ onMounted(()=>{
 	document.addEventListener('resize',()=>{
 		windowSize.value.width = window.innerWidth;
 		windowSize.value.height = window.innerHeight;
+	});
+
+	document.addEventListener('scroll',()=>{
+
+		if(windowSize.value.scroll > window.scrollY){
+			scrollState.value = 'up';
+		}else{
+			scrollState.value = 'down';
+		}
+		if(window.scrollY < 100){
+			scrollState.value = 'up';
+		}
+		_.debounce(()=>{
+			windowSize.value.scroll = window.scrollY;
+		},300)();
 	});
 
 	if(lscache.get('fullMode')){

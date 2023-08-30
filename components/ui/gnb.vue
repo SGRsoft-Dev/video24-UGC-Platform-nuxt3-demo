@@ -1,7 +1,8 @@
 <template>
 
-	<div class="main-header fixed top-0 w-full backdrop-blur z-[99999] md:drop-shadow-none drop-shadow-lg border-b   " :class="{'bg-neutral-900 border-[#252424]' : setDark , 'bg-white ' : !setDark , }">
-		<div class="p-4 ">
+	<div class="main-header fixed tra200 w-full backdrop-blur z-[99999] md:drop-shadow-none drop-shadow-lg border-b   "
+		 :class="{'bg-neutral-900 border-[#252424]' : setDark , 'bg-white ' : !setDark , 'top-[-100px] md:top-0' : scrollState == 'down' , 'top-0' : scrollState == 'up' }">
+		<div class="p-4 "  >
 			<div class=" flex items-center">
 				<div class="w-48 flex pl-2">
 
@@ -36,6 +37,8 @@
 const route = useRoute();
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
+const windowSize = useState('windowSize');
+const scrollState = useState('scrollState');
 const isDark = computed({
 	get () {
 		return colorMode.value === 'dark'
@@ -66,6 +69,8 @@ const leftMenuOpen = useState('leftMenuOpen');
 const setLeftMenuOpen = () => {
 	leftMenuOpen.value = !leftMenuOpen.value;
 };
+
+
 </script>
 
 <style scoped>

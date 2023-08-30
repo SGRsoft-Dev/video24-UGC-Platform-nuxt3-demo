@@ -24,7 +24,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="rightWrap px-5 space-y-2 " v-if="!fullMode && watchMode">
+			<div class="rightWrap px-5 space-y-2 pt-10 " v-if="!fullMode && watchMode">
 
 				<div class="flex " v-for="i in 10">
 					<USkeleton class="h-[80px] w-[140px] "  />
