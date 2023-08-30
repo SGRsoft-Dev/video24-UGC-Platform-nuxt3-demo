@@ -1,7 +1,7 @@
 <template>
 
 	<div v-if="!VIDEO" >
-		<div class="text-center">
+		<div class="text-center" v-if="!loading">
 			<div class="flex justify-center items-center h-[500px]">
 				<div class="mb-4">
 					<i class="ph ph-selection-slash text-[40px]"></i>
