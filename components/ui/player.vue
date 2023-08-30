@@ -56,7 +56,6 @@ let options = {
 	muted:false,
 	keyboardShortcut:true,
 	controls:true,
-
 	controlBtn:{
 		play:true,
 		fullscreen:true,
