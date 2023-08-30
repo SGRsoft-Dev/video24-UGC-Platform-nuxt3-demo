@@ -103,11 +103,10 @@ let options = {
 		{
 			ui:'mobile',
 			position:'left-top',
-			icon:'/image/caret-down.svg',
+			icon:'/image/caret-left.svg',
 			flow:'left',
 			callback(){
-				floatPlayer.value = true;
-				router.go(-1);
+				router.push('/')
 			}
 		},
 	],
