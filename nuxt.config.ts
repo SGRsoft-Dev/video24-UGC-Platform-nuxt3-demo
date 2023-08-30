@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-    ssr: false,
+
     experimental: {
         viewTransition: true
     },
@@ -34,7 +34,14 @@ export default defineNuxtConfig({
 
     },
     colorMode: {
-        preference: 'dark',
+        preference: 'light',
     },
 
+    nitro: {
+        routeRules: {
+            '/api/**' : {cors : true},
+        },
+        preset: "firebase",
+
+    },
 })

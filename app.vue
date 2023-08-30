@@ -34,6 +34,13 @@ watch(fullMode,(v)=>{
 	}
 });
 
+//ssr , csr 호환을 위한 조치
+try{
+	windowSize.value.width = window.innerWidth;
+	windowSize.value.height = window.innerHeight;
+}catch (e) {
+
+}
 
 onMounted(()=>{
 	window.player = null;
