@@ -112,10 +112,10 @@ let options = {
 			on(){
 				floatPlayer.value = true;
 				window.player.uiHidden();
-				if(lastRouterPath.value && route.path.indexOf('/watch') < 1){
+				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
 					router.go(-1);
 				}else {
-					router.push('/')
+					router.push('/?floatPlayer=true')
 				}
 			},
 			off(){
@@ -214,13 +214,8 @@ const setupVPE = ()=>{
 			});
 		},500);
 
-		/*window.player.controlBarBtnStateUpdate({
-			fullscreen:false,
-			pictureInPicture:false,
-			setting:false,
-		})*/
-
-
+		//시작시 컨트롤바를 보여줌
+		window.player.controlBarActive();
 		vodViewCountUpdate(VIDEO.value);
 	});
 

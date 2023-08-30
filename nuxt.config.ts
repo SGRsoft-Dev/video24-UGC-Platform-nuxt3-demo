@@ -21,7 +21,7 @@ export default defineNuxtConfig({
         '~/assets/css/bootstrap_dnone.css',
         '~/assets/css/bootstrap_grids.css',
     ],
-    devtools: { enabled: true },
+    devtools: { enabled: process.env.NODE_ENV === 'development' ? true : false },
     modules: ['@nuxthq/ui', '@nuxtjs/google-fonts'],
 
     runtimeConfig:{

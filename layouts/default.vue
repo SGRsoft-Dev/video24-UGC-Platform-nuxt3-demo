@@ -42,9 +42,26 @@ const lastRouterPath = useState('lastRouterPath',()=>null);
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
 
+
+const VIDEO = useState('VIDEO');
+
+
+watch(colorMode,()=>{
+	if(colorMode.value == 'dark'){
+		document.body.classList.add('bg-neutral-900')
+	}else{
+		document.body.classList.remove('bg-neutral-900')
+	}
+})
+
+
 watch(()=>route.path,(path , oldPath)=>{
 
-	lastRouterPath.value = oldPath;
+	if(oldPath.split('/')[1] == 'watch'  ) {
+		lastRouterPath.value = null;
+	}else {
+		lastRouterPath.value = oldPath;
+	}
 
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
@@ -60,17 +77,6 @@ watch(()=>route.path,(path , oldPath)=>{
 
 	}
 });
-
-const VIDEO = useState('VIDEO');
-
-
-watch(colorMode,()=>{
-	if(colorMode.value == 'dark'){
-		document.body.classList.add('bg-neutral-900')
-	}else{
-		document.body.classList.remove('bg-neutral-900')
-	}
-})
 
 onMounted(()=>{
 	if(route.path.split('/')[1] == 'watch'  ) {

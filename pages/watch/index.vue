@@ -37,6 +37,7 @@ const windowSize = useState('windowSize');
 const VIDEO = useState('VIDEO');
 const loading = useState('loading',()=>true);
 const UUID = useState('UUID');
+const lastRouterPath = useState('lastRouterPath');
 
 const colorMode = useColorMode();
 
@@ -124,6 +125,7 @@ const changePlayer = async (video_id)=>{
 }
 watch(()=>route.query.v, (to)=>{
 	changePlayer(to);
+	lastRouterPath.value = null;
 });
 
 onMounted(()=>{
