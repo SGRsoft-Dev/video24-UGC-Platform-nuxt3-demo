@@ -2,7 +2,7 @@
 	<div class="mb-5">
 		<div class="px-0">
 			<div class="p-3 mb-2 text-xl">
-				{{VIDEO.title}}
+				{{$util.titleMake(VIDEO.title)}}
 			</div>
 
 			<div class="md:flex justify-between">

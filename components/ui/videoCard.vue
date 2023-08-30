@@ -12,8 +12,11 @@
 					<UAvatar  src="~/assets/image/non-profile.png" v-else  :alt="v.channel_name" class="profileThumb object-contain"/>
 				</div>
 				<div>
-					<div class="el">
-						{{v.title}}
+					<div class="   ">
+						<div class=" overflow-hidden text-ellipsis w-full " >
+							{{$util.titleMake(v.title)}}
+						</div>
+
 					</div>
 					<div class="text-sm text-gray-400 pt-1">
 						{{v.channel_name}}
@@ -36,6 +39,8 @@ defineProps({
 		required: true
 	}
 })
+
+const {$util} = useNuxtApp();
 </script>
 
 <style scoped>

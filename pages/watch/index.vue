@@ -149,6 +149,11 @@ watch(()=>route.query.v, (to)=>{
 
 onMounted(()=>{
 	floatPlayer.value = false;
+	try{
+		window.player.uiVisible();
+	}catch (e) {
+		
+	}
 })
 onUnmounted(()=>{
 

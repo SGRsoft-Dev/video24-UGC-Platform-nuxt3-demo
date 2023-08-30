@@ -30,22 +30,7 @@ const shuffle =  (array) =>{
 	array.sort(() => Math.random() - 0.5);
 }
 
-const playerAddNextSource = (data)=>{
-	try {
-		let source = {
-			file: data.file,
-			poster: data.poster,
-			description: {
-				"title": data.title,
-			},
-			video_id: data.video_id,
-		}
-		VIDEO.value.next_video_id = data.video_id;
-		window.player.addNextSource(source);
-	} catch (e) {
-		console.log(e);
-	}
-}
+
 
 //비디오 중복 체크
 const chkDuvideo = (video_id)=>{
@@ -109,14 +94,7 @@ onMounted(async ()=>{
 
 
 
-	setTimeout(()=>{
-		playerAddNextSource({
-			file: VOD.value[0].hls_play_url,
-			poster: VOD.value[0].thumb_url,
-			title: VOD.value[0].title,
-			video_id: VOD.value[0].video_id,
-		});
-	},500);
+
 });
 
 </script>

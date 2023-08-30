@@ -9,7 +9,7 @@
 			<div class="text-base pl-2  infoWrap">
 				<div>
 					<div class="el2">
-						{{v.title}}
+						{{$util.titleMake(v.title)}}
 					</div>
 					<div class="text-sm text-gray-400 pt-1">
 						{{v.channel_name}}
@@ -31,7 +31,8 @@ defineProps({
 		type: Object,
 		required: true
 	}
-})
+});
+const {$util} = useNuxtApp();
 </script>
 
 <style scoped>

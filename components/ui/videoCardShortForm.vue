@@ -13,7 +13,7 @@
 
 					<div>
 						<div class="el2 w-full break-words overflow-hidden" >
-							{{v.title}}
+							{{$util.titleMake(v.title)}}
 						</div>
 						<div class="text-sm text-gray-400 pt-1">
 							{{v.channel_name}}
@@ -37,6 +37,8 @@ defineProps({
 		required: true
 	}
 })
+
+const {$util} = useNuxtApp();
 </script>
 
 <style scoped>

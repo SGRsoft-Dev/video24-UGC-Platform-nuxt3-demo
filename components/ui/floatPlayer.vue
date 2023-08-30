@@ -1,5 +1,5 @@
 <template>
-	<div v-if="VIDEO " class="pt-0 md:pt-5 dark:bg-neutral-900" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto ' : !fullMode} ">
+	<div v-if="VIDEO " class="pt-0  dark:bg-neutral-900" :class="{' floatPlayer drop-shadow-md' : !watchMode && floatPlayer , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : watchMode} ">
 
 		<div class="relative">
 			<div class="playerFrame relative" >
@@ -56,6 +56,7 @@ const windowSize = useState('windowSize');
 
 
 const VIDEO = useState('VIDEO');
+const {$util} = useNuxtApp();
 const backVideo = ()=>{
 	router.replace(`/watch?v=${VIDEO.value.video_id}`);
 }

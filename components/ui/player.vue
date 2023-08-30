@@ -27,6 +27,8 @@ const fullMode = useState('fullMode');
 const floatPlayer = useState('floatPlayer');
 const windowSize = useState('windowSize');
 const loading = ref(true);
+const VOD = useState('PLAYLIST_LIST',()=>[]);
+
 
 let options = {
 	playlist:[
@@ -93,21 +95,29 @@ let options = {
 		pip:{
 			on(){
 				floatPlayer.value = true;
+				window.player.uiHidden();
 				router.push('/')
 			},
 			off(){
 				floatPlayer.value = false;
+				window.player.uiVisible();
 			}
 		},
 		nextSource(){
 
 			if(VIDEO.value.next_video_id) {
-				router.push(`/watch?v=${VIDEO.value.next_video_id}`);
+				if(watchMode.value) {
+					router.push(`/watch?v=${VIDEO.value.next_video_id}`);
+				}else{
+
+				}
 			}
 		},
 		prevSource(){
 			if(VIDEO.value.prev_video_id) {
-				router.push(`/watch?v=${VIDEO.value.prev_video_id}`);
+				if(watchMode.value) {
+					router.push(`/watch?v=${VIDEO.value.prev_video_id}`);
+				}
 			}
 		},
 	}
@@ -118,12 +128,45 @@ if(VIDEO.value.open_datetime && VIDEO.value.visible == 'N'){
 }
 
 
+const playerAddNextSource = (data)=>{
+	try {
+		let source = {
+			file: data.file,
+			poster: data.poster,
+			description: {
+				"title": data.title,
+			},
+			video_id: data.video_id,
+		}
+		VIDEO.value.next_video_id = data.video_id;
+		window.player.addNextSource(source);
+	} catch (e) {
+		console.log(e);
+	}
+}
+
 
 const setupVPE = ()=>{
 	window.player = new ncplayer('vpePlayer',options);
 	window.player.on('ready',()=>{
 		loading.value = false;
+
+		setTimeout(()=>{
+			playerAddNextSource({
+				file: VOD.value[0].hls_play_url,
+				poster: VOD.value[0].thumb_url,
+				title: VOD.value[0].title,
+				video_id: VOD.value[0].video_id,
+			});
+		},500);
+
+		/*window.player.controlBarBtnStateUpdate({
+			fullscreen:false,
+			pictureInPicture:false,
+			setting:false,
+		})*/
 	});
+
 
 	window.player.on('error',(e)=>{
 
@@ -131,6 +174,8 @@ const setupVPE = ()=>{
 			loading.value = false;
 		}
 	});
+
+
 
 
 }
@@ -143,6 +188,8 @@ watch(()=>VIDEO.value,(v)=>{
 	if(window.player){
 		console.log('change video')
 		loading.value = true;
+		window.player.on('ready',()=>{});
+		window.player.on('error',()=>{});
 		window.player.destroy();
 		setupVPE();
 	}

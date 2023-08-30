@@ -114,6 +114,22 @@ const util = {
         }
 
         return resultString || 0;
+    },
+
+    /**
+     * 타이틀 검수
+     * @param str
+     */
+    titleMake(str) {
+        let underScore = str.indexOf('_');
+        if(underScore > 2) {
+            str = str.replaceAll('_', ' ');
+        }
+        let hipen = str.indexOf('-');
+        if(hipen > 2) {
+            str = str.replaceAll('-', ' ');
+        }
+        return str;
     }
 
 };

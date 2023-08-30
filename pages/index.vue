@@ -126,7 +126,7 @@ const getVodList = async ()=>{
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod',{
 		params:{
 			pageNo:pageNo.value,
-			limit:20,
+			limit:60,
 
 		},
 		headers:{
@@ -183,8 +183,12 @@ useAsyncData(async ()=>{
 });
 
 const setObserver = ()=>{
-	const io = new IntersectionObserver(ioCallback, { threshold: 0.9 });
-	io.observe(document.querySelector('.moreLoader') );
+	try {
+		const io = new IntersectionObserver(ioCallback, {threshold: 0.9});
+		io.observe(document.querySelector('.moreLoader'));
+	}catch (e) {
+
+	}
 }
 const ioCallback = async ()=>{
 	pageNo.value++;
