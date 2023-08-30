@@ -41,7 +41,6 @@ watch(fullMode,(v)=>{
 });
 
 watch(scrollY,(to,from)=>{
-	console.log('!!!',to , from)
 	if(to > from){
 		scrollState.value = 'down';
 	}else{
