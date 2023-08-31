@@ -35,6 +35,8 @@
 
 <script setup>
 import axios from "axios";
+import lscache from "lscache";
+lscache.setExpiryMilliseconds(1000);
 
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
@@ -42,6 +44,7 @@ const VIDEO = useState('VIDEO');
 const router = useRouter();
 const watchMode = useState('watchMode');
 const fullMode = useState('fullMode');
+const autoPlayMode = useState('autoPlayMode');
 const floatPlayer = useState('floatPlayer');
 const windowSize = useState('windowSize');
 const loading = ref(true);
@@ -50,6 +53,14 @@ const ERROR = useState('ERROR',()=>null);
 const lastRouterPath = useState('lastRouterPath');
 const route = useRoute();
 const UUID = useState('UUID');
+
+
+if(lscache.get('autoPlayMode')){
+	autoPlayMode.value = true;
+}else{
+	autoPlayMode.value = false;
+}
+
 
 let options = {
 	playlist:[
@@ -89,16 +100,37 @@ let options = {
 		{
 			ui:'pc',
 			position:'right-bottom',
+			icon:'/image/autoplay-off.svg',
+			activeIcon:'/image/autoplay-on.svg',
+			tooltip: '자동 재생 사용 설정',
+			activeTooltip: '자동 재생 사용 중지',
+			flow:'left',
+			default:autoPlayMode.value ? true : false,
+			callback(res){
+				if(res){
+					window.player.nextSourceRunOn();
+					lscache.set('autoPlayMode',true);
+				}else{
+					window.player.nextSourceRunOff();
+					lscache.set('autoPlayMode',false);
+				}
+			}
+		},
+
+		{
+			ui:'pc',
+			position:'right-bottom',
 			icon:'/image/frame-corners-off.svg',
-			activeIcon:'/image/frame-corners.svg',
-			tooltip:'기본 모드',
-			activeTooltip:'몰입 모드',
+			activeIcon:'/image/frame-corners-on.svg',
+			tooltip:'몰입 모드',
+			activeTooltip:'기본 모드',
 			flow:'left',
 			default:fullMode.value ? true : false,
 			callback(){
 				fullMode.value = fullMode.value ? false : true;
 			}
 		},
+
 
 		{
 			ui:'mobile',
@@ -226,8 +258,16 @@ const setupVPE = ()=>{
 			});
 		},500);
 
+		if(autoPlayMode.value){
+			window.player.nextSourceRunOn();
+		}else{
+			window.player.nextSourceRunOff();
+		}
 
 		vodViewCountUpdate(VIDEO.value);
+
+
+
 	});
 
 

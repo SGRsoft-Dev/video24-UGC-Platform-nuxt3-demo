@@ -19,6 +19,7 @@ const VOD = useState('VOD',()=>[]);
 const TOTAL = useState('TOTAL',()=>0);
 const VIDEO = useState('VIDEO',);
 const fullMode = useState('fullMode',()=>false);
+const autoPlayMode = useState('autoPlayMode',()=>true);
 const floatPlayer = useState('floatPlayer',()=>false);
 const windowSize = useState('windowSize',()=> {
 		return {
@@ -39,6 +40,8 @@ watch(fullMode,(v)=>{
 		lscache.set('fullMode',false);
 	}
 });
+
+
 
 watch(scrollY,(to,from)=>{
 	if(to > from){
@@ -84,6 +87,7 @@ onMounted(()=>{
 			fullMode.value = true;
 		}
 	}
+
 
 })
 </script>

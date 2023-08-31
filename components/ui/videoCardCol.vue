@@ -3,7 +3,7 @@
 		<div class="flex mb-4">
 			<div class="thumbWrap" :style="{background:`url(${v.thumb_url}) `}">
 				<div class="backdrop-blur-cu1">
-					<img :src="v.thumb_url" :alt="v.title" class="w-full h-full object-contain " loading="lazy">
+					<NuxtImg :src="v.thumb_url ? v.thumb_url : '/image/b.png'" :class="{'bg-gray-100':!v.thumb_url}" :alt="v.title" onerror="this.src='/image/b.png'" class="w-full h-full object-contain " loading="lazy"/>
 				</div>
 			</div>
 			<div class="text-base pl-2  infoWrap">

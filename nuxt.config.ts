@@ -12,7 +12,8 @@ export default defineNuxtConfig({
             ],
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
-                { src: 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=17e49e099ea78c1f1ae159fc1647316c&v=betaV.18' },
+                //{ src: 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=17e49e099ea78c1f1ae159fc1647316c&v=betaV.18' },
+                { src: process.env.vpeSdkUrl ?  process.env.vpeSdkUrl : 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=17e49e099ea78c1f1ae159fc1647316c' },
 
 
             ],
@@ -24,7 +25,7 @@ export default defineNuxtConfig({
         '~/assets/css/bootstrap_grids.css',
     ],
     devtools: { enabled: process.env.NODE_ENV === 'development' ? true : false },
-    modules: ['@nuxthq/ui', '@nuxtjs/google-fonts'],
+    modules: ['@nuxthq/ui','@nuxt/image'],
 
     runtimeConfig:{
         public:{

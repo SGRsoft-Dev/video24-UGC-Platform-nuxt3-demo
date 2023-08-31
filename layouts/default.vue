@@ -30,7 +30,7 @@
 
 
 
-	<UiFloatPlayer class="tra100"/>
+	<UiFloatPlayer :class="{'tra100':floatPlayer}"/>
 </template>
 
 <script setup>
