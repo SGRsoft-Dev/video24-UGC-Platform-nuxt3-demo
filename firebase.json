@@ -1,9 +1,11 @@
 {
-  "functions": {
-    "source": ".output/server",
-    "runtime": "nodejs16",
-    "codebase": "nuxt"
-  },
+  "functions": [
+    {
+      "source": ".output/server",
+      "runtime": "nodejs16",
+      "codebase": "ugcserver"
+    }
+  ],
   "hosting": {
     "site": "mediaplus-ugc-platform-nuxt3-demo",
     "public": ".output/public",
@@ -13,6 +15,6 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [{ "source": "**", "function": "ugc-demo-server" }]
+    "rewrites": [{ "source": "**", "function": "server" }]
   }
 }

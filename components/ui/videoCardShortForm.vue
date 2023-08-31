@@ -3,7 +3,7 @@
 		<div class="w-full overflow-hidden">
 			<div class="videoThumbSf bg-gray-200/15 relative" :style="{background:`url(${v.thumb_url}) `}">
 				<div class="backdrop-blur-cu1" style="aspect-ratio: 9/16">
-					<NuxtImg :src="v.thumb_url ? v.thumb_url : '/image/b.png'" :alt="v.title" class="w-full h-full object-contain " placeholder loading="lazy"/>
+					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png'" :alt="v.title" class="w-full h-full object-contain " placeholder loading="lazy"/>
 				</div>
 
 

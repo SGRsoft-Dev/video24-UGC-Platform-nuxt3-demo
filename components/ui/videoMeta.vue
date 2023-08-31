@@ -26,7 +26,7 @@
 					<div class="flex items-center">
 						<div class=" rounded-full px-2 pl-3 pr-3 pt-1 pb-1 text-sm mr-3"
 							 :class="{'bg-gray-700/40' : colorMode.value=='dark', 'bg-gray-200' : colorMode.value=='light'}">
-							<i class="ph ph-eye mr-1"></i> 조회수 {{VIDEO.view_cnt | 0}}
+							<i class="ph ph-eye mr-1"></i> 조회수 {{VIDEO.view_cnt || 0}}
 						</div>
 						<div class=" rounded-full px-2 pl-3 pr-3 pt-1 pb-1 text-sm mr-3"
 							 :class="{'bg-gray-700/40' : colorMode.value=='dark', 'bg-gray-200' : colorMode.value=='light'}">
