@@ -42,6 +42,5 @@ export default defineNuxtConfig({
             '/api/**' : {cors : true},
         },
         preset: "firebase",
-
     },
 })

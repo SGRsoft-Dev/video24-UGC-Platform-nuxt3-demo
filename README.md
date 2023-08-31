@@ -177,6 +177,65 @@ $ yarn run generate
 $ npx serve .output/public
 ```
 
+## Firebase Hosting 배포
+
+### Firebase Deploy Nitro 가이드
+
+https://nitro.unjs.io/deploy/providers/firebase
+
+```javascript
+// nuxt.config.js
+export default defineNuxtConfig({
+    // ...
+    nitro: {
+        routeRules: {
+            '/api/**' : {cors : true},
+        },
+        preset: "firebase",
+    },
+    // ...
+})
+```
+- 서버 빌드 프리셋을 firebase로 변경합니다.
+
+```javascript
+//firebase.json
+{
+  "functions": {
+    "source": ".output/server",
+    "runtime": "nodejs16"
+  },
+  "hosting": {
+    "public": ".output/public",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [{ "source": "**", "function": "server" }]
+  }
+}
+
+```
+- firebase.json 파일을 생성합니다.
+
+```bash
+$ npm install -g firebase-tools@latest
+$ firebase login
+$ firebase init hosting
+
+```
+- firebase cli를 설치하고, 로그인을 합니다.
+
+```bash
+$ NITRO_PRESET=firebase 
+$ npm run build
+$ npx firebase-tools deploy
+```
+- 빌드 후 배포를 합니다.
+
+
 
 
 ***
