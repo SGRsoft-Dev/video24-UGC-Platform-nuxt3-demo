@@ -56,9 +56,9 @@ const UUID = useState('UUID');
 
 
 if(lscache.get('autoPlayMode')){
-	autoPlayMode.value = true;
+	autoPlayMode.value = lscache.get('autoPlayMode') == 'Y' ? true : false;
 }else{
-	autoPlayMode.value = false;
+	autoPlayMode.value = true;
 }
 
 
@@ -109,10 +109,10 @@ let options = {
 			callback(res){
 				if(res){
 					window.player.nextSourceRunOn();
-					lscache.set('autoPlayMode',true);
+					lscache.set('autoPlayMode','Y');
 				}else{
 					window.player.nextSourceRunOff();
-					lscache.set('autoPlayMode',false);
+					lscache.set('autoPlayMode','N');
 				}
 			}
 		},
