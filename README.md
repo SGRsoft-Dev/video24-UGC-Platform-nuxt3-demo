@@ -223,7 +223,7 @@ export default defineNuxtConfig({
 ```bash
 $ npm install -g firebase-tools@latest
 $ firebase login
-$ firebase init hosting
+$ firebase init 
 
 ```
 - firebase cli를 설치하고, 로그인을 합니다.
