@@ -87,8 +87,9 @@ const limit = ref(20);
 const getVodList = async ()=>{
 	if(endPage.value) return;
 
-	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod',{
+	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
 		params:{
+			type:'vod',
 			pageNo:pageNo.value,
 			limit:limit.value,
 

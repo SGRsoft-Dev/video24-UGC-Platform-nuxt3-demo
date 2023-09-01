@@ -3,11 +3,13 @@
 	<div v-if="!VIDEO" >
 		<div class="text-center" v-if="!loading">
 			<div class="flex justify-center items-center h-[500px]">
-				<div class="mb-4">
-					<i class="ph ph-selection-slash text-[40px]"></i>
-				</div>
-				<div>
-					비디오가 존재하지 않습니다.
+				<div class="text-center">
+					<div class="mb-4">
+						<i class="ph ph-selection-slash text-[40px]"></i>
+					</div>
+					<div>
+						비디오가 존재하지 않습니다.
+					</div>
 				</div>
 			</div>
 		</div>
@@ -76,7 +78,7 @@ const getVod = async (video_id)=>{
 		video_id = route.query.v;
 	}
 
-	let {data} = await axios.get(`https://mediaplus.co.kr/openApi/v1/vod/${route.query.v}`,{
+	let {data} = await axios.get(`https://mediaplus.co.kr/openApi/v1/content/${route.query.v}`,{
 		headers:{
 			'Authorization':mpKey
 		}
@@ -86,14 +88,14 @@ const getVod = async (video_id)=>{
 		if(VIDEO.value) {
 
 			try {
-				if (VIDEO.value.video_id != data.result.data.video_id) {
-					VIDEO.value = data.result.data;
+				if (VIDEO.value.video_id != data.result.video_id) {
+					VIDEO.value = data.result;
 				}
 			}catch (e) {
-				VIDEO.value = data.result.data;
+				VIDEO.value = data.result;
 			}
 		}else {
-			VIDEO.value = data.result.data;
+			VIDEO.value = data.result;
 		}
 
 	}

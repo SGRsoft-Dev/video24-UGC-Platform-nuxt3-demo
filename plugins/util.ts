@@ -130,6 +130,25 @@ const util = {
             str = str.replaceAll('-', ' ');
         }
         return str;
+    },
+
+    /**
+     * 가로/세로 비율
+     * @param width
+     * @param height
+     * @param split
+     */
+    getRate(width,height, split? = '/') {
+        let a = width;
+        let b = height;
+
+        while(b !== 0) {
+            let temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        return `${width/a}${split}${height/a}`;
     }
 
 };

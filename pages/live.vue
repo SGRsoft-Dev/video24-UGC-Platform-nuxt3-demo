@@ -88,8 +88,9 @@ const limit = ref(20);
 const getLiveList = async ()=>{
 	if(endPage.value) return;
 
-	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/live',{
+	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
 		params:{
+			type:'live',
 			pageNo:pageNo.value,
 			limit:limit.value,
 

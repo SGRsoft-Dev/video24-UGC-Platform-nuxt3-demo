@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-
     experimental: {
         viewTransition: true
     },
@@ -12,7 +11,7 @@ export default defineNuxtConfig({
             ],
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
-                { src: process.env.vpeSdkUrl ?  process.env.vpeSdkUrl : 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=17e49e099ea78c1f1ae159fc1647316c&beta=1114' },
+                { src: 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=17e49e099ea78c1f1ae159fc1647316c&beta=1114' },
 
 
             ],
