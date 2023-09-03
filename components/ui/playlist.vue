@@ -45,7 +45,7 @@ const chkDuvideo = (video_id)=>{
 
 const getVodList = async (params)=>{
 	try {
-		let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/vod', {
+		let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content', {
 			params: params,
 			headers: {
 				'Authorization': mpKey
@@ -83,6 +83,7 @@ onMounted(async ()=>{
 	await getVodList({
 		channelId:VIDEO.value.channel_id,
 		limit:20,
+		type:'vod',
 	});
 
 	shuffle(VOD.value);
