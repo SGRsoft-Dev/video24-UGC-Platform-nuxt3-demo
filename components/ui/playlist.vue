@@ -90,6 +90,7 @@ onMounted(async ()=>{
 
 	await getVodList({
 		limt:10,
+		type:'vod',
 	});
 
 
