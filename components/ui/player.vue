@@ -8,7 +8,9 @@
 		<div class="leftWrap" >
 			<div class="playerWrap relative">
 				<div class="playerBody mobileSeekBarFix"  v-show="!loading">
-					<div id="vpePlayer" class="tra200"></div>
+					<Swipe>
+						<div id="vpePlayer" class="tra200"></div>
+					</Swipe>
 				</div>
 				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
 					<div class="bg-black text-center p-4 rounded">
@@ -301,6 +303,32 @@ const setupVPE = ()=>{
 
 
 }
+
+
+
+const nuxtApp = useNuxtApp();
+
+nuxtApp.$bus.$on('swipe', (direction) => {
+	switch (direction) {
+		case 'down':
+
+			if(watchMode.value){
+				floatPlayer.value = true;
+				window.player.uiHidden();
+				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
+					router.go(-1);
+				}else {
+					router.push('/?floatPlayer=true')
+				}
+			}
+
+			break;
+		default:
+			break;
+	}
+})
+
+
 
 onMounted(()=>{
 	setupVPE();

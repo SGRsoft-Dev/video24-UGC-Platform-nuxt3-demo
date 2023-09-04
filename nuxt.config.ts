@@ -21,7 +21,7 @@ export default defineNuxtConfig({
         '~/assets/css/bootstrap_grids.css',
     ],
     devtools: { enabled: process.env.NODE_ENV === 'development' ? true : false },
-    modules: ['@nuxthq/ui'],
+    modules: ['@nuxthq/ui','@emanuele-em/nuxt-swipe'],
 
     runtimeConfig:{
         public:{

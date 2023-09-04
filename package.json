@@ -20,6 +20,7 @@
     "nuxt": "^3.6.5"
   },
   "dependencies": {
+    "@emanuele-em/nuxt-swipe": "^1.0.2",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "lscache": "^1.3.2",

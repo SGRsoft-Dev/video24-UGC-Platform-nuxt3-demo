@@ -1,10 +1,14 @@
 <template>
+
 	<div v-if="VIDEO " class="pt-0  dark:bg-neutral-900" :class="{' floatPlayer shadow-md hover:shadow-xl' : !watchMode && floatPlayer , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : !fullMode && watchMode} ">
 
 		<div class="relative">
 			<div class="playerFrame relative" >
-				<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] md:hidden inline " @click="backVideo"  v-if="!watchMode"></div>
+				<Swipe>
+					<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] md:hidden inline " @click="backVideo"  v-if="!watchMode"></div>
+				</Swipe>
 				<UiPlayer />
+
 			</div>
 
 			<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] cursor-pointer hover:bg-black/50 hoverBtnArea hidden md:inline" v-if="!watchMode" >
@@ -24,12 +28,14 @@
 		</div>
 
 		<div v-if="!watchMode" class="p-3 flex-auto" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
-			<div class="md:text-base text-[12px] el">
-				{{VIDEO.title}}
-			</div>
-			<div class="md:text-xs text-[11px] text-gray-400 mt-2 mb-2">
-				{{ VIDEO.channel_name }}
-			</div>
+			<Swipe>
+				<div class="md:text-base text-[12px] el">
+					{{VIDEO.title}}
+				</div>
+				<div class="md:text-xs text-[11px] text-gray-400 mt-2 mb-2">
+					{{ VIDEO.channel_name }}
+				</div>
+			</Swipe>
 		</div>
 
 		<div class="md:hidden flex " v-if="windowSize.width <= 640 && !watchMode" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
@@ -76,6 +82,22 @@ const goVideo = ()=>{
 		router.push(`/watch?v=${VIDEO.value.video_id}`);
 	}
 }
+
+
+const nuxtApp = useNuxtApp();
+
+nuxtApp.$bus.$on('swipe', (direction) => {
+	switch (direction) {
+		case 'up':
+			console.log('!!! up')
+			backVideo();
+
+			break;
+		default:
+			break;
+	}
+})
+
 </script>
 
 <style scoped>
@@ -86,6 +108,15 @@ const goVideo = ()=>{
 	z-index: 9999;
 	width:500px;
 	max-width: 20vw;
+}
+
+.floatBackDrop{
+	position: fixed;
+	bottom:0;
+	right:0;
+	left:0;
+	top:0;
+	z-index: 9998;
 }
 
 .floatPlayer .playerFrame{
