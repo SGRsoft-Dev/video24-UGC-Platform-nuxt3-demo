@@ -1,7 +1,7 @@
 <template>
 
 	<Transition name="fade">
-		<div v-if="VIDEO" class=" pt-0  dark:bg-neutral-900" :class="{' floatPlayer duration-100  delay-100 shadow-sm' : !watchMode && floatPlayer ,' noFloatMode ' : watchMode && !floatPlayer  , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : !fullMode && watchMode} ">
+		<div v-if="VIDEO" class=" pt-0  dark:bg-neutral-900" :class="{' floatPlayer duration-100 delay-100 shadow-sm' : !watchMode && floatPlayer ,' noFloatMode ' : watchMode && !floatPlayer  , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : !fullMode && watchMode} ">
 
 			<div class="relative ">
 				<div class="playerFrame relative " >
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 
-			<div v-if="!watchMode" class="p-3 flex-auto" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
+			<div v-if="!watchMode" class="p-3 flex-auto border-t dark:border-gray-800 border-gray-100 " :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
 
 					<div class="md:text-base text-[12px] el">
 						{{VIDEO.title}}

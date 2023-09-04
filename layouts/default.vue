@@ -116,7 +116,8 @@ onMounted(()=>{
 @media (max-width: 640px) {
 
 	.floatPlayer {
-		max-width:620px;
+
+
 	}
 
 }
