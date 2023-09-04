@@ -58,14 +58,8 @@ watch(colorMode,()=>{
 	}
 })
 
+const pageChaneInit = (path)=>{
 
-watch(()=>route.path,(path , oldPath)=>{
-
-	if(oldPath.split('/')[1] == 'watch'  ) {
-		lastRouterPath.value = null;
-	}else {
-		lastRouterPath.value = oldPath;
-	}
 
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
@@ -82,6 +76,18 @@ watch(()=>route.path,(path , oldPath)=>{
 		document.body.classList.remove('no-scroll');
 		document.getElementsByTagName('html')[0].classList.remove('no-scroll');
 	}
+}
+
+watch(()=>route.path,(path , oldPath)=>{
+
+	if(oldPath.split('/')[1] == 'watch'  ) {
+		lastRouterPath.value = null;
+	}else {
+		lastRouterPath.value = oldPath;
+	}
+
+
+	pageChaneInit(path);
 
 	try{
 		window.player.controlBarDeactive();
@@ -96,13 +102,7 @@ onMounted(()=>{
 	windowSize.value.height = window.innerHeight;
 
 
-	if(route.path.split('/')[1] == 'watch'  ) {
-		leftMenuOpen.value = false
-		watchMode.value = true;
-	}else{
-		leftMenuOpen.value = true;
-		watchMode.value = false;
-	}
+	pageChaneInit(route.path);
 
 	if(colorMode.value == 'dark'){
 		document.body.classList.add('bg-neutral-900')
