@@ -39,5 +39,11 @@ export default defineNuxtConfig({
             '/api/**' : {cors : true},
         },
         preset: "firebase",
+        firebase: {
+            gen:2,
+            maxInstances: 3,
+            minInstances: 1,
+            memory: '256MB'
+        }
     },
 })
