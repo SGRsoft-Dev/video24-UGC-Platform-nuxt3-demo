@@ -14,7 +14,7 @@
 		</div>
 
 
-		<div class="fixed bottom-0 w-full z-20 tra200  border-t border-[#eeeeee] dark:border-[#252424] bg-white dark:bg-neutral-900  md:hidden" v-if="!watchMode">
+		<div class="fixed bottom-0 w-full z-20   border-t border-[#eeeeee] dark:border-[#252424] bg-white dark:bg-neutral-900  md:hidden" v-if="!watchMode">
 			<div class=" pb-safe" style="min-height:80px">
 				<div class="pt-2 ">
 					<UiBottom />
@@ -30,7 +30,7 @@
 
 
 
-	<UiFloatPlayer :class="{'tra100':floatPlayer}"/>
+	<UiFloatPlayer  :class="{'duration-100  delay-100 floatPlayer':floatPlayer}"/>
 </template>
 
 <script setup>
@@ -70,14 +70,9 @@ watch(()=>route.path,(path , oldPath)=>{
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;
-
-		document.body.classList.add('no-scroll');
-		document.getElementsByTagName('html')[0].style.overflow = "hidden";
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
-		document.body.classList.remove('no-scroll');
-		document.getElementsByTagName('html')[0].style.overflow = "unset";
 	}
 
 	try{
@@ -96,13 +91,9 @@ onMounted(()=>{
 	if(route.path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false
 		watchMode.value = true;
-		document.body.classList.add('no-scroll');
-		document.getElementsByTagName('html')[0].style.overflow = "hidden";
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
-		document.body.classList.remove('no-scroll');
-		document.getElementsByTagName('html')[0].style.overflow = "unset";
 	}
 
 	if(colorMode.value == 'dark'){
@@ -121,4 +112,25 @@ onMounted(()=>{
 <style scoped>
 
 
+
+@media (max-width: 640px) {
+
+	.floatPlayer {
+		max-width:620px;
+	}
+
+}
+
+.floatPlayer .UiVideoMeta,
+.floatPlayer .UiPlaylist{
+	display: none ;
+}
+
+.floatPlayer .ncp_player_root .controls-body{
+	display: none;
+}
+
+.floatPlayer .ncp_player_root .description_frame{
+	display: none;
+}
 </style>

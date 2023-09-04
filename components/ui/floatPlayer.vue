@@ -1,53 +1,52 @@
 <template>
 
-	<div v-if="VIDEO " class="pt-0  dark:bg-neutral-900" :class="{' floatPlayer shadow-md hover:shadow-xl' : !watchMode && floatPlayer , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : !fullMode && watchMode} ">
+	<Transition name="fade">
+		<div v-if="VIDEO" class=" pt-0  dark:bg-neutral-900" :class="{' floatPlayer duration-100  delay-100 shadow-sm' : !watchMode && floatPlayer ,' noFloatMode ' : watchMode && !floatPlayer  , 'md:container md:mx-auto  ' : !fullMode , 'md:pt-5' : !fullMode && watchMode} ">
 
-		<div class="relative">
-			<div class="playerFrame relative" >
-				<Swipe>
+			<div class="relative ">
+				<div class="playerFrame relative " >
 					<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] md:hidden inline " @click="backVideo"  v-if="!watchMode"></div>
-				</Swipe>
-				<UiPlayer/>
+					<UiPlayer/>
+				</div>
 
-			</div>
-
-			<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] cursor-pointer hover:bg-black/50 hoverBtnArea hidden md:inline" v-if="!watchMode" >
-				<div class="flex justify-between hoverBtns">
-					<div class="p-2">
-						<button type="button" @click="backVideo()">
-							<i class="ph ph-arrow-square-up-left text-white text-2xl"></i>
-						</button>
+				<div class="absolute top-0 bottom-0 left-0 right-0 z-[999] cursor-pointer hover:bg-black/50 hoverBtnArea hidden md:inline" v-if="!watchMode" >
+					<div class="flex justify-between hoverBtns">
+						<div class="p-2">
+							<button type="button" @click="backVideo()">
+								<i class="ph ph-arrow-square-up-left text-white text-2xl"></i>
+							</button>
+						</div>
+						<div class="p-2">
+							<button type="button" @click="closeVideo()">
+								<i class="ph ph-x text-white text-2xl"></i>
+							</button>
+						</div>
 					</div>
-					<div class="p-2">
-						<button type="button" @click="closeVideo()">
-							<i class="ph ph-x text-white text-2xl"></i>
-						</button>
+				</div>
+			</div>
+
+			<div v-if="!watchMode" class="p-3 flex-auto" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
+
+					<div class="md:text-base text-[12px] el">
+						{{VIDEO.title}}
 					</div>
+					<div class="md:text-xs text-[11px] text-gray-400 mt-2 mb-2">
+						{{ VIDEO.channel_name }}
+					</div>
+
+			</div>
+
+			<div class="md:hidden flex " v-if="windowSize.width <= 640 && !watchMode" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
+
+				<div class="">
+					<button type="button" class=" p-3" @click="closeVideo()">
+						<i class="ph ph-x  text-xl"></i>
+					</button>
 				</div>
 			</div>
+
 		</div>
-
-		<div v-if="!watchMode" class="p-3 flex-auto" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
-			<Swipe>
-				<div class="md:text-base text-[12px] el">
-					{{VIDEO.title}}
-				</div>
-				<div class="md:text-xs text-[11px] text-gray-400 mt-2 mb-2">
-					{{ VIDEO.channel_name }}
-				</div>
-			</Swipe>
-		</div>
-
-		<div class="md:hidden flex " v-if="windowSize.width <= 640 && !watchMode" :class="{'bg-bg-neutral-900' : colorMode.value == 'dark' , 'bg-white' : colorMode.value == 'light' }">
-
-			<div class="">
-				<button type="button" class=" p-3" @click="closeVideo()">
-					<i class="ph ph-x  text-xl"></i>
-				</button>
-			</div>
-		</div>
-
-	</div>
+	</Transition>
 </template>
 
 <script setup>
@@ -84,19 +83,7 @@ const goVideo = ()=>{
 }
 
 
-const nuxtApp = useNuxtApp();
 
-nuxtApp.$bus.$on('swipe', (direction) => {
-	switch (direction) {
-		case 'up':
-			console.log('!!! up')
-			backVideo();
-
-			break;
-		default:
-			break;
-	}
-})
 
 </script>
 
@@ -132,8 +119,17 @@ nuxtApp.$bus.$on('swipe', (direction) => {
 }
 
 
+
 @media (max-width: 640px) {
-	.floatPlayer  {
+
+	.playerFrame{
+		width:100vw;
+	}
+	.noFloatMode{
+		height:100vh;
+	}
+
+	.floatPlayer{
 		position: fixed;
 		bottom:76px;
 		left:0;
@@ -141,11 +137,13 @@ nuxtApp.$bus.$on('swipe', (direction) => {
 		z-index: 9999;
 		max-width:100vw;
 		width:100%;
+		height:80px;
 
 	}
 
 	.floatPlayer{
 		display:flex;
+
 	}
 
 	.floatPlayer .playerFrame{
@@ -154,11 +152,4 @@ nuxtApp.$bus.$on('swipe', (direction) => {
 }
 
 
-.floatPlayer .ncp_player_root .controls-body{
-	display: none;
-}
-
-.floatPlayer .ncp_player_root .description_frame{
-	display: none;
-}
 </style>
