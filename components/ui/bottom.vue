@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center h-full">
+  <div class="flex items-center h-full ">
 	  <div v-for="( m , i) in leftMenu" class="flex-1">
 		  <div v-for="(mm , ii) in m.subs">
 			 <NuxtLink :to="mm.to">

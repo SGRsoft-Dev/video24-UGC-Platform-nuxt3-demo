@@ -187,6 +187,25 @@ let options = {
 		error(err){
 			ERROR.value = err;
 		}
+	},
+	icon:{
+
+		bigPlay:"/svg/material/youtube-logo-fill.svg",
+		play:"/svg/material/play_arrow_white_24dp.svg",
+		pause:"/svg/material/pause_black_24dp.svg",
+		prev:"/svg/material/skip_previous_white_24dp.svg",
+		next:"/svg/material/skip_next_white_24dp.svg",
+		replay:"/svg/material/replay_white_24dp.svg",
+		subtitle:"/svg/material/subtitles_white_24dp.svg",
+		subtitleOff:"/svg/material/subtitles_off_white_24dp.svg",
+		fullscreen:"/svg/material/fullscreen_white_24dp.svg",
+		fullscreenExit:"/svg/material/fullscreen_exit_white_24dp.svg",
+		volumeFull:"/svg/material/volume_up_white_24dp.svg",
+		volumeMute:"/svg/material/volume_off_white_24dp.svg",
+		volumeMid:"/svg/material/volume_down_white_24dp.svg",
+		pip:"/svg/material/picture_in_picture_alt_white_24dp.svg",
+		setting:"/svg/material/settings_white_24dp.svg",
+
 	}
 };
 
