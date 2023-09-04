@@ -37,6 +37,7 @@
 <script setup>
 import axios from "axios";
 import lscache from "lscache";
+import _ from "lodash";
 lscache.setExpiryMilliseconds(1000);
 
 const runtimeConfig = useRuntimeConfig();
@@ -150,24 +151,12 @@ let options = {
 	override:{
 		pip:{
 			on(){
-				floatPlayer.value = true;
-				window.player.uiHidden();
-				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
-					router.go(-1);
-				}else {
-					router.push('/?floatPlayer=true')
-				}
+				pipStart();
 
 
 			},
 			off(){
-				floatPlayer.value = true;
-				window.player.uiHidden();
-				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
-					router.go(-1);
-				}else {
-					router.push('/?floatPlayer=true')
-				}
+				pipStart();
 			}
 		},
 		nextSource(){
@@ -306,33 +295,34 @@ const setupVPE = ()=>{
 }
 
 
+const pipStart = _.debounce(()=>{
+	if(watchMode.value){
+		floatPlayer.value = true;
+		window.player.uiHidden();
+		if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
+			router.go(-1);
+		}else {
+			router.push('/?floatPlayer=true')
+		}
+	}
+
+},200);
 
 const nuxtApp = useNuxtApp();
 
-nuxtApp.$bus.$on('swipe', (direction) => {
-	switch (direction) {
-		case 'down':
-
-			if(watchMode.value){
-				floatPlayer.value = true;
-				window.player.uiHidden();
-				if(lastRouterPath.value && lastRouterPath.value.indexOf('/watch') < 1){
-					router.go(-1);
-				}else {
-					router.push('/?floatPlayer=true')
-				}
-			}
-
-			break;
-		default:
-			break;
-	}
-})
-
-
-
 onMounted(()=>{
 	setupVPE();
+	nuxtApp.$bus.$on('swipe', (direction) => {
+		switch (direction) {
+			case 'down':
+				pipStart();
+
+				break;
+			default:
+				break;
+		}
+	})
+
 });
 
 watch(()=>VIDEO.value,(v)=>{

@@ -30,7 +30,7 @@
 
 
 
-	<UiFloatPlayer  :class="{'duration-200 floatPlayer':floatPlayer}"/>
+	<UiFloatPlayer  :class="{'duration-200 floatPlayerBody':floatPlayer}"/>
 </template>
 
 <script setup>
@@ -119,5 +119,11 @@ onMounted(()=>{
 
 <style scoped>
 
+@media (max-width: 640px) {
+	.floatPlayerBody {
+		max-height: 20vh;
+		height: 80px;
+	}
+}
 
 </style>
