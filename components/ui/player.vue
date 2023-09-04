@@ -1,36 +1,38 @@
 <template>
 
-	<div v-if="loading" >
-		<SkeletonPlayer/>
-	</div>
+	<div :class="{'mobileModeWarp' : windowSize.width < 720}">
+		<div v-if="loading" >
+			<SkeletonPlayer/>
+		</div>
 
-	<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode}">
-		<div class="leftWrap" >
-			<div class="playerWrap relative">
-				<div class="playerBody mobileSeekBarFix"  v-show="!loading">
-					<Swipe>
-						<div id="vpePlayer" class="tra200"></div>
-					</Swipe>
-				</div>
-				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
-					<div class="bg-black text-center p-4 rounded">
-						<div>
-							<i class="ph-fill text-3xl ph-warning"></i>
-						</div>
-						<div class="text-[12px] mt-2">
-							동영상 재생중 에러가 발생하였습니다.
+		<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode }">
+			<div class="leftWrap" >
+				<div class="playerWrap relative">
+					<div class="playerBody mobileSeekBarFix"  v-show="!loading">
+						<Swipe>
+							<div id="vpePlayer" class="tra200"></div>
+						</Swipe>
+					</div>
+					<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
+						<div class="bg-black text-center p-4 rounded">
+							<div>
+								<i class="ph-fill text-3xl ph-warning"></i>
+							</div>
+							<div class="text-[12px] mt-2">
+								동영상 재생중 에러가 발생하였습니다.
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div v-if="watchMode" class="flex mt-3" :class="{'md:container md:mx-auto' : fullMode   }">
-				<UiVideoMeta class="flex3"/>
-				<UiPlaylist v-if="fullMode" class="flex1 pt-3 pl-5" style="max-width:420px"/>
+				<div v-if="watchMode" class="flex mt-3" :class="{'md:container md:mx-auto' : fullMode   }">
+					<UiVideoMeta class="flex3"/>
+					<UiPlaylist v-if="fullMode" class="flex1 pt-3 pl-5" style="max-width:420px"/>
+				</div>
 			</div>
-		</div>
-		<div class="rightWrap  " v-if="!fullMode && watchMode">
-			<UiPlaylist class="ml-4"/>
+			<div class="rightWrap  " v-if="!fullMode && watchMode">
+				<UiPlaylist class="ml-4"/>
+			</div>
 		</div>
 	</div>
 </template>
@@ -350,7 +352,6 @@ watch(()=>VIDEO.value,(v)=>{
 <style scoped>
 .playerWrap{
 	width: 100%;
-
 	background-color: #000;
 	color:#fff;
 
@@ -393,6 +394,12 @@ watch(()=>VIDEO.value,(v)=>{
 
 	.fullMode .leftWrap , .basicMode .leftWrap{
 		width:100%;
+	}
+
+	.mobileModeWarp{
+		overflow-y: auto;
+		width:100vw;
+		height:100vh;
 	}
 
 }

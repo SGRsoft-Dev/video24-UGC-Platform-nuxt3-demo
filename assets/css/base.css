@@ -449,3 +449,8 @@ body {
 .aspect-video{
     aspect-ratio: 16/9;
 }
+
+
+body.no-scroll {
+    overflow: hidden !important
+}

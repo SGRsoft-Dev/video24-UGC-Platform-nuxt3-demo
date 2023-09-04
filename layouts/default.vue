@@ -71,10 +71,13 @@ watch(()=>route.path,(path , oldPath)=>{
 		leftMenuOpen.value = false;
 		watchMode.value = true;
 
-
+		document.body.classList.add('no-scroll');
+		document.getElementsByTagName('html')[0].style.overflow = "hidden";
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
+		document.body.classList.remove('no-scroll');
+		document.getElementsByTagName('html')[0].style.overflow = "unset";
 	}
 
 	try{
@@ -93,9 +96,13 @@ onMounted(()=>{
 	if(route.path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false
 		watchMode.value = true;
+		document.body.classList.add('no-scroll');
+		document.getElementsByTagName('html')[0].style.overflow = "hidden";
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
+		document.body.classList.remove('no-scroll');
+		document.getElementsByTagName('html')[0].style.overflow = "unset";
 	}
 
 	if(colorMode.value == 'dark'){
