@@ -77,7 +77,7 @@
 						<UAvatar src="/image/non-profile.png" v-else  :alt="VIDEO.channel_name" class="profileThumb object-contain" size="lg"/>
 					</div>
 					<div class="flex-auto">
-						<input type="text" placeholder="댓글 추가..." class="border-b w-full">
+						<input type="text" placeholder="댓글 추가..." class="border-b w-full" style="outline: none">
 					</div>
 				</div>
 
@@ -85,7 +85,6 @@
 
 					<div class="flex items-center" v-for="i in 30">
 						<div class="pr-4">
-
 							<UAvatar :src="`https://picsum.photos/100/100/?random&v=${i}`"  class="profileThumb object-contain" size="lg"/>
 						</div>
 						<div class="flex-auto space-y-1">
