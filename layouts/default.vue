@@ -70,9 +70,17 @@ watch(()=>route.path,(path , oldPath)=>{
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;
+
+		document.getElementById('__nuxt').classList.add('no-pull-mode');
+		document.body.classList.add('no-scroll');
+		document.getElementsByTagName('html')[0].classList.add('no-scroll');
 	}else{
 		leftMenuOpen.value = true;
 		watchMode.value = false;
+
+		document.getElementById('__nuxt').classList.remove('no-pull-mode');
+		document.body.classList.remove('no-scroll');
+		document.getElementsByTagName('html')[0].classList.remove('no-scroll');
 	}
 
 	try{
@@ -110,17 +118,6 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-
-
-
-@media (max-width: 640px) {
-
-	.floatPlayer {
-
-
-	}
-
-}
 
 .floatPlayer .UiVideoMeta,
 .floatPlayer .UiPlaylist{

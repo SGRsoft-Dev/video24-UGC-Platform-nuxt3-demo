@@ -451,7 +451,14 @@ body {
 }
 
 
-body.no-scroll {
+.no-scroll {
     overflow: hidden !important
+}
+
+.no-pull-mode{
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
 }
 
