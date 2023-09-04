@@ -119,16 +119,5 @@ onMounted(()=>{
 
 <style scoped>
 
-.floatPlayer .UiVideoMeta,
-.floatPlayer .UiPlaylist{
-	display: none ;
-}
 
-.floatPlayer .ncp_player_root .controls-body{
-	display: none;
-}
-
-.floatPlayer .ncp_player_root .description_frame{
-	display: none;
-}
 </style>
