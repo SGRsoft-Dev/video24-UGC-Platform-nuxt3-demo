@@ -1,5 +1,5 @@
 <template>
-	<div :style="{height:contentHeight+'px'}" class="tra200"></div>
+	<div :style="{height:contentHeight+'px'}" class=""></div>
 	<div v-if="loading" >
 		<SkeletonPlayer/>
 	</div>
