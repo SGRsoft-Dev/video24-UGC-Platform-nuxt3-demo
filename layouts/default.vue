@@ -30,7 +30,7 @@
 
 
 
-	<UiFloatPlayer  :class="{'duration-200 floatPlayerBody':floatPlayer}"/>
+	<UiFloatPlayer  :class="{' floatPlayerBody':floatPlayer}"/>
 </template>
 
 <script setup>

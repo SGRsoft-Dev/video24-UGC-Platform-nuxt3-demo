@@ -1,6 +1,6 @@
 <template>
 
-	<div class="main-header fixed tra200 w-full backdrop-blur z-[99999] md:drop-shadow-none  border-b pt-safe  "
+	<div class="main-header fixed  w-full backdrop-blur z-[99999] md:drop-shadow-none  border-b pt-safe  "
 		 :class="{
 				'bg-neutral-900 border-[#252424]' : setDark ,
 				'bg-white ' : !setDark ,

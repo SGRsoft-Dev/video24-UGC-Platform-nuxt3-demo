@@ -1,15 +1,16 @@
 <template>
+	<div :style="{height:contentHeight+'px'}" class="tra200"></div>
 	<div v-if="loading" >
 		<SkeletonPlayer/>
 	</div>
 
 	<div :class="{'fullMode ' : fullMode && watchMode , 'basicMode ' : !fullMode && watchMode }">
 		<div class="leftWrap" >
-			<div class="playerWrap relative ">
-				<div class="playerBody mobileSeekBarFix"  v-show="!loading">
-					<Swipe>
+			<div class="playerWrap relative " @touchstart="startResize" @touchmove="resize" @touchend="stopResize">
+				<div class="playerBody mobileSeekBarFix"   v-show="!loading">
+
 						<div id="vpePlayer"></div>
-					</Swipe>
+
 				</div>
 				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
 					<div class="bg-black text-center p-4 rounded">
@@ -182,7 +183,7 @@ let options = {
 	},
 	icon:{
 
-		bigPlay:"/svg/material/youtube-logo-fill.svg",
+		bigPlay:"/svg/material/play_arrow_white_24dp.svg",
 		play:"/svg/material/play_arrow_white_24dp.svg",
 		pause:"/svg/material/pause_black_24dp.svg",
 		prev:"/svg/material/skip_previous_white_24dp.svg",
@@ -295,7 +296,7 @@ const setupVPE = ()=>{
 }
 
 
-const pipStart = _.debounce(()=>{
+const pipStart = ()=>{
 	if(watchMode.value){
 		floatPlayer.value = true;
 		window.player.uiHidden();
@@ -306,7 +307,38 @@ const pipStart = _.debounce(()=>{
 		}
 	}
 
-},200);
+};
+
+const resizing = ref(false);
+const startY = ref(0);
+const contentHeight = ref(0);
+
+const startResize = (e)=> {
+	if (e.touches.length === 1) {
+		resizing.value = true;
+		startY.value = e.touches[0].clientY;
+	}
+}
+const resize = (e)=> {
+	if (resizing.value && e.touches.length === 1) {
+		const deltaY = e.touches[0].clientY - startY.value;
+		contentHeight.value += deltaY;
+		startY.value = e.touches[0].clientY;
+
+
+		if(contentHeight.value > 300){
+			if(!floatPlayer.value){
+				pipStart();
+			}
+		}
+	}
+}
+const stopResize = ()=> {
+	resizing.value = false;
+	contentHeight.value = 0;
+}
+
+
 
 const nuxtApp = useNuxtApp();
 
@@ -315,7 +347,7 @@ onMounted(()=>{
 	nuxtApp.$bus.$on('swipe', (direction) => {
 		switch (direction) {
 			case 'down':
-				pipStart();
+				//pipStart();
 
 				break;
 			default:
