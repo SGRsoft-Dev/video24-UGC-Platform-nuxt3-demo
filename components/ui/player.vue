@@ -326,7 +326,7 @@ const resize = (e)=> {
 		startY.value = e.touches[0].clientY;
 
 
-		if(contentHeight.value > 300){
+		if(contentHeight.value > 150){
 			if(!floatPlayer.value){
 				pipStart();
 			}
