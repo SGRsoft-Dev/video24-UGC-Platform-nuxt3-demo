@@ -1,5 +1,5 @@
 <template>
-	<div :style="{height:contentHeight+'px'}" class=""></div>
+	<div :style="{height:(contentHeight / 2.5)+'px'}" class="tra200"></div>
 	<div v-if="loading" >
 		<SkeletonPlayer/>
 	</div>
@@ -326,16 +326,27 @@ const resize = (e)=> {
 		startY.value = e.touches[0].clientY;
 
 
-		if(contentHeight.value > 150){
-			if(!floatPlayer.value){
-				pipStart();
-			}
-		}
+
 	}
 }
 const stopResize = ()=> {
+
+	if(contentHeight.value > 150){
+		if(!floatPlayer.value){
+			pipStart();
+		}
+	}
+
 	resizing.value = false;
-	contentHeight.value = 0;
+	if(!floatPlayer.value) {
+		contentHeight.value = 0;
+		setTimeout(() => {
+			contentHeight.value = 0;
+		}, 300);
+	}else{
+		contentHeight.value = 0;
+	}
+
 }
 
 
