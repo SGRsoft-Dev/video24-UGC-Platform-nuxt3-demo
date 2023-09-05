@@ -322,10 +322,10 @@ const startResize = (e)=> {
 const resize = (e)=> {
 	if (resizing.value && e.touches.length === 1) {
 		const deltaY = e.touches[0].clientY - startY.value;
-		contentHeight.value += deltaY;
+		if(contentHeight.value < 200) {
+			contentHeight.value += deltaY;
+		}
 		startY.value = e.touches[0].clientY;
-
-
 
 	}
 }
