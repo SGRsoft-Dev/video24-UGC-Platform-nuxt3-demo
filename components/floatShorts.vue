@@ -69,7 +69,7 @@ const setShortItemHeight = ()=>{
 	setShortItemHeightTimer = setInterval(()=>{
 		let shortItems = document.getElementsByClassName('shortItems');
 		if(shortItems.length > 0){
-			shortItemHeight.value = shortItems[0].clientHeight;
+			shortItemHeight.value = shortItems[0].clientHeight - 30;
 			clearTimeout(setShortItemHeightTimer);
 		}
 	},200)
