@@ -16,8 +16,15 @@ lscache.setExpiryMilliseconds(1000);
 
 const UUID = useState('UUID',()=>null);
 const VOD = useState('VOD',()=>[]);
+
 const TOTAL = useState('TOTAL',()=>0);
 const VIDEO = useState('VIDEO',);
+
+const SHORTS = useState('SHORTS',()=>[]);
+const SHORTS_VIDEO = useState('SHORTS_VIDEO');
+const SHORTS_IDX = useState('SHORTS_IDX',()=>0);
+const startFlag = useState('startFlag',()=>false);
+
 const fullMode = useState('fullMode',()=>false);
 const autoPlayMode = useState('autoPlayMode',()=>true);
 const floatPlayer = useState('floatPlayer',()=>false);
@@ -67,6 +74,8 @@ onMounted(()=>{
 
 	window.uuid = lscache.get('UUID') ? lscache.get('UUID') : uuidv4();
 	lscache.set('UUID', window.uuid, 3600);
+
+	UUID.value = window.uuid;
 
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;

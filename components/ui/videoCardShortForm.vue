@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink :to="`/watch?v=${v.video_id}`">
+	<NuxtLink style="cursor: pointer"  @click="goShort(v.video_id)">
 		<div class="w-full overflow-hidden">
 			<div class="videoThumbSf bg-gray-200/15 relative" :style="{background:`url(${v.thumb_url}) `}">
 				<div class="backdrop-blur-cu1" style="aspect-ratio: 9/16">
@@ -37,8 +37,14 @@ defineProps({
 		required: true
 	}
 })
-
+const ShortsList = useState('ShortsList');
 const {$util} = useNuxtApp();
+const router = useRouter();
+
+const goShort = (video_id)=>{
+	ShortsList.value = [];
+	router.push('/shorts/'+video_id);
+}
 </script>
 
 <style scoped>

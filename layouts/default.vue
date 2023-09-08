@@ -10,7 +10,9 @@
 			<UiLnb />
 		</div>
 		<div class="  px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
+
 			<slot/>
+			<FloatShorts v-if="route.params.shortsVideoId"/>
 		</div>
 
 
@@ -30,7 +32,11 @@
 
 
 
-	<UiFloatPlayer  :class="{' floatPlayerBody':floatPlayer}"/>
+	<FloatPlayer  :class="{' floatPlayerBody':floatPlayer}"/>
+
+
+
+
 </template>
 
 <script setup>

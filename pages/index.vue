@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3" >
-				<template v-for="(v , i) in VOD">
+				<template v-for="(v , i) in SHORTS">
 					<div  class=" px-0 md:px-3 mb-10 videoItems" v-if="v.height > v.width">
 						<UiVideoCardShortForm :v="v" />
 					</div>
@@ -116,9 +116,43 @@ useHead({
  * @type {*[]}
  */
 const VOD = useState('VOD');
+const SHORTS = useState('SHORTS');
+const SHORTS_VIDEO = useState('SHORTS_VIDEO');
 const TOTAL = useState('TOTAL');
 const pageNo = ref(1);
 const endPage = ref(false);
+
+
+
+const getShortList = async ()=>{
+
+	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
+		params:{
+			type:'vod',
+			pageNo:pageNo.value,
+			limit:20,
+			portrait:true,
+
+		},
+		headers:{
+			'Authorization':mpKey
+		}
+	});
+
+	if(data.code == 200){
+		for (let i = 0; i < data.result.data.length; i++) {
+			let v = data.result.data[i];
+			if(i==0){
+				SHORTS_VIDEO.value = v
+			}
+			v.created_at = $util.dateFormat2(v.created_at);
+			v.view_cnt = $util.numberToKorean(v.view_cnt);
+			SHORTS.value.push(v);
+		}
+	}
+
+
+}
 
 const getVodList = async ()=>{
 	if(endPage.value) return;
@@ -128,6 +162,7 @@ const getVodList = async ()=>{
 			type:'vod',
 			pageNo:pageNo.value,
 			limit:60,
+			landscape:true,
 
 		},
 		headers:{
@@ -177,6 +212,7 @@ const getVodList = async ()=>{
 
 useAsyncData(async ()=>{
 	if(VOD.value.length == 0){
+		await getShortList();
 		await getVodList();
 	}else{
 		loading.value = false;
