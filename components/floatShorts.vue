@@ -6,7 +6,7 @@
 		</div>
 		<div class="absolute top-0 left-0 z-[9] p-3">
 			<NuxtLink to="/">
-				<img src="/image/logo_dark.svg" class="h-[20px]" alt="">
+				<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
 			</NuxtLink>
 		</div>
 
@@ -194,7 +194,7 @@ watch(()=>SHORTS_IDX.value , (to , from)=>{
 		try {
 			chageShortsVideo(ShortsList.value[to].video_id);
 		}catch (e) {
-			
+
 		}
 	}
 })
