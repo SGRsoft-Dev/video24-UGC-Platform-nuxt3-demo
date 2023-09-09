@@ -1,8 +1,13 @@
 <template>
 
 	<div class="relative">
-		<div class="absolute top-0 left-0">
+		<div class="absolute top-0 right-0 z-[10]">
 			{{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}} / {{shortMode}}
+		</div>
+		<div class="absolute top-0 left-0 z-[9] p-3">
+			<NuxtLink to="/">
+				<img src="/image/logo_dark.svg" class="h-[20px]" alt="">
+			</NuxtLink>
 		</div>
 
 		<div class="absolute top-0 right-0 p-4" v-if="shortScroll > 0">
@@ -66,6 +71,10 @@ const startFlag = useState('startFlag');
 
 //쇼츠 높이 구하기
 let setShortItemHeightTimer = null;
+
+
+
+
 
 const setShortItemHeight = ()=>{
 	clearTimeout(setShortItemHeightTimer);
@@ -169,16 +178,24 @@ const setShortsList = ()=>{
 
 
 const chageShortsVideo = (video_id)=>{
-	_.debounce(()=>{
-		router.replace('/shorts/'+video_id);
-	},1000)()
+	try{
+		_.debounce(()=>{
+			router.replace('/shorts/'+video_id);
+		},1000)()
+	}catch (e) {
+
+	}
 
 }
 
 watch(()=>SHORTS_IDX.value , (to , from)=>{
 	setShortItemHeight();
 	if(to != from) {
-		chageShortsVideo(ShortsList.value[to].video_id);
+		try {
+			chageShortsVideo(ShortsList.value[to].video_id);
+		}catch (e) {
+			
+		}
 	}
 })
 

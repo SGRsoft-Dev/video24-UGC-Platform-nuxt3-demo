@@ -8,7 +8,7 @@
 			<div class="md:flex h-full md:gap-4">
 
 				<div class=" md:rounded-xl dark:dark:bg-neutral-800 bg-gray-100 h-full flex-auto shadow-md relative">
-					<div class="absolute w-full h-full md:rounded-xl overflow-hidden" v-if="video" :style="{'background':`url(${video.thumb_url}) center / cover`}">
+					<div class="absolute w-full h-full md:rounded-xl overflow-hidden flex justify-center items-center text-white" v-if="video" :style="{'background':`url(${video.thumb_url}) center / cover`}">
 
 						<div >
 							{{video.video_id}}
