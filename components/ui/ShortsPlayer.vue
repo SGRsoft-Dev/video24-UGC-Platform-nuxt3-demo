@@ -1,6 +1,6 @@
 <template>
 
-	<div class="h-screen md:pt-5 md:max-h-[90vh] "   v-if="video">
+	<div class="h-screen md:pt-5 md:max-h-[90vh] "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
 
 
 

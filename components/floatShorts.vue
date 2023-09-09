@@ -1,6 +1,6 @@
 <template>
 
-	<div class="relative">
+	<div class="relative h-screen " :style="{height:`${windowSize.height - 0}px`}">
 
 		<div class="absolute top-0 left-0 z-[99999] p-3 md:hidden">
 			<NuxtLink to="/">
@@ -20,7 +20,7 @@
 			</button>
 		</div>
 
-		<div class="h-screen max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"  @scroll="shortsScrollRun">
+		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
 				<div>
 					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
@@ -199,9 +199,11 @@ watch(()=>SHORTS_IDX.value , (to , from)=>{
 	}
 })
 
+
 /*watch(()=>route.params , (to,from)=>{
 	console.log(to,from)
 })*/
+
 
 onMounted(async ()=>{
 	if(ShortsList.value.length==0) {
