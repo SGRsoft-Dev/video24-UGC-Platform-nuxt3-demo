@@ -36,7 +36,7 @@
 
 
 
-	<FloatPlayer  :class="{' floatPlayerBody':floatPlayer}"/>
+	<FloatPlayer  :class="{' floatPlayerBody':floatPlayer}" v-if="!route.params.shortsVideoId"/>
 
 
 
