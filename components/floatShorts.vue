@@ -2,7 +2,7 @@
 
 	<div class="relative">
 		<div class="absolute top-0 right-0 z-[10]">
-			{{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}} / {{shortMode}}
+			 {{shortItemWidth}} / {{shortItemHeight}} / {{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}} / {{shortMode}}
 		</div>
 		<div class="absolute top-0 left-0 z-[9] p-3 md:hidden">
 			<NuxtLink to="/">
@@ -22,10 +22,10 @@
 			</button>
 		</div>
 
-		<div class="h-screen max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0" @scroll="shortsScrollRun">
+		<div class="h-screen max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"  @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
 				<div>
-					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX ? true : false"/>
+					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
 				</div>
 			</div>
 		</div>
@@ -65,9 +65,12 @@ const route = useRoute();
 const router = useRouter();
 
 const shortScroll = ref(0);
-const shortItemHeight = ref(0)
+const shortItemHeight = ref(0);
+const shortItemWidth = ref(0);
+
 
 const startFlag = useState('startFlag');
+
 
 //쇼츠 높이 구하기
 let setShortItemHeightTimer = null;
@@ -77,6 +80,8 @@ const setShortItemHeight = ()=>{
 		let shortItems = document.getElementsByClassName('shortItems');
 		if(shortItems.length > 0){
 			shortItemHeight.value = shortItems[0].clientHeight - 30;
+			shortItemWidth.value = shortItems[0].clientWidth;
+
 			clearTimeout(setShortItemHeightTimer);
 		}
 	},200)
@@ -101,7 +106,10 @@ const shortsNext = ()=>{
 
 const shortsScrollRun = (e)=>{
 	shortScroll.value = e.target.scrollTop;
-	SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
+	_.debounce(()=>{
+		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
+	},100)();
+
 }
 
 const shuffle =  (array) =>{
@@ -112,7 +120,6 @@ const shuffle =  (array) =>{
 
 const getShortList = async ()=>{
 
-	console.log('!@!@! getShortList');
 
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
 		params:{

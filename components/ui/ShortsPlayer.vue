@@ -7,17 +7,17 @@
 		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[70vw] xl:max-w-[40vw] md:max-h-[95vh] h-full  " >
 			<div class="md:flex h-full md:gap-4">
 
-				<div class=" md:rounded-xl dark:dark:bg-neutral-800 bg-gray-100 h-full flex-auto shadow-md relative">
+				<div class=" md:rounded-xl dark:dark:bg-neutral-800 bg-gray-100 h-full flex-auto shadow-md relative md:aspect-[9/20] md:aspect-[9/18]">
 					<div class="absolute w-full h-full md:rounded-xl overflow-hidden " v-if="video" :style="{'background':`url(${video.thumb_url}) center / cover`}">
 
 						<div>
 
-								<UiMiniPlayer :playUrl="video.hls_play_url" :poster="video.thumb_url" :aspectRatio="aspectRatio" objectFit="cover" v-if="active" />
+								<UiMiniPlayer :playUrl="video.hls_play_url" :poster="video.thumb_url" aspectRatio="9/20" objectFit="cover" v-if="active" :width="shortItemWidth" :height="shortItemHeight" />
 
 						</div>
 
 
-						<div class="absolute right-5 bottom-[50px] md:hidden z-[99]">
+						<div class="absolute right-5 bottom-[10vh] md:hidden z-[99]">
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 
@@ -52,17 +52,23 @@ const props = defineProps({
 	active: {
 		type: Boolean,
 		default: false
-	}
+	},
+	aspectRatio: {
+		type: String,
+		default: null
+	},
+	shortItemHeight: {
+		type: Number,
+		default: 0
+	},
+	shortItemWidth: {
+		type: Number,
+		default: 0
+	},
 });
 const windowSize = useState('windowSize');
 const {$util} = useNuxtApp();
-const aspectRatio = computed(() => {
-	if(windowSize.value.width < 720) {
-		return $util.getRate(windowSize.value.width, windowSize.value.height, '/');
-	}else{
-		return '9/18';
-	}
-});
+
 
 </script>
 

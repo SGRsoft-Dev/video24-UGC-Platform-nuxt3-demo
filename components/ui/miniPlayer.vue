@@ -42,6 +42,14 @@ const props = defineProps({
 		type: String,
 		default: 'contain'
 	},
+	width: {
+		type: Number,
+		default: 0
+	},
+	height: {
+		type: Number,
+		default: 0
+	},
 })
 
 window.miniPlayer = null;
@@ -64,16 +72,22 @@ const setupVPE = ()=>{
 		startMutedInfoNotVisible:true,
 		aspectRatio:props.aspectRatio,
 		objectFit:props.objectFit,
-		autoPause:true,
+		autoPause:false,
 		repeat:true,
 		descriptionNotVisible:true
 	};
 
 	window.miniPlayer = new ncplayer('vpeMiniPlayer',options);
+
+	window.miniPlayer.on('ready',()=>{
+
+	});
+
 }
 
 onMounted(()=>{
 	setupVPE();
+
 	console.log('miniPlayer mounted')
 })
 
