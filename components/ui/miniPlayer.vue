@@ -2,7 +2,7 @@
 
 <template>
 
-	<div class="w-full h-full bg-black relative text-white duration-200">
+	<div class="w-full h-full bg-black  text-white duration-200">
 
 		<div id="vpeMiniPlayer"></div>
 
@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full z-[9999] bg-neutral-400/30  duration-200 ">
-			<div class="bg-red-600 h-[2px]" :style="{width:`${isPercent}%`}"></div>
+			<div class="bg-red-600 h-[2px] md:h-[3px]" :style="{width:`${isPercent}%`}"></div>
 		</div>
 	</div>
 </template>
