@@ -15,7 +15,7 @@
 						</div>
 
 
-						<div class="absolute right-5 bottom-[120px]">
+						<div class="absolute right-5 bottom-5">
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 

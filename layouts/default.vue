@@ -18,7 +18,7 @@
 
 		<div
 			class="fixed bottom-0 w-full z-20    md:hidden"
-			v-if="!watchMode"
+			v-if="!watchMode && !shortMode"
 			:class="{'bg-neutral-900 border-[#252424] text-white' : shortMode , 'border-t border-[#eeeeee]  bg-white dark:bg-neutral-900 dark:border-[#252424] ' : !shortMode}"
 		>
 			<div class=" pb-safe" style="min-height:80px">
