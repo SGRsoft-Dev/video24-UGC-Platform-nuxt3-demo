@@ -6,7 +6,7 @@
 
 		<div id="vpeMiniPlayer"></div>
 
-		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/30 flex justify-center items-center " v-if="uiStart" @click="playStart" v-show="!isPlay">
+		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart" @click="playStart" v-show="!isPlay">
 			<button class="rounded-[100px] w-[60px] h-[60px]  flex items-center justify-center bg-neutral-900/20"  >
 				<i class="ph-fill ph-play  text-3xl text-white" ></i>
 			</button>
@@ -16,7 +16,7 @@
 			<div class="bg-red-600 h-[2px] md:h-[3px]" :style="{width:`${isPercent}%`}"></div>
 		</div>
 
-		<div class="absolute top-0 left-0 w-full z-[9999]   justify-between hidden md:inline-flex" v-show="isHover && isPlay">
+		<div class="absolute top-0 left-0 w-full z-[9999]   justify-between hidden md:inline-flex" v-show="isHover && isPlay || isMuted">
 			<div class="p-4">
 				<button type="button" @click="togglePlay"><i class="ph-fill text-2xl " :class="{'ph-pause' : isPlay , 'ph-play' : !isPlay}"></i></button>
 			</div>
