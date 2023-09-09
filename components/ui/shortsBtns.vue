@@ -44,7 +44,7 @@
 
 		<div class="space-y-1">
 			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ 'bg-gray-200/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button"  @click="toggleMuted()">
-				<i class="ph-fill  text-xl text-white" :class="{'ph-speaker-simple-slash' : isMuted , 'ph-speaker-high' : !isMuted}"></i>
+				<i class="ph-fill  text-xl " :class="{'ph-speaker-simple-slash' : isMuted , 'ph-speaker-high' : !isMuted}"></i>
 			</button>
 			<div class="text-[12px]">{{isMuted ? '음소거' : '켜짐'}}</div>
 		</div>
