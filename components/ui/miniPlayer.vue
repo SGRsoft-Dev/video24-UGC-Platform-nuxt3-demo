@@ -6,7 +6,7 @@
 
 		<div id="vpeMiniPlayer"></div>
 
-		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/30 flex justify-center items-center   " @click="playStart" v-show="!isPlay">
+		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/30 flex justify-center items-center " v-if="uiStart" @click="playStart" v-show="!isPlay">
 			<button class="rounded-[100px] w-[60px] h-[60px]  flex items-center justify-center bg-neutral-900/20"  >
 				<i class="ph-fill ph-play  text-3xl text-white" ></i>
 			</button>
@@ -67,6 +67,7 @@ window.miniPlayer = null;
 const isMuted = useState('isMuted',()=>false);
 const isPercent = ref(0);
 const isPlay = ref(false);
+const uiStart = ref(false);
 
 if(props.muted){
 	isMuted.value = true;
@@ -96,7 +97,9 @@ const setupVPE = ()=>{
 	window.miniPlayer = new ncplayer('vpeMiniPlayer',options);
 
 	window.miniPlayer.on('ready',()=>{
-
+		setTimeout(()=>{
+			uiStart.value = true;
+		},100);
 	});
 
 	window.miniPlayer.on('play',()=>{

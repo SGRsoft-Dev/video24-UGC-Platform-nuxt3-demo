@@ -78,7 +78,7 @@ const pageChaneInit = (path)=>{
 		shortMode.value = false;
 	}
 
-	if(path.split('/')[1] == 'watch'  ) {
+	if(path.split('/')[1] == 'watch' || path.split('/')[1] == 'shorts' ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;
 
