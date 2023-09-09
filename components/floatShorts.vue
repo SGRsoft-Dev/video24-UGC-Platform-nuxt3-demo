@@ -162,7 +162,7 @@ const setShortsList = ()=>{
 			}
 		}
 
-		shuffle(ShortsList.value);
+		//shuffle(ShortsList.value);
 
 		let find = SHORTS.value.find(v=>v.video_id == route.params.shortsVideoId);
 		ShortsList.value.unshift(find);
