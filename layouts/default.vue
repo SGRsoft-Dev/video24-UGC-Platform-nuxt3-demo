@@ -1,8 +1,10 @@
 <template>
 	<div class=" relative  w-full  dark:bg-neutral-900 " v-if="!loading">
 
-		<div class="mb-[72px] " v-show="!watchMode && !shortMode">
-			<UiGnb/>
+		<div id="gnbBody">
+			<div class="mb-[72px] " v-show="isViewGnb">
+				<UiGnb/>
+			</div>
 		</div>
 
 
@@ -56,7 +58,29 @@ const shortMode = useState('shortMode',()=>false);
 
 const VIDEO = useState('VIDEO');
 
+const isViewGnb = computed(()=>{
+	if(route.path.split('/')[1] == 'shorts') {
+		if(windowSize.value.width > 720) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 
+	if(route.path.split('/')[1] == 'watch') {
+		if(isMobile.value) {
+			return false;
+		}else{
+			if(windowSize.value.width > 720) {
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
+
+	return true;
+})
 
 watch(colorMode,()=>{
 	if(colorMode.value == 'dark'){
@@ -141,8 +165,10 @@ onMounted(()=>{
 
 	if(parser.device.type == 'mobile'){
 		document.body.classList.add('isMobile');
+		document.body.classList.remove('isPc');
 		isMobile.value = true;
 	}else{
+		document.body.classList.add('isPc')
 		document.body.classList.remove('isMobile');
 		isMobile.value = false;
 	}

@@ -1,6 +1,6 @@
 <template>
 
-	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden">
+	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 		<NuxtLink to="/">
 			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
 		</NuxtLink>
@@ -44,6 +44,7 @@
 	#shortsBody:focus{
 		outline: none;
 	}
+
 </style>
 
 <script setup>
@@ -68,6 +69,7 @@ const SHORTS_IDX = useState('SHORTS_IDX');
 const ShortsList = useState('ShortsList');
 const shortsInitLoad = useState('shortsInitLoad');
 const shortMode = useState('shortMode');
+const isMobile = useState('isMobile');
 
 const route = useRoute();
 const router = useRouter();

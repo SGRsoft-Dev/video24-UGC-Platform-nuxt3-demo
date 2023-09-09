@@ -81,7 +81,7 @@ onMounted(()=>{
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
 
-	document.addEventListener('resize',()=>{
+	window.addEventListener('resize',()=>{
 		windowSize.value.width = window.innerWidth;
 		windowSize.value.height = window.innerHeight;
 	});

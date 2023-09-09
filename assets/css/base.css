@@ -104,6 +104,10 @@ body {
 
 }
 
+.isPc{
+    min-width:920px;
+}
+
 .profileThumb{
     object-fit: cover;
 }
