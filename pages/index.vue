@@ -15,9 +15,9 @@
 				<strong class="text-2xl">Reels</strong>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3" >
-				<template v-for="(v , i) in SHORTS">
-					<div  class=" px-0 md:px-3 mb-10 videoItems" v-if="v.height > v.width">
+			<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3 " >
+				<template v-for="(v , i) in SHORTS" >
+					<div  class=" px-0 md:px-3 mb-10 videoItems "  v-if="v.height > v.width">
 						<UiVideoCardShortForm :v="v" />
 					</div>
 				</template>
