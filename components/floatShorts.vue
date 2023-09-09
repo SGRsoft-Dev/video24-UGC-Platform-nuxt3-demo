@@ -4,6 +4,14 @@
 		<NuxtLink to="/">
 			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
 		</NuxtLink>
+
+		<div v-if="isMuted" class="mt-3">
+			<button class="rounded-full  px-3 h-[30px] dark:bg-neutral-800/20 bg-gray-200/20 flex items-center justify-center"  type="button">
+				<i class="ph ph-speaker-simple-slash text-xl mr-2"></i>
+				<span class="text-[12px]">화면을 터치해서 음소거 해제</span>
+			</button>
+		</div>
+
 	</div>
 
 	<div class="fixed top-[80px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
@@ -19,7 +27,7 @@
 	</div>
 
 
-	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}">
+	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  @click="toggleMuted">
 
 		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
@@ -68,9 +76,13 @@ const shortScroll = ref(0);
 const shortItemHeight = ref(0);
 const shortItemWidth = ref(0);
 
-
+const isMuted = useState('isMuted');
 const startFlag = useState('startFlag');
-
+const toggleMuted = ()=>{
+	if(isMuted.value) {
+		window.miniPlayer.mute();
+	}
+}
 
 //쇼츠 높이 구하기
 let setShortItemHeightTimer = null;

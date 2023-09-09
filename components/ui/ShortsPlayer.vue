@@ -30,6 +30,7 @@
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
 							<div>
+
 								<div class="p-3  text-sm">
 									{{$util.titleMake(video.title)}}
 								</div>
@@ -99,9 +100,13 @@ const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const windowSize = useState('windowSize');
 const UUID = useState('UUID');
 const {$util} = useNuxtApp();
+const isMuted = useState('isMuted');
 
-
-
+const toggleMuted = ()=>{
+	if(isMuted.value) {
+		window.miniPlayer.mute();
+	}
+}
 
 /**
  * VOD 조회수 업데이트

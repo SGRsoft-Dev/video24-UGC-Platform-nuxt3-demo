@@ -135,6 +135,11 @@ const setupVPE = ()=>{
 	window.miniPlayer.on('timeupdate',(res)=>{
 		isPercent.value = res.percent;
 		isPlay.value = true;
+		if(document.getElementsByTagName('video')[0].muted){
+			isMuted.value = true;
+		}else{
+			isMuted.value = false;
+		}
 	})
 	window.miniPlayer.on('volumechange',()=>{
 

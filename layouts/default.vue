@@ -34,12 +34,7 @@
 
 	</div>
 
-
-
 	<FloatPlayer  :class="{' floatPlayerBody':floatPlayer}" v-if="!route.params.shortsVideoId"/>
-
-
-
 
 </template>
 
@@ -72,8 +67,6 @@ watch(colorMode,()=>{
 })
 
 const pageChaneInit = (path)=>{
-
-
 	if(path.split('/')[1] == 'shorts' ){
 		shortMode.value = true;
 		if(isMobile.value){
