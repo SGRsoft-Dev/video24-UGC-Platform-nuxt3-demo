@@ -5,10 +5,10 @@
 			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
 		</NuxtLink>
 
-		<div v-if="isMuted" class="mt-3">
+		<div v-if="isMuted" class="mt-3" @click="toggleMuted">
 			<button class="rounded-full  px-3 h-[30px] dark:bg-neutral-800/20 bg-gray-200/20 flex items-center justify-center"  type="button">
 				<i class="ph ph-speaker-simple-slash text-xl mr-2"></i>
-				<span class="text-[12px]">화면을 터치해서 음소거 해제</span>
+				<span class="text-[12px]">터치해서 음소거 해제</span>
 			</button>
 		</div>
 
@@ -27,7 +27,7 @@
 	</div>
 
 
-	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  @click="toggleMuted">
+	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
 		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
