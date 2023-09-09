@@ -78,17 +78,19 @@ const pageChaneInit = (path)=>{
 		shortMode.value = false;
 	}
 
-	if(path.split('/')[1] == 'watch' || path.split('/')[1] == 'shorts' ) {
+	if(path.split('/')[1] == 'watch' ) {
 		leftMenuOpen.value = false;
 		watchMode.value = true;
+	}else{
+		leftMenuOpen.value = true;
+		watchMode.value = false;
+	}
 
+	if(path.split('/')[1] == 'watch' || path.split('/')[1] == 'shorts' ) {
 		document.getElementById('__nuxt').classList.add('no-pull-mode');
 		document.body.classList.add('no-scroll');
 		document.getElementsByTagName('html')[0].classList.add('no-scroll');
 	}else{
-		leftMenuOpen.value = true;
-		watchMode.value = false;
-
 		document.getElementById('__nuxt').classList.remove('no-pull-mode');
 		document.body.classList.remove('no-scroll');
 		document.getElementsByTagName('html')[0].classList.remove('no-scroll');
