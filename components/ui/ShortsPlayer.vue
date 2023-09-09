@@ -12,7 +12,7 @@
 
 						<div>
 
-								<UiMiniPlayer :playUrl="video.hls_play_url" :poster="video.thumb_url" aspectRatio="9/20" objectFit="cover" v-if="active" :width="shortItemWidth" :height="shortItemHeight" />
+							<UiMiniPlayer :playUrl="video.hls_play_url" :poster="video.thumb_url" aspectRatio="9/20" objectFit="cover" v-if="active" :width="shortItemWidth" :height="shortItemHeight" />
 
 						</div>
 
@@ -73,6 +73,8 @@ const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const windowSize = useState('windowSize');
 const UUID = useState('UUID');
 const {$util} = useNuxtApp();
+
+
 
 
 /**

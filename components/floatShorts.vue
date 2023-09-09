@@ -108,7 +108,7 @@ const shortsScrollRun = (e)=>{
 	shortScroll.value = e.target.scrollTop;
 	_.debounce(()=>{
 		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-	},100)();
+	},500)();
 
 }
 

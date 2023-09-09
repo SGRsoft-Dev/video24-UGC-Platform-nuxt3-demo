@@ -69,7 +69,7 @@ const setupVPE = ()=>{
 		muted:props.muted ? true : false,
 		controls:false,
 		progressBarColor:"#ff0000",
-		startMutedInfoNotVisible:true,
+		startMutedInfoNotVisible:false,
 		aspectRatio:props.aspectRatio,
 		objectFit:props.objectFit,
 		autoPause:false,
