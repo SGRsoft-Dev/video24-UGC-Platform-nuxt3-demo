@@ -4,20 +4,50 @@
 
 
 
-		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[70vw] xl:max-w-[40vw] md:max-h-[95vh] h-full  " >
+		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[70vw] xl:max-w-[40vw] md:max-h-[95vh] h-full pb-safe pt-safe  " >
 			<div class="md:flex h-full md:gap-4">
 
 				<div class=" md:rounded-xl dark:dark:bg-neutral-800 bg-gray-100 h-full flex-auto shadow-md relative md:aspect-[9/20] md:aspect-[9/18]">
 					<div class="absolute w-full h-full md:rounded-xl overflow-hidden " v-if="video" :style="{'background':`url(${video.thumb_url}) center / cover`}">
 
+						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
+
 						<div>
 
-							<UiMiniPlayer :playUrl="video.hls_play_url" :poster="video.thumb_url" aspectRatio="9/20" objectFit="cover" v-if="active" :width="shortItemWidth" :height="shortItemHeight" />
+							<UiMiniPlayer
+								:playUrl="video.hls_play_url"
+								:poster="video.thumb_url"
+								aspectRatio="9/20"
+								objectFit="cover"
+								:width="shortItemWidth"
+								:height="shortItemHeight"
+								muted="true"
+								v-if="active"
+							/>
 
 						</div>
 
 
-						<div class="absolute right-5 bottom-[10vh] md:hidden z-[99]">
+						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
+							<div>
+								<div class="p-3  text-sm">
+									{{$util.titleMake(video.title)}}
+								</div>
+								<div class="flex items-center ">
+									<div class="pr-3 pl-2 w-18 ">
+
+										<UAvatar :src="video.channel_profile_image_url" v-if="video.channel_profile_image_url" size="sm" :alt="video.channel_name" class="profileThumb" />
+										<UAvatar src="/image/non-profile.png" v-else  :alt="video.channel_name" class="profileThumb object-contain" size="sm"/>
+
+									</div>
+									<div>
+										<div>{{ video.channel_name }}</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="absolute right-[15px] bottom-[10vh] md:hidden z-[999999]">
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 
@@ -26,11 +56,7 @@
 				</div>
 
 				<div class="h-full min-w-[30px] hidden md:inline">
-
-
-						<UiShortsBtns :video="video"/>
-
-
+					<UiShortsBtns :video="video"/>
 				</div>
 			</div>
 		</div>
@@ -123,6 +149,11 @@ onMounted(()=>{
 }
 .fade-enter, .fade-leave-active {
 	opacity: 0;
+}
+
+.bg-gra-v{
+	background: rgb(0,0,0);
+	background: linear-gradient(180deg, rgba(0,0,0,0.3435968137254902) 0%, rgba(0,0,0,0) 9%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.24555759803921573) 69%, rgba(0,0,0,0.5424763655462185) 100%);
 }
 
 </style>

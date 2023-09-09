@@ -1,9 +1,7 @@
 <template>
 
 	<div class="relative">
-		<div class="absolute top-0 right-0 z-[10]">
-			 {{shortItemWidth}} / {{shortItemHeight}} / {{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}} / {{shortMode}}
-		</div>
+
 		<div class="absolute top-0 left-0 z-[99999] p-3 md:hidden">
 			<NuxtLink to="/">
 				<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
