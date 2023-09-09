@@ -1,7 +1,7 @@
 <template>
 	<div class=" relative  w-full  dark:bg-neutral-900 " v-if="!loading">
 
-		<div class="mb-[72px] " v-show="windowSize.width > 640 || !watchMode">
+		<div class="mb-[72px] " v-show="windowSize.width > 640 || (!watchMode && !shortMode)">
 			<UiGnb/>
 		</div>
 
@@ -16,7 +16,11 @@
 		</div>
 
 
-		<div class="fixed bottom-0 w-full z-20   border-t border-[#eeeeee] dark:border-[#252424] bg-white dark:bg-neutral-900  md:hidden" v-if="!watchMode">
+		<div
+			class="fixed bottom-0 w-full z-20    md:hidden"
+			v-if="!watchMode"
+			:class="{'bg-neutral-900 border-[#252424] text-white' : shortMode , 'border-t border-[#eeeeee]  bg-white dark:bg-neutral-900 dark:border-[#252424] ' : !shortMode}"
+		>
 			<div class=" pb-safe" style="min-height:80px">
 				<div class="pt-2 ">
 					<UiBottom />
@@ -52,6 +56,7 @@ const lastRouterPath = useState('lastRouterPath',()=>null);
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
 const loading = ref(true)
+const shortMode = useState('shortMode',()=>false);
 
 const VIDEO = useState('VIDEO');
 
@@ -66,6 +71,12 @@ watch(colorMode,()=>{
 
 const pageChaneInit = (path)=>{
 
+
+	if(path.split('/')[1] == 'shorts' ){
+		shortMode.value = true;
+	}else{
+		shortMode.value = false;
+	}
 
 	if(path.split('/')[1] == 'watch'  ) {
 		leftMenuOpen.value = false;
@@ -85,6 +96,12 @@ const pageChaneInit = (path)=>{
 }
 
 watch(()=>route.path,(path , oldPath)=>{
+
+	if(path.split('/')[1] == 'shorts' ){
+		shortMode.value = true;
+	}else{
+		shortMode.value = false;
+	}
 
 	if(oldPath.split('/')[1] == 'watch'  ) {
 		lastRouterPath.value = null;

@@ -2,7 +2,7 @@
 
 	<div class="relative">
 		<div class="absolute top-0 left-0">
-			{{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}}
+			{{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}} / {{shortMode}}
 		</div>
 
 		<div class="absolute top-0 right-0 p-4" v-if="shortScroll > 0">
@@ -17,7 +17,7 @@
 			</button>
 		</div>
 
-		<div class="h-screen max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto" id="shortsBody" @scroll="shortsScrollRun">
+		<div class="h-screen md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto" id="shortsBody" tabindex="0" @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
 				<div>
 					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" />
@@ -29,7 +29,9 @@
 </template>
 
 <style scoped>
-
+	#shortsBody:focus{
+		outline: none;
+	}
 </style>
 
 <script setup>
@@ -52,6 +54,7 @@ const SHORTS_VIDEO = useState('SHORTS_VIDEO');
 const SHORTS_IDX = useState('SHORTS_IDX');
 const ShortsList = useState('ShortsList',()=>[]);
 const shortsInitLoad = useState('shortsInitLoad');
+const shortMode = useState('shortMode');
 
 const route = useRoute();
 const router = useRouter();
@@ -189,7 +192,10 @@ onMounted(async ()=>{
 
 		setShortsList();
 		startFlag.value = true;
+
 	}
+
+	document.getElementById("shortsBody").focus()
 })
 onUnmounted(()=>{
 	//ShortsList.value = [];

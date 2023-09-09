@@ -2,12 +2,12 @@
   <div class="flex items-center h-full ">
 	  <div v-for="( m , i) in leftMenu" class="flex-1">
 		  <div v-for="(mm , ii) in m.subs">
-			 <NuxtLink :to="mm.to">
+			 <NuxtLink :to="mm.to" :class="{'router-link-active' : route.path == mm.to || (route.path.indexOf('/' + mm.to.split('/')[1]) > -1 && mm.to.split('/')[1] !='') }">
 				 <div class="flex justify-center items-center">
 					 <div class="text-center">
 						 <div :class="{'dark' : isDark , 'light' : !isDark}">
 							 <i
-								 :class=" route.path == mm.to ? 'ph-fill '+mm.icon : 'ph '+mm.icon"
+								 :class=" route.path == mm.to  || (route.path.indexOf('/' + mm.to.split('/')[1]) > -1 && mm.to.split('/')[1] !='')  ? 'ph-fill '+mm.icon : 'ph '+mm.icon"
 								 class="self-center text-2xl "
 							 />
 						 </div>
@@ -25,6 +25,7 @@
 <script setup>
 
 const colorMode = useColorMode();
+
 const isDark = computed({
 	get () {
 		return colorMode.value === 'dark'
@@ -45,10 +46,12 @@ leftMenu.value = menus.value;
 </script>
 
 <style scoped>
+.router-link-active  .light ,
 .router-link-exact-active  .light {
 	color: #ff4b5f;
 }
 
+.router-link-active  .dark ,
 .router-link-exact-active  .dark {
 	color: #fa132c;
 }

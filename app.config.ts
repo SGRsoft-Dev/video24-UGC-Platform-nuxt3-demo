@@ -57,7 +57,15 @@ export default defineAppConfig({
                 },
             ],
         },
-
+        {
+            subs: [
+                {
+                    title: 'Shorts',
+                    icon: ' ph-film-script',
+                    to: '/shorts',
+                }
+            ],
+        },
         {
             subs: [
                 {
