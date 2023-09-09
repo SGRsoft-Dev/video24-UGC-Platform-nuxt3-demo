@@ -40,6 +40,7 @@
 <script setup>
 import axios from "axios";
 import _ from "lodash";
+import {useAsyncData} from "#app";
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
@@ -55,7 +56,7 @@ const {$util} = useNuxtApp();
 const SHORTS = useState('SHORTS');
 const SHORTS_VIDEO = useState('SHORTS_VIDEO');
 const SHORTS_IDX = useState('SHORTS_IDX');
-const ShortsList = useState('ShortsList',()=>[]);
+const ShortsList = useState('ShortsList');
 const shortsInitLoad = useState('shortsInitLoad');
 const shortMode = useState('shortMode');
 
@@ -104,16 +105,42 @@ const shortsNext = ()=>{
 
 const shortsScrollRun = (e)=>{
 	shortScroll.value = e.target.scrollTop;
+	setIdx();
+
+}
+
+const setIdx = ()=>{
 	_.debounce(()=>{
 		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-	},100)();
+	},300)();
+}
+
+const chageShortsVideo = (video_id)=>{
+	try{
+		_.debounce(()=>{
+			router.replace('/shorts/'+video_id);
+		},1000)()
+	}catch (e) {
+
+	}
 
 }
 
-const shuffle =  (array) =>{
-	array.sort(() => Math.random() - 0.5);
-}
+watch(()=>SHORTS_IDX.value , (to , from)=>{
+	setShortItemHeight();
+	if(to != from) {
+		try {
+			chageShortsVideo(ShortsList.value[to].video_id);
+		}catch (e) {
 
+		}
+	}
+})
+
+
+/*watch(()=>route.params , (to,from)=>{
+	console.log(to,from)
+})*/
 
 
 const getShortList = async ()=>{
@@ -148,8 +175,14 @@ const getShortList = async ()=>{
 }
 
 
+const shuffle =  (array) =>{
+	array.sort(() => Math.random() - 0.5);
+}
+
+
 const setShortsList = ()=>{
 
+	ShortsList.value = [];
 
 	if(route.params.shortsVideoId){
 
@@ -172,47 +205,27 @@ const setShortsList = ()=>{
 		}
 	}
 
-	setShortItemHeight();
+
+
+
 
 }
 
 
-const chageShortsVideo = (video_id)=>{
-	try{
-		_.debounce(()=>{
-			router.replace('/shorts/'+video_id);
-		},1000)()
-	}catch (e) {
 
-	}
-
-}
-
-watch(()=>SHORTS_IDX.value , (to , from)=>{
-	setShortItemHeight();
-	if(to != from) {
-		try {
-			chageShortsVideo(ShortsList.value[to].video_id);
-		}catch (e) {
-
-		}
-	}
-})
+useAsyncData(async ()=>{
+	SHORTS_IDX.value = 0;
+	await getShortList();
+	setShortsList();
+});
 
 
-/*watch(()=>route.params , (to,from)=>{
-	console.log(to,from)
-})*/
 
 
 onMounted(async ()=>{
-	if(ShortsList.value.length==0) {
-		await getShortList();
+	setShortItemHeight();
+	startFlag.value = true;
 
-		setShortsList();
-		startFlag.value = true;
-
-	}
 
 	document.getElementById("shortsBody").focus()
 })

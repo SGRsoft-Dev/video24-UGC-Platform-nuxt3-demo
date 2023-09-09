@@ -4,10 +4,10 @@
 
 
 
-		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[70vw] xl:max-w-[40vw] md:max-h-[95vh] h-full pb-safe pt-safe  " >
+		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[60vw] xl:max-w-[60vw] md:max-h-[95vh] h-full pb-safe pt-safe  " >
 			<div class="md:flex h-full md:gap-4">
 
-				<div class=" md:rounded-xl dark:dark:bg-neutral-800 bg-gray-100 h-full flex-auto shadow-md relative md:aspect-[9/20] md:aspect-[9/18]">
+				<div class=" md:rounded-xl dark:dark:bg-neutral-800 bg-gray-100 h-full flex-auto shadow-md relative md:aspect-[9/20]" >
 					<div class="absolute w-full h-full md:rounded-xl overflow-hidden " v-if="video" :style="{'background':`url(${video.thumb_url}) center / cover`}">
 
 						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
@@ -21,8 +21,8 @@
 								objectFit="cover"
 								:width="shortItemWidth"
 								:height="shortItemHeight"
-								muted="true"
 								v-if="active"
+
 							/>
 
 						</div>
@@ -144,12 +144,7 @@ onMounted(()=>{
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-	transition: opacity .2s;
-}
-.fade-enter, .fade-leave-active {
-	opacity: 0;
-}
+
 
 .bg-gra-v{
 	background: rgb(0,0,0);

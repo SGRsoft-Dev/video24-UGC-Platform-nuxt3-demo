@@ -2,9 +2,10 @@
 
 <template>
 
-	<div class="w-full h-full bg-black  text-white duration-200" @mouseover="isHover = true" @mouseout="isHover = false">
-
-		<div id="vpeMiniPlayer"></div>
+	<div class="w-full h-full bg-black  text-white  duration-200" :style="{'background':`url(${props.poster}) center / cover`}" @mouseover="isHover = true" @mouseout="isHover = false">
+		<Transition name="fade">
+			<div id="vpeMiniPlayer" v-show="uiStart"></div>
+		</Transition>
 
 		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart" @click="playStart" v-show="!isPlay">
 			<button class="rounded-[100px] w-[60px] h-[60px]  flex items-center justify-center bg-neutral-900/20"  >
@@ -28,14 +29,21 @@
 </template>
 
 <style scoped>
-	#vpeMiniPlayer{
-
+	#vpeMiniPlayer .ncp_player_root{
+		width: 100% !important;
+		height: 100% !important;
 	}
 	#vpeMiniPlayer video {
 		width: 100% !important;
 		height: 100% !important;
 		aspect-ratio: unset !important;
 		object-fit: cover !important;
+	}
+	.fade-enter-active, .fade-leave-active {
+		transition: opacity .5s;
+	}
+	.fade-enter, .fade-leave-active {
+		opacity: 0;
 	}
 </style>
 
@@ -92,7 +100,7 @@ const setupVPE = ()=>{
 				"poster":props.poster,
 			}
 		],
-		autostart:true,
+		autostart:false,
 		muted:props.muted ? true : false,
 		controls:false,
 		progressBarColor:"#ff0000",
@@ -109,7 +117,10 @@ const setupVPE = ()=>{
 	window.miniPlayer.on('ready',()=>{
 		setTimeout(()=>{
 			uiStart.value = true;
-		},100);
+		},800);
+		setTimeout(()=>{
+			playStart();
+		},700);
 	});
 
 	window.miniPlayer.on('play',()=>{
