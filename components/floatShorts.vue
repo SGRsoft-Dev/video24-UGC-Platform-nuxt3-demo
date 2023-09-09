@@ -1,24 +1,25 @@
 <template>
 
-	<div class="relative h-screen " :style="{height:`${windowSize.height - 0}px`}">
+	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden">
+		<NuxtLink to="/">
+			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
+		</NuxtLink>
+	</div>
 
-		<div class="absolute top-0 left-0 z-[99999] p-3 md:hidden">
-			<NuxtLink to="/">
-				<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
-			</NuxtLink>
-		</div>
+	<div class="fixed top-[80px] right-0 z-[99999] p-4 " v-if="shortScroll > 0">
+		<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsPrev">
+			<i class="ph ph-arrow-up"></i>
+		</button>
+	</div>
 
-		<div class="absolute top-0 right-0 p-4" v-if="shortScroll > 0">
-			<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsPrev">
-				<i class="ph ph-arrow-up"></i>
-			</button>
-		</div>
+	<div class="fixed bottom-0 right-0 p-4 z-[99999] ">
+		<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsNext">
+			<i class="ph ph-arrow-down"></i>
+		</button>
+	</div>
 
-		<div class="absolute bottom-0 right-0 p-4 ">
-			<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsNext">
-				<i class="ph ph-arrow-down"></i>
-			</button>
-		</div>
+
+	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}">
 
 		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
