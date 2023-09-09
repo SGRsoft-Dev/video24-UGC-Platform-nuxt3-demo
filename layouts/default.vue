@@ -1,7 +1,7 @@
 <template>
 	<div class=" relative  w-full  dark:bg-neutral-900 " v-if="!loading">
 
-		<div class="mb-[72px] " v-show="windowSize.width > 720 || (!watchMode && !shortMode)">
+		<div class="mb-[72px] " v-show="!watchMode && !shortMode">
 			<UiGnb/>
 		</div>
 
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-
+import ua from "ua-parser-js";
 const leftMenuOpen = useState('leftMenuOpen',()=>true);
 const watchMode = useState('watchMode',()=>false);
 const floatPlayer = useState('floatPlayer');
@@ -53,12 +53,14 @@ const route = useRoute();
 const router = useRouter();
 const lastRouterPath = useState('lastRouterPath',()=>null);
 
+const isMobile = useState('isMobile');
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
 const loading = ref(true)
 const shortMode = useState('shortMode',()=>false);
 
 const VIDEO = useState('VIDEO');
+
 
 
 watch(colorMode,()=>{
@@ -74,8 +76,14 @@ const pageChaneInit = (path)=>{
 
 	if(path.split('/')[1] == 'shorts' ){
 		shortMode.value = true;
+		if(isMobile.value){
+			document.body.classList.add('bg-neutral-900')
+		}
 	}else{
 		shortMode.value = false;
+		if(isMobile.value){
+			document.body.classList.remove('bg-neutral-900')
+		}
 	}
 
 	if(path.split('/')[1] == 'watch' ) {
@@ -96,6 +104,16 @@ const pageChaneInit = (path)=>{
 		document.getElementsByTagName('html')[0].classList.remove('no-scroll');
 	}
 }
+
+watch(()=>route.params,(to,from)=>{
+	if(!to.shortsVideoId){
+		try {
+			window.miniPlayer.destroy();
+		}catch (e) {
+
+		}
+	}
+})
 
 watch(()=>route.path,(path , oldPath)=>{
 
@@ -125,6 +143,16 @@ onMounted(()=>{
 
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
+
+	let parser = ua(window.navigator.userAgent);
+
+	if(parser.device.type == 'mobile'){
+		document.body.classList.add('isMobile');
+		isMobile.value = true;
+	}else{
+		document.body.classList.remove('isMobile');
+		isMobile.value = false;
+	}
 
 
 	pageChaneInit(route.path);

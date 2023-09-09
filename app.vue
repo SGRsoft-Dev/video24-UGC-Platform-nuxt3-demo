@@ -39,6 +39,7 @@ const windowSize = useState('windowSize',()=> {
 
 const scrollY = ref(0)
 const scrollState = useState('scrollState',()=>'up');
+const isMobile = useState('isMobile',()=>false);
 
 watch(fullMode,(v)=>{
 	if(v){

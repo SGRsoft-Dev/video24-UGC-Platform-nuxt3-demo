@@ -6,13 +6,13 @@
 		</NuxtLink>
 	</div>
 
-	<div class="fixed top-[80px] right-0 z-[99999] p-4 " v-if="shortScroll > 0">
+	<div class="fixed top-[80px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
 		<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsPrev">
 			<i class="ph ph-arrow-up"></i>
 		</button>
 	</div>
 
-	<div class="fixed bottom-0 right-0 p-4 z-[99999] ">
+	<div class="fixed bottom-0 right-0 p-4 z-[99999] hidden md:inline">
 		<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsNext">
 			<i class="ph ph-arrow-down"></i>
 		</button>

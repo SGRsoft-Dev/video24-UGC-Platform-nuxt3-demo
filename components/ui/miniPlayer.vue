@@ -7,7 +7,7 @@
 			<div id="vpeMiniPlayer" v-show="uiStart"></div>
 		</Transition>
 
-		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart" @click="playStart" v-show="!isPlay">
+		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart && isInitPlay" @click="playStart" v-show="!isPlay">
 			<button class="rounded-[100px] w-[60px] h-[60px]  flex items-center justify-center bg-neutral-900/20"  >
 				<i class="ph-fill ph-play  text-3xl text-white" ></i>
 			</button>
@@ -84,6 +84,7 @@ window.miniPlayer = null;
 const isMuted = useState('isMuted',()=>false);
 const isPercent = ref(0);
 const isPlay = ref(false);
+const isInitPlay = ref(false);
 const uiStart = ref(false);
 const isHover = ref(false);
 
@@ -100,7 +101,7 @@ const setupVPE = ()=>{
 				"poster":props.poster,
 			}
 		],
-		autostart:false,
+		autostart:true,
 		muted:props.muted ? true : false,
 		controls:false,
 		progressBarColor:"#ff0000",
@@ -125,6 +126,7 @@ const setupVPE = ()=>{
 
 	window.miniPlayer.on('play',()=>{
 		isPlay.value = true;
+		isInitPlay.value = true;
 	});
 	window.miniPlayer.on('pause',()=>{
 		isPlay.value = false;
