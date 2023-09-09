@@ -4,7 +4,7 @@
 		<div class="absolute top-0 right-0 z-[10]">
 			{{startFlag}} / {{shortScroll}} / {{shortItemHeight}} / {{SHORTS_IDX}} / {{shortMode}}
 		</div>
-		<div class="absolute top-0 left-0 z-[9] p-3">
+		<div class="absolute top-0 left-0 z-[9] p-3 md:hidden">
 			<NuxtLink to="/">
 				<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
 			</NuxtLink>
@@ -16,16 +16,16 @@
 			</button>
 		</div>
 
-		<div class="absolute bottom-0 right-0 p-4">
+		<div class="absolute bottom-0 right-0 p-4 ">
 			<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsNext">
 				<i class="ph ph-arrow-down"></i>
 			</button>
 		</div>
 
-		<div class="h-screen md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto" id="shortsBody" tabindex="0" @scroll="shortsScrollRun">
+		<div class="h-screen max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0" @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
 				<div>
-					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" />
+					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX ? true : false"/>
 				</div>
 			</div>
 		</div>
@@ -71,11 +71,6 @@ const startFlag = useState('startFlag');
 
 //쇼츠 높이 구하기
 let setShortItemHeightTimer = null;
-
-
-
-
-
 const setShortItemHeight = ()=>{
 	clearTimeout(setShortItemHeightTimer);
 	setShortItemHeightTimer = setInterval(()=>{

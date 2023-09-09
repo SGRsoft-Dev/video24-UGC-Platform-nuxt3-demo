@@ -1,7 +1,7 @@
 <template>
 	<div class=" relative  w-full  dark:bg-neutral-900 " v-if="!loading">
 
-		<div class="mb-[72px] " v-show="windowSize.width > 640 || (!watchMode && !shortMode)">
+		<div class="mb-[72px] " v-show="windowSize.width > 720 || (!watchMode && !shortMode)">
 			<UiGnb/>
 		</div>
 
