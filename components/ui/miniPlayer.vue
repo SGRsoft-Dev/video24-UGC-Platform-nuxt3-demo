@@ -93,7 +93,11 @@ if(props.muted){
 }
 
 const setupVPE = ()=>{
+	try{
+		window.miniPlayer.destroy();
+	}catch (e) {
 
+	}
 	let options = {
 		playlist:[
 			{
