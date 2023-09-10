@@ -33,7 +33,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="absolute right-[15px] min-[720px]:right-[-50px] bottom-[15px] min-[980px]:hidden  z-[999999]">
+						<div class="absolute right-[15px] min-[720px]:right-[-55px] bottom-[15px] min-[980px]:hidden  z-[999999]">
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 
