@@ -8,7 +8,7 @@
 				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20]" >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
-						<div class="bg-gra-v w-full h-full absolute z-[99]" @click="playStart"></div>
+						<div class="bg-gra-v w-full h-full absolute z-[99]"  @click="playStart"></div>
 						<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
@@ -158,7 +158,7 @@ onMounted(()=>{
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .1s;
+	transition: opacity .3s;
 }
 .fade-enter, .fade-leave-active {
 	opacity: 0;
@@ -167,6 +167,7 @@ onMounted(()=>{
 .bg-gra-v{
 	background: rgb(0,0,0);
 	background: linear-gradient(180deg, rgba(0,0,0,0.3435968137254902) 0%, rgba(0,0,0,0) 9%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.24555759803921573) 69%, rgba(0,0,0,0.5424763655462185) 100%);
+	height:calc(100% - 4px) !important;
 }
 
 </style>
