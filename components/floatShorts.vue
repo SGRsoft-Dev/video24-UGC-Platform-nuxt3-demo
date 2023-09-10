@@ -228,9 +228,7 @@ const shuffle =  (array) =>{
 
 
 const setShortsList = (fix)=>{
-
-
-
+	console.log('!!setShortsList')
 	if(route.params.shortsVideoId) {
 
 		if(fix) {
@@ -245,7 +243,6 @@ const setShortsList = (fix)=>{
 			}
 			//shuffle(ShortsList.value);
 		}
-
 
 	}else{
 		for (let i = 0; SHORTS.value.length > i; i++) {
@@ -285,13 +282,17 @@ useAsyncData(async ()=>{
 });
 
 
-
-
-
 onMounted(async ()=>{
 	setShortItemHeight();
 	startFlag.value = true;
 
+	document.getElementById('__nuxt').classList.add('no-pull-mode');
+	document.body.classList.add('no-scroll');
+	document.getElementsByTagName('html')[0].classList.add('no-scroll');
+
+	if(isMobile.value){
+		document.body.classList.add('bg-neutral-900')
+	}
 
 	document.getElementById("shortsBody").focus()
 
