@@ -9,7 +9,9 @@
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
 						<div class="bg-gra-v w-full h-full absolute z-[99]"  @click="playStart"></div>
-						<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
+						<Transition name="fade">
+							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
+						</Transition>
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
 							<div>
