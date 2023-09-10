@@ -169,7 +169,7 @@ onMounted(()=>{
 .bg-gra-v{
 	background: rgb(0,0,0);
 	background: linear-gradient(180deg, rgba(0,0,0,0.3435968137254902) 0%, rgba(0,0,0,0) 9%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.24555759803921573) 69%, rgba(0,0,0,0.5424763655462185) 100%);
-	height:calc(100% - 4px) !important;
+	height:calc(100% - 3px) !important;
 }
 
 </style>
