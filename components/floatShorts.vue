@@ -1,5 +1,9 @@
 <template>
 
+	<div class="fixed top-0 right-0 z-[99999] debug-info">
+		debug-info :{{IDX}} / {{ShortsList.length}}
+	</div>
+
 	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 		<NuxtLink to="/">
 			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
@@ -29,13 +33,14 @@
 
 	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
-		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
+		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"  @scrollend="shortsScrollEnd"  @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
 				<div>
 					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 </template>
@@ -70,11 +75,13 @@ const ShortsList = useState('ShortsList');
 const shortsInitLoad = useState('shortsInitLoad');
 const shortMode = useState('shortMode');
 const isMobile = useState('isMobile');
+const IDX = ref(0);
 
 const route = useRoute();
 const router = useRouter();
 
 const shortScroll = ref(0);
+const shortScrollStart = ref(false);
 const shortItemHeight = ref(0);
 const shortItemWidth = ref(0);
 
@@ -108,6 +115,7 @@ const shortsPrev = ()=>{
 		behavior:'smooth'
 	});
 	SHORTS_IDX.value = SHORTS_IDX.value - 1;
+	IDX.value = getCurrentVisibleElementIndex()
 }
 
 const shortsNext = ()=>{
@@ -116,32 +124,56 @@ const shortsNext = ()=>{
 		behavior:'smooth'
 	});
 	SHORTS_IDX.value = SHORTS_IDX.value + 1;
+	IDX.value = getCurrentVisibleElementIndex()
 }
 
 const shortsScrollRun = (e)=>{
+	shortScrollStart.value = true;
+}
+
+const shortsScrollEnd = (e)=>{
+	try{
+		window.miniPlayer.destroy();
+	}catch (e) {
+
+	}
 	shortScroll.value = e.target.scrollTop;
+	shortScrollStart.value = false;
 	setIdx();
 
 }
 
 const setIdx = ()=>{
 	_.debounce(()=>{
-		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-	},300)();
+		//SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
+		SHORTS_IDX.value = getCurrentVisibleElementIndex();
+
+		setShortItemHeight();
+
+		IDX.value = getCurrentVisibleElementIndex()
+		router.replace('/shorts/'+ShortsList.value[SHORTS_IDX.value].video_id);
+
+	},100)();
 }
 
-const chageShortsVideo = (video_id)=>{
-	try{
-		_.debounce(()=>{
-			router.replace('/shorts/'+video_id);
-		},1000)()
-	}catch (e) {
+const getCurrentVisibleElementIndex = () => {
+	const elements = document.querySelectorAll('.shortsBody .shortItems'); // 스크롤 가능한 컨테이너와 그 안에 있는 요소들을 선택해야 합니다.
 
+	for (let i = 0; i < elements.length; i++) {
+		const element = elements[i];
+		const rect = element.getBoundingClientRect();
+
+		// 요소가 현재 화면에 보이는지 확인
+		if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+			return i; // 현재 화면에 보이면 해당 요소의 인덱스를 반환
+		}
 	}
 
+	return -1; // 현재 화면에 보이는 요소가 없을 경우 -1 반환
 }
 
-watch(()=>SHORTS_IDX.value , (to , from)=>{
+
+/*watch(()=>SHORTS_IDX.value , (to , from)=>{
 	setShortItemHeight();
 	if(to != from) {
 		try {
@@ -150,7 +182,7 @@ watch(()=>SHORTS_IDX.value , (to , from)=>{
 
 		}
 	}
-})
+})*/
 
 
 /*watch(()=>route.params , (to,from)=>{
@@ -160,7 +192,7 @@ watch(()=>SHORTS_IDX.value , (to , from)=>{
 
 const getShortList = async ()=>{
 
-
+	SHORTS.value = [];
 	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
 		params:{
 			type:'vod',
