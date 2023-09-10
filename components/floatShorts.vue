@@ -1,6 +1,8 @@
 <template>
 
-
+	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
+		{{SHORTS_IDX}} / {{ShortsList.length}}
+	</div>
 	<div v-if="!loading">
 		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 			<a href="/">
@@ -34,16 +36,13 @@
 			<div class="absolute top-0 left-0 z-[3] w-full h-full">
 				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
-						<UiMobileShortsPlayer v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i && IDX==i" />
+						<UiMobileShortsPlayer v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
 						<UiShortsPlayer v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
 					</div>
 				</div>
 			</div>
 
 			<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute top-0 left-0 z-[2]">
-
-
-
 				<UiMobileMiniPlayer
 					:playlist="ShortPlayList"
 					aspectRatio="9/20"
@@ -151,7 +150,11 @@ const shortsNext = ()=>{
 }
 
 const shortsScrollRun = (e)=>{
-	window.miniPlayer.pause();
+	try {
+		window.miniPlayer.pause();
+	}catch (e) {
+
+	}
 	shortScrollStart.value = true;
 	activeTmp.value = false;
 	shortScroll.value = e.target.scrollTop;
@@ -166,7 +169,6 @@ const setIdx = ()=>{
 
 	SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
 	IDX.value = getCurrentVisibleElementIndex();
-
 
 	chageShortsVideo(ShortsList.value[SHORTS_IDX.value].video_id);
 
@@ -271,7 +273,8 @@ const setShortsFist = ()=>{
 	if(route.params.shortsVideoId){
 		let find = SHORTS.value.find((v)=>v.video_id == route.params.shortsVideoId);
 		if(find){
-			SHORTS_IDX.value = ShortsList.value.indexOf(find);
+			//SHORTS_IDX.value = ShortsList.value.indexOf(find);
+			SHORTS_IDX.value = 0
 			ShortsList.value.unshift(find);
 		}
 
@@ -285,7 +288,7 @@ const setShortsList = ()=>{
 		let v = SHORTS.value[i];
 		if(route.params.shortsVideoId) {
 			if (v.video_id == route.params.shortsVideoId) {
-				SHORTS_IDX.value = i;
+				//SHORTS_IDX.value = i;
 			}else{
 				ShortsList.value.push(v);
 			}
