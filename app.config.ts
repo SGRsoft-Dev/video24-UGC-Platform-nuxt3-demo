@@ -23,6 +23,7 @@ export default defineAppConfig({
                     title: 'Shorts',
                     icon: ' ph-film-script',
                     to: '/shorts',
+                    href:true,
                 }
             ],
         },
@@ -63,6 +64,7 @@ export default defineAppConfig({
                     title: 'Shorts',
                     icon: ' ph-film-script',
                     to: '/shorts',
+                    href:true,
                 }
             ],
         },

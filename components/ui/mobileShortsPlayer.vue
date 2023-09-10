@@ -2,28 +2,14 @@
 
 	<div class="h-screen md:pt-5 md:max-h-[90vh] "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
 
-		<div class="mx-auto w-full md:w-[100vw]  md:max-w-[600px] md:max-h-[95vh] h-full pb-safe pt-safe  " >
+		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[60vw] xl:max-w-[40vw] md:max-h-[95vh] h-full pb-safe pt-safe  " >
 			<div class="md:flex h-full md:gap-4">
 
-				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative md:aspect-[9/20]" >
+				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20]" >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
 						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
-
-						<Transition name="fade">
-							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover`}" v-if="shortScrollStart"></div>
-						</Transition>
-
-						<UiMiniPlayer
-							:playUrl="video.hls_play_url"
-							:poster="video.thumb_url"
-							aspectRatio="9/20"
-							objectFit="cover"
-							:width="shortItemWidth"
-							:height="shortItemHeight"
-							v-if="active"
-
-						/>
+						<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
 							<div>
@@ -134,6 +120,10 @@ const vodViewCountUpdate = async (vod)=>{
 	});
 }
 
+const setIosPlayer = () =>{
+
+}
+
 
 onMounted(()=>{
 
@@ -151,11 +141,12 @@ onMounted(()=>{
 
 })
 
+
 </script>
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .2s;
+	transition: opacity .1s;
 }
 .fade-enter, .fade-leave-active {
 	opacity: 0;

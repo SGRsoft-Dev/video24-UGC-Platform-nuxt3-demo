@@ -43,7 +43,8 @@ const router = useRouter();
 
 const goShort = (video_id)=>{
 	ShortsList.value = [];
-	router.push('/shorts/'+video_id);
+	//router.push('/shorts/'+video_id);
+	location.href='/shorts/'+video_id;
 }
 </script>
 

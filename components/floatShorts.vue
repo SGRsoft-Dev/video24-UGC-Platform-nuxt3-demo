@@ -1,18 +1,18 @@
 <template>
 
-	<div class="fixed top-0 right-0 z-[99999] debug-info">
+	<div class="fixed top-0 right-0 z-[99999] debug-info text-white bg-gray-800 p-4 rounded-lg shadow-lg">
 	{{IDX}}	/ {{SHORTS_IDX}} / {{ShortsList.length}}
 	</div>
 
 	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
-		<NuxtLink to="/">
+		<a href="/">
 			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
-		</NuxtLink>
+		</a>
 
 		<div v-if="isMuted" class="mt-3" @click="toggleMuted">
-			<button class="rounded-full  px-3 h-[30px] dark:bg-neutral-800/20 bg-gray-200/20 flex items-center justify-center"  type="button">
-				<i class="ph ph-speaker-simple-slash text-xl mr-2"></i>
-				<span class="text-[12px]">터치해서 음소거 해제</span>
+			<button class="rounded-full  px-3 h-[30px] dark:bg-neutral-800/20 bg-gray-900/20 text-white flex items-center justify-center"  type="button">
+				<i class="ph-fill ph-speaker-simple-slash text-xl mr-2"></i>
+				<span class="text-[12px] ">터치해서 음소거 해제</span>
 			</button>
 		</div>
 
@@ -33,15 +33,27 @@
 
 	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
-		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
-			<div v-for="(s , i) in ShortsList" class="shortItemWarps h-full" :id="`shortItem_${i}`">
-				<div>
-					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
+		<div class="absolute top-0 left-0 z-[3] w-full h-full">
+			<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
+				<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
+					<UiMobileShortsPlayer v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i && IDX==i" />
+					<UiShortsPlayer v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
 				</div>
 			</div>
 		</div>
 
+		<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute top-0 left-0 z-[2]">
+
+			<UiMobileMiniPlayer
+				:playlist="ShortPlayList"
+				aspectRatio="9/20"
+				objectFit="cover"
+			/>
+		</div>
+
 	</div>
+
+
 
 </template>
 
@@ -55,7 +67,8 @@
 <script setup>
 import axios from "axios";
 import _ from "lodash";
-import {useAsyncData} from "#app";
+import ua from "ua-parser-js";
+
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
@@ -75,22 +88,28 @@ const ShortsList = useState('ShortsList');
 const shortsInitLoad = useState('shortsInitLoad');
 const shortMode = useState('shortMode');
 const isMobile = useState('isMobile');
+const ShortPlayList = useState('ShortPlayList');
 const IDX = ref(0);
 
 const route = useRoute();
 const router = useRouter();
 
 const shortScroll = ref(0);
-const shortScrollStart = ref(false);
+const shortScrollStart = useState('shortScrollStart',()=>true);
+
 const shortItemHeight = ref(0);
 const shortItemWidth = ref(0);
 
 const isMuted = useState('isMuted');
 const startFlag = useState('startFlag');
+
+const activeTmp = useState('activeTmp',()=>true);
 const toggleMuted = ()=>{
-	if(isMuted.value) {
-		window.miniPlayer.mute();
+	let videos = document.querySelectorAll('video');
+	for (let i = 0; i < videos.length; i++) {
+		videos[i].muted = isMuted.value ? false : true;
 	}
+
 }
 
 //쇼츠 높이 구하기
@@ -128,29 +147,34 @@ const shortsNext = ()=>{
 }
 
 const shortsScrollRun = (e)=>{
-	//SHORTS_IDX.value = -1;
+	window.miniPlayer.pause();
 	shortScrollStart.value = true;
+	activeTmp.value = false;
 	shortScroll.value = e.target.scrollTop;
-	setIdx();
+	shortsScrollEnd();
+
 }
+const shortsScrollEnd = _.debounce((e)=>{
+	setIdx();
+},isMobile.value ? 200 : 600);
 
 const setIdx = ()=>{
-	_.debounce(()=>{
 
-		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-		//IDX.value = getCurrentVisibleElementIndex();
-		shortScrollStart.value = false;
-	},100)();
+	SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
+	IDX.value = getCurrentVisibleElementIndex();
+
+
+	chageShortsVideo(ShortsList.value[SHORTS_IDX.value].video_id);
+
+	SHORTS_VIDEO.value = ShortsList.value[SHORTS_IDX.value];
+	if(isMobile.value) {
+		window.miniPlayer.seekSource(SHORTS_IDX.value);
+	}
+	activeTmp.value = true;
 }
 
 const chageShortsVideo = (video_id)=>{
-	try{
-		_.debounce(()=>{
-			router.replace('/shorts/'+video_id);
-		},500)()
-	}catch (e) {
-
-	}
+	router.replace('/shorts/'+video_id);
 
 }
 
@@ -172,17 +196,6 @@ const getCurrentVisibleElementIndex = () => {
 	return -1; // 현재 화면에 보이는 요소가 없을 경우 -1 반환
 }
 
-
-watch(()=>SHORTS_IDX.value , (to , from)=>{
-	setShortItemHeight();
-	if(to != from) {
-		try {
-			chageShortsVideo(ShortsList.value[to].video_id);
-		}catch (e) {
-
-		}
-	}
-})
 
 
 /*watch(()=>route.params , (to,from)=>{
@@ -228,12 +241,14 @@ const shuffle =  (array) =>{
 
 
 const setShortsList = (fix)=>{
-	console.log('!!setShortsList')
+
 	if(route.params.shortsVideoId) {
 
 		if(fix) {
 			let find = SHORTS.value.find(v => v.video_id == route.params.shortsVideoId);
 			ShortsList.value.unshift(find);
+
+			SHORTS_VIDEO.value = find;
 		}else{
 			for (let i = 0; SHORTS.value.length > i; i++) {
 				let v = SHORTS.value[i];
@@ -261,7 +276,7 @@ const startOv = ()=>{
 			if (entry.intersectionRatio >= 0.9) {
 				// 요소가 화면에 80% 이상 보이는 경우
 				const visibleElementIndex = Array.from(elements).indexOf(entry.target);
-				console.log(`현재 보이는 요소의 인덱스: ${visibleElementIndex}`);
+				//console.log(`현재 보이는 요소의 인덱스: ${visibleElementIndex}`);
 				IDX.value = visibleElementIndex;
 			}
 		});
@@ -292,19 +307,39 @@ onMounted(async ()=>{
 
 	if(isMobile.value){
 		document.body.classList.add('bg-neutral-900')
+	}else{
+		document.body.classList.remove('bg-neutral-900')
 	}
 
 	document.getElementById("shortsBody").focus()
 
 	setTimeout(()=>{
 		setShortsList();
+
+		if(isMobile.value) {
+			ShortPlayList.value = [];
+			try {
+				if (ShortsList.value.length > 0) {
+					for (let i = 0; i < ShortsList.value.length; i++) {
+						ShortPlayList.value.push({
+							"file": ShortsList.value[i].hls_play_url,
+						})
+					}
+				}
+
+
+			} catch (e) {
+
+			}
+		}
 		setTimeout(()=>{
 			startOv();
 		},300)
-	},2000)
+	},1000)
 })
 onUnmounted(()=>{
-	//ShortsList.value = [];
+	ShortsList.value = [];
+
 
 });
 

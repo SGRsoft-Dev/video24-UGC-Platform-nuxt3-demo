@@ -2,7 +2,7 @@
   <div class="flex items-center h-full ">
 	  <div v-for="( m , i) in leftMenu" class="flex-1">
 		  <div v-for="(mm , ii) in m.subs">
-			 <NuxtLink :to="mm.to" :class="{'router-link-active' : route.path == mm.to || (route.path.indexOf('/' + mm.to.split('/')[1]) > -1 && mm.to.split('/')[1] !='') }">
+			 <NuxtLink @click="goLink(mm)" :class="{'router-link-active' : route.path == mm.to || (route.path.indexOf('/' + mm.to.split('/')[1]) > -1 && mm.to.split('/')[1] !='') }">
 				 <div class="flex justify-center items-center">
 					 <div class="text-center">
 						 <div :class="{'dark' : isDark , 'light' : !isDark}">
@@ -35,6 +35,7 @@ const isDark = computed({
 	}
 });
 const route = useRoute();
+const router = useRouter();
 const leftMenu = useState('leftMenu');
 const leftMenuOpen = useState('leftMenuOpen');
 const menus = ref();
@@ -42,6 +43,14 @@ const menus = ref();
 const appConfig = useAppConfig();
 menus.value = appConfig.mobileBottomMenu;
 
+const goLink = (l)=>{
+	console.log('!@!@',l);
+	if(l.href){
+		location.href=l.to;
+	}else{
+		router.replace(l.to);
+	}
+}
 leftMenu.value = menus.value;
 </script>
 

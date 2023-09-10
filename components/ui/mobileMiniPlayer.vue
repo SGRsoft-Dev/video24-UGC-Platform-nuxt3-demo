@@ -2,7 +2,7 @@
 
 <template>
 
-	<div class="w-full h-full bg-black  text-white  duration-200" :style="{'background':`url(${props.poster}) center / cover`,'--min-video-width':  windowSize.width < 720 ?  windowSize.width+'px' : '100%'}" @mouseover="isHover = true" @mouseout="isHover = false">
+	<div class="w-full h-full bg-black  text-white  duration-200" :style="{'background':`url(${props.poster}) center / cover`,'--min-video-width': windowSize.width+'px','--min-video-height': windowSize.height+'px' }" @mouseover="isHover = true" @mouseout="isHover = false">
 		<div class="vpeMiniPlayer">
 			<div :id="`vpeMiniPlayer`" v-show="uiStart"></div>
 		</div>
@@ -31,18 +31,20 @@
 <style scoped>
 	.vpeMiniPlayer{
 		min-width:var(--min-video-width);
+		min-height:var(--min-video-height);
 	}
 
 	.vpeMiniPlayer video{
 		position: absolute !important;
 		top: 0;
 		left: 0;
-		width: 100% !important;
-		height: 100% !important;
+		width: var(--min-video-width) !important;
+		height: var(--min-video-width) !important;
+		object-fit: contain !important;
 		z-index:1;
 	}
 	.fade-enter-active, .fade-leave-active {
-		transition: opacity .5s;
+		transition: opacity .2s;
 	}
 	.fade-enter, .fade-leave-active {
 		opacity: 0;
@@ -52,13 +54,9 @@
 <script setup>
 
 const props = defineProps({
-	playUrl: {
-		type: String,
-		required: true
-	},
-	poster: {
-		type: String,
-		default: ''
+	playlist: {
+		type: Array,
+		default: []
 	},
 	muted: {
 		type: Boolean,
@@ -83,10 +81,11 @@ const props = defineProps({
 
 })
 
-window.miniPlayer = null;
+
 const isMuted = useState('isMuted',()=>false);
 const windowSize = useState('windowSize');
 const shortScrollStart = useState('shortScrollStart');
+const ShortsList = useState('ShortsList');
 const isPercent = ref(0);
 const isPlay = ref(false);
 const isInitPlay = ref(false);
@@ -99,15 +98,19 @@ if(props.muted){
 
 const setupVPE = ()=>{
 
+	console.log('!@!@ setupVPE');
+	if(window.miniPlayer) {
+		window.miniPlayer.destroy();
+	}
+	try{
+		document.getElementsByTagName('video')[0].remove();
+	}catch (e) {
+
+	}
 
 
 	let options = {
-		playlist:[
-			{
-				"file":props.playUrl,
-				"poster":props.poster,
-			}
-		],
+		playlist:props.playlist,
 		autostart:true,
 		muted:props.muted ? true : false,
 		controls:false,
@@ -120,50 +123,63 @@ const setupVPE = ()=>{
 		descriptionNotVisible:true
 	};
 
-	window.miniPlayer = new ncplayer(`vpeMiniPlayer`,options);
-
-
-	window.miniPlayer.on('ready',()=>{
-		setTimeout(()=>{
-			uiStart.value = true;
-		},200);
-		setTimeout(()=>{
-			playStart();
-		},300);
-	});
-
-	window.miniPlayer.on('play',()=>{
-		isPlay.value = true;
-		isInitPlay.value = true;
-
-	});
-	window.miniPlayer.on('pause',()=>{
-		isPlay.value = false;
-	});
+	setTimeout(()=>{
+		window.miniPlayer= new ncplayer(`vpeMiniPlayer`,options);
 
 
 
-	window.miniPlayer.on('timeupdate',(res)=>{
-		isPercent.value = res.percent;
-		isPlay.value = true;
-		if(document.getElementsByTagName('video')[0].muted){
-			isMuted.value = true;
-		}else{
-			isMuted.value = false;
-		}
-		if(res.percent >=0.1){
-			shortScrollStart.value = false;
-		}
-	})
-	window.miniPlayer.on('volumechange',()=>{
+		window.miniPlayer.on('ready',()=>{
+			document.getElementsByTagName('video')[0].style.width = windowSize.value.width+"px";
+			document.getElementsByTagName('video')[0].style.height = windowSize.value.height+"px";
+			document.getElementsByTagName('video')[0].style.objectFit = 'contain';
+			setTimeout(()=>{
+				document.getElementsByTagName('video')[0].style.width = windowSize.value.width+"px";
+				document.getElementsByTagName('video')[0].style.height = windowSize.value.height+"px";
+				document.getElementsByTagName('video')[0].style.objectFit = 'contain';
+				uiStart.value = true;
+			},800);
+			setTimeout(()=>{
+				document.getElementsByTagName('video')[0].style.width = windowSize.value.width+"px";
+				document.getElementsByTagName('video')[0].style.height = windowSize.value.height+"px";
+				document.getElementsByTagName('video')[0].style.objectFit = 'contain';
+				playStart();
+			},700);
 
-		if(document.getElementsByTagName('video')[0].muted){
-			isMuted.value = true;
-		}else{
-			isMuted.value = false;
-		}
-	});
+		});
 
+		window.miniPlayer.on('play',()=>{
+			isPlay.value = true;
+			isInitPlay.value = true;
+
+		});
+		window.miniPlayer.on('pause',()=>{
+			isPlay.value = false;
+		});
+
+
+
+		window.miniPlayer.on('timeupdate',(res)=>{
+			isPercent.value = res.percent;
+			isPlay.value = true;
+			if(document.getElementsByTagName('video')[0].muted){
+				isMuted.value = true;
+			}else{
+				isMuted.value = false;
+			}
+			if(res.percent >=0.1){
+				shortScrollStart.value = false;
+			}
+		})
+		window.miniPlayer.on('volumechange',()=>{
+
+			if(document.getElementsByTagName('video')[0].muted){
+				isMuted.value = true;
+			}else{
+				isMuted.value = false;
+			}
+		});
+
+	},100)
 	//document.querySelector('.vpeMiniPlayer').style.display = 'flex';
 }
 
@@ -184,16 +200,18 @@ const toggleMuted = ()=>{
 }
 
 onMounted(()=>{
-	setupVPE();
-})
 
-onUnmounted(()=>{
-
-	try{
-		window.miniPlayer.destroy();
-	}catch (e) {
+	if(!window.miniPlayer) {
+		setupVPE();
 	}
 
-
 })
+
+
+onUnmounted(()=>{
+	ShortsList.value = [];
+
+
+});
+
 </script>

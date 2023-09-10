@@ -72,6 +72,7 @@ try{
 
 onMounted(()=>{
 	window.player = null;
+	window.miniPlayer = null;
 
 	window.uuid = lscache.get('UUID') ? lscache.get('UUID') : uuidv4();
 	lscache.set('UUID', window.uuid, 3600);

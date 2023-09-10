@@ -22,6 +22,11 @@ const shortsInitLoad = useState('shortsInitLoad');
 const shortMode = useState('shortMode');
 
 const startFlag = useState('startFlag');
+const activeTmp = useState('activeTmp');
+const ShortPlayList = useState('ShortPlayList');
+const isMobile = useState('isMobile');
 
-
+onMounted(()=>{
+	activeTmp.value = true;
+})
 </script>

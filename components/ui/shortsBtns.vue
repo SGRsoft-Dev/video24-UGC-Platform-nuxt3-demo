@@ -67,7 +67,13 @@ defineProps({
 const isMuted = useState('isMuted');
 
 const toggleMuted = ()=>{
-	window.miniPlayer.mute();
+
+
+	let videos = document.querySelectorAll('video');
+	for (let i = 0; i < videos.length; i++) {
+		videos[i].muted = isMuted.value ? false : true;
+	}
+
 }
 </script>
 

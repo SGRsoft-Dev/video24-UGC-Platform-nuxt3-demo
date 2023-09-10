@@ -14,7 +14,9 @@
 		<div class="  px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
 
 			<slot/>
-			<FloatShorts v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts'"/>
+
+			<FloatShorts v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts'" />
+
 		</div>
 
 
@@ -50,6 +52,11 @@ const route = useRoute();
 const router = useRouter();
 const lastRouterPath = useState('lastRouterPath',()=>null);
 
+const SHORTS_VIDEO = useState('SHORTS_VIDEO');
+const ShortsList = useState('ShortsList');
+const ShortPlayList = useState('ShortPlayList',()=>[]);
+
+
 const isMobile = useState('isMobile');
 const colorMode = useColorMode();
 const fullMode = useState('fullMode');
@@ -57,6 +64,8 @@ const loading = ref(true)
 const shortMode = useState('shortMode',()=>false);
 
 const VIDEO = useState('VIDEO');
+
+const isIOS = useState('osIOS',()=>false);
 
 const isViewGnb = computed(()=>{
 	if(route.path.split('/')[1] == 'shorts') {
@@ -94,12 +103,13 @@ const pageChaneInit = (path)=>{
 	if(path.split('/')[1] == 'shorts' ){
 		shortMode.value = true;
 		if(isMobile.value){
-			document.body.classList.add('bg-neutral-900')
+			document.body.classList.add('bg-neutral-900');
 		}
 	}else{
 		shortMode.value = false;
 		if(isMobile.value){
-			document.body.classList.remove('bg-neutral-900')
+			document.body.classList.remove('bg-neutral-900');
+
 		}
 	}
 
@@ -119,13 +129,23 @@ const pageChaneInit = (path)=>{
 		document.getElementById('__nuxt').classList.remove('no-pull-mode');
 		document.body.classList.remove('no-scroll');
 		document.getElementsByTagName('html')[0].classList.remove('no-scroll');
+
 	}
 }
 
 watch(()=>route.params,(to,from)=>{
-	if(!to.shortsVideoId){
-		try {
+	if(!to.shortsVideoId && from.shortsVideoId){
+
+			ShortsList.value = [];
+			window.miniPlayer.pause();
 			window.miniPlayer.destroy();
+			window.miniPlayer = null;
+			for (let i = 0; document.getElementsByTagName('video').length > i; i++) {
+				document.getElementsByTagName('video')[i].remove();
+			}
+
+
+		try {
 		}catch (e) {
 
 		}
@@ -163,6 +183,9 @@ onMounted(()=>{
 
 	let parser = ua(window.navigator.userAgent);
 
+	if(parser.os.name == 'iOS'){
+		isIOS.value = true;
+	}
 	if(parser.device.type == 'mobile'){
 		document.body.classList.add('isMobile');
 		document.body.classList.remove('isPc');
@@ -176,11 +199,16 @@ onMounted(()=>{
 
 	pageChaneInit(route.path);
 
+
+
 	if(colorMode.value == 'dark'){
 		document.body.classList.add('bg-neutral-900')
 	}else{
 		document.body.classList.remove('bg-neutral-900')
 	}
+
+
+	console.log('!!!',ShortPlayList.value);
 
 	loading.value = false;
 
