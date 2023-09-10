@@ -36,7 +36,7 @@
 		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" class="shortItemWarps h-full" :id="`shortItem_${i}`">
 				<div>
-					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX && i==IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
+					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
 				</div>
 			</div>
 		</div>
@@ -128,19 +128,13 @@ const shortsNext = ()=>{
 }
 
 const shortsScrollRun = (e)=>{
-
+	//SHORTS_IDX.value = -1;
 	shortScrollStart.value = true;
 	shortScroll.value = e.target.scrollTop;
 	setIdx();
 }
 
 const setIdx = ()=>{
-	try{
-		SHORTS_IDX.value = -1;
-		window.miniPlayer.destroy()
-	}catch (e) {
-
-	}
 	_.debounce(()=>{
 
 		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
@@ -235,7 +229,6 @@ const shuffle =  (array) =>{
 
 const setShortsList = (fix)=>{
 
-	ShortsList.value = [];
 
 
 	if(route.params.shortsVideoId) {
@@ -287,7 +280,6 @@ const startOv = ()=>{
 
 useAsyncData(async ()=>{
 	SHORTS_IDX.value = 0;
-	IDX.value = 0;
 	await getShortList();
 	setShortsList(true);
 });
@@ -304,8 +296,11 @@ onMounted(async ()=>{
 	document.getElementById("shortsBody").focus()
 
 	setTimeout(()=>{
-		startOv();
-	},1000)
+		setShortsList();
+		setTimeout(()=>{
+			startOv();
+		},300)
+	},2000)
 })
 onUnmounted(()=>{
 	//ShortsList.value = [];
