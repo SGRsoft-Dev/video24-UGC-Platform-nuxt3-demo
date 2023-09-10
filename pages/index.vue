@@ -2,7 +2,7 @@
 	<div class="p-0 md:p-5  pt-5 md:pr-0">
 
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5" v-if="loading">
+		<div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5" v-if="loading">
 			<div v-for="(v , i) in skelCnt" class=" px-0 md:px-3 mb-10">
 				<SkeletonVideoCard  />
 			</div>
