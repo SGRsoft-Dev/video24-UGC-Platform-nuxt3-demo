@@ -1,7 +1,7 @@
 <template>
 
 	<div class="fixed top-0 right-0 z-[99999] debug-info">
-		debug-info :{{IDX}} / {{ShortsList.length}}
+	{{IDX}}	/ {{SHORTS_IDX}} / {{ShortsList.length}}
 	</div>
 
 	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
@@ -34,9 +34,9 @@
 	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
 		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
-			<div v-for="(s , i) in ShortsList" >
+			<div v-for="(s , i) in ShortsList" class="shortItemWarps h-full" :id="`shortItem_${i}`">
 				<div>
-					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
+					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX && i==IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
 				</div>
 			</div>
 		</div>
@@ -128,15 +128,23 @@ const shortsNext = ()=>{
 }
 
 const shortsScrollRun = (e)=>{
+
 	shortScrollStart.value = true;
 	shortScroll.value = e.target.scrollTop;
 	setIdx();
 }
 
 const setIdx = ()=>{
+	try{
+		SHORTS_IDX.value = -1;
+		window.miniPlayer.destroy()
+	}catch (e) {
+		
+	}
 	_.debounce(()=>{
+
 		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-		//SHORTS_IDX.value = getCurrentVisibleElementIndex();
+		//IDX.value = getCurrentVisibleElementIndex();
 		shortScrollStart.value = false;
 	},100)();
 }
@@ -144,7 +152,6 @@ const setIdx = ()=>{
 const chageShortsVideo = (video_id)=>{
 	try{
 		_.debounce(()=>{
-			IDX.value = getCurrentVisibleElementIndex()
 			router.replace('/shorts/'+video_id);
 		},500)()
 	}catch (e) {
@@ -152,6 +159,8 @@ const chageShortsVideo = (video_id)=>{
 	}
 
 }
+
+
 
 const getCurrentVisibleElementIndex = () => {
 	const elements = document.querySelectorAll('.shortsBody .shortItems'); // 스크롤 가능한 컨테이너와 그 안에 있는 요소들을 선택해야 합니다.
@@ -255,6 +264,26 @@ const setShortsList = ()=>{
 
 }
 
+const startOv = ()=>{
+	const elements = document.querySelectorAll('.shortItemWarps'); // 스크롤 가능한 컨테이너 내의 요소 선택
+
+	const observer = new IntersectionObserver((entries, observer) => {
+		entries.forEach((entry) => {
+			if (entry.intersectionRatio >= 0.9) {
+				// 요소가 화면에 80% 이상 보이는 경우
+				const visibleElementIndex = Array.from(elements).indexOf(entry.target);
+				console.log(`현재 보이는 요소의 인덱스: ${visibleElementIndex}`);
+				IDX.value = visibleElementIndex;
+			}
+		});
+	}, { threshold: 0.9 }); // threshold를 0.8로 설정
+
+
+	// 모든 요소를 감시
+	elements.forEach((element) => {
+		observer.observe(element);
+	});
+}
 
 
 useAsyncData(async ()=>{
@@ -266,12 +295,17 @@ useAsyncData(async ()=>{
 
 
 
+
 onMounted(async ()=>{
 	setShortItemHeight();
 	startFlag.value = true;
 
 
 	document.getElementById("shortsBody").focus()
+
+	setTimeout(()=>{
+		startOv();
+	},1000)
 })
 onUnmounted(()=>{
 	//ShortsList.value = [];
