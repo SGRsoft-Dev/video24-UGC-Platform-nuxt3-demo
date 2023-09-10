@@ -139,7 +139,7 @@ const setIdx = ()=>{
 		SHORTS_IDX.value = -1;
 		window.miniPlayer.destroy()
 	}catch (e) {
-		
+
 	}
 	_.debounce(()=>{
 
@@ -233,23 +233,26 @@ const shuffle =  (array) =>{
 }
 
 
-const setShortsList = ()=>{
+const setShortsList = (fix)=>{
 
 	ShortsList.value = [];
 
-	if(route.params.shortsVideoId){
 
-		for (let i = 0; SHORTS.value.length > i; i++) {
-			let v = SHORTS.value[i];
-			if (route.params.shortsVideoId != v.video_id) {
-				ShortsList.value.push(v);
+	if(route.params.shortsVideoId) {
+
+		if(fix) {
+			let find = SHORTS.value.find(v => v.video_id == route.params.shortsVideoId);
+			ShortsList.value.unshift(find);
+		}else{
+			for (let i = 0; SHORTS.value.length > i; i++) {
+				let v = SHORTS.value[i];
+				if (route.params.shortsVideoId != v.video_id) {
+					ShortsList.value.push(v);
+				}
 			}
+			//shuffle(ShortsList.value);
 		}
 
-		//shuffle(ShortsList.value);
-
-		let find = SHORTS.value.find(v=>v.video_id == route.params.shortsVideoId);
-		ShortsList.value.unshift(find);
 
 	}else{
 		for (let i = 0; SHORTS.value.length > i; i++) {
@@ -257,10 +260,6 @@ const setShortsList = ()=>{
 			ShortsList.value.push(v);
 		}
 	}
-
-
-
-
 
 }
 
@@ -288,8 +287,9 @@ const startOv = ()=>{
 
 useAsyncData(async ()=>{
 	SHORTS_IDX.value = 0;
+	IDX.value = 0;
 	await getShortList();
-	setShortsList();
+	setShortsList(true);
 });
 
 

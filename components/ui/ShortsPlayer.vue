@@ -19,6 +19,7 @@
 								objectFit="cover"
 								:width="shortItemWidth"
 								:height="shortItemHeight"
+								:video_id="video.video_id"
 								v-if="active"
 
 							/>
