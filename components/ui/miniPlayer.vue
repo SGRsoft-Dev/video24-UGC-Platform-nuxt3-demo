@@ -151,7 +151,7 @@ const setupVPE = ()=>{
 		}else{
 			isMuted.value = false;
 		}
-		if(res.percent >=0.1){
+		if(res.percent >=0.05){
 			shortScrollStart.value = false;
 		}
 	})

@@ -1,8 +1,8 @@
 <template>
 
-	<div class="fixed top-0 right-0 z-[99999] debug-info text-white bg-gray-800 p-4 rounded-lg shadow-lg">
+<!--	<div class="fixed top-0 right-0 z-[99999] debug-info text-white bg-gray-800 p-4 rounded-lg shadow-lg">
 	{{IDX}}	/ {{SHORTS_IDX}} / {{ShortsList.length}}
-	</div>
+	</div>-->
 
 	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 		<a href="/">
