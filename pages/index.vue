@@ -28,7 +28,7 @@
 				<strong class="text-2xl">VOD</strong>
 			</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 " >
+			<div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-2 sm:px-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 " >
 				<template v-for="(v , i) in VOD">
 					<div class=" px-0 md:px-3 mb-10" v-if="v.height < v.width">
 						<UiVideoCard :v="v" />

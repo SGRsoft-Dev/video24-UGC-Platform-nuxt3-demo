@@ -2,7 +2,7 @@
 	<div class=" relative  w-full  dark:bg-neutral-900 " v-if="!loading">
 
 		<div id="gnbBody">
-			<div class="mb-[72px] " v-show="isViewGnb">
+			<div class="mb-[52px] " v-show="isViewGnb">
 				<UiGnb/>
 			</div>
 		</div>

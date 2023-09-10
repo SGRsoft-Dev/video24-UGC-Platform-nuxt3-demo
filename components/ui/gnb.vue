@@ -9,7 +9,7 @@
 				'drop-shadow-lg' : windowSize.scroll > 50,
 		 }"
 	>
-		<div class="p-4 "  >
+		<div class="p-2 "  >
 			<div class=" flex items-center">
 				<div class="w-48 flex pl-2">
 
@@ -28,7 +28,9 @@
 				</div>
 				<div class="flex-1"></div>
 				<div class="w-4/12 gnbSearchInput hidden md:inline">
-					<UInput icon="i-heroicons-magnifying-glass-20-solid  "   variant="outline" size="lg" :color="setDark ? 'black' : 'white'" :trailing="false" placeholder="검색하기" />
+					<UInput icon="i-heroicons-magnifying-glass-20-solid  "  :ui="{
+						rounded:'rounded-full',
+					}"  variant="outline" size="lg"  :color="setDark ? 'gray' : 'white'" :trailing="false" placeholder="검색하기" />
 				</div>
 				<div class="flex-1 text-right">
 					<i class="ph-fill mr-2" :class="setDark ? 'ph-moon text-white' : 'ph-sun-dim text-dark'"></i>

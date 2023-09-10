@@ -8,17 +8,8 @@ module.exports = {
         "./nuxt.config.{js,ts}",
     ],
     theme: {
-        extend: {},
-        screens: {
-            'tablet': '800px',
-            // => @media (min-width: 640px) { ... }
+        extend: {}
 
-            'laptop': '1440px',
-            // => @media (min-width: 1024px) { ... }
-
-            'desktop': '1680px',
-            // => @media (min-width: 1280px) { ... }
-        },
     },
     plugins: [require('tailwindcss-safe-area')],
 }

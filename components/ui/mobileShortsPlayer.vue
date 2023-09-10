@@ -5,7 +5,7 @@
 		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[60vw] xl:max-w-[40vw] md:max-h-[95vh] h-full pb-safe pt-safe  " >
 			<div class="md:flex h-full md:gap-4">
 
-				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20]" >
+				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20] " >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
 						<div class="bg-gra-v w-full h-full absolute z-[99]"  @click="playStart"></div>
