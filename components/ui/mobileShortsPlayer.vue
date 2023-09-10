@@ -13,7 +13,7 @@
 							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 						</Transition>
 
-						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
+						<div class=" absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
 							<div>
 
 								<div class="p-3  text-sm">
@@ -33,7 +33,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="absolute right-[15px] bottom-[15px] md:hidden z-[999999]">
+						<div class="absolute right-[15px] min-[720px]:right-[-50px] bottom-[15px] min-[980px]:hidden  z-[999999]">
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 

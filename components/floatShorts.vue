@@ -1,7 +1,7 @@
 <template>
 
 	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
-		{{SHORTS_IDX}} / {{ShortsList.length}}
+		{{windowSize.width}} / {{SHORTS_IDX}} / {{ShortsList.length}}
 	</div>
 	<div v-if="!loading">
 		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
@@ -310,10 +310,15 @@ useAsyncData(async ()=>{
 
 });
 
+let parser = ref(null);
 
 onMounted(async ()=>{
 	setShortItemHeight();
 	startFlag.value = true;
+
+	parser = ua(window.navigator.userAgent);
+
+	console.log('!!',parser)
 
 	document.getElementById('__nuxt').classList.add('no-pull-mode');
 	document.body.classList.add('no-scroll');

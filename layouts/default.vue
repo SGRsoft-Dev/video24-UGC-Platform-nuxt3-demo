@@ -69,7 +69,7 @@ const isIOS = useState('osIOS',()=>false);
 
 const isViewGnb = computed(()=>{
 	if(route.path.split('/')[1] == 'shorts') {
-		if(windowSize.value.width > 720) {
+		if(windowSize.value.width > 800) {
 			return true;
 		}else{
 			return false;
@@ -186,7 +186,7 @@ onMounted(()=>{
 	if(parser.os.name == 'iOS'){
 		isIOS.value = true;
 	}
-	if(parser.device.type == 'mobile'){
+	if(parser.device.type == 'mobile' || parser.device.type == 'tablet'){
 		document.body.classList.add('isMobile');
 		document.body.classList.remove('isPc');
 		isMobile.value = true;
