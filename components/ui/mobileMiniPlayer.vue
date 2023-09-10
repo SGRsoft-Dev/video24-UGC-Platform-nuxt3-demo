@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full z-[9999] bg-neutral-400/30  duration-200  ">
-			<div class="bg-red-600 h-[2px] md:h-[3px]" :style="{width:`${isPercent}%`}"></div>
+			<div class="bg-red-600 h-[3px] md:h-[3px]" :style="{width:`${isPercent}%`}"></div>
 		</div>
 
 		<div class="absolute top-0 left-0 w-full z-[9999]   justify-between hidden md:inline-flex" v-show="isHover && isPlay || isMuted">
@@ -87,7 +87,7 @@ const windowSize = useState('windowSize');
 const shortScrollStart = useState('shortScrollStart');
 const ShortsList = useState('ShortsList');
 const isPercent = ref(0);
-const isPlay = ref(false);
+const isPlay = useState('isPlay',()=>false);
 const isInitPlay = ref(false);
 const uiStart = ref(false);
 const isHover = ref(false);

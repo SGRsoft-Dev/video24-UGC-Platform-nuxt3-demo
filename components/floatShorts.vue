@@ -1,58 +1,59 @@
 <template>
 
-<!--	<div class="fixed top-0 right-0 z-[99999] debug-info text-white bg-gray-800 p-4 rounded-lg shadow-lg">
-	{{IDX}}	/ {{SHORTS_IDX}} / {{ShortsList.length}}
-	</div>-->
 
-	<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
-		<a href="/">
-			<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
-		</a>
+	<div v-if="!loading">
+		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
+			<a href="/">
+				<img src="/image/logo_dark.svg" class="h-[24px]" alt="">
+			</a>
 
-		<div v-if="isMuted" class="mt-3" @click="toggleMuted">
-			<button class="rounded-full  px-3 h-[30px] dark:bg-neutral-800/20 bg-gray-900/20 text-white flex items-center justify-center"  type="button">
-				<i class="ph-fill ph-speaker-simple-slash text-xl mr-2"></i>
-				<span class="text-[12px] ">터치해서 음소거 해제</span>
+			<div v-if="isMuted" class="mt-3" @click="toggleMuted">
+				<button class="rounded-full  px-3 h-[30px] dark:bg-neutral-800/20 bg-gray-900/20 text-white flex items-center justify-center"  type="button">
+					<i class="ph-fill ph-speaker-simple-slash text-xl mr-2"></i>
+					<span class="text-[12px] ">터치해서 음소거 해제</span>
+				</button>
+			</div>
+
+		</div>
+
+		<div class="fixed top-[80px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
+			<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsPrev">
+				<i class="ph ph-arrow-up"></i>
 			</button>
 		</div>
 
-	</div>
-
-	<div class="fixed top-[80px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
-		<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsPrev">
-			<i class="ph ph-arrow-up"></i>
-		</button>
-	</div>
-
-	<div class="fixed bottom-0 right-0 p-4 z-[99999] hidden md:inline">
-		<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsNext">
-			<i class="ph ph-arrow-down"></i>
-		</button>
-	</div>
+		<div class="fixed bottom-0 right-0 p-4 z-[99999] hidden md:inline">
+			<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsNext">
+				<i class="ph ph-arrow-down"></i>
+			</button>
+		</div>
 
 
-	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
+		<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
-		<div class="absolute top-0 left-0 z-[3] w-full h-full">
-			<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
-				<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
-					<UiMobileShortsPlayer v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i && IDX==i" />
-					<UiShortsPlayer v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
+			<div class="absolute top-0 left-0 z-[3] w-full h-full">
+				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
+					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
+						<UiMobileShortsPlayer v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i && IDX==i" />
+						<UiShortsPlayer v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute top-0 left-0 z-[2]">
+			<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute top-0 left-0 z-[2]">
 
-			<UiMobileMiniPlayer
-				:playlist="ShortPlayList"
-				aspectRatio="9/20"
-				objectFit="cover"
-			/>
+
+
+				<UiMobileMiniPlayer
+					:playlist="ShortPlayList"
+					aspectRatio="9/20"
+					objectFit="cover"
+				/>
+			</div>
+
 		</div>
 
 	</div>
-
 
 
 </template>
@@ -100,10 +101,13 @@ const shortScrollStart = useState('shortScrollStart',()=>true);
 const shortItemHeight = ref(0);
 const shortItemWidth = ref(0);
 
+
 const isMuted = useState('isMuted');
 const startFlag = useState('startFlag');
-
 const activeTmp = useState('activeTmp',()=>true);
+
+
+
 const toggleMuted = ()=>{
 	let videos = document.querySelectorAll('video');
 	for (let i = 0; i < videos.length; i++) {
@@ -311,7 +315,7 @@ onMounted(async ()=>{
 		document.body.classList.remove('bg-neutral-900')
 	}
 
-	document.getElementById("shortsBody").focus()
+
 
 	setTimeout(()=>{
 		setShortsList();
@@ -332,7 +336,12 @@ onMounted(async ()=>{
 
 			}
 		}
+
+		loading.value = false;
+
+
 		setTimeout(()=>{
+			document.getElementById("shortsBody").focus()
 			startOv();
 		},300)
 	},1000)

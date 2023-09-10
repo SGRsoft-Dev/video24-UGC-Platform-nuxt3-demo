@@ -8,7 +8,7 @@
 				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20]" >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
-						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
+						<div class="bg-gra-v w-full h-full absolute z-[99]" @click="playStart"></div>
 						<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
@@ -86,6 +86,7 @@ const UUID = useState('UUID');
 const {$util} = useNuxtApp();
 const isMuted = useState('isMuted');
 const isIOS = useState('isIOS');
+const isPlay = useState('isPlay');
 
 const toggleMuted = ()=>{
 	if(isMuted.value) {
@@ -123,7 +124,18 @@ const vodViewCountUpdate = async (vod)=>{
 const setIosPlayer = () =>{
 
 }
-
+const playStart = ()=>{
+	console.log('playStart')
+	if(isPlay.value) {
+		if(isMuted.value) {
+			window.miniPlayer.mute();
+		}else {
+			window.miniPlayer.pause();
+		}
+	}else{
+		window.miniPlayer.play();
+	}
+}
 
 onMounted(()=>{
 
