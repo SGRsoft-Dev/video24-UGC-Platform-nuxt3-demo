@@ -78,6 +78,10 @@ const props = defineProps({
 		type: Number,
 		default: 0
 	},
+	video_id:{
+		type: String,
+		default: 0
+	}
 })
 
 window.miniPlayer = null;
@@ -137,6 +141,7 @@ const setupVPE = ()=>{
 	});
 
 	window.miniPlayer.on('timeupdate',(res)=>{
+		console.log('!!! timeupdate' , props.video_id);
 		isPercent.value = res.percent;
 		isPlay.value = true;
 		if(document.getElementsByTagName('video')[0].muted){

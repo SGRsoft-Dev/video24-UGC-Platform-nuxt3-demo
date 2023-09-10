@@ -14,7 +14,7 @@
 		<div class="  px-0" :class="{'md:pl-[220px]' : leftMenuOpen , 'md:pl-[60px]' : !leftMenuOpen && !watchMode}">
 
 			<slot/>
-			<FloatShorts v-if="route.params.shortsVideoId"/>
+			<FloatShorts v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts'"/>
 		</div>
 
 
