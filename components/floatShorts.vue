@@ -33,7 +33,7 @@
 
 	<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
-		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"  @scrollend="shortsScrollEnd"  @scroll="shortsScrollRun">
+		<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 			<div v-for="(s , i) in ShortsList" >
 				<div>
 					<UiShortsPlayer :video="s" class="snap-always snap-start shortItems" :active="i==SHORTS_IDX"  :shortItemHeight="shortItemHeight" :shortItemWidth="shortItemWidth"/>
@@ -129,31 +129,28 @@ const shortsNext = ()=>{
 
 const shortsScrollRun = (e)=>{
 	shortScrollStart.value = true;
-}
-
-const shortsScrollEnd = (e)=>{
-	try{
-		window.miniPlayer.destroy();
-	}catch (e) {
-
-	}
 	shortScroll.value = e.target.scrollTop;
-	shortScrollStart.value = false;
 	setIdx();
-
 }
 
 const setIdx = ()=>{
 	_.debounce(()=>{
-		//SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-		SHORTS_IDX.value = getCurrentVisibleElementIndex();
-
-		setShortItemHeight();
-
-		IDX.value = getCurrentVisibleElementIndex()
-		router.replace('/shorts/'+ShortsList.value[SHORTS_IDX.value].video_id);
-
+		SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
+		//SHORTS_IDX.value = getCurrentVisibleElementIndex();
+		shortScrollStart.value = false;
 	},100)();
+}
+
+const chageShortsVideo = (video_id)=>{
+	try{
+		_.debounce(()=>{
+			IDX.value = getCurrentVisibleElementIndex()
+			router.replace('/shorts/'+video_id);
+		},500)()
+	}catch (e) {
+
+	}
+
 }
 
 const getCurrentVisibleElementIndex = () => {
@@ -173,7 +170,7 @@ const getCurrentVisibleElementIndex = () => {
 }
 
 
-/*watch(()=>SHORTS_IDX.value , (to , from)=>{
+watch(()=>SHORTS_IDX.value , (to , from)=>{
 	setShortItemHeight();
 	if(to != from) {
 		try {
@@ -182,7 +179,7 @@ const getCurrentVisibleElementIndex = () => {
 
 		}
 	}
-})*/
+})
 
 
 /*watch(()=>route.params , (to,from)=>{
