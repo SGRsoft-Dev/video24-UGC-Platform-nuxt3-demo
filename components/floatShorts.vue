@@ -287,11 +287,7 @@ const setShortsList = ()=>{
 			if (v.video_id == route.params.shortsVideoId) {
 				SHORTS_IDX.value = i;
 			}else{
-				if(i > SHORTS_IDX.value) {
-					ShortsList.value.push(v);
-				}else{
-					ShortsList.value.unshift(v);
-				}
+				ShortsList.value.push(v);
 			}
 		}
 

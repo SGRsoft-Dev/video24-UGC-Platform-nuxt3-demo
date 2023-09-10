@@ -15,12 +15,13 @@
 				<strong class="text-2xl">Reels</strong>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3 " >
-				<template v-for="(v , i) in SHORTS" >
-					<div  class=" px-0 md:px-3 mb-10 videoItems "  v-if="v.height > v.width">
+			<div class="">
+				<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3 "  >
+
+					<div  class=" px-0 md:px-3 mb-10 videoItems "  v-for="(v , i) in SHORTS" >
 						<UiVideoCardShortForm :v="v" />
 					</div>
-				</template>
+				</div>
 			</div>
 
 			<div class="px-2 ">
@@ -76,8 +77,12 @@
 	}
 	& > div {
 		scroll-snap-align: start;
+
 	}
 
+}
+.slickBody > div:first-child {
+	padding-left: 10px; /* 첫 번째 하위 요소에만 margin-left를 적용 */
 }
 .slickBody .videoItems{
 	max-width:240px;
@@ -85,6 +90,8 @@
 	padding-left: 5px;
 	padding-right: 5px;
 	aspect-ratio: 9/10;
+	scroll-snap-align: start;
+
 }
 </style>
 

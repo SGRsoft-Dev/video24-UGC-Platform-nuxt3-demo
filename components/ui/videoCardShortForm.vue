@@ -1,7 +1,7 @@
 <template>
 	<NuxtLink style="cursor: pointer"  @click="goShort(v.video_id)">
 		<div class="w-full overflow-hidden">
-			<div class="videoThumbSf rounded-lg overflow-hidden bg-gray-200/15 relative" :style="{background:`url(${v.thumb_url}) `}">
+			<div class="videoThumbSf rounded-lg dark:shadow-sm overflow-hidden bg-gray-200/15 relative" :style="{background:`url(${v.thumb_url}) `}">
 				<div class="backdrop-blur-cu1 aspect-[9/20]" >
 					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png'" :alt="v.title" class="w-full h-full object-cover " placeholder loading="lazy"/>
 				</div>
