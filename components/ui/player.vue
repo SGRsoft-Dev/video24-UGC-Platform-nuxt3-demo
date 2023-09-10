@@ -418,7 +418,7 @@ watch(()=>VIDEO.value,(v)=>{
 	aspect-ratio: 16/9;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 980px) {
 	.fullMode  , .basicMode{
 		display:inline;
 	}

@@ -91,8 +91,8 @@ const goVideo = ()=>{
 	bottom:0;
 	right:25px;
 	z-index: 9999;
-	width:500px;
-	max-width: 20vw;
+	width:40vw;
+	max-width: 400px;
 }
 
 .floatBackDrop{
