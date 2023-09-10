@@ -10,7 +10,9 @@
 
 						<div class="bg-gra-v w-full h-full absolute z-[99]"  @click="playStart"></div>
 						<Transition name="fade">
-							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
+							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart">
+								<div class="bg-gra-v w-full h-full absolute z-[99]" ></div>
+							</div>
 						</Transition>
 
 						<div class=" absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
@@ -168,7 +170,7 @@ onMounted(()=>{
 
 .bg-gra-v{
 	background: rgb(0,0,0);
-	background: linear-gradient(180deg, rgba(0,0,0,0.3435968137254902) 0%, rgba(0,0,0,0) 9%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.24555759803921573) 69%, rgba(0,0,0,0.5424763655462185) 100%);
+	background: linear-gradient(180deg, rgba(0,0,0,0.3435968137254902) 0%, rgba(0,0,0,0) 7%, rgba(0,0,0,0) 78%, rgba(0,0,0,0.24555759803921573) 89%, rgba(0,0,0,0.5424763655462185) 100%);
 	height:calc(100% - 3px) !important;
 }
 
