@@ -244,34 +244,6 @@ const shuffle =  (array) =>{
 }
 
 
-const setShortsList = (fix)=>{
-
-	if(route.params.shortsVideoId) {
-
-		if(fix) {
-			let find = SHORTS.value.find(v => v.video_id == route.params.shortsVideoId);
-			ShortsList.value.unshift(find);
-
-			SHORTS_VIDEO.value = find;
-		}else{
-			for (let i = 0; SHORTS.value.length > i; i++) {
-				let v = SHORTS.value[i];
-				if (route.params.shortsVideoId != v.video_id) {
-					ShortsList.value.push(v);
-				}
-			}
-			//shuffle(ShortsList.value);
-		}
-
-	}else{
-		for (let i = 0; SHORTS.value.length > i; i++) {
-			let v = SHORTS.value[i];
-			ShortsList.value.push(v);
-		}
-	}
-
-}
-
 const startOv = ()=>{
 	const elements = document.querySelectorAll('.shortItemWarps'); // 스크롤 가능한 컨테이너 내의 요소 선택
 
@@ -294,10 +266,49 @@ const startOv = ()=>{
 }
 
 
+const setShortsFist = ()=>{
+
+	if(route.params.shortsVideoId){
+		let find = SHORTS.value.find((v)=>v.video_id == route.params.shortsVideoId);
+		if(find){
+			SHORTS_IDX.value = ShortsList.value.indexOf(find);
+			ShortsList.value.unshift(find);
+		}
+
+	}
+
+}
+
+const setShortsList = ()=>{
+
+	for (let i = 0; SHORTS.value.length > i; i++) {
+		let v = SHORTS.value[i];
+		if(route.params.shortsVideoId) {
+			if (v.video_id == route.params.shortsVideoId) {
+				SHORTS_IDX.value = i;
+			}else{
+				if(i > SHORTS_IDX.value) {
+					ShortsList.value.push(v);
+				}else{
+					ShortsList.value.unshift(v);
+				}
+			}
+		}
+
+
+	}
+
+}
+
+
 useAsyncData(async ()=>{
 	SHORTS_IDX.value = 0;
 	await getShortList();
-	setShortsList(true);
+
+	setShortsList();
+	shuffle(ShortsList.value);
+
+
 });
 
 
@@ -318,7 +329,10 @@ onMounted(async ()=>{
 
 
 	setTimeout(()=>{
-		setShortsList();
+
+
+
+		setShortsFist();
 
 		if(isMobile.value) {
 			ShortPlayList.value = [];
@@ -330,8 +344,6 @@ onMounted(async ()=>{
 						})
 					}
 				}
-
-
 			} catch (e) {
 
 			}
@@ -339,9 +351,14 @@ onMounted(async ()=>{
 
 		loading.value = false;
 
+		console.log('!!ShortsList.value',ShortsList.value);
 
 		setTimeout(()=>{
-			document.getElementById("shortsBody").focus()
+			document.getElementById("shortsBody").focus();
+			/*document.getElementById("shortsBody").scroll({
+				top: SHORTS_IDX.value * shortItemHeight.value,
+			})*/
+
 			startOv();
 		},300)
 	},1000)

@@ -208,8 +208,6 @@ onMounted(()=>{
 	}
 
 
-	console.log('!!!',ShortPlayList.value);
-
 	loading.value = false;
 
 

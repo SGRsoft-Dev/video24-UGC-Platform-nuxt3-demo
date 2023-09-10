@@ -17,13 +17,13 @@
 						<i class="ph ph-list mr-1 text-2xl" :class="setDark ? 'text-white' : 'text-black'"></i>
 					</button>
 
-					<NuxtLink to="/">
+					<a href="/">
 						<img
 							:src="logo"
 							class="  h-10 object-contain  md:w-full w-40"
 							alt=""
 						>
-					</NuxtLink>
+					</a>
 
 				</div>
 				<div class="flex-1"></div>

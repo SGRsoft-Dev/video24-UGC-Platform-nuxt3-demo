@@ -122,6 +122,9 @@ const TOTAL = useState('TOTAL');
 const pageNo = ref(1);
 const endPage = ref(false);
 
+const shuffle =  (array) =>{
+	array.sort(() => Math.random() - 0.5);
+}
 
 
 const getShortList = async ()=>{
@@ -149,6 +152,8 @@ const getShortList = async ()=>{
 			v.view_cnt = $util.numberToKorean(v.view_cnt);
 			SHORTS.value.push(v);
 		}
+
+		shuffle(SHORTS.value);
 	}
 
 
@@ -186,6 +191,7 @@ const getVodList = async ()=>{
 
 			if(pageNo.value == 1){
 				VOD.value = data.result.data;
+				shuffle(VOD.value);
 			}
 
 			setTimeout(()=>{
