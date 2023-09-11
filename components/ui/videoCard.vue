@@ -1,8 +1,14 @@
 <template>
-	<NuxtLink :to="`/watch?v=${v.video_id}`">
-		<div class="videoThumb   bg-gray-200/15 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url}) `}">
+	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseenter="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
+		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/15 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url}) `}">
 			<div class="backdrop-blur-cu1">
-				<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-contain " loading="lazy" />
+
+				<Transition name="fade" mode="out-in">
+					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-contain  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver}" v-if="!mouseOverIn" loading="lazy"/>
+				</Transition>
+				<Transition name="fade" mode="out-in">
+					<iframe :src="`/embed/${v.video_id}?autoplay=1&lowquality=true&hidecontrol=true&muted=true`" loading="lazy"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]" frameborder="0"   v-if="mouseOver "></iframe>
+				</Transition>
 			</div>
 		</div>
 		<div class="text-base pt-2 px-4 md:px-0">
@@ -33,27 +39,66 @@
 
 <script setup>
 
-defineProps({
+const props = defineProps({
 	v: {
 		type: Object,
 		required: true
 	}
 })
-const isTransitioning = ref(false);
-//full-embed
-const thumbClick = async ()=>{
-	const thumbnail = document.querySelector('.videoThumb');
-	thumbnail.style.viewTransitionName = 'full-embed';
-
-	document.startViewTransition(() => {
-		thumbnail.style.viewTransitionName = '';
-		updateTheDOMSomehow();
-	});
-}
 
 const {$util} = useNuxtApp();
+const isMobile = useState('isMobile');
+const isThumbPlayVideoId = useState('isThumbPlayVideoId',()=>null);
+const mouseOver = ref(false);
+const mouseOverIn = ref(false);
+
+let mouseInTimer = null
+const mouseOverActive = ()=>{
+	if(!isMobile.value) {
+		clearTimeout(mouseInTimer);
+		mouseInTimer = setTimeout(()=>{
+			mouseOver.value = true;
+		},200)
+
+	}
+}
+
+const mouseOverDeActive = ()=>{
+	if(!isMobile.value) {
+		clearTimeout(mouseInTimer);
+		mouseOver.value = false;
+	}
+}
+
+let mouserTimer = null;
+
+watch(()=>mouseOver.value , ()=>{
+	if(mouseOver.value){
+		clearTimeout(mouserTimer);
+		mouserTimer = setTimeout(()=>{
+			if(mouseOver.value) {
+				mouseOverIn.value = true;
+				isThumbPlayVideoId.value = props.v.video_id;
+			}
+		},900)
+
+	}else{
+		mouseOverIn.value = false;
+		if(isThumbPlayVideoId.value == props.v.video_id){
+			isThumbPlayVideoId.value = null;
+		}
+	}
+})
+
+
+
 </script>
 
 <style scoped>
-
+.fade-enter-active, .fade-leave-active {
+	transition: opacity .5s;
+}
+.fade-enter, .fade-leave-active {
+	opacity: 0;
+}
 </style>

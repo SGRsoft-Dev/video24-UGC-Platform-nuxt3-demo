@@ -62,7 +62,7 @@
 				</div>
 			</div>
 
-			<div class="mt-[-20px] overflow-hidden h-[calc(100vh_+_20px)]" :class="{'bg-neutral-900 border-[#252424] text-white' : setDark }">
+			<div class=" overflow-hidden h-[calc(100vh_+_20px)]" :class="{'bg-neutral-900 border-[#252424] text-white' : setDark }">
 				<UiLnb />
 			</div>
 		</div>

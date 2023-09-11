@@ -1,6 +1,6 @@
 <template>
   <div class="relative h-full pl-3 pt-4 pr-3 sidebar">
-    <div class="relative h-full overflow-auto pb-[40px] pt-[80px]">
+    <div class="relative h-full overflow-auto pb-[40px] pt-[60px]">
 
       <transition-group name="fade">
         <div v-for="m in menus" :key="m">

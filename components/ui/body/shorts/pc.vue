@@ -45,9 +45,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="absolute right-[15px] bottom-[15px] md:hidden z-[999999]">
-							<UiShortsBtns :video="video" :isMobile="true"/>
-						</div>
+
 
 					</div>
 
