@@ -11,16 +11,16 @@
 	>
 		<div class="p-2 "  >
 			<div class=" flex items-center">
-				<div class="w-48 flex pl-2">
+				<div class="w-[220px] flex pl-2">
 
-					<button @click="setLeftMenuOpen" class="mr-2 hidden md:inline" type="button" >
+					<button @click="setLeftMenuOpen" class="ml-2 mr-2 hidden md:inline" type="button" >
 						<i class="ph ph-list mr-1 text-2xl" :class="setDark ? 'text-white' : 'text-black'"></i>
 					</button>
 
 					<a href="/">
 						<img
 							:src="logo"
-							class="  h-10 object-contain  md:w-full w-40"
+							class="  h-10 object-contain  md:w-full w-40 "
 							alt=""
 						>
 					</a>
@@ -40,6 +40,34 @@
 
 		</div>
 	</div>
+
+
+	<USlideover v-model="leftMenuPopover" class="z-[99999] max-w-[260px] "  side="left">
+		<div class="relative border-r dark:border-[#252424]" :class="{'bg-neutral-900 border-[#252424]' : setDark }">
+			<div class="absolute w-full items-center flex z-[3]  h-[56px] border-b dark:border-[#252424] pt-safe" :class="{'bg-neutral-900 border-[#252424]' : setDark }">
+				<div class="w-[220px] flex pl-2">
+
+					<button @click="setLeftMenuOpen" class="ml-2 mr-2 hidden md:inline" type="button" >
+						<i class="ph ph-list mr-1 text-2xl" :class="setDark ? 'text-white' : 'text-black'"></i>
+					</button>
+
+					<a href="/">
+						<img
+							:src="logo"
+							class="  h-10 object-contain  md:w-full w-40 "
+							alt=""
+						>
+					</a>
+
+				</div>
+			</div>
+
+			<div class="mt-[-20px] overflow-hidden h-[calc(100vh_+_20px)]" :class="{'bg-neutral-900 border-[#252424] text-white' : setDark }">
+				<UiLnb />
+			</div>
+		</div>
+	</USlideover>
+
 </template>
 
 <script setup>
@@ -48,6 +76,9 @@ const colorMode = useColorMode();
 const fullMode = useState('fullMode');
 const windowSize = useState('windowSize');
 const scrollState = useState('scrollState');
+const watchMode = useState('watchMode');
+
+
 const isDark = computed({
 	get () {
 		return colorMode.value === 'dark'
@@ -74,11 +105,28 @@ const logo = computed(() => {
 
 });
 
+
 const leftMenuOpen = useState('leftMenuOpen');
 const setLeftMenuOpen = () => {
-	leftMenuOpen.value = !leftMenuOpen.value;
+
+	if(route.path.split('/')[1] == 'watch' ) {
+		setLeftMenuPopover();
+		return;
+	}else {
+		leftMenuOpen.value = !leftMenuOpen.value;
+	}
 };
 
+const leftMenuPopover = useState('leftMenuPopover',()=>false);
+const setLeftMenuPopover = () => {
+	leftMenuPopover.value = !leftMenuPopover.value;
+};
+
+watch(()=>route.path,()=>{
+	if(route.path.split('/')[1] != 'watch' ) {
+		leftMenuPopover.value = false;
+	}
+})
 
 </script>
 

@@ -12,7 +12,7 @@
 			          :class="{'text-[#6366f1]': mm.toPath === '/' + route.path.split('/')[1] + '/' + route.path.split('/')[2] || route.path.indexOf(mm.toPath) > -1 , 'dark' : isDark , 'light' : !isDark }"
 		          >
 			          <i :class=" route.path == mm.to || (route.path.indexOf('/' + mm.to.split('/')[1]) > -1 && mm.to.split('/')[1] !='')  ? 'ph-fill '+mm.icon : 'ph '+mm.icon" class="self-center mr-2"/>
-			          <div class="flex-1 transition" v-show="leftMenuOpen">
+			          <div class="flex-1 transition" v-show="leftMenuOpen || leftMenuPopover">
 				          {{ mm.title }}
 			          </div>
 		          </div>
@@ -23,7 +23,7 @@
         </div>
       </transition-group>
     </div>
-    <div class="absolute w-full p-3  bottom-0  backdrop-blur" v-show="leftMenuOpen">
+    <div class="absolute w-full p-3  bottom-0  backdrop-blur" v-show="leftMenuOpen || leftMenuPopover">
       <a href="https://ncloud.com" target="_blank">
         <img
           src="/image/ncloud-logo.png"
@@ -55,7 +55,7 @@ const route = useRoute();
 const leftMenu = useState('leftMenu');
 
 const leftMenuOpen = useState('leftMenuOpen');
-
+const leftMenuPopover = useState('leftMenuPopover');
 
 // ref 선언
 const menus = ref();
