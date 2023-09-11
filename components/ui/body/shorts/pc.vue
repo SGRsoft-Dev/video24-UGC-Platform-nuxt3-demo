@@ -2,14 +2,14 @@
 
 	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
 
-		<div class="mx-auto w-full md:w-[100vw]  md:max-w-[600px] md:max-h-[95vh] h-full pb-safe pt-safe   " >
+		<div class="mx-auto w-full md:w-[100vw]  md:max-w-[500px] md:max-h-[95vh] h-full pb-safe pt-safe   " >
 			<div class="md:flex h-full md:gap-4">
 
 				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative md:aspect-[9/20] " >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
-						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
 
+						<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover no-repeat`,'backgroundColor':'#000'}" v-if="!active"></div>
 						<Transition name="fade">
 							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 						</Transition>
