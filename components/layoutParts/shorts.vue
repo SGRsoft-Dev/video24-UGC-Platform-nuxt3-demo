@@ -18,7 +18,7 @@
 
 		</div>
 
-		<div class="fixed top-[80px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
+		<div class="fixed top-[50px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
 			<button class="rounded-[100px] w-[40px] h-[40px] dark:bg-neutral-800 bg-gray-200 flex items-center justify-center"  type="button" @click="shortsPrev">
 				<i class="ph ph-arrow-up"></i>
 			</button>
