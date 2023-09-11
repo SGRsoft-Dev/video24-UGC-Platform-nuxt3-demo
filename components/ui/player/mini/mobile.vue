@@ -41,7 +41,7 @@
 		top: 0;
 		left: 0;
 		width: var(--min-video-width) !important;
-		height: var(--min-video-width) !important;
+
 		object-fit: contain !important;
 		z-index:1;
 	}

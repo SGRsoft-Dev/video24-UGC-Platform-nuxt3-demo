@@ -97,8 +97,8 @@ const router = useRouter();
 const shortScroll = ref(0);
 const shortScrollStart = useState('shortScrollStart',()=>false);
 
-const shortItemHeight = ref(0);
-const shortItemWidth = ref(0);
+const shortItemHeight = useState('shortItemHeight',()=>0);
+const shortItemWidth = useState('shortItemWidth',()=>0);
 
 
 const isMuted = useState('isMuted');
@@ -151,11 +151,7 @@ const shortsNext = ()=>{
 
 let scrollEndTimer = null;
 const shortsScrollRun = (e)=>{
-	try {
-		window.miniPlayer.pause();
-	}catch (e) {
 
-	}
 	shortScrollStart.value = true;
 	activeTmp.value = false;
 	shortScroll.value = e.target.scrollTop;

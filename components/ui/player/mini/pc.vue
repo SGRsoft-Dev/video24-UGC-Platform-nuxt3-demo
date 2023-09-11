@@ -2,7 +2,7 @@
 
 <template>
 
-	<div class="w-full h-full bg-black  text-white  duration-200" :style="{'background':`url(${props.poster}) center / cover`,'--min-video-width':  windowSize.width < 720 ?  windowSize.width+'px' : '100%'}" @mouseover="isHover = true" @mouseout="isHover = false">
+	<div class="w-full h-full bg-black  text-white  duration-200"  :style="{'background':`url(${props.poster}) center / cover`,'--min-video-height':  shortItemHeight > 0 ?  shortItemHeight+'px' : '100%'}" @mouseover="isHover = true" @mouseout="isHover = false">
 		<div class="vpeMiniPlayer">
 			<div :id="`vpeMiniPlayer`" v-show="uiStart"></div>
 		</div>
@@ -30,17 +30,13 @@
 
 <style scoped>
 	.vpeMiniPlayer{
-		min-width:var(--min-video-width);
+		min-height:var(--min-video-height);
 	}
 
 	.vpeMiniPlayer video{
-		position: absolute !important;
-		top: 0;
-		left: 0;
-		width: 100% !important;
-		height: 100% !important;
+		max-height: var(--min-video-height) !important;
 		object-fit:contain !important;
-		z-index:1;
+
 	}
 	.fade-enter-active, .fade-leave-active {
 		transition: opacity .5s;
@@ -88,6 +84,7 @@ window.miniPlayer = null;
 const isMuted = useState('isMuted',()=>false);
 const windowSize = useState('windowSize');
 const shortScrollStart = useState('shortScrollStart');
+const shortItemHeight = useState('shortItemHeight');
 const isPercent = ref(0);
 const isPlay = ref(false);
 const isInitPlay = ref(false);
@@ -125,10 +122,16 @@ const setupVPE = ()=>{
 
 
 	window.miniPlayer.on('ready',()=>{
+		document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10) +"px";
+		document.getElementsByTagName('video')[0].style.objectFit = 'cover';
 		setTimeout(()=>{
+			document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10)+"px";
+			document.getElementsByTagName('video')[0].style.objectFit = 'cover';
 			uiStart.value = true;
 		},200);
 		setTimeout(()=>{
+			document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10)+"px";
+			document.getElementsByTagName('video')[0].style.objectFit = 'cover';
 			playStart();
 		},300);
 	});

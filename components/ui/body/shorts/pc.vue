@@ -11,7 +11,7 @@
 						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
 
 						<Transition name="fade">
-							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
+							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 						</Transition>
 
 						<UiPlayerMiniPc
