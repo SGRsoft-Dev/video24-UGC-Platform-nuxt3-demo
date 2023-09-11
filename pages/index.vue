@@ -12,7 +12,7 @@
 		<div v-else class="space-y-5 ">
 
 			<div class="px-2 ">
-				<strong class="text-2xl">Reels</strong>
+				<strong class="text-2xl">Shorts</strong>
 			</div>
 
 			<div class="">
