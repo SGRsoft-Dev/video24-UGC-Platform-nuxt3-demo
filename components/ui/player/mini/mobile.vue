@@ -14,7 +14,9 @@
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full z-[9999] bg-neutral-400/30  duration-200  ">
-			<div class="bg-red-600 h-[3px] md:h-[3px]" :style="{width:`${isPercent}%`}"></div>
+			<div class="bg-neutral-700/50 w-full">
+				<div class="bg-red-600 h-[3px] md:h-[3px]" :style="{width:`${isPercent}%`}"></div>
+			</div>
 		</div>
 
 		<div class="absolute top-0 left-0 w-full z-[9999]   justify-between hidden md:inline-flex" v-show="isHover && isPlay || isMuted">
