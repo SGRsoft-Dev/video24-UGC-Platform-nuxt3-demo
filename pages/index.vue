@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="">
-				<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-3 "  >
+				<div class="grid grid-cols-1 md:grid-cols-7 slickBody gap-1 "  >
 
 					<div  class=" px-0 md:px-3 mb-10 videoItems "  v-for="(v , i) in SHORTS" >
 						<UiVideoCardShortForm :v="v" />
@@ -70,7 +70,7 @@
 	scroll-snap-type: x mandatory;
 	overflow-x: scroll;
 	overflow-y: hidden;
-	white-space: nowrap;
+
 	-webkit-overflow-scrolling: touch;
 	&::-webkit-scrollbar {
 		display: none;
@@ -82,14 +82,14 @@
 
 }
 .slickBody > div:first-child {
-	padding-left: 10px; /* 첫 번째 하위 요소에만 margin-left를 적용 */
+
 }
 .slickBody .videoItems{
 	max-width:240px;
 	min-width:180px;
 	padding-left: 5px;
 	padding-right: 5px;
-	aspect-ratio: 9/10;
+
 	scroll-snap-align: start;
 
 }

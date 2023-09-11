@@ -21,7 +21,7 @@
 							objectFit="cover"
 							:width="shortItemWidth"
 							:height="shortItemHeight"
-							v-if="active"
+							v-if="active && !shortScrollStart"
 
 						/>
 

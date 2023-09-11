@@ -1,8 +1,8 @@
 <template>
 
-	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
+<!--	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
 		{{windowSize.width}} / {{SHORTS_IDX}} / {{ShortsList.length}}
-	</div>
+	</div>-->
 	<div v-if="!loading">
 		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 			<a href="/">
@@ -33,8 +33,8 @@
 
 		<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
-			<div class="absolute top-0 left-0 z-[3] w-full h-full">
-				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_75px)] snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
+			<div class="absolute  top-0 left-0 z-[3] w-full h-full ">
+				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)]  snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
 						<UiBodyShortsMobile v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
 						<UiBodyShortsPc v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
@@ -95,7 +95,7 @@ const route = useRoute();
 const router = useRouter();
 
 const shortScroll = ref(0);
-const shortScrollStart = useState('shortScrollStart',()=>true);
+const shortScrollStart = useState('shortScrollStart',()=>false);
 
 const shortItemHeight = ref(0);
 const shortItemWidth = ref(0);
@@ -149,6 +149,7 @@ const shortsNext = ()=>{
 	IDX.value = getCurrentVisibleElementIndex()
 }
 
+let scrollEndTimer = null;
 const shortsScrollRun = (e)=>{
 	try {
 		window.miniPlayer.pause();
@@ -159,6 +160,18 @@ const shortsScrollRun = (e)=>{
 	activeTmp.value = false;
 	shortScroll.value = e.target.scrollTop;
 	shortsScrollEnd();
+
+	clearTimeout(scrollEndTimer);
+	scrollEndTimer = setTimeout(()=>{
+		if(shortScrollStart.value) {
+			try {
+				window.miniPlayer.play();
+			} catch (e) {
+
+			}
+			shortScrollStart.value = false;
+		}
+	},800);
 
 }
 const shortsScrollEnd = _.debounce((e)=>{
@@ -177,6 +190,7 @@ const setIdx = ()=>{
 		window.miniPlayer.seekSource(SHORTS_IDX.value);
 	}
 	activeTmp.value = true;
+
 }
 
 const chageShortsVideo = (video_id)=>{
@@ -318,7 +332,6 @@ onMounted(async ()=>{
 
 	parser = ua(window.navigator.userAgent);
 
-	console.log('!!',parser)
 
 	document.getElementById('__nuxt').classList.add('no-pull-mode');
 	document.body.classList.add('no-scroll');
@@ -354,8 +367,6 @@ onMounted(async ()=>{
 		}
 
 		loading.value = false;
-
-		console.log('!!ShortsList.value',ShortsList.value);
 
 		setTimeout(()=>{
 			document.getElementById("shortsBody").focus();

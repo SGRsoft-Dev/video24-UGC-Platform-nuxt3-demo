@@ -15,7 +15,7 @@
 
 			<slot/>
 
-			<FloatShorts v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts'" />
+			<LayoutPartsShorts v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts'" />
 
 		</div>
 
@@ -38,7 +38,7 @@
 
 	</div>
 
-	<FloatPlayer  :class="{' floatPlayerBody':floatPlayer}" v-if="!route.params.shortsVideoId"/>
+	<LayoutPartsPlayer  :class="{' floatPlayerBody':floatPlayer}" v-if="!route.params.shortsVideoId"/>
 
 </template>
 
@@ -166,6 +166,7 @@ watch(()=>route.path,(path , oldPath)=>{
 		lastRouterPath.value = oldPath;
 	}
 
+	checkOS();
 
 	pageChaneInit(path);
 
@@ -176,26 +177,36 @@ watch(()=>route.path,(path , oldPath)=>{
 	}
 });
 
+const checkOS = ()=>{
+	try {
+		let parser = ua(window.navigator.userAgent);
+		if (parser.os.name == 'iOS') {
+			isIOS.value = true;
+		} else {
+			isIOS.value = false;
+		}
+
+		if (parser.device.type == 'mobile' || parser.device.type == 'tablet') {
+			document.body.classList.add('isMobile');
+			document.body.classList.remove('isPc');
+			isMobile.value = true;
+		} else {
+			document.body.classList.add('isPc')
+			document.body.classList.remove('isMobile');
+			isMobile.value = false;
+		}
+	}catch (e) {
+
+	}
+
+}
+
 onMounted(()=>{
 
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
 
-	let parser = ua(window.navigator.userAgent);
-
-	if(parser.os.name == 'iOS'){
-		isIOS.value = true;
-	}
-	if(parser.device.type == 'mobile' || parser.device.type == 'tablet'){
-		document.body.classList.add('isMobile');
-		document.body.classList.remove('isPc');
-		isMobile.value = true;
-	}else{
-		document.body.classList.add('isPc')
-		document.body.classList.remove('isMobile');
-		isMobile.value = false;
-	}
-
+	checkOS();
 
 	pageChaneInit(route.path);
 
