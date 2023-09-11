@@ -8,9 +8,7 @@
 		<div class="leftWrap" >
 			<div class="playerWrap relative " @touchstart="startResize" @touchmove="resize" @touchend="stopResize">
 				<div class="playerBody mobileSeekBarFix"   v-show="!loading">
-
-						<div id="vpePlayer"></div>
-
+					<div id="vpePlayer"></div>
 				</div>
 				<div v-if="ERROR" class="absolute top-0 left-0 z-[9999] w-full h-full flex justify-center items-center backdrop-blur">
 					<div class="bg-black text-center p-4 rounded">
