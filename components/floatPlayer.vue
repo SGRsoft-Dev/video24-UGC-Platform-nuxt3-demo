@@ -4,7 +4,7 @@
 		<div class="relative ">
 			<div class="playerFrame relative " >
 				<div class="absolute top-0 bottom-0 left-0 right-0 z-[999999999] md:hidden inline  " @click="backVideo"  v-if="!watchMode"></div>
-				<UiPlayer/>
+				<UiPlayerDefault/>
 			</div>
 
 			<div class="absolute top-0 bottom-0 left-0 right-0 z-[999] cursor-pointer hover:bg-black/50 hoverBtnArea hidden md:inline" v-if="!watchMode" >

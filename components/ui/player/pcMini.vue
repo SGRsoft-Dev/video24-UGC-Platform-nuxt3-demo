@@ -39,6 +39,7 @@
 		left: 0;
 		width: 100% !important;
 		height: 100% !important;
+		object-fit:contain !important;
 		z-index:1;
 	}
 	.fade-enter-active, .fade-leave-active {
@@ -114,7 +115,7 @@ const setupVPE = ()=>{
 		progressBarColor:"#ff0000",
 		startMutedInfoNotVisible:false,
 		aspectRatio:props.aspectRatio,
-		objectFit:props.objectFit,
+		objectFit:'contain',
 		autoPause:false,
 		repeat:true,
 		descriptionNotVisible:true

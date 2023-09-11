@@ -11,10 +11,10 @@
 						<div class="bg-gra-v w-full h-full absolute z-[99]"></div>
 
 						<Transition name="fade">
-							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover`}" v-if="shortScrollStart"></div>
+							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
 						</Transition>
 
-						<UiMiniPlayer
+						<UiPlayerPcMini
 							:playUrl="video.hls_play_url"
 							:poster="video.thumb_url"
 							aspectRatio="9/20"
