@@ -23,7 +23,7 @@
         </div>
       </transition-group>
     </div>
-    <div class="absolute w-full p-3  bottom-0  backdrop-blur" v-show="leftMenuOpen || leftMenuPopover">
+    <div class="absolute w-full p-3  bottom-0  " v-show="leftMenuOpen || leftMenuPopover">
       <a href="https://ncloud.com" target="_blank">
         <img
           src="/image/ncloud-logo.png"
