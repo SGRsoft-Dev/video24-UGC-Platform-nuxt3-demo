@@ -1,6 +1,6 @@
 <template>
 	<div  class="w-screen h-screen">
-		<img :src="VIDEO.thumb_url" v-if="VIDEO.thumb_url" class="w-screen h-screen fixed top-0 left-0 z-[1] object-contain">
+		<img :src="VIDEO.thumb_url" v-if="VIDEO.thumb_url" class="bg-black w-screen h-screen fixed top-0 left-0 z-[1] object-contain">
 		<div id="vpePlayer" class="embedFullBodyTs  w-screen h-screen fixed top-0 left-0 z-[2]" v-if="VIDEO" ></div>
 	</div>
 </template>
@@ -172,6 +172,9 @@ onMounted(()=>{
 </script>
 
 <style>
+	body,html{
+		background-color: #000;
+	}
 	.embedFullBodyTs .ncp_player_root{
 		width:100vw !important;
 		height:100vh !important;
