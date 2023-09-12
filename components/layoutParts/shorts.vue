@@ -19,13 +19,13 @@
 		</div>
 
 		<div class="fixed top-[50px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
-			<button class="rounded-[100px] w-[60px] h-[60px] dark:bg-neutral-800 dark:hover:bg-neutral-900 bg-gray-200 hover:bg-gray-300 flex items-center justify-center"  type="button" @click="shortsPrev">
+			<button class="rounded-[100px] w-[60px] h-[60px] dark:bg-neutral-700 dark:hover:bg-neutral-600 bg-gray-200 hover:bg-gray-300 flex items-center justify-center"  type="button" @click="shortsPrev">
 				<i class="ph ph-arrow-up text-xl"></i>
 			</button>
 		</div>
 
 		<div class="fixed bottom-0 right-0 p-4 z-[99999] hidden md:inline">
-			<button class="rounded-[100px] w-[60px] h-[60px] dark:bg-neutral-800 bg-gray-200  dark:hover:bg-neutral-900 hover:bg-gray-300 flex items-center justify-center"  type="button" @click="shortsNext">
+			<button class="rounded-[100px] w-[60px] h-[60px] dark:bg-neutral-700 dark:hover:bg-neutral-600 bg-gray-200 hover:bg-gray-300 flex items-center justify-center"  type="button" @click="shortsNext">
 				<i class="ph ph-arrow-down text-xl"></i>
 			</button>
 		</div>

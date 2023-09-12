@@ -1,6 +1,6 @@
 <template>
 
-	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
+	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 dark:bg-neutral-900/10 "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
 
 		<div class="mx-auto w-full md:w-[40vw]  md:max-w-[600px]  md:max-h-[95vh] h-full pb-safe pt-safe   " >
 			<div class="md:flex h-full md:gap-4">
