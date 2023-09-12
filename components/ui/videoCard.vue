@@ -3,12 +3,11 @@
 		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/15 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url}) `}">
 			<div class="backdrop-blur-cu1">
 
+				<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-cover  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd }"  loading="lazy"/>
 				<Transition name="fade" mode="out-in">
-					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-cover  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver}" v-if="!mouseOverIn" loading="lazy"/>
+					<UiPlayerPreview :v="v"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]"  @mouseOverInEndActive="mouseOverInEndActive" v-if="mouseOverIn "></UiPlayerPreview>
 				</Transition>
-				<Transition name="fade" mode="out-in">
-					<iframe :src="`/embed/${v.video_id}?autoplay=1&lowquality=true&hidecontrol=true&muted=true`" loading="lazy"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]" frameborder="0"   v-if="mouseOver "></iframe>
-				</Transition>
+
 			</div>
 		</div>
 		<div class="text-base pt-2 px-4 md:px-0">
@@ -51,8 +50,10 @@ const isMobile = useState('isMobile');
 const isThumbPlayVideoId = useState('isThumbPlayVideoId',()=>null);
 const mouseOver = ref(false);
 const mouseOverIn = ref(false);
-
+const mouseOverInEnd = ref(false);
 let mouseInTimer = null
+let mouserTimer = null;
+
 const mouseOverActive = ()=>{
 	if(!isMobile.value) {
 		clearTimeout(mouseInTimer);
@@ -70,7 +71,12 @@ const mouseOverDeActive = ()=>{
 	}
 }
 
-let mouserTimer = null;
+const mouseOverInEndActive = ()=>{
+	setTimeout(()=>{
+		mouseOverInEnd.value = true;
+
+	},300);
+}
 
 watch(()=>mouseOver.value , ()=>{
 	if(mouseOver.value){
@@ -79,14 +85,17 @@ watch(()=>mouseOver.value , ()=>{
 			if(mouseOver.value) {
 				mouseOverIn.value = true;
 				isThumbPlayVideoId.value = props.v.video_id;
+
 			}
-		},500)
+		},200)
 
 	}else{
 		mouseOverIn.value = false;
+		mouseOverInEnd.value = false;
 		if(isThumbPlayVideoId.value == props.v.video_id){
 			isThumbPlayVideoId.value = null;
 		}
+
 	}
 })
 

@@ -23,6 +23,7 @@
     "@emanuele-em/nuxt-swipe": "^1.0.2",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "hls.js": "^1.4.12",
     "lscache": "^1.3.2",
     "nuxt-swiper": "^1.2.2",
     "postcss-custom-properties": "^13.3.0",

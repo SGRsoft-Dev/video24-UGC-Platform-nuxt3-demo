@@ -171,9 +171,7 @@ onMounted(()=>{
 </script>
 
 <style>
-	body,html{
-		background-color: #000;
-	}
+
 	.embedFullBodyTs .ncp_player_root{
 		width:100vw !important;
 		height:100vh !important;
