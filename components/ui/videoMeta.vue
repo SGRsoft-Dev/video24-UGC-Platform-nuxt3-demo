@@ -35,9 +35,11 @@
 
 						</div>
 						<div class=" rounded-full px-2 pl-3 pr-3 pt-1 pb-1 text-sm " :class="{'bg-gray-700/40' : colorMode.value=='dark', 'bg-gray-200' : colorMode.value=='light'}">
-							<button type="button" onclick="alert('데모에서 제공하지 않습니다.')">
+							<button type="button" @click="sharePopup = true">
 								<i class="ph ph-share-fat"></i> 공유
 							</button>
+
+
 						</div>
 						<div class=" rounded-full px-2 pl-3 pr-3 pt-1 pb-1 text-sm " :class="{'bg-gray-700/40' : colorMode.value=='dark', 'bg-gray-200' : colorMode.value=='light'}">
 							<button type="button" onclick="alert('데모에서 제공하지 않습니다.')">
@@ -113,7 +115,51 @@
 		</div>
 
 
+		<!-- 공유팝업-->
+
+		<UModal v-model="sharePopup" class="z-[999999] ">
+			<div class="p-5 space-y-5">
+				<div>공유</div>
+				<div class="flex flex-row gap-6">
+
+					<div class="text-center">
+						<button type="button" class="bg-neutral-200 rounded-full w-[60px] h-[60px] flex justify-center items-center">
+							<i class="ph ph-code text-3xl"></i>
+						</button>
+						<div class="text-[13px] mt-2">
+							퍼가기
+						</div>
+					</div>
+
+					<div class="text-center">
+						<button type="button" class="bg-neutral-200 rounded-full overflow-hidden w-[60px] h-[60px] bg-[#ffe811] p-2 flex justify-center items-center">
+							<img src="https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202309/8d13d66cce0c073d197773a49f8463b5.svg" class="w-full h-full" alt="">
+						</button>
+						<div class="text-[13px] mt-2">
+							카카오톡
+						</div>
+					</div>
+
+					<div class="text-center">
+						<button type="button" class="bg-neutral-200 rounded-full  w-[60px] h-[60px] flex justify-center items-center">
+							<img src="https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202309/fd96a0803b6d581f2b3055f8da827b0f.svg" class="w-full h-full" alt="">
+						</button>
+						<div class="text-[13px] mt-2">
+							Facebook
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</UModal>
+
+		<!-- 공유팝업-->
+
+
 	</div>
+
+
+
 
 
 
@@ -126,11 +172,8 @@ const colorMode = useColorMode();
 const {$util} = useNuxtApp();
 const route = useRoute();
 
+const sharePopup = ref(false);
 
-onMounted(()=>{
-
-
-})
 </script>
 
 <style scoped>

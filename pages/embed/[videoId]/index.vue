@@ -1,12 +1,16 @@
 <template>
-	<div id="vpePlayer" class="embedFullBodyTs"></div>
+	<div  class="w-screen h-screen">
+		<img :src="VIDEO.thumb_url" v-if="VIDEO.thumb_url" class="w-screen h-screen fixed top-0 left-0 z-[1] object-contain">
+		<div id="vpePlayer" class="embedFullBodyTs  w-screen h-screen fixed top-0 left-0 z-[2]" v-if="VIDEO" ></div>
+	</div>
 </template>
 
 <script setup>
-import lscache from "lscache";
+import axios from "axios";
 
 definePageMeta({
-	layout:'dark'
+	layout:'dark',
+	middleware: ["video"],
 });
 
 const runtimeConfig = useRuntimeConfig();
@@ -16,6 +20,7 @@ const route = useRoute();
 const router = useRouter();
 
 const videoId = ref(route.params.videoId);
+const UUID = useState('UUID');
 const VIDEO = useState('VIDEO',()=>null);
 const ERROR = useState('ERROR',()=>null);
 const playUrl = useState('playUrl',()=>null);
@@ -116,41 +121,52 @@ const vpeSetup = ()=>{
 		if(route.query.start){
 			window.player.currentTime(route.query.start);
 		}
+
+		window.player.on('play',(res)=>{
+			if(!route.query.lowquality){
+				vodViewCountUpdate(VIDEO.value);
+			}
+		})
 	})
 
 
 }
 
-const getVideoInfo = async ()=>{
-	let data = await $fetch(`https://mediaplus.co.kr/openApi/v1/content/${videoId.value}`, {
+
+/**
+ * VOD 조회수 업데이트
+ * @returns {Promise<void>}
+ */
+const vodViewCountUpdate = async (vod)=>{
+
+	if(!vod) return false;
+
+	let {data} = await axios.post(`https://mediaplus.co.kr/openApi/v1/analytics`,{
+		uid:UUID.value,
+		oid:vod.oid,
+		ovp_channel_id:vod.channel_id,
+		video_id:vod.video_id,
+		type:'vod',
+		currentTime:0,
+		duration:vod.duration,
+		viewingTime:0,
+		percent:0,
+
+
+	},{
 		headers:{
 			'Authorization':mpKey
 		}
 	});
-
-	if(data){
-		if(data.code==200){
-			VIDEO.value = data.result;
-			playUrl.value = route.query.lowquality ? VIDEO.value.quality_hls[0].url : VIDEO.value.hls_play_url;
-		}
-	}
 }
 
 
-const { data, pending, error, refresh } = await useAsyncData('video', ()=>{
-		getVideoInfo();
-	}, {
-		watch: [videoId]
-	}
-)
 
-watch(()=>VIDEO.value, (to)=>{
-	if(to){
-		vpeSetup();
-	}
-})
 
 onMounted(()=>{
+	if(VIDEO.value) {
+		vpeSetup();
+	}
 	document.body.classList.add('bg-black');
 })
 </script>
@@ -159,6 +175,7 @@ onMounted(()=>{
 	.embedFullBodyTs .ncp_player_root{
 		width:100vw !important;
 		height:100vh !important;
+
 	}
 
 </style>

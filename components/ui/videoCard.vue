@@ -1,10 +1,10 @@
 <template>
-	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseenter="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
+	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseover="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
 		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/15 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url}) `}">
 			<div class="backdrop-blur-cu1">
 
 				<Transition name="fade" mode="out-in">
-					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-contain  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver}" v-if="!mouseOverIn" loading="lazy"/>
+					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-cover  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver}" v-if="!mouseOverIn" loading="lazy"/>
 				</Transition>
 				<Transition name="fade" mode="out-in">
 					<iframe :src="`/embed/${v.video_id}?autoplay=1&lowquality=true&hidecontrol=true&muted=true`" loading="lazy"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]" frameborder="0"   v-if="mouseOver "></iframe>
@@ -80,7 +80,7 @@ watch(()=>mouseOver.value , ()=>{
 				mouseOverIn.value = true;
 				isThumbPlayVideoId.value = props.v.video_id;
 			}
-		},900)
+		},500)
 
 	}else{
 		mouseOverIn.value = false;
