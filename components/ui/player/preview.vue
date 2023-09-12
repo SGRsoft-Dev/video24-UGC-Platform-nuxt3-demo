@@ -32,6 +32,10 @@ const unmounted = ()=>{
 	}
 }
 
+const playStartEmit = _.debounce(()=>{
+	emit('mouseOverInEndActive');
+},200);
+
 const mounted = _.debounce(()=>{
 	let video = document.getElementById('video');
 	try{
@@ -47,13 +51,13 @@ const mounted = _.debounce(()=>{
 		hls.attachMedia(video);
 		hls.on(Hls.Events.MANIFEST_PARSED,function() {
 			video.play();
-			emit('mouseOverInEndActive');
+			playStartEmit();
 		});
 	} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 		video.src = props.v.quality_hls[0].url;
 		video.addEventListener('canplay',function() {
 			video.play();
-			emit('mouseOverInEndActive');
+			playStartEmit();
 		});
 	}
 },200);
