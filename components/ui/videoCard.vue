@@ -1,9 +1,9 @@
 <template>
 	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseover="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
-		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/15 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url}) `}">
-			<div class="backdrop-blur-cu1">
+		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/15 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url}) center / cover `}">
+			<div :class="{'backdrop-blur-cu1' : mouseOverInEnd}">
 
-				<img :src="v.thumb_url ? v.thumb_url : '/image/b.png' " :alt="v.title" class="w-full h-full object-cover  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd }"  loading="lazy"/>
+				<img src="/image/b.png" :alt="v.title" class="w-full h-full object-cover  " :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd }"  loading="lazy"/>
 				<Transition name="fade" mode="out-in">
 					<UiPlayerPreview :v="v"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]"  @mouseOverInEndActive="mouseOverInEndActive" v-if="mouseOverIn "></UiPlayerPreview>
 				</Transition>
@@ -75,7 +75,7 @@ const mouseOverInEndActive = ()=>{
 	setTimeout(()=>{
 		mouseOverInEnd.value = true;
 
-	},300);
+	},200);
 }
 
 watch(()=>mouseOver.value , ()=>{
