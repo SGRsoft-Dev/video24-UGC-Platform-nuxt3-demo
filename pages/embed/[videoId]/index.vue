@@ -118,6 +118,7 @@ const vpeSetup = ()=>{
 	ERROR.value = null;
 	window.player = new ncplayer('vpePlayer',options);
 	window.player.on('ready',()=>{
+		window.player.controlBarActive();
 		if(route.query.start){
 			window.player.currentTime(route.query.start);
 		}
