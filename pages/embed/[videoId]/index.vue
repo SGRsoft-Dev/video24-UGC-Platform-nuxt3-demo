@@ -1,8 +1,6 @@
 <template>
-	<div  class="w-screen h-screen">
-		<img :src="VIDEO.thumb_url" v-if="VIDEO.thumb_url" class="bg-black w-screen h-screen fixed top-0 left-0 z-[1] object-contain">
-		<div id="vpePlayer" class="embedFullBodyTs  w-screen h-screen fixed top-0 left-0 z-[2]" v-if="VIDEO" ></div>
-	</div>
+	<img :src="VIDEO.thumb_url" v-if="VIDEO.thumb_url" class="bg-black w-full h-full fixed top-0 left-0 z-[1] object-contain">
+	<div id="vpePlayer" class="embedFullBodyTs  w-full h-full fixed top-0 left-0 z-[2]" v-if="VIDEO" ></div>
 </template>
 
 <script setup>
