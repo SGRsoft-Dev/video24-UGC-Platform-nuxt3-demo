@@ -121,14 +121,14 @@ const util = {
      * @param str
      */
     titleMake(str) {
-        let underScore = str.indexOf('_');
+        /*let underScore = str.indexOf('_');
         if(underScore > 2) {
             str = str.replaceAll('_', ' ');
         }
         let hipen = str.indexOf('-');
         if(hipen > 2) {
             str = str.replaceAll('-', ' ');
-        }
+        }*/
         return str;
     },
 
