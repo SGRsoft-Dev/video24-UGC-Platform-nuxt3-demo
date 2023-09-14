@@ -55,6 +55,8 @@
 
 <script setup>
 
+
+
 const props = defineProps({
 	playlist: {
 		type: Array,
@@ -85,9 +87,9 @@ const props = defineProps({
 
 
 const isMuted = useState('isMuted',()=>false);
-const windowSize = useState('windowSize');
+const windowSize = useWindowSize();
 const shortScrollStart = useState('shortScrollStart');
-const ShortsList = useState('ShortsList');
+const ShortsList = useShortsList();
 const isPercent = ref(0);
 const isPlay = useState('isPlay',()=>false);
 const isInitPlay = ref(false);

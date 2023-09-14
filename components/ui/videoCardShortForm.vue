@@ -26,16 +26,18 @@
 
 <script setup>
 
+
+
 const props = defineProps({
 	v: {
 		type: Object,
 		required: true
 	}
 })
-const ShortsList = useState('ShortsList');
+const ShortsList = useShortsList();
 const {$util} = useNuxtApp();
 const router = useRouter();
-const isMobile = useState('isMobile');
+const isMobile = useIsMobile();
 
 const goShort = (video_id)=>{
 	ShortsList.value = [];

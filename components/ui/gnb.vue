@@ -71,12 +71,15 @@
 </template>
 
 <script setup>
+
+
+
 const route = useRoute();
 const colorMode = useColorMode();
-const fullMode = useState('fullMode');
-const windowSize = useState('windowSize');
-const scrollState = useState('scrollState');
-const watchMode = useState('watchMode');
+const fullMode = useFullMode();
+const windowSize = useWindowSize();
+const scrollState = useScrollState();
+const watchMode = useWatchMode();
 
 
 const isDark = computed({
@@ -106,7 +109,9 @@ const logo = computed(() => {
 });
 
 
-const leftMenuOpen = useState('leftMenuOpen');
+const leftMenu = useLeftMenu();
+const leftMenuOpen = useLeftMenuOpen();
+const leftMenuPopover = useLeftMenuPopover();
 const setLeftMenuOpen = () => {
 
 	if(route.path.split('/')[1] == 'watch' ) {
@@ -117,7 +122,7 @@ const setLeftMenuOpen = () => {
 	}
 };
 
-const leftMenuPopover = useState('leftMenuPopover',()=>false);
+
 const setLeftMenuPopover = () => {
 	leftMenuPopover.value = !leftMenuPopover.value;
 };

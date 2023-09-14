@@ -51,7 +51,7 @@ const route = useRoute();
 
 const VOD = useState('PLAYLIST_LIST',()=>[]);
 const TOTAL = useState('PLAYLIST_TOTAL',()=>0);
-const VIDEO = useState('VIDEO');
+const VIDEO =  useVideo();
 
 const shuffle =  (array) =>{
 	array.sort(() => Math.random() - 0.5);

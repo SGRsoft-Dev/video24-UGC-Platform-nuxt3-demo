@@ -24,6 +24,7 @@
 
 <script setup>
 
+
 const colorMode = useColorMode();
 
 const isDark = computed({
@@ -36,8 +37,9 @@ const isDark = computed({
 });
 const route = useRoute();
 const router = useRouter();
-const leftMenu = useState('leftMenu');
-const leftMenuOpen = useState('leftMenuOpen');
+const leftMenu = useLeftMenu();
+const leftMenuOpen = useLeftMenuOpen();
+const leftMenuPopover = useLeftMenuPopover();
 const menus = ref();
 
 const appConfig = useAppConfig();

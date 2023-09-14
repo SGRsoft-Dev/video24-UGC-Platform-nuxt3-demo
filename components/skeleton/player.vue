@@ -86,8 +86,9 @@
 
 }
 </style>
-<script setup lang="ts">
+<script setup>
+
 const colorMode = useColorMode();
-const watchMode = useState('watchMode');
-const fullMode = useState('fullMode');
+const watchMode = useWatchMode();
+const fullMode = useFullMode();
 </script>

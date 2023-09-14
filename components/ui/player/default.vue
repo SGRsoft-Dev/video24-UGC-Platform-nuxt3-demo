@@ -37,23 +37,24 @@
 import axios from "axios";
 import lscache from "lscache";
 import _ from "lodash";
+
 lscache.setExpiryMilliseconds(1000);
 
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
-const VIDEO = useState('VIDEO');
+const VIDEO =  useVideo();
 const router = useRouter();
-const watchMode = useState('watchMode');
-const fullMode = useState('fullMode');
-const autoPlayMode = useState('autoPlayMode');
-const floatPlayer = useState('floatPlayer');
-const windowSize = useState('windowSize');
+const watchMode = useWatchMode();
+const fullMode = useFullMode();
+const autoPlayMode = useAutoPlayMode();
+const floatPlayer = useFloatPlayer();
+const windowSize = useWindowSize();
 const loading = ref(true);
 const VOD = useState('PLAYLIST_LIST',()=>[]);
 const ERROR = useState('ERROR',()=>null);
-const lastRouterPath = useState('lastRouterPath');
+const lastRouterPath = useLastRouterPath();
 const route = useRoute();
-const UUID = useState('UUID');
+const UUID = useUuid();
 
 
 if(lscache.get('autoPlayMode')){

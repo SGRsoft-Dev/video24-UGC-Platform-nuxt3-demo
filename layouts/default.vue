@@ -44,28 +44,32 @@
 
 <script setup>
 import ua from "ua-parser-js";
-const leftMenuOpen = useState('leftMenuOpen',()=>true);
-const watchMode = useState('watchMode',()=>false);
-const floatPlayer = useState('floatPlayer');
-const windowSize = useState('windowSize');
+
+
+
+
+const leftMenuOpen = useLeftMenuOpen();
+const watchMode = useWatchMode();
+const floatPlayer = useFloatPlayer();
+const windowSize = useWindowSize();
 const route = useRoute();
 const router = useRouter();
-const lastRouterPath = useState('lastRouterPath',()=>null);
+const lastRouterPath = useLastRouterPath();
 
-const SHORTS_VIDEO = useState('SHORTS_VIDEO');
-const ShortsList = useState('ShortsList');
-const ShortPlayList = useState('ShortPlayList',()=>[]);
+const SHORTS_VIDEO = useShortVideo();
+const ShortsList = useShortsList();
+const ShortPlayList = useShortPlayList();
 
 
-const isMobile = useState('isMobile');
+const isMobile = useIsMobile();
 const colorMode = useColorMode();
-const fullMode = useState('fullMode');
+const fullMode = useFullMode();
 const loading = ref(true)
-const shortMode = useState('shortMode',()=>false);
+const shortMode = useShortMode();
 
-const VIDEO = useState('VIDEO');
+const VIDEO =  useVideo();
 
-const isIOS = useState('osIOS',()=>false);
+const isIOS = useOsIOS();
 
 const isViewGnb = computed(()=>{
 	if(route.path.split('/')[1] == 'shorts') {

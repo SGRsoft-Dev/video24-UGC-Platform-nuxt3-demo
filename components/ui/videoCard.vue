@@ -46,7 +46,7 @@ const props = defineProps({
 })
 
 const {$util} = useNuxtApp();
-const isMobile = useState('isMobile');
+const isMobile = useIsMobile();
 const isThumbPlayVideoId = useState('isThumbPlayVideoId',()=>null);
 const mouseOver = ref(false);
 const mouseOverIn = ref(false);

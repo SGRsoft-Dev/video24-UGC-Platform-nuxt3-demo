@@ -24,23 +24,19 @@
 </style>
 
 <script setup>
-
-
 import axios from "axios";
-
 
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
 
 const route = useRoute();
-const floatPlayer = useState('floatPlayer');
-const windowSize = useState('windowSize');
-const VIDEO = useState('VIDEO');
-const loading = useState('loading',()=>true);
+const floatPlayer = useFloatPlayer();
+const windowSize = useWindowSize();
+const VIDEO =  useVideo();
+const loading = useLoading();
 const UUID = useState('UUID');
-const lastRouterPath = useState('lastRouterPath');
-
+const lastRouterPath = useLastRouterPath();
 
 const colorMode = useColorMode();
 

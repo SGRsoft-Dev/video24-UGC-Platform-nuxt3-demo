@@ -92,9 +92,9 @@ const props = defineProps({
 });
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
-const windowSize = useState('windowSize');
+const windowSize = useWindowSize();
 const shortScrollStart = useState('shortScrollStart');
-const UUID = useState('UUID');
+const UUID = useUuid();
 const {$util} = useNuxtApp();
 const isMuted = useState('isMuted');
 const isIOS = useState('isIOS');

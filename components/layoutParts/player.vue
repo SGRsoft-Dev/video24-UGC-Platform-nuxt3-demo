@@ -48,17 +48,18 @@
 </template>
 
 <script setup>
-const watchMode = useState('watchMode',()=>false);
-const floatPlayer = useState('floatPlayer');
+
+const watchMode = useWatchMode();
+const floatPlayer = useFloatPlayer();
 const route = useRoute();
 const router = useRouter();
 
 const colorMode = useColorMode();
-const fullMode = useState('fullMode');
-const windowSize = useState('windowSize');
+const fullMode = useFullMode();
+const windowSize = useWindowSize();
 
 
-const VIDEO = useState('VIDEO');
+const VIDEO =  useVideo();
 const {$util} = useNuxtApp();
 const backVideo = ()=>{
 	floatPlayer.value = false;

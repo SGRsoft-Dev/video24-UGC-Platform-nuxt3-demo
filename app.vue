@@ -9,37 +9,15 @@
 <script setup>
 import lscache from 'lscache';
 import { v4 as uuidv4 } from 'uuid';
-
-
 lscache.setExpiryMilliseconds(1000);
 
 
-const UUID = useState('UUID',()=>null);
-const VOD = useState('VOD',()=>[]);
-
-const TOTAL = useState('TOTAL',()=>0);
-const VIDEO = useState('VIDEO',);
-
-const SHORTS = useState('SHORTS',()=>[]);
-const SHORTS_VIDEO = useState('SHORTS_VIDEO');
-const SHORTS_IDX = useState('SHORTS_IDX',()=>0);
-const startFlag = useState('startFlag',()=>false);
-
-const fullMode = useState('fullMode',()=>false);
-const autoPlayMode = useState('autoPlayMode',()=>true);
-const floatPlayer = useState('floatPlayer',()=>false);
-const windowSize = useState('windowSize',()=> {
-		return {
-			width:0,
-			height:0,
-			scroll:0,
-			lastScroll:0,
-		}
-});
-
+const UUID = useUuid();
+const fullMode = useFullMode();
+const windowSize = useWindowSize();
 const scrollY = ref(0)
-const scrollState = useState('scrollState',()=>'up');
-const isMobile = useState('isMobile',()=>false);
+const scrollState = useScrollState();
+const isMobile = useIsMobile();
 
 watch(fullMode,(v)=>{
 	if(v){
@@ -88,7 +66,6 @@ onMounted(()=>{
 	});
 
 	document.addEventListener('scroll',()=>{
-
 		windowSize.value.scroll = window.scrollY;
 		scrollY.value = window.scrollY;
 	});

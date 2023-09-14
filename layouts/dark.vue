@@ -6,16 +6,17 @@
 
 <script setup>
 import ua from "ua-parser-js";
-const windowSize = useState('windowSize');
+
+const windowSize = useWindowSize();
 const route = useRoute();
 const router = useRouter();
 
-const isMobile = useState('isMobile');
+const isMobile = useIsMobile();
 const colorMode = useColorMode();
 const loading = ref(true)
 
 
-const isIOS = useState('osIOS',()=>false);
+const isIOS = useOsIOS();
 
 
 

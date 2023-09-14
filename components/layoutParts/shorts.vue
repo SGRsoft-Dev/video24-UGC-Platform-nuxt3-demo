@@ -69,26 +69,22 @@ import axios from "axios";
 import _ from "lodash";
 import ua from "ua-parser-js";
 
+const {$util} = useNuxtApp();
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
-
-const windowSize = useState('windowSize');
-const loading = useState('loading',()=>true);
-const UUID = useState('UUID');
-
+const windowSize = useWindowSize();
+const loading = useLoading();
+const UUID = useUuid();
 const colorMode = useColorMode();
-
-const {$util} = useNuxtApp();
-
-const SHORTS = useState('SHORTS');
-const SHORTS_VIDEO = useState('SHORTS_VIDEO');
-const SHORTS_IDX = useState('SHORTS_IDX');
-const ShortsList = useState('ShortsList');
-const shortsInitLoad = useState('shortsInitLoad');
-const shortMode = useState('shortMode');
-const isMobile = useState('isMobile');
-const ShortPlayList = useState('ShortPlayList');
+const SHORTS = useShorts()
+const SHORTS_VIDEO = useShortVideo();
+const SHORTS_IDX = useShortIdx();
+const ShortsList = useShortsList();
+const shortsInitLoad = useShortsInitLoad();
+const shortMode = useShortMode();
+const isMobile = useIsMobile();
+const ShortPlayList = useShortPlayList();
 const IDX = ref(0);
 
 const route = useRoute();
@@ -102,8 +98,8 @@ const shortItemWidth = useState('shortItemWidth',()=>0);
 
 
 const isMuted = useState('isMuted');
-const startFlag = useState('startFlag');
-const activeTmp = useState('activeTmp',()=>true);
+const startFlag = useStartFlag();
+const activeTmp = useActiveTmp();
 
 
 

@@ -82,7 +82,7 @@ const props = defineProps({
 
 window.miniPlayer = null;
 const isMuted = useState('isMuted',()=>false);
-const windowSize = useState('windowSize');
+const windowSize = useWindowSize();
 const shortScrollStart = useState('shortScrollStart');
 const shortItemHeight = useState('shortItemHeight');
 const isPercent = ref(0);

@@ -9,7 +9,7 @@ const config = ref(runtimeConfig);
 const colorMode = useColorMode();
 const route = useRoute();
 const router = useRouter();
-const SHORTS = useState('SHORTS');
+const SHORTS = useShorts();
 const {$util} = useNuxtApp();
 
 

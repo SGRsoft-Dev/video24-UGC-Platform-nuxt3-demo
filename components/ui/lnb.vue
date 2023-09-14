@@ -52,10 +52,9 @@ const isDark = computed({
 const route = useRoute();
 
 // 전역 상태 선언
-const leftMenu = useState('leftMenu');
-
-const leftMenuOpen = useState('leftMenuOpen');
-const leftMenuPopover = useState('leftMenuPopover');
+const leftMenu = useLeftMenu();
+const leftMenuOpen = useLeftMenuOpen();
+const leftMenuPopover = useLeftMenuPopover();
 
 // ref 선언
 const menus = ref();

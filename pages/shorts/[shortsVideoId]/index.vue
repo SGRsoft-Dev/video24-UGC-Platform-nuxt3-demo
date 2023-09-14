@@ -3,10 +3,6 @@
 </template>
 <script setup>
 
-
-
-import axios from "axios";
-import {useAsyncData} from "#app";
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
@@ -14,17 +10,17 @@ const {$util} = useNuxtApp();
 
 const route = useRoute();
 
-const SHORTS = useState('SHORTS');
-const SHORTS_VIDEO = useState('SHORTS_VIDEO');
-const SHORTS_IDX = useState('SHORTS_IDX');
-const ShortsList = useState('ShortsList',()=>[]);
-const shortsInitLoad = useState('shortsInitLoad');
-const shortMode = useState('shortMode');
+const SHORTS = useShorts();
+const SHORTS_VIDEO = useShortVideo();
+const SHORTS_IDX = useShortIdx();
+const ShortsList = useShortsList();
+const shortsInitLoad = useShortsInitLoad();
+const shortMode = useShortMode();
 
-const startFlag = useState('startFlag');
-const activeTmp = useState('activeTmp');
-const ShortPlayList = useState('ShortPlayList');
-const isMobile = useState('isMobile');
+const startFlag = useStartFlag();
+const activeTmp = useActiveTmp();
+const ShortPlayList = useShortPlayList();
+const isMobile = useIsMobile();
 
 onMounted(()=>{
 	activeTmp.value = true;

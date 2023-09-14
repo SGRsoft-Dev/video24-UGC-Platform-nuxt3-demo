@@ -167,7 +167,7 @@
 </template>
 
 <script setup>
-const VIDEO = useState('VIDEO');
+const VIDEO =  useVideo();
 const colorMode = useColorMode();
 const {$util} = useNuxtApp();
 const route = useRoute();

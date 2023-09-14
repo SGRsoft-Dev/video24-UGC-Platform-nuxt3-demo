@@ -122,10 +122,10 @@ useHead({
  * VOD 리스트 가져오기
  * @type {*[]}
  */
-const VOD = useState('VOD');
-const SHORTS = useState('SHORTS');
-const SHORTS_VIDEO = useState('SHORTS_VIDEO');
-const TOTAL = useState('TOTAL');
+const VOD = useVod();
+const SHORTS = useShorts();
+const SHORTS_VIDEO = useShortVideo();
+const TOTAL = useTotal();
 const pageNo = ref(1);
 const endPage = ref(false);
 
