@@ -2,7 +2,7 @@
 	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseover="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
 
 
-		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/30 md:hover:scale-105 duration-200"  :id="`videoCard_${v.video_id}`" :style="{background:`url(${v.thumb_url})  `}">
+		<div class="videoThumb relative mx-3 md:mx-0 rounded-xl overflow-hidden bg-gray-200/30 md:hover:scale-105 duration-200"  :class="{'activeMobileVideo' : mouseOverIn && mouseOverInEnd && isThumbPlayVideoId == v.video_id}" :id="`videoCard_${v.video_id}`" :style="{background:`url(${v.thumb_url})  `}">
 			<div class="backdrop-blur-cu1">
 
 				<img :src="v.thumb_url ? v.thumb_url :  '/image/b.png'" :alt="v.title" class="w-full h-full object-cover   " :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd && isThumbPlayVideoId == v.video_id  }"  loading="lazy"/>
@@ -12,7 +12,7 @@
 
 			</div>
 		</div>
-		<div class="text-base pt-2 px-4 md:px-0">
+		<div class="text-base pt-3 px-4 md:px-0">
 			<div class="flex">
 				<div class="pr-3  ">
 					<UAvatar :src="v.channel_profile_image_url" v-if="v.channel_profile_image_url"  :alt="v.channel_name" class="profileThumb" />
@@ -53,19 +53,20 @@ const isMobile = useIsMobile();
 const isThumbPlayVideoId = useIsThumbPlayVideoId();
 const observerVideos = useObserverVideos();
 const windowSize = useWindowSize();
+const scrollState = useScrollState();
+
 const mouseOver = ref(false);
 const mouseOverIn = ref(false);
 const mouseOverInEnd = ref(false);
+
 let mouseInTimer = null
 let mouserTimer = null;
 
-const mouseOverActive = ()=>{
+const mouseOverActive = (time)=>{
 	clearTimeout(mouseInTimer);
-	//if(isThumbPlayVideoId.value) return;
-
 	mouseInTimer = setTimeout(()=>{
 		mouseOver.value = true;
-	},200)
+	},time ? time : 200)
 }
 
 const mouseOverDeActive = ()=>{
@@ -76,7 +77,6 @@ const mouseOverDeActive = ()=>{
 const mouseOverInEndActive = ()=>{
 	setTimeout(()=>{
 		mouseOverInEnd.value = true;
-
 	},200);
 }
 
@@ -112,7 +112,11 @@ const isObView = ref(false);
 const handleIntersection = (entries) =>{
 	entries.forEach(entry => {
 		if (entry.isIntersecting) {
-			observerVideos.value.push(props.v.video_id);
+			if(scrollState.value == 'down') {
+				observerVideos.value.push(props.v.video_id);
+			}else{
+				observerVideos.value.unshift(props.v.video_id);
+			}
 		} else {
 			observerVideos.value = observerVideos.value.filter((v)=>v != props.v.video_id);
 		}
@@ -130,9 +134,9 @@ watch(()=>windowSize.value.scroll , (to)=>{
 //조건이 맞으면 마우스 올린것 처럼 작동
 const mouseOverTriggle = _.debounce((thisScroll)=>{
 	if(isObView.value  && thisScroll < 250){
-		mouseOverActive();
+		mouseOverActive(100);
 	}
-},300)
+},100)
 
 //옵져버는 모바일만 동작
 watch(()=>observerVideos.value , (to)=>{
@@ -155,6 +159,8 @@ const setObserver = ()=>{
 		};
 		const observer = new IntersectionObserver(handleIntersection, options);
 		observer.observe(document.getElementById(`videoCard_${props.v.video_id}`));
+
+
 	}
 }
 
@@ -162,6 +168,8 @@ onMounted(()=>{
 	setObserver();
 	isDomScrollOffset.value = document.getElementById(`videoCard_${props.v.video_id}`).offsetTop || 0;
 	inScrollTopSt.value = Math.round(isDomScrollOffset.value - windowSize.value.scroll) ;
+
+
 })
 
 </script>
@@ -172,5 +180,10 @@ onMounted(()=>{
 }
 .fade-enter, .fade-leave-active {
 	opacity: 0;
+}
+
+.activeMobileVideo{
+	border-radius: 0 !important;
+	margin:0 !important;
 }
 </style>

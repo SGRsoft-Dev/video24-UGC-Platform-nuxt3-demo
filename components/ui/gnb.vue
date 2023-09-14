@@ -1,5 +1,8 @@
 <template>
 
+<!--	<div class="fixed top-[60px] right-0 bg-black p-2 text-white z-[999]">
+		{{observerVideos.length > 0 ? observerVideos[0] : ''}} / {{scrollState}} / {{windowSize.scroll}}
+	</div>-->
 
 	<div class="main-header fixed  w-full backdrop-blur z-[99999] md:drop-shadow-none  border-b pt-safe  "
 		 :class="{

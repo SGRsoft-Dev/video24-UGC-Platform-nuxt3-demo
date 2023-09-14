@@ -59,6 +59,8 @@ onMounted(()=>{
 
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
+	windowSize.value.scroll = window.scrollY;
+	scrollY.value = window.scrollY;
 
 	window.addEventListener('resize',()=>{
 		windowSize.value.width = window.innerWidth;
@@ -69,6 +71,8 @@ onMounted(()=>{
 		windowSize.value.scroll = window.scrollY;
 		scrollY.value = window.scrollY;
 	});
+
+
 
 	if(lscache.get('fullMode')){
 		if(windowSize.value.width > 640) {

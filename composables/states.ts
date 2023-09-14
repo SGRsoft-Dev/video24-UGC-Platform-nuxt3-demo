@@ -45,7 +45,7 @@ export const useVod = ()=> useState('VOD',()=>[]);
 
 //VOD 리스트 개수
 export const useTotal = ()=> useState('TOTAL',()=>0);
-export const useError = ()=> useState('ERROR',()=>null);
+export const usePlayerError = ()=> useState('ERROR',()=>null);
 
 //시청중인 VIDEO
 export const useVideo = ()=> useState('VIDEO',()=>0);

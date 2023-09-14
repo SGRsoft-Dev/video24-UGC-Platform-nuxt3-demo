@@ -20,7 +20,7 @@ const router = useRouter();
 const videoId = ref(route.params.videoId);
 const UUID = useUuid();
 const VIDEO = useVideo();
-const ERROR = useError();
+const ERROR = usePlayerError();
 const playUrl = usePlayUrl();
 
 
