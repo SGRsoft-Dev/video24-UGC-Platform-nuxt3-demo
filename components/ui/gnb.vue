@@ -1,5 +1,6 @@
 <template>
 
+
 	<div class="main-header fixed  w-full backdrop-blur z-[99999] md:drop-shadow-none  border-b pt-safe  "
 		 :class="{
 				'bg-neutral-900 border-[#252424]' : setDark ,
@@ -80,7 +81,8 @@ const fullMode = useFullMode();
 const windowSize = useWindowSize();
 const scrollState = useScrollState();
 const watchMode = useWatchMode();
-
+const isThumbPlayVideoId = useIsThumbPlayVideoId();
+const observerVideos = useObserverVideos();
 
 const isDark = computed({
 	get () {

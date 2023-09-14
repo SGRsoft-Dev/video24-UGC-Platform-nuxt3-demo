@@ -51,6 +51,8 @@ export const useError = ()=> useState('ERROR',()=>null);
 export const useVideo = ()=> useState('VIDEO',()=>0);
 
 export const usePlayUrl = ()=> useState('playUrl',()=>null);
+export const useIsThumbPlayVideoId = ()=> useState('isThumbPlayVideoId',()=>null);
+export const useObserverVideos = ()=> useState('observerVideos',()=>[]);
 
 ////////////////////////////////////////
 

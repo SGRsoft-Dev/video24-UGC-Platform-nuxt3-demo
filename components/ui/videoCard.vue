@@ -1,11 +1,13 @@
 <template>
 	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseover="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
-		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/30 md:hover:scale-105 duration-200" :style="{background:`url(${v.thumb_url})  `}">
+
+
+		<div class="videoThumb relative md:rounded-xl md:overflow-hidden bg-gray-200/30 md:hover:scale-105 duration-200"  :id="`videoCard_${v.video_id}`" :style="{background:`url(${v.thumb_url})  `}">
 			<div class="backdrop-blur-cu1">
 
-				<img :src="v.thumb_url ? v.thumb_url :  '/image/b.png'" :alt="v.title" class="w-full h-full object-cover   " :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd }"  loading="lazy"/>
+				<img :src="v.thumb_url ? v.thumb_url :  '/image/b.png'" :alt="v.title" class="w-full h-full object-cover   " :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd && isThumbPlayVideoId == v.video_id  }"  loading="lazy"/>
 				<Transition name="fade" mode="out-in">
-					<UiPlayerPreview :v="v"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]"  @mouseOverInEndActive="mouseOverInEndActive" v-if="mouseOverIn "></UiPlayerPreview>
+					<UiPlayerPreview :v="v"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]"  @mouseOverInEndActive="mouseOverInEndActive" v-if="mouseOverIn && isThumbPlayVideoId == v.video_id "></UiPlayerPreview>
 				</Transition>
 
 			</div>
@@ -37,6 +39,7 @@
 </template>
 
 <script setup>
+import _ from 'lodash';
 
 const props = defineProps({
 	v: {
@@ -47,7 +50,9 @@ const props = defineProps({
 
 const {$util} = useNuxtApp();
 const isMobile = useIsMobile();
-const isThumbPlayVideoId = useState('isThumbPlayVideoId',()=>null);
+const isThumbPlayVideoId = useIsThumbPlayVideoId();
+const observerVideos = useObserverVideos();
+const windowSize = useWindowSize();
 const mouseOver = ref(false);
 const mouseOverIn = ref(false);
 const mouseOverInEnd = ref(false);
@@ -55,20 +60,17 @@ let mouseInTimer = null
 let mouserTimer = null;
 
 const mouseOverActive = ()=>{
-	if(!isMobile.value) {
-		clearTimeout(mouseInTimer);
-		mouseInTimer = setTimeout(()=>{
-			mouseOver.value = true;
-		},200)
+	clearTimeout(mouseInTimer);
+	//if(isThumbPlayVideoId.value) return;
 
-	}
+	mouseInTimer = setTimeout(()=>{
+		mouseOver.value = true;
+	},200)
 }
 
 const mouseOverDeActive = ()=>{
-	if(!isMobile.value) {
-		clearTimeout(mouseInTimer);
-		mouseOver.value = false;
-	}
+	clearTimeout(mouseInTimer);
+	mouseOver.value = false;
 }
 
 const mouseOverInEndActive = ()=>{
@@ -100,6 +102,67 @@ watch(()=>mouseOver.value , ()=>{
 })
 
 
+
+let isDomScrollOffset = ref(0);
+const inScrollTopSt = ref(0);
+const isObView = ref(false);
+
+
+//옵져버로 감시해서 보이는 비디오카드는 배열에 추가, 안보이는 요소는 제거
+const handleIntersection = (entries) =>{
+	entries.forEach(entry => {
+		if (entry.isIntersecting) {
+			observerVideos.value.push(props.v.video_id);
+		} else {
+			observerVideos.value = observerVideos.value.filter((v)=>v != props.v.video_id);
+		}
+	});
+}
+
+//스크롤 감시
+watch(()=>windowSize.value.scroll , (to)=>{
+	inScrollTopSt.value = Math.round(isDomScrollOffset.value - windowSize.value.scroll) ;
+	if(isObView.value ) {
+		mouseOverTriggle(inScrollTopSt.value);
+	}
+})
+
+//조건이 맞으면 마우스 올린것 처럼 작동
+const mouseOverTriggle = _.debounce((thisScroll)=>{
+	if(isObView.value  && thisScroll < 250){
+		mouseOverActive();
+	}
+},300)
+
+//옵져버는 모바일만 동작
+watch(()=>observerVideos.value , (to)=>{
+	if(isMobile.value){
+		if(to[0] == props.v.video_id){
+			isObView.value = true;
+		}else{
+			isObView.value = false;
+			mouseOverDeActive();
+		}
+	}
+})
+
+const setObserver = ()=>{
+	if(isMobile.value){
+		let options = {
+			root: null, // 기본적으로 뷰포트를 root로 사용합니다.
+			rootMargin:'0px',
+			threshold: .8, // 스크롤 영역과 얼마나 교차해야 할지를 설정합니다.
+		};
+		const observer = new IntersectionObserver(handleIntersection, options);
+		observer.observe(document.getElementById(`videoCard_${props.v.video_id}`));
+	}
+}
+
+onMounted(()=>{
+	setObserver();
+	isDomScrollOffset.value = document.getElementById(`videoCard_${props.v.video_id}`).offsetTop || 0;
+	inScrollTopSt.value = Math.round(isDomScrollOffset.value - windowSize.value.scroll) ;
+})
 
 </script>
 
