@@ -18,10 +18,10 @@ const route = useRoute();
 const router = useRouter();
 
 const videoId = ref(route.params.videoId);
-const UUID = useState('UUID');
-const VIDEO = useState('VIDEO',()=>null);
-const ERROR = useState('ERROR',()=>null);
-const playUrl = useState('playUrl',()=>null);
+const UUID = useUuid();
+const VIDEO = useVideo();
+const ERROR = useError();
+const playUrl = usePlayUrl();
 
 
 const vpeSetup = ()=>{

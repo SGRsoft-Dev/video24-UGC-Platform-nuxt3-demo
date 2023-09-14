@@ -11,11 +11,10 @@ export const useWatchMode = ()=> useState('watchMode',()=>false);
 export const useActiveTmp = ()=> useState('activeTmp',()=>false);
 export const useLastRouterPath = ()=> useState('lastRouterPath',()=>false);
 
-
-
 //시작됨 플래그
 export const useStartFlag = ()=> useState('startFlag',()=>false);
 
+//윈도우 상태
 export const useWindowSize = ()=> useState('windowSize',()=> {
     return {
         width:0,
@@ -25,6 +24,7 @@ export const useWindowSize = ()=> useState('windowSize',()=> {
     }
 });
 
+//스크롤 방향
 export const useScrollState = ()=> useState('scrollState',()=>'up');
 
 //////////////////
@@ -45,10 +45,17 @@ export const useVod = ()=> useState('VOD',()=>[]);
 
 //VOD 리스트 개수
 export const useTotal = ()=> useState('TOTAL',()=>0);
+export const useError = ()=> useState('ERROR',()=>null);
 
 //시청중인 VIDEO
 export const useVideo = ()=> useState('VIDEO',()=>0);
 
+export const usePlayUrl = ()=> useState('playUrl',()=>null);
+
+////////////////////////////////////////
+
+export const usePlayList = ()=> useState('PLAYLIST_LIST',()=>0);
+export const usePlayListTotal = ()=> useState('PLAYLIST_TOTAL',()=>0);
 ////////////////////////////////////////
 
 //로드된 shorts 리스트

@@ -41,17 +41,19 @@
 
 </template>
 
-<script setup lang="ts">
+<script setup>
 import axios from "axios";
+import dayjs from "dayjs";
+
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
 const config = ref(runtimeConfig);
 const {$util} = useNuxtApp();
 const route = useRoute();
 
-const VOD = useState('PLAYLIST_LIST',()=>[]);
-const TOTAL = useState('PLAYLIST_TOTAL',()=>0);
-const VIDEO =  useVideo();
+const VOD = usePlayList();
+const TOTAL = usePlayListTotal();
+const VIDEO = useVideo();
 
 const shuffle =  (array) =>{
 	array.sort(() => Math.random() - 0.5);
@@ -126,18 +128,22 @@ const getVodList = async (params)=>{
 onMounted(async ()=>{
 
 	VOD.value = [];
-	await getVodList({
+/*	await getVodList({
 		channelId:VIDEO.value.channel_id,
 		limit:20,
 		type:'vod',
-	});
+		//keyword:VIDEO.value.title,
+	});*/
 
-	shuffle(VOD.value);
+
 
 	await getVodList({
 		limt:10,
 		type:'vod',
+		landscape:true,
+		randkey:dayjs().format('YYYYMMDDHHmm')
 	});
+	//shuffle(VOD.value);
 
 
 });

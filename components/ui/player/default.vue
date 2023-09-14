@@ -23,7 +23,9 @@
 			</div>
 
 			<div v-if="watchMode && !floatPlayer" class="flex mt-3 UiVideoMeta" :class="{'md:container md:mx-auto' : fullMode   }">
-				<UiVideoMeta class="flex3"/>
+				<div class="flex3">
+					<UiVideoMeta/>
+				</div>
 				<UiPlaylist v-if="fullMode" class="flex1 pt-3 pl-5" style="max-width:420px"/>
 			</div>
 		</div>
@@ -36,7 +38,6 @@
 <script setup>
 import axios from "axios";
 import lscache from "lscache";
-import _ from "lodash";
 
 lscache.setExpiryMilliseconds(1000);
 
@@ -50,8 +51,8 @@ const autoPlayMode = useAutoPlayMode();
 const floatPlayer = useFloatPlayer();
 const windowSize = useWindowSize();
 const loading = ref(true);
-const VOD = useState('PLAYLIST_LIST',()=>[]);
-const ERROR = useState('ERROR',()=>null);
+const VOD = usePlayList();
+const ERROR = useError();
 const lastRouterPath = useLastRouterPath();
 const route = useRoute();
 const UUID = useUuid();
@@ -261,12 +262,16 @@ const setupVPE = ()=>{
 		loading.value = false;
 
 		setTimeout(()=>{
-			playerAddNextSource({
-				file: VOD.value[0].hls_play_url,
-				poster: VOD.value[0].thumb_url,
-				title: VOD.value[0].title,
-				video_id: VOD.value[0].video_id,
-			});
+			try {
+				playerAddNextSource({
+					file: VOD.value[0].hls_play_url,
+					poster: VOD.value[0].thumb_url,
+					title: VOD.value[0].title,
+					video_id: VOD.value[0].video_id,
+				});
+			}catch (e) {
+
+			}
 		},500);
 
 		if(autoPlayMode.value){

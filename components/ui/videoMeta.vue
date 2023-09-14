@@ -1,5 +1,5 @@
 <template>
-	<div class="mb-5">
+	<div class="mb-5" v-if="initLoad">
 		<div class="px-0">
 			<div class="p-3 mb-2 text-xl">
 				{{$util.titleMake(VIDEO.title)}}
@@ -53,7 +53,7 @@
 			<div class="mt-3">
 				<div class=" text-sm p-3   md:rounded-lg min-h-100  " style="max-width:100vw" :class="{'bg-gray-700/20' : colorMode.value == 'dark' , 'bg-gray-100' : colorMode.value == 'light'}">
 					조회수 {{VIDEO.view_cnt || 0}}회 업로드 {{$util.dateFormat2(VIDEO.created_at) }}
-					<span v-html="$util.nl2br(VIDEO.description)" class="px-3 break-words"></span>
+					<span v-html="$util.nl2br(VIDEO.description)" class="px-3 break-words" v-if="VIDEO.description"></span>
 				</div>
 			</div>
 
@@ -159,11 +159,6 @@
 	</div>
 
 
-
-
-
-
-
 </template>
 
 <script setup>
@@ -173,6 +168,11 @@ const {$util} = useNuxtApp();
 const route = useRoute();
 
 const sharePopup = ref(false);
+const initLoad = ref(false);
+
+onMounted(()=>{
+	initLoad.value = true;
+})
 
 </script>
 

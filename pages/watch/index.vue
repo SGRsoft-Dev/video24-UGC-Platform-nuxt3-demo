@@ -24,6 +24,10 @@
 </style>
 
 <script setup>
+
+definePageMeta({
+	middleware: ["video"],
+});
 import axios from "axios";
 
 const runtimeConfig = useRuntimeConfig();
@@ -35,7 +39,7 @@ const floatPlayer = useFloatPlayer();
 const windowSize = useWindowSize();
 const VIDEO =  useVideo();
 const loading = useLoading();
-const UUID = useState('UUID');
+const UUID = useUuid()
 const lastRouterPath = useLastRouterPath();
 
 const colorMode = useColorMode();
@@ -76,7 +80,7 @@ const getVod = async (video_id)=>{
 		video_id = route.query.v;
 	}
 
-	let {data} = await axios.get(`https://mediaplus.co.kr/openApi/v1/content/${route.query.v}`,{
+	/*let {data} = await axios.get(`https://mediaplus.co.kr/openApi/v1/content/${route.query.v}`,{
 		headers:{
 			'Authorization':mpKey
 		}
@@ -96,7 +100,7 @@ const getVod = async (video_id)=>{
 			VIDEO.value = data.result;
 		}
 
-	}
+	}*/
 
 	setTimeout(()=>{
 		loading.value = false;
@@ -116,7 +120,7 @@ useAsyncData(async ()=>{
 
 	}else {
 		loading.value = true;
-		VIDEO.value = null;
+		//VIDEO.value = null;
 		try {
 			window.player.destroy();
 		} catch (e) {
@@ -129,7 +133,7 @@ useAsyncData(async ()=>{
 
 const changePlayer = async (video_id)=>{
 	loading.value = true;
-	VIDEO.value = null;
+	//VIDEO.value = null;
 	window.player.destroy();
 	await getVod(video_id);
 
