@@ -95,6 +95,8 @@ const isPlay = useState('isPlay',()=>false);
 const isInitPlay = ref(false);
 const uiStart = ref(false);
 const isHover = ref(false);
+const isIos = useOsIOS();
+const isMobile = useIsMobile();
 
 if(props.muted){
 	isMuted.value = true;
@@ -102,7 +104,6 @@ if(props.muted){
 
 const setupVPE = ()=>{
 
-	console.log('!@!@ setupVPE');
 	if(window.miniPlayer) {
 		window.miniPlayer.destroy();
 	}
@@ -158,7 +159,9 @@ const setupVPE = ()=>{
 	window.miniPlayer.on('pause',()=>{
 		isPlay.value = false;
 	});
+	window.miniPlayer.on('next',()=>{
 
+	});
 
 
 	window.miniPlayer.on('timeupdate',(res)=>{
@@ -169,8 +172,10 @@ const setupVPE = ()=>{
 		}else{
 			isMuted.value = false;
 		}
-		if(res.percent >=0.05){
-			shortScrollStart.value = false;
+		if(!isMobile.value) {
+			if (res.percent >= 0.6) {
+				shortScrollStart.value = false;
+			}
 		}
 	})
 	window.miniPlayer.on('volumechange',()=>{

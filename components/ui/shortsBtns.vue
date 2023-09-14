@@ -8,42 +8,42 @@
 		</div>
 
 		<div class="space-y-1">
-			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center" :class="{ 'bg-gray-200/20 ' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }"  type="button">
+			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center" :class="{ '  min-[460px]:bg-neutral-800/20 ' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }"  type="button">
 				<i class="ph-fill ph-dots-three-outline"></i>
 			</button>
 
 		</div>
 
 		<div class="space-y-1">
-			<button class="rounded-[100px] w-[40px] h-[40px] flex items-center justify-center"  :class="{ 'bg-gray-200/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button">
+			<button class="rounded-[100px] w-[40px] h-[40px] flex items-center justify-center"  :class="{ ' min-[460px]:bg-neutral-800/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button">
 				<i class="ph-fill ph-share-fat"></i>
 			</button>
 			<div class="text-[12px]">공유</div>
 		</div>
 
 		<div class="space-y-1">
-			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ 'bg-gray-200/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button">
+			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ ' min-[460px]:bg-neutral-800/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button">
 				<i class="ph-fill ph-chat-text"></i>
 			</button>
 			<div class="text-[12px]">291</div>
 		</div>
 
 		<div class="space-y-1">
-			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center" :class="{ 'bg-gray-200/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }"  type="button">
+			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center" :class="{ ' min-[460px]:bg-neutral-800/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }"  type="button">
 				<i class="ph-fill ph-thumbs-down"></i>
 			</button>
 			<div class="text-[12px]">싫어요</div>
 		</div>
 
 		<div class="space-y-1">
-			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ 'bg-gray-200/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button">
+			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ ' min-[460px]:bg-neutral-800/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button">
 				<i class="ph-fill ph-thumbs-up"></i>
 			</button>
 			<div class="text-[12px]">1.0천</div>
 		</div>
 
 		<div class="space-y-1">
-			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ 'bg-gray-200/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button"  @click="toggleMuted()">
+			<button class="rounded-[100px] w-[40px] h-[40px]  flex items-center justify-center"  :class="{ ' min-[460px]:bg-neutral-800/20' : isMobile , 'dark:bg-neutral-800 bg-gray-200' : !isMobile  }" type="button"  @click="toggleMuted()">
 				<i class="ph-fill  text-xl " :class="{'ph-speaker-simple-slash' : isMuted , 'ph-speaker-high' : !isMuted}"></i>
 			</button>
 			<div class="text-[12px]">{{isMuted ? '음소거' : '켜짐'}}</div>

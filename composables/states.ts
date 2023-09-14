@@ -74,4 +74,5 @@ export const useShortPlayList = ()=> useState('ShortPlayList',()=>[]);
 
 //현재 보고 있는 SHORTS 인덱스
 export const useShortIdx = ()=> useState('SHORTS_IDX',()=>0);
+export const useShortPlay = ()=> useState('SHORTS_PLAY',()=>false);
 

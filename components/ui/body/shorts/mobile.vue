@@ -1,8 +1,8 @@
 <template>
 
-	<div class="h-screen md:pt-5 md:max-h-[90vh] "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
+	<div class="h-screen  "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
 
-		<div class="mx-auto w-full md:w-[100vw] sm:max-w-[60vw] xl:max-w-[40vw] md:max-h-[95vh] h-full pb-safe pt-safe  " >
+		<div class="w-full h-full   " >
 			<div class="md:flex h-full md:gap-4">
 
 				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20] " >
@@ -35,7 +35,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="absolute right-[15px] min-[720px]:right-[-55px] bottom-[15px] min-[980px]:hidden  z-[999999]">
+						<div class="fixed right-[15px] min-[720px]:right-[20px] bottom-[25px] min-[980px]:hidden  z-[999999]">
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 
@@ -43,9 +43,7 @@
 
 				</div>
 
-				<div class="h-full min-w-[30px] hidden md:inline">
-					<UiShortsBtns :video="video"/>
-				</div>
+
 			</div>
 		</div>
 

@@ -101,7 +101,7 @@ const isMuted = useState('isMuted');
 const startFlag = useStartFlag();
 const activeTmp = useActiveTmp();
 
-
+const isPlay = useState('isPlay');
 
 const toggleMuted = ()=>{
 	let videos = document.querySelectorAll('video');
@@ -151,6 +151,7 @@ const shortsScrollRun = (e)=>{
 	shortScrollStart.value = true;
 	activeTmp.value = false;
 	shortScroll.value = e.target.scrollTop;
+	isPlay.value = false;
 	shortsScrollEnd();
 
 	clearTimeout(scrollEndTimer);
@@ -162,13 +163,14 @@ const shortsScrollRun = (e)=>{
 
 			}
 			shortScrollStart.value = false;
+			isPlay.value = true;
 		}
-	},800);
+	},2000);
 
 }
 const shortsScrollEnd = _.debounce((e)=>{
 	setIdx();
-},isMobile.value ? 200 : 600);
+},isMobile.value ? 400 : 600);
 
 const setIdx = ()=>{
 
