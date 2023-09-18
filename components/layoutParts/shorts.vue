@@ -163,10 +163,10 @@ const shortsScrollRun = (e)=>{
 			} catch (e) {
 
 			}
-			shortScrollStart.value = false;
+			//shortScrollStart.value = false;
 			isPlay.value = true;
 		}
-	},isMobile.value ? 2200 : 300);
+	},isMobile.value ? 5000 : 300);
 
 }
 const shortsScrollEnd = _.debounce((e)=>{

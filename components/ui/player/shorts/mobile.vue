@@ -103,6 +103,15 @@ if(props.muted){
 	isMuted.value = true;
 }
 
+watch(()=>shortScrollStart.value , (to)=>{
+	isPercent.value = 0;
+	if(to){
+		window.miniPlayer.pause()
+	}else{
+		window.miniPlayer.play()
+	}
+})
+
 const setupVPE = ()=>{
 
 	if(window.miniPlayer) {
@@ -113,7 +122,6 @@ const setupVPE = ()=>{
 	}catch (e) {
 
 	}
-
 
 	let options = {
 		playlist:props.playlist,
@@ -150,7 +158,10 @@ const setupVPE = ()=>{
 			playStart();
 		},700);
 
+
+
 	});
+
 
 	window.miniPlayer.on('play',()=>{
 		isPlay.value = true;
@@ -160,10 +171,13 @@ const setupVPE = ()=>{
 	window.miniPlayer.on('pause',()=>{
 		isPlay.value = false;
 	});
-	window.miniPlayer.on('next',()=>{
+	window.miniPlayer.on('nextTrack',()=>{
 		isPercent.value = 0;
+		setTimeout(()=>{
+			shortScrollStart.value = false;
+			console.log('isNext')
+		},200);
 	});
-
 
 	window.miniPlayer.on('timeupdate',(res)=>{
 		isPercent.value = res.percent;
@@ -173,7 +187,7 @@ const setupVPE = ()=>{
 		}else{
 			isMuted.value = false;
 		}
-		if (res.percent >= 0.8 && shortScrollStart.value) {
+		if (res.percent >= 0.5 && shortScrollStart.value) {
 			shortScrollStart.value = false;
 		}
 	})
