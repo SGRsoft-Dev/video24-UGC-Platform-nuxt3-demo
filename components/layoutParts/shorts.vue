@@ -1,8 +1,5 @@
 <template>
 
-<!--	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
-		{{activeTmp}} / {{SHORTS_IDX}}
-	</div>-->
 	<div v-if="!loading">
 		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 			<a href="/">
@@ -18,7 +15,7 @@
 
 		</div>
 
-		<div class="fixed top-[50px] right-0 z-[99999] p-4 hidden md:inline " v-if="shortScroll > 0">
+		<div class="fixed top-[50px] right-0 z-[99999] p-4 hidden md:inline " v-if="SHORTS_IDX>0">
 			<button class="rounded-[100px] w-[60px] h-[60px] dark:bg-neutral-700 dark:hover:bg-neutral-600 bg-gray-200 hover:bg-gray-300 flex items-center justify-center"  type="button" @click="shortsPrev">
 				<i class="ph ph-arrow-up text-xl"></i>
 			</button>
@@ -31,13 +28,38 @@
 		</div>
 
 
-		<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
+		<div class="relative h-screen  " :style="{height:`${isMobile ? windowSize.height : windowSize.height - 54}px`}"  @mousewheel="mousewheelRun" @keydown="keydownRun">
 
 			<div class="absolute  top-0 left-0 z-[3] w-full h-full ">
-				<div class="h-full w-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)]  snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
-					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
-						<UiBodyShortsPc  :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
-					</div>
+				<div class="h-full w-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)] overflow-hidden  "  id="shortsBody" tabindex="0">
+					<Swiper
+						direction="vertical"
+						effect="slide"
+						:loop="false"
+
+						@slideChange="slideChage"
+						@slideChangeTransitionStart="slideChangeTransitionStart"
+						@slideChangeTransitionEnd="slideChangeTransitionEnd"
+
+						:mousewheel="{
+							forceToAxis: true,
+							  sensitivity: 1,
+							  releaseOnEdges: true,
+						}"
+						:keyboard="true"
+						ref="shortsSwiper"
+						:height="isMobile ? windowSize.height : windowSize.height - 90"
+
+
+					>
+
+						<SwiperSlide v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`"    :key="i">
+							<UiBodyShortsPc  :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
+						</SwiperSlide>
+
+						<UiSwiperControls ref="uiSwiperControls"/>
+					</Swiper>
+
 				</div>
 			</div>
 
@@ -84,6 +106,7 @@ const route = useRoute();
 const router = useRouter();
 
 const shortScroll = ref(0);
+
 const shortScrollStart = useState('shortScrollStart',()=>true);
 
 const shortItemHeight = useState('shortItemHeight',()=>0);
@@ -121,113 +144,62 @@ const setShortItemHeight = ()=>{
 }
 
 const shortsPrev = ()=>{
-	document.getElementById('shortsBody').scrollTo({
-		top:shortScroll.value - shortItemHeight.value,
-		behavior:'smooth'
-	});
-	SHORTS_IDX.value = SHORTS_IDX.value - 1;
-	IDX.value = getCurrentVisibleElementIndex()
+
+
+	uiSwiperControls.value.prevSlide();
+
 }
 
 const shortsNext = ()=>{
-	document.getElementById('shortsBody').scrollTo({
-		top:shortScroll.value + shortItemHeight.value,
-		behavior:'smooth'
-	});
-	SHORTS_IDX.value = SHORTS_IDX.value + 1;
-	IDX.value = getCurrentVisibleElementIndex()
+
+	uiSwiperControls.value.nextSlide();
 }
 
-let scrollEndTimer = null;
-const shortsScrollRun = (e)=>{
-	shortScrollStart.value = true;
-	activeTmp.value = false;
-	shortScroll.value = e.target.scrollTop;
-	isPlay.value = false;
-	shortsScrollEnd();
 
-
-}
-const shortsScrollEnd = _.debounce((e)=>{
-	setIdx();
-	clearTimeout(scrollEndTimer);
-	scrollEndTimer = setTimeout(()=>{
-		shortScrollStart.value = false;
-		activeTmp.value = true;
-	},1000)
-},isMobile.value ? 400 : 200);
-
-const setIdx = ()=>{
-	clearTimeout(scrollEndTimer);
-	SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
-	IDX.value = getCurrentVisibleElementIndex();
-
-	SHORTS_VIDEO.value = ShortsList.value[SHORTS_IDX.value];
-	chageShortsVideo(ShortsList.value[SHORTS_IDX.value].video_id);
-
-}
-
+//swiper
+const uiSwiperControls = ref(null);
 const chageShortsVideo = (video_id)=>{
 	router.replace('/shorts/'+video_id);
 }
 
-watch(()=>SHORTS_IDX.value , (to,from)=>{
-	if(to == from){
-		clearTimeout(scrollEndTimer);
+const slideChage = (e)=>{
+	console.log('!!!',e.activeIndex)
+
+	SHORTS_IDX.value = e.activeIndex
+	IDX.value = e.activeIndex
+
+	SHORTS_VIDEO.value = ShortsList.value[SHORTS_IDX.value];
+	chageShortsVideo(ShortsList.value[SHORTS_IDX.value].video_id);
+}
+
+const slideChangeTransitionStart = (e)=>{
+	console.log('!!!slideChangeTransitionStart');
+	shortScrollStart.value = true;
+	activeTmp.value = false;
+
+	isPlay.value = false;
+}
+const slideChangeTransitionEnd = (e)=>{
+	console.log('!!!slideChangeTransitionEnd');
+	shortScrollStart.value = false;
+	activeTmp.value = true;
+}
+
+const mousewheelRun = _.debounce((e)=>{
+	if(e.deltaY > 0){
+		shortsNext();
+	}else{
+		shortsPrev();
 	}
-
-})
-
-
-const getCurrentVisibleElementIndex = () => {
-	const elements = document.querySelectorAll('.shortsBody .shortItems'); // 스크롤 가능한 컨테이너와 그 안에 있는 요소들을 선택해야 합니다.
-
-	for (let i = 0; i < elements.length; i++) {
-		const element = elements[i];
-		const rect = element.getBoundingClientRect();
-
-		// 요소가 현재 화면에 보이는지 확인
-		if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-			return i; // 현재 화면에 보이면 해당 요소의 인덱스를 반환
-		}
+},200);
+const keydownRun = _.debounce((e)=>{
+	if(e.key == 'ArrowDown'){
+		shortsNext();
+	}else if(e.key == 'ArrowUp'){
+		shortsPrev();
 	}
+},200);
 
-	return -1; // 현재 화면에 보이는 요소가 없을 경우 -1 반환
-}
-
-
-
-watch(()=>shortScrollStart.value , (to,from)=>{
-	console.log('shortScrollStart',to)
-})
-
-
-
-const shuffle =  (array) =>{
-	array.sort(() => Math.random() - 0.5);
-}
-
-
-const startOv = ()=>{
-	const elements = document.querySelectorAll('.shortItemWarps'); // 스크롤 가능한 컨테이너 내의 요소 선택
-
-	const observer = new IntersectionObserver((entries, observer) => {
-		entries.forEach((entry) => {
-			if (entry.intersectionRatio >= 0.9) {
-				// 요소가 화면에 80% 이상 보이는 경우
-				const visibleElementIndex = Array.from(elements).indexOf(entry.target);
-				//console.log(`현재 보이는 요소의 인덱스: ${visibleElementIndex}`);
-				IDX.value = visibleElementIndex;
-			}
-		});
-	}, { threshold: 0.9 }); // threshold를 0.8로 설정
-
-
-	// 모든 요소를 감시
-	elements.forEach((element) => {
-		observer.observe(element);
-	});
-}
 
 
 
@@ -244,13 +216,6 @@ onMounted(async ()=>{
 	document.getElementById('__nuxt').classList.add('no-pull-mode');
 	document.body.classList.add('no-scroll');
 	document.getElementsByTagName('html')[0].classList.add('no-scroll');
-
-	if(isMobile.value){
-		document.body.classList.add('bg-neutral-900')
-	}else{
-		document.body.classList.remove('bg-neutral-900')
-	}
-
 
 
 	setTimeout(()=>{
@@ -276,11 +241,6 @@ onMounted(async ()=>{
 
 		setTimeout(()=>{
 			document.getElementById("shortsBody").focus();
-			/*document.getElementById("shortsBody").scroll({
-				top: SHORTS_IDX.value * shortItemHeight.value,
-			})*/
-
-			startOv();
 		},300)
 	},1000)
 })

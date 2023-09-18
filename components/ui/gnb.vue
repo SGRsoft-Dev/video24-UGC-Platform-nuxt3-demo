@@ -82,6 +82,7 @@
 
 
 
+
 const route = useRoute();
 const colorMode = useColorMode();
 const fullMode = useFullMode();
@@ -90,13 +91,15 @@ const scrollState = useScrollState();
 const watchMode = useWatchMode();
 const isThumbPlayVideoId = useIsThumbPlayVideoId();
 const observerVideos = useObserverVideos();
-
+const lastColorMode = useState('lastColorMode',()=>colorMode.value);
 const isDark = computed({
 	get () {
 		return colorMode.value === 'dark'
 	},
 	set () {
 		colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+		lastColorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+		console.log('!!',lastColorMode.value)
 	}
 });
 

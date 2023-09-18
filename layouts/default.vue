@@ -31,7 +31,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="md:hidden h-[100px]" v-if="!watchMode">
+		<div class="md:hidden h-[100px]" v-if="!watchMode && !shortMode">
 			<!--margin-->
 		</div>
 
@@ -44,6 +44,7 @@
 
 <script setup>
 import ua from "ua-parser-js";
+import {useState} from "#app";
 
 
 
@@ -104,18 +105,17 @@ watch(colorMode,()=>{
 	}
 })
 
+const lastColorMode = useState('lastColorMode',()=>colorMode.value);
 const pageChaneInit = (path)=>{
 	if(path.split('/')[1] == 'shorts' ){
 		shortMode.value = true;
 		if(isMobile.value){
-			document.body.classList.add('bg-neutral-900');
+			lastColorMode.value = colorMode.value;
+			colorMode.preference = 'dark';
 		}
 	}else{
 		shortMode.value = false;
-		if(isMobile.value){
-			document.body.classList.remove('bg-neutral-900');
-
-		}
+		colorMode.preference = lastColorMode.value;
 	}
 
 	if(path.split('/')[1] == 'watch' ) {
@@ -187,7 +187,7 @@ const checkOS = ()=>{
 			isIOS.value = false;
 		}
 
-		if (parser.device.type == 'mobile' || parser.device.type == 'tablet') {
+		if (parser.device.type == 'mobile' || parser.device.type == 'tablet' || windowSize.value.width <= 720) {
 
 			document.body.classList.add('isMobile');
 
@@ -243,5 +243,7 @@ onMounted(()=>{
 		height: 80px;
 	}
 }
+
+
 
 </style>

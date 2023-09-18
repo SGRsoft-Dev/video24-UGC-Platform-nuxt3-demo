@@ -9,6 +9,7 @@
 <script setup>
 import lscache from 'lscache';
 import { v4 as uuidv4 } from 'uuid';
+import ua from "ua-parser-js";
 lscache.setExpiryMilliseconds(1000);
 
 
@@ -48,6 +49,28 @@ try{
 
 }
 
+
+const checkOS = ()=>{
+
+	let parser = ua(window.navigator.userAgent);
+
+
+	if (parser.device.type == 'mobile' || parser.device.type == 'tablet' || windowSize.value.width <= 720) {
+
+		document.body.classList.add('isMobile');
+
+		document.body.classList.remove('isPc');
+		isMobile.value = true;
+	} else {
+		document.body.classList.add('isPc')
+
+		document.body.classList.remove('isMobile');
+		isMobile.value = false;
+	}
+
+
+}
+
 onMounted(()=>{
 	window.player = null;
 	window.miniPlayer = null;
@@ -65,6 +88,7 @@ onMounted(()=>{
 	window.addEventListener('resize',()=>{
 		windowSize.value.width = window.innerWidth;
 		windowSize.value.height = window.innerHeight;
+		checkOS();
 	});
 
 	document.addEventListener('scroll',(event)=>{

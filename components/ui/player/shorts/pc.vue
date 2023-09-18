@@ -2,7 +2,7 @@
 
 <template>
 
-	<div class="w-full h-full bg-black  text-white  duration-200"  :style="{'background':`url(${props.poster}) center / cover`,'--min-video-height':  shortItemHeight > 0 ?  shortItemHeight+'px' : '100%'}" @mouseover="isHover = true" @mouseout="isHover = false">
+	<div class="w-full h-full   text-white  duration-200"  :style="{'background':`url(${props.poster}) center / cover`,'--min-video-height':  shortItemHeight > 0 ?  shortItemHeight+'px' : '100%'}" @mouseover="isHover = true" @mouseout="isHover = false">
 		<div class="vpeMiniPlayer">
 			<div :id="`vpeMiniPlayer`" v-show="uiStart"></div>
 		</div>
@@ -35,7 +35,7 @@
 
 	.vpeMiniPlayer video{
 		max-height: var(--min-video-height) !important;
-		object-fit:contain !important;
+		object-fit:cover !important;
 
 	}
 	.fade-enter-active, .fade-leave-active {

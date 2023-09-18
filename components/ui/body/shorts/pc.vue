@@ -1,19 +1,15 @@
 <template>
 
-	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 dark:bg-neutral-900/10 "  :style="{height:`${windowSize.height - 0}px` , width:`${windowSize.width - 0}px`}"  v-if="video">
+	<div class="h-screen md:pt-5 md:max-h-[90vh]  "  :style="{height:`${windowSize.height - 0}px` , width:`${windowSize.width - 0}px`}"  v-if="video">
 
-		<div class="mx-auto w-full md:w-[40vw]  md:max-w-[520px]  md:max-h-[95vh] h-full pb-safe pt-safe   " >
+		<div class="mx-auto  md:max-h-[95vh] h-full pb-safe pt-safe aspectCu"  >
 			<div class="md:flex h-full md:gap-4">
 
 				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative  " >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  "  v-if="video" >
 
 						<div class="bg-gra-v w-full h-full absolute z-[101] bg-red-900"  @click="togglePlay"  v-if=" !shortScrollStart"></div>
-						<Transition name="fade">
-							<div class=" w-full  h-full absolute z-[99] bg-black"  :style="{background:`url(${video.thumb_url}) center / contain no-repeat`,backgroundColor:'#000'}" v-show="shortScrollStart">
-								<UiPlayerShortsThumbHlsjs  :poster="video.thumb_url" :playUrl="video.hls_play_url" :id="video.video_id" v-if="!isIOS && ( SHORTS_IDX == idx || SHORTS_IDX == (idx+1) || SHORTS_IDX == (idx-1))"/>
-							</div>
-						</Transition>
+						<div class=" w-full  h-full absolute z-[99] bg-black"  :style="{background:`url(${video.thumb_url}) center / cover no-repeat`,backgroundColor:'#000'}" ></div>
 
 						<UiPlayerShortsHlsjs
 							:playUrl="video.hls_play_url"
@@ -59,7 +55,7 @@
 		</div>
 
 
-		<div class="fixed right-[15px] min-[720px]:right-[20px] bottom-[25px] min-[980px]:hidden  z-[999999]" v-if="SHORTS_IDX == idx" >
+		<div class="absolute right-[15px] min-[720px]:right-[20px] bottom-[25px]   z-[999999]" v-if="SHORTS_IDX == idx && isMobile" >
 			<UiShortsBtns :video="video" :isMobile="true"/>
 		</div>
 
@@ -110,6 +106,7 @@ const {$util} = useNuxtApp();
 const isMuted = useState('isMuted');
 const isIOS = useState('isIOS');
 const activeTmp = useState('activeTmp');
+const isMobile = useIsMobile();
 
 const toggleMuted = ()=>{
 
@@ -182,6 +179,15 @@ onMounted(()=>{
 	opacity: 0;
 }
 
+.isPc .aspectCu {
+	aspect-ratio: 9/15;
+}
+
+@media (max-width: 1600px) {
+	.isPc .aspectCu {
+		aspect-ratio: 9/14;
+	}
+}
 .bg-gra-v{
 	background: rgb(0,0,0);
 	background: linear-gradient(180deg, rgba(0,0,0,0.1435968137254902) 0%, rgba(0,0,0,0) 6%, rgba(0,0,0,0) 86%, rgba(0,0,0,0.24555759803921573) 94%, rgba(0,0,0,0.3424763655462185) 100%);

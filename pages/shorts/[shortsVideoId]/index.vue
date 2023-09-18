@@ -102,9 +102,10 @@ useAsyncData(async ()=>{
 		await getShortList();
 
 		setShortsFist();
+		setShortsList();
 
 		setTimeout(() => {
-			setShortsList();
+
 		}, 1000);
 		//shuffle(ShortsList.value);
 	}
