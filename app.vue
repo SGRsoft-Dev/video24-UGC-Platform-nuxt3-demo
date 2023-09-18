@@ -67,7 +67,8 @@ onMounted(()=>{
 		windowSize.value.height = window.innerHeight;
 	});
 
-	document.addEventListener('scroll',()=>{
+	document.addEventListener('scroll',(event)=>{
+
 		windowSize.value.scroll = window.scrollY;
 		scrollY.value = window.scrollY;
 	});

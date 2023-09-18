@@ -1,7 +1,6 @@
 <template>
 	<NuxtLink :to="`/watch?v=${v.video_id}`" @mouseover="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
 
-
 		<div class="videoThumb relative mx-3 md:mx-0 rounded-xl overflow-hidden bg-gray-200/30 md:hover:scale-105 duration-200"  :class="{'activeMobileVideo' : mouseOverIn && mouseOverInEnd && isThumbPlayVideoId == v.video_id}" :id="`videoCard_${v.video_id}`" :style="{background:`url(${v.thumb_url})  `}">
 			<div class="backdrop-blur-cu1">
 

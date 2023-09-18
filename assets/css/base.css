@@ -93,6 +93,7 @@ body{
     overflow-x: hidden;
     box-sizing: border-box;
     overflow-y: auto;
+    overscroll-behavior: none;
 }
 
 body::-webkit-scrollbar {

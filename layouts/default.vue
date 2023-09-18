@@ -134,6 +134,7 @@ const pageChaneInit = (path)=>{
 		document.body.classList.remove('no-scroll');
 		document.getElementsByTagName('html')[0].classList.remove('no-scroll');
 
+
 	}
 }
 
@@ -182,7 +183,7 @@ watch(()=>route.path,(path , oldPath)=>{
 });
 
 const checkOS = ()=>{
-	try {
+
 		let parser = ua(window.navigator.userAgent);
 		if (parser.os.name == 'iOS') {
 			isIOS.value = true;
@@ -191,14 +192,19 @@ const checkOS = ()=>{
 		}
 
 		if (parser.device.type == 'mobile' || parser.device.type == 'tablet') {
+
 			document.body.classList.add('isMobile');
+
 			document.body.classList.remove('isPc');
 			isMobile.value = true;
 		} else {
 			document.body.classList.add('isPc')
+
 			document.body.classList.remove('isMobile');
 			isMobile.value = false;
 		}
+
+	try {
 	}catch (e) {
 
 	}
@@ -210,11 +216,6 @@ onMounted(()=>{
 	windowSize.value.width = window.innerWidth;
 	windowSize.value.height = window.innerHeight;
 
-	checkOS();
-
-	pageChaneInit(route.path);
-
-
 
 	if(colorMode.value == 'dark'){
 		document.body.classList.add('bg-neutral-900')
@@ -225,10 +226,18 @@ onMounted(()=>{
 
 	loading.value = false;
 
+	setTimeout(()=>{
+		checkOS();
+		pageChaneInit(route.path);
+	},100);
+
+
 
 });
 
 </script>
+
+
 
 <style scoped>
 

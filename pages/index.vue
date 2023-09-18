@@ -30,7 +30,7 @@
 
 			<div class="grid grid-cols-1 sm:grid-cols-3  sm:px-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5  sm:gap-5 mainVodArea" >
 				<template v-for="(v , i) in VOD">
-					<div class=" px-0 mb-10" v-if="v.height < v.width">
+					<div class=" px-0 mb-10  overflow-auto" v-if="v.height < v.width">
 						<UiVideoCard :v="v" />
 					</div>
 				</template>
