@@ -64,6 +64,7 @@ export const usePlayListTotal = ()=> useState('PLAYLIST_TOTAL',()=>0);
 export const useShortsInitLoad = ()=> useState('shortsInitLoad',()=>false);
 export const useShortMode = ()=> useState('shortMode',()=>false);
 export const useShorts = ()=> useState('SHORTS',()=>[]);
+export const useMainShorts = ()=> useState('MAIN_SHORTS',()=>[]);
 
 //시청중인 SHORTS
 export const useShortVideo = ()=> useState('SHORTS_VIDEO',()=>[]);

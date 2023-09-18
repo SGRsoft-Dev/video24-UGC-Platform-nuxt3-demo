@@ -218,37 +218,6 @@ const getCurrentVisibleElementIndex = () => {
 })*/
 
 
-const getShortList = async ()=>{
-
-	SHORTS.value = [];
-	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
-		params:{
-			type:'vod',
-			pageNo:1,
-			limit:20,
-			portrait:true,
-		},
-		headers:{
-			'Authorization':mpKey
-		}
-	});
-
-	if(data.code == 200){
-
-		for (let i = 0; i < data.result.data.length; i++) {
-			let v = data.result.data[i];
-
-			v.created_at = $util.dateFormat2(v.created_at);
-			v.view_cnt = $util.numberToKorean(v.view_cnt);
-			SHORTS.value.push(v);
-		}
-
-		shortsInitLoad.value = true;
-
-
-	}
-}
-
 
 const shuffle =  (array) =>{
 	array.sort(() => Math.random() - 0.5);
@@ -277,47 +246,7 @@ const startOv = ()=>{
 }
 
 
-const setShortsFist = ()=>{
 
-	if(route.params.shortsVideoId){
-		let find = SHORTS.value.find((v)=>v.video_id == route.params.shortsVideoId);
-		if(find){
-			//SHORTS_IDX.value = ShortsList.value.indexOf(find);
-			SHORTS_IDX.value = 0
-			ShortsList.value.unshift(find);
-		}
-
-	}
-
-}
-
-const setShortsList = ()=>{
-
-	for (let i = 0; SHORTS.value.length > i; i++) {
-		let v = SHORTS.value[i];
-		if(route.params.shortsVideoId) {
-			if (v.video_id == route.params.shortsVideoId) {
-				//SHORTS_IDX.value = i;
-			}else{
-				ShortsList.value.push(v);
-			}
-		}
-
-
-	}
-
-}
-
-
-useAsyncData(async ()=>{
-	SHORTS_IDX.value = 0;
-	await getShortList();
-
-	setShortsList();
-	shuffle(ShortsList.value);
-
-
-});
 
 let parser = ref(null);
 
@@ -343,8 +272,6 @@ onMounted(async ()=>{
 	setTimeout(()=>{
 
 
-
-		setShortsFist();
 
 		if(isMobile.value) {
 			ShortPlayList.value = [];

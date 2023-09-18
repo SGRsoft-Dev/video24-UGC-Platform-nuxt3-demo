@@ -2,11 +2,11 @@
 	<NuxtLink style="cursor: pointer"  @click="goShort(v.video_id)"  @mouseover="mouseOverActive" @mouseleave="mouseOverDeActive" @mouseout="mouseOverDeActive">
 		<div class="w-full max-w-full scale-95 hover:scale-100 duration-200">
 			<div class="videoThumbSf  shortsThumbArea rounded-lg dark:shadow-sm overflow-hidden bg-gray-200/15 relative" :style="{background:`url(${v.thumb_url}) `}">
-				<div class="backdrop-blur-cu1 aspect-[9/20]" >
-					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png'" :alt="v.title" class="w-full h-full min-h-[100px] aspect-[9/16] object-cover " placeholder loading="lazy"/>
+				<div class="backdrop-blur-cu1 aspect-[9/20] h-full" >
+					<img :src="v.thumb_url ? v.thumb_url : '/image/b.png'" :alt="v.title" class="w-full h-full min-h-[100px] aspect-[9/16] object-cover "   :class="{'absolute top-0 left-0 z-[3]' : mouseOver , 'opacity-0' : mouseOverIn && mouseOverInEnd && isThumbPlayVideoId == v.video_id  }"  placeholder loading="lazy"/>
 
 					<Transition name="fade" mode="out-in">
-						<UiPlayerPreview :v="v"  class="w-full h-full object-contain absolute top-0 left-0 z-[2]"  aspect="" @mouseOverInEndActive="mouseOverInEndActive" v-if="mouseOverIn "></UiPlayerPreview>
+						<UiPlayerPreview :v="v" aspectRatio="9/20" :objectCover="true" class="w-full h-full object-contain absolute top-0 left-0 z-[2]"  @mouseOverInEndActive="mouseOverInEndActive" v-if="mouseOverIn && isThumbPlayVideoId == v.video_id "></UiPlayerPreview>
 					</Transition>
 				</div>
 			</div>
@@ -41,8 +41,8 @@ const isMobile = useIsMobile();
 
 const goShort = (video_id)=>{
 	ShortsList.value = [];
-	//router.push('/shorts/'+video_id);
-	location.href='/shorts/'+video_id;
+	router.push('/shorts/'+video_id);
+	//location.href='/shorts/'+video_id;
 }
 
 

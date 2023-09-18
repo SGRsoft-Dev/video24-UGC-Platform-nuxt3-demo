@@ -30,13 +30,7 @@ const getShortList = async ()=>{
 
 	if(data.code == 200){
 
-		for (let i = 0; i < data.result.data.length; i++) {
-			let v = data.result.data[i];
-
-			v.created_at = $util.dateFormat2(v.created_at);
-			v.view_cnt = $util.numberToKorean(v.view_cnt);
-			SHORTS.value.push(v);
-		}
+		SHORTS.value = data.result.data;
 
 	}
 }
@@ -45,10 +39,8 @@ const getShortList = async ()=>{
 
 onMounted(async ()=>{
 
-
-	if(SHORTS.value.length == 0){
-		await getShortList();
-	}
+	SHORTS.value = [];
+	await getShortList();
 
 	let idValue = route.params.videoId;
 	if(!idValue) idValue = SHORTS.value[0].video_id;

@@ -59,6 +59,7 @@ const lastRouterPath = useLastRouterPath();
 const SHORTS_VIDEO = useShortVideo();
 const ShortsList = useShortsList();
 const ShortPlayList = useShortPlayList();
+const SHORTS = useShorts();
 
 
 const isMobile = useIsMobile();
@@ -142,12 +143,7 @@ watch(()=>route.params,(to,from)=>{
 	if(!to.shortsVideoId && from.shortsVideoId){
 
 			ShortsList.value = [];
-			window.miniPlayer.pause();
-			window.miniPlayer.destroy();
-			window.miniPlayer = null;
-			for (let i = 0; document.getElementsByTagName('video').length > i; i++) {
-				document.getElementsByTagName('video')[i].remove();
-			}
+			SHORTS.value = [];
 
 
 		try {

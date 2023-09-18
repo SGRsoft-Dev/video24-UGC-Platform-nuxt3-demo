@@ -1,6 +1,6 @@
 <template>
-	<div class="relative w-full h-hull">
-		<video :id="`video_${v.video_id}`" playsinline autoplay muted ></video>
+	<div class="relative w-full h-full">
+		<video :id="`video_${v.video_id}`" style="" playsinline autoplay muted :style="{aspectRatio:aspectRatio }" class="w-full h-full" :class="{'object-cover' : objectCover}"></video>
 		<div class="absolute bottom-0 left-0 w-full z-[5] bg-white/80  duration-200  ">
 			<div class="bg-red-600 h-[3px]" :style="{width:`${isPercent}%`}"></div>
 		</div>
@@ -16,6 +16,14 @@ const props = defineProps({
 	v: {
 		type: Object,
 		required: true
+	},
+	aspectRatio: {
+		type: String,
+		default: '16/9'
+	},
+	objectCover: {
+		type: Boolean,
+		default: false
 	}
 })
 
@@ -74,8 +82,6 @@ const mounted = _.debounce(()=>{
 	video.addEventListener('timeupdate',(res)=>{
 		try {
 			isPercent.value = (video.currentTime / video.duration) * 100;
-
-
 		}catch (e) {
 
 		}

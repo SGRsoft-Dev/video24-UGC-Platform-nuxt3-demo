@@ -123,7 +123,7 @@ useHead({
  * @type {*[]}
  */
 const VOD = useVod();
-const SHORTS = useShorts();
+const SHORTS = useMainShorts();
 const SHORTS_VIDEO = useShortVideo();
 const TOTAL = useTotal();
 const pageNo = ref(1);

@@ -4,7 +4,7 @@
 
 	<div class="w-full h-full bg-black  text-white  duration-200"   @mouseover="isHover = true" @mouseout="isHover = false">
 		<div class="vpeMiniPlayer">
-			<video :id="`vpeMiniPlayer`" v-show="uiStart" playsinline class="w-full  bg-black" :loop="loop ? true : false"></video>
+			<video :id="`vpeMiniPlayer`" autoplay v-show="uiStart" playsinline class="w-full h-full  bg-black" object-cover="" :loop="loop ? true : false"></video>
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart && isInitPlay" @click="playStart" v-show="!isPlay">
@@ -104,30 +104,36 @@ if(props.muted){
 	isMuted.value = true;
 }
 
+let video = null
+let hls = null
 
-const playStart = ()=>{
+const playStart = (muted)=>{
 	try {
-		window.miniPlayer.play();
+		if(muted){
+			video.muted = true;
+		}
+		video.play();
 	}catch (e) {
-		window.miniPlayer.muted = true;
-		window.miniPlayer.play();
+		console.log('!@!@! p1')
+		video.muted = true;
+		video.play();
 	}
 }
 
 const togglePlay = ()=>{
 	if(isPlay.value){
-		window.miniPlayer.pause();
+		video.pause();
 	}else{
-		window.miniPlayer.play();
+		video.play();
 	}
 }
 
 const toggleMuted = ()=>{
 
-	if(window.miniPlayer.muted){
-		window.miniPlayer.muted = false;
+	if(video.muted){
+		video.muted = false;
 	}else{
-		window.miniPlayer.muted = true;
+		video.muted = true;
 	}
 
 }
@@ -137,32 +143,29 @@ const playStartEmit = _.debounce(()=>{
 },200);
 
 const mounted = ()=>{
-	window.miniPlayer = document.getElementById('vpeMiniPlayer');
-	try{
-		hls.destroy();
-	}catch (e) {
 
-	}
 
-	let hls = new Hls();
-	window.miniPlayer.destroy = ()=>{
-		try{
-			hls.destroy();
-		}catch (e) {
-
-		}
-	}
 	if(Hls.isSupported()) {
-
 		hls.loadSource(props.playUrl);
-		hls.attachMedia(window.miniPlayer);
-		hls.on(Hls.Events.MANIFEST_PARSED,function() {
-			playStart();
+		hls.attachMedia(video);
+
+		window.addEventListener("unhandledrejection", (event) => {
+			playStart(true);
 			playStartEmit();
 		});
-	} else if (window.miniPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-		window.miniPlayer.src = props.playUrl;
-		window.miniPlayer.addEventListener('canplay',function() {
+
+		hls.on(Hls.Events.MANIFEST_PARSED,()=> {
+			try{
+				playStart();
+				playStartEmit();
+			}catch (e) {
+
+			}
+		});
+	} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+		video.src = props.playUrl;
+
+		video.addEventListener('canplay',()=> {
 			playStart();
 			playStartEmit();
 		});
@@ -170,20 +173,20 @@ const mounted = ()=>{
 
 	uiStart.value = true;
 
-	window.miniPlayer.removeEventListener('play',()=>{});
-	window.miniPlayer.addEventListener('play' , ()=>{
+
+	video.addEventListener('play' , ()=>{
 		isPlay.value = true;
 		isInitPlay.value = true;
 
 	});
 
-	window.miniPlayer.removeEventListener('pause',()=>{});
-	window.miniPlayer.addEventListener('pause',()=>{
+
+	video.addEventListener('pause',()=>{
 		isPlay.value = false;
 	});
 
-	window.miniPlayer.removeEventListener('timeupdate',()=>{});
-	window.miniPlayer.addEventListener('timeupdate',(res)=>{
+
+	video.addEventListener('timeupdate',(res)=>{
 		try {
 			isPercent.value = (window.miniPlayer.currentTime / window.miniPlayer.duration) * 100;
 
@@ -198,16 +201,17 @@ const mounted = ()=>{
 		}catch (e) {
 
 		}
-		if (isPercent.value >= 0.05) {
+		if (isPercent.value >= 0.05 && shortScrollStart.value ){
 			shortScrollStart.value = false;
 		}
 
+
 	})
 
-	window.miniPlayer.removeEventListener('volumechange',()=>{});
-	window.miniPlayer.addEventListener('volumechange',()=>{
 
-		if(window.miniPlayer.muted){
+	video.addEventListener('volumechange',()=>{
+
+		if(video.muted){
 			isMuted.value = true;
 		}else{
 			isMuted.value = false;
@@ -215,6 +219,7 @@ const mounted = ()=>{
 	});
 
 
+	window.miniPlayer = video;
 
 
 
@@ -222,6 +227,8 @@ const mounted = ()=>{
 
 
 onMounted(()=>{
+	video = document.getElementById('vpeMiniPlayer');
+	hls = new Hls();
 	mounted();
 })
 

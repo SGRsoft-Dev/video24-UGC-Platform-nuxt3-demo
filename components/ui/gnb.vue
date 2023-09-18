@@ -15,20 +15,21 @@
 	>
 		<div class="p-2 "  >
 			<div class=" flex items-center ">
-				<div class="w-[220px] flex pl-2">
+				<div class=" flex pl-2">
 
 					<button @click="setLeftMenuOpen" class="ml-2 mr-2 hidden md:inline" type="button" >
 						<i class="ph ph-list mr-1 text-2xl" :class="setDark ? 'text-white' : 'text-black'"></i>
 					</button>
 
+				</div>
+				<div>
 					<a href="/">
 						<img
 							:src="logo"
-							class="  h-10 object-contain  md:w-full w-40 "
+							class="  h-[20px]    "
 							alt=""
 						>
 					</a>
-
 				</div>
 				<div class="flex-1"></div>
 				<div class="w-4/12 gnbSearchInput hidden md:inline">
@@ -49,22 +50,26 @@
 	<USlideover v-model="leftMenuPopover" class="z-[99999] max-w-[260px] "  side="left">
 		<div class="relative border-r dark:border-[#252424]" :class="{'bg-neutral-900 border-[#252424]' : setDark }">
 			<div class="absolute w-full items-center flex z-[3]  h-[56px] border-b dark:border-[#252424] pt-safe" :class="{'bg-neutral-900 border-[#252424]' : setDark }">
-				<div class="w-[220px] flex pl-2">
+				<div class=" flex pl-2">
 
 					<button @click="setLeftMenuOpen" class="ml-2 mr-2 hidden md:inline" type="button" >
 						<i class="ph ph-list mr-1 text-2xl" :class="setDark ? 'text-white' : 'text-black'"></i>
 					</button>
 
+
+				</div>
+				<div>
+
 					<a href="/">
 						<img
 							:src="logo"
-							class="  h-10 object-contain  md:w-full w-40 "
+							class="  h-[20px]    "
 							alt=""
 						>
 					</a>
-
 				</div>
 			</div>
+
 
 			<div class=" overflow-hidden h-[calc(100vh_+_20px)]" :class="{'bg-neutral-900 border-[#252424] text-white' : setDark }">
 				<UiLnb />
