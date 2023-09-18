@@ -1,5 +1,11 @@
 <template>
-	<video id="video" playsinline autoplay muted ></video>
+	<div class="relative w-full h-hull">
+		<video :id="`video_${v.video_id}`" playsinline autoplay muted ></video>
+		<div class="absolute bottom-0 left-0 w-full z-[5] bg-white/80  duration-200  ">
+			<div class="bg-red-600 h-[3px]" :style="{width:`${isPercent}%`}"></div>
+		</div>
+	</div>
+
 </template>
 
 <script setup>
@@ -22,7 +28,7 @@ const unmounted = ()=>{
 	}catch (e) {
 
 	}
-	let video = document.getElementById('video');
+	let video = document.getElementById(`video_${props.v.video_id}`);
 	try {
 		video.pause();
 		video.src = "";
@@ -36,8 +42,11 @@ const playStartEmit = _.debounce(()=>{
 	emit('mouseOverInEndActive');
 },200);
 
+const isPercent = ref(0);
+
 const mounted = _.debounce(()=>{
-	let video = document.getElementById('video');
+	let video = document.getElementById(`video_${props.v.video_id}`);
+
 	try{
 		hls.destroy();
 	}catch (e) {
@@ -45,6 +54,7 @@ const mounted = _.debounce(()=>{
 	}
 
 	let hls = new Hls();
+
 	if(Hls.isSupported()) {
 
 		hls.loadSource(props.v.quality_hls[0].url);
@@ -60,7 +70,19 @@ const mounted = _.debounce(()=>{
 			playStartEmit();
 		});
 	}
-},200);
+
+	video.addEventListener('timeupdate',(res)=>{
+		try {
+			isPercent.value = (video.currentTime / video.duration) * 100;
+
+
+		}catch (e) {
+
+		}
+
+
+	})
+},100);
 
 onMounted(()=>{
 	if(!props.v) return;

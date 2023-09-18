@@ -66,7 +66,7 @@ const mouseOverActive = (time)=>{
 	clearTimeout(mouseInTimer);
 	mouseInTimer = setTimeout(()=>{
 		mouseOver.value = true;
-	},time ? time : 200)
+	},time ? time : 100)
 }
 
 const mouseOverDeActive = ()=>{
@@ -77,7 +77,7 @@ const mouseOverDeActive = ()=>{
 const mouseOverInEndActive = ()=>{
 	setTimeout(()=>{
 		mouseOverInEnd.value = true;
-	},200);
+	},100);
 }
 
 watch(()=>mouseOver.value , ()=>{
@@ -89,7 +89,7 @@ watch(()=>mouseOver.value , ()=>{
 				isThumbPlayVideoId.value = props.v.video_id;
 
 			}
-		},200)
+		},100)
 
 	}else{
 		mouseOverIn.value = false;

@@ -5,7 +5,7 @@
 		</div>
 
 
-		<div v-for="(v , i) in LIST" class="">
+		<div v-for="(v , i) in LIST" class="space-y-3">
 			<UiVideoCardCol :v="v" />
 		</div>
 
