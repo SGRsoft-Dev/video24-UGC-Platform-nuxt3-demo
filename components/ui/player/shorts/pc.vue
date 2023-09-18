@@ -4,7 +4,7 @@
 
 	<div class="w-full h-full   text-white  duration-200"  :style="{'background':`url(${props.poster}) center / cover`,'--min-video-height':  shortItemHeight > 0 ?  shortItemHeight+'px' : '100%'}" @mouseover="isHover = true" @mouseout="isHover = false">
 		<div class="vpeMiniPlayer">
-			<div :id="`vpeMiniPlayer`" v-show="uiStart"></div>
+			<div :id="`vpeMiniPlayer`" ></div>
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart && isInitPlay" @click="playStart" v-show="!isPlay">

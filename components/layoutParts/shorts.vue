@@ -102,6 +102,7 @@ const isMobile = useIsMobile();
 const ShortPlayList = useShortPlayList();
 const IDX = ref(0);
 
+
 const route = useRoute();
 const router = useRouter();
 
@@ -144,14 +145,10 @@ const setShortItemHeight = ()=>{
 }
 
 const shortsPrev = ()=>{
-
-
 	uiSwiperControls.value.prevSlide();
-
 }
 
 const shortsNext = ()=>{
-
 	uiSwiperControls.value.nextSlide();
 }
 
@@ -163,7 +160,6 @@ const chageShortsVideo = (video_id)=>{
 }
 
 const slideChage = (e)=>{
-	console.log('!!!',e.activeIndex)
 
 	SHORTS_IDX.value = e.activeIndex
 	IDX.value = e.activeIndex
@@ -173,14 +169,14 @@ const slideChage = (e)=>{
 }
 
 const slideChangeTransitionStart = (e)=>{
-	console.log('!!!slideChangeTransitionStart');
+
 	shortScrollStart.value = true;
 	activeTmp.value = false;
 
 	isPlay.value = false;
 }
 const slideChangeTransitionEnd = (e)=>{
-	console.log('!!!slideChangeTransitionEnd');
+
 	shortScrollStart.value = false;
 	activeTmp.value = true;
 }
@@ -197,7 +193,17 @@ const keydownRun = _.debounce((e)=>{
 		shortsNext();
 	}else if(e.key == 'ArrowUp'){
 		shortsPrev();
+	}else if(e.key == ' '){
+		let videos = document.querySelectorAll('video');
+		for (let i = 0; i < videos.length; i++) {
+			if(isPlay.value){
+				videos[i].pause();
+			}else{
+				videos[i].play();
+			}
+		}
 	}
+
 },200);
 
 
