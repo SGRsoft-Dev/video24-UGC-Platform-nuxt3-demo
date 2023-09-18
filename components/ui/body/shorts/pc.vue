@@ -2,27 +2,27 @@
 
 	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 dark:bg-neutral-900/10 "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
 
-		<div class="mx-auto w-full md:w-[40vw]  md:max-w-[600px]  md:max-h-[95vh] h-full pb-safe pt-safe   " >
+		<div class="mx-auto w-full md:w-[40vw]  md:max-w-[520px]  md:max-h-[95vh] h-full pb-safe pt-safe   " >
 			<div class="md:flex h-full md:gap-4">
 
-				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative md:aspect-[9/20] " >
+				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative aspect-[9/20] " >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
 
-						<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover no-repeat`,'backgroundColor':'#000'}" v-if="!active"></div>
+						<div class="bg-gra-v w-full h-full absolute z-[98] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="!active && !shortScrollStart"></div>
 						<Transition name="fade">
-							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / cover no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart"></div>
+							<div class="bg-gra-v w-full  h-full absolute z-[99] "  v-show="shortScrollStart">
+								<UiPlayerShortsThumbHlsjs :playUrl="video.hls_play_url" :id="video.video_id" v-if="SHORTS_IDX == idx || SHORTS_IDX == (idx+1) || SHORTS_IDX == (idx-1)"/>
+							</div>
 						</Transition>
 
-						<UiPlayerMiniPc
+						<UiPlayerShortsHlsjs
 							:playUrl="video.hls_play_url"
 							:poster="video.thumb_url"
 							aspectRatio="9/20"
 							objectFit="cover"
-							:width="shortItemWidth"
-							:height="shortItemHeight"
-							v-if="active && !shortScrollStart"
-
+							v-if="active"
+							class="w-full h-full absolute z-[97]  "
 						/>
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
@@ -86,6 +86,14 @@ const props = defineProps({
 		default: 0
 	},
 	shortItemWidth: {
+		type: Number,
+		default: 0
+	},
+	SHORTS_IDX: {
+		type: Number,
+		default: 0
+	},
+	idx: {
 		type: Number,
 		default: 0
 	},

@@ -14,7 +14,7 @@
 		 }"
 	>
 		<div class="p-2 "  >
-			<div class=" flex items-center">
+			<div class=" flex items-center ">
 				<div class="w-[220px] flex pl-2">
 
 					<button @click="setLeftMenuOpen" class="ml-2 mr-2 hidden md:inline" type="button" >

@@ -28,7 +28,7 @@
 definePageMeta({
 	middleware: ["video"],
 });
-import axios from "axios";
+
 
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;

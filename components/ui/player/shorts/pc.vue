@@ -95,6 +95,15 @@ if(props.muted){
 	isMuted.value = true;
 }
 
+const setVpeStyle = ()=>{
+	try{
+		document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10) +"px";
+		document.getElementsByTagName('video')[0].style.objectFit = 'cover';
+	}catch (e) {
+
+	}
+}
+
 const setupVPE = ()=>{
 
 
@@ -122,18 +131,15 @@ const setupVPE = ()=>{
 
 
 	window.miniPlayer.on('ready',()=>{
-		document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10) +"px";
-		document.getElementsByTagName('video')[0].style.objectFit = 'cover';
+		setVpeStyle();
 		setTimeout(()=>{
-			document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10)+"px";
-			document.getElementsByTagName('video')[0].style.objectFit = 'cover';
+			setVpeStyle();
 			uiStart.value = true;
-		},200);
+		},100);
 		setTimeout(()=>{
-			document.getElementsByTagName('video')[0].style.height = (shortItemHeight.value + 10)+"px";
-			document.getElementsByTagName('video')[0].style.objectFit = 'cover';
+			setVpeStyle();
 			playStart();
-		},300);
+		},200);
 	});
 
 	window.miniPlayer.on('play',()=>{
@@ -172,7 +178,11 @@ const setupVPE = ()=>{
 }
 
 const playStart = ()=>{
-	window.miniPlayer.play();
+	try {
+		window.miniPlayer.play();
+	}catch (e) {
+
+	}
 }
 
 const togglePlay = ()=>{

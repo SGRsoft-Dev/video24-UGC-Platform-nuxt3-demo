@@ -1,8 +1,8 @@
 <template>
 
-<!--	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
-		{{windowSize.width}} / {{SHORTS_IDX}} / {{ShortsList.length}}
-	</div>-->
+	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
+		{{activeTmp}} / {{SHORTS_IDX}}
+	</div>
 	<div v-if="!loading">
 		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 			<a href="/">
@@ -37,13 +37,13 @@
 				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)]  snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
 						<UiBodyShortsMobile v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
-						<UiBodyShortsPc v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
+						<UiBodyShortsPc v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
 					</div>
 				</div>
 			</div>
 
 			<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute top-0 left-0 z-[2]">
-				<UiPlayerMiniMobile
+				<UiPlayerShortsMobile
 					:playlist="ShortPlayList"
 					aspectRatio="9/20"
 					objectFit="cover"
@@ -153,8 +153,8 @@ const shortsScrollRun = (e)=>{
 	shortScroll.value = e.target.scrollTop;
 	isPlay.value = false;
 	shortsScrollEnd();
-
 	clearTimeout(scrollEndTimer);
+
 	scrollEndTimer = setTimeout(()=>{
 		if(shortScrollStart.value) {
 			try {
@@ -165,12 +165,12 @@ const shortsScrollRun = (e)=>{
 			shortScrollStart.value = false;
 			isPlay.value = true;
 		}
-	},2000);
+	},isMobile.value ? 2000 : 300);
 
 }
 const shortsScrollEnd = _.debounce((e)=>{
 	setIdx();
-},isMobile.value ? 400 : 600);
+},isMobile.value ? 400 : 200);
 
 const setIdx = ()=>{
 
