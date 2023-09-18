@@ -97,16 +97,17 @@ const getShortList = async ()=>{
 useAsyncData(async ()=>{
 
 	if(SHORTS.value.length > 0){
-		return;
+		activeTmp.value = true;
+	}else {
+		await getShortList();
+
+		setShortsFist();
+
+		setTimeout(() => {
+			setShortsList();
+		}, 1000);
+		//shuffle(ShortsList.value);
 	}
-	await getShortList();
-
-	setShortsFist();
-
-	setTimeout(()=>{
-		setShortsList();
-	},1000);
-	//shuffle(ShortsList.value);
 
 });
 

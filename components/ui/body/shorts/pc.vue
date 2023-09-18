@@ -1,28 +1,29 @@
 <template>
 
-	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 dark:bg-neutral-900/10 "  :style="{height:`${windowSize.height - 0}px`}"  v-if="video">
+	<div class="h-screen md:pt-5 md:max-h-[90vh] bg-neutral-300/20 dark:bg-neutral-900/10 "  :style="{height:`${windowSize.height - 0}px` , width:`${windowSize.width - 0}px`}"  v-if="video">
 
 		<div class="mx-auto w-full md:w-[40vw]  md:max-w-[520px]  md:max-h-[95vh] h-full pb-safe pt-safe   " >
 			<div class="md:flex h-full md:gap-4">
 
-				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative aspect-[9/20] " >
-					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
+				<div class=" md:rounded-xl overflow-hidden  h-full flex-auto shadow-md relative  " >
+					<div class=" w-full h-full md:rounded-xl overflow-hidden  "  v-if="video" >
 
-
-						<div class="bg-gra-v w-full h-full absolute z-[98] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="!active && !shortScrollStart"></div>
+						<div class="bg-gra-v w-full h-full absolute z-[101] bg-red-900"  @click="togglePlay"  v-if=" !shortScrollStart"></div>
 						<Transition name="fade">
-							<div class="bg-gra-v w-full  h-full absolute z-[99] "  v-show="shortScrollStart">
-								<UiPlayerShortsThumbHlsjs :playUrl="video.hls_play_url" :id="video.video_id" v-if="SHORTS_IDX == idx || SHORTS_IDX == (idx+1) || SHORTS_IDX == (idx-1)"/>
+							<div class=" w-full  h-full absolute z-[99] bg-black"  :style="{background:`url(${video.thumb_url}) center / contain no-repeat`,backgroundColor:'#000'}" v-show="shortScrollStart">
+								<UiPlayerShortsThumbHlsjs  :poster="video.thumb_url" :playUrl="video.hls_play_url" :id="video.video_id" v-if="!isIOS && ( SHORTS_IDX == idx || SHORTS_IDX == (idx+1) || SHORTS_IDX == (idx-1))"/>
 							</div>
 						</Transition>
 
 						<UiPlayerShortsHlsjs
 							:playUrl="video.hls_play_url"
 							:poster="video.thumb_url"
-							aspectRatio="9/20"
-							objectFit="cover"
-							v-if="active"
-							class="w-full h-full absolute z-[97]  "
+
+							v-if="active && activeTmp"
+							class="w-full h-full absolute z-[100]  "
+
+							v-show="!shortScrollStart"
+							ref="uiPlayerShortsHlsjs"
 						/>
 
 						<div class="absolute bottom-0  z-[999999] flex text-white p-3 mb-2">
@@ -58,7 +59,9 @@
 		</div>
 
 
-
+		<div class="fixed right-[15px] min-[720px]:right-[20px] bottom-[25px] min-[980px]:hidden  z-[999999]" v-if="SHORTS_IDX == idx" >
+			<UiShortsBtns :video="video" :isMobile="true"/>
+		</div>
 
 	</div>
 
@@ -106,10 +109,22 @@ const UUID = useUuid();
 const {$util} = useNuxtApp();
 const isMuted = useState('isMuted');
 const isIOS = useState('isIOS');
+const activeTmp = useState('activeTmp');
 
 const toggleMuted = ()=>{
+
 	if(isMuted.value) {
 		window.miniPlayer.mute();
+	}
+}
+
+const uiPlayerShortsHlsjs = ref(null);
+
+const togglePlay = ()=>{
+	if(isMuted.value){
+		uiPlayerShortsHlsjs.value.toggleMuted();
+	}else {
+		uiPlayerShortsHlsjs.value.togglePlay();
 	}
 }
 
@@ -169,7 +184,7 @@ onMounted(()=>{
 
 .bg-gra-v{
 	background: rgb(0,0,0);
-	background: linear-gradient(180deg, rgba(0,0,0,0.3435968137254902) 0%, rgba(0,0,0,0) 9%, rgba(0,0,0,0) 46%, rgba(0,0,0,0.24555759803921573) 69%, rgba(0,0,0,0.5424763655462185) 100%);
+	background: linear-gradient(180deg, rgba(0,0,0,0.1435968137254902) 0%, rgba(0,0,0,0) 6%, rgba(0,0,0,0) 86%, rgba(0,0,0,0.24555759803921573) 94%, rgba(0,0,0,0.3424763655462185) 100%);
 }
 
 </style>

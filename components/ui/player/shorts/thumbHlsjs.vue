@@ -1,8 +1,8 @@
 
 
 <template>
-	<div class="relative w-full h-full bg-black bg-gra-v" >
-		<video class="w-full h-full object-contain bg-black" style="" :id="`thumbHlsJs_${id}`" playsinline muted></video>
+	<div class="relative w-full h-full bg-black " >
+		<video class="w-full h-full object-contain bg-black"  :id="`thumbHlsJs_${id}`" playsinline muted></video>
 	</div>
 </template>
 
@@ -36,6 +36,10 @@ const props = defineProps({
 		type: Boolean,
 		default: false
 	},
+	poster: {
+		type: String,
+		default: ''
+	},
 })
 
 const thumbHlsJsPlay = ()=>{
@@ -58,6 +62,8 @@ const mounted = ()=>{
 
 	} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 		video.src = props.playUrl;
+
+
 	}
 
 

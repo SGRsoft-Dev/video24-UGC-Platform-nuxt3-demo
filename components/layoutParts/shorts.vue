@@ -34,22 +34,14 @@
 		<div class="relative h-screen  " :style="{height:`${windowSize.height - 0}px`}"  >
 
 			<div class="absolute  top-0 left-0 z-[3] w-full h-full ">
-				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)]  snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
+				<div class="h-full w-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)]  snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
-						<UiBodyShortsMobile v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
-						<UiBodyShortsPc v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
+						<UiBodyShortsPc  :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
 					</div>
 				</div>
 			</div>
 
-			<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute h-screen w-screen top-[-2px] left-0 z-[2]" v-show="!shortScrollStart">
-				<UiPlayerShortsMobile
-					:playlist="ShortPlayList"
-					aspectRatio="9/20"
-					objectFit="cover"
 
-				/>
-			</div>
 
 		</div>
 
@@ -148,51 +140,43 @@ const shortsNext = ()=>{
 
 let scrollEndTimer = null;
 const shortsScrollRun = (e)=>{
-
 	shortScrollStart.value = true;
 	activeTmp.value = false;
 	shortScroll.value = e.target.scrollTop;
 	isPlay.value = false;
 	shortsScrollEnd();
-	clearTimeout(scrollEndTimer);
 
-	scrollEndTimer = setTimeout(()=>{
-		if(shortScrollStart.value) {
-			try {
-				window.miniPlayer.play();
-			} catch (e) {
-
-			}
-			//shortScrollStart.value = false;
-			isPlay.value = true;
-		}
-	},isMobile.value ? 5000 : 300);
 
 }
 const shortsScrollEnd = _.debounce((e)=>{
 	setIdx();
+	clearTimeout(scrollEndTimer);
+	scrollEndTimer = setTimeout(()=>{
+		shortScrollStart.value = false;
+		activeTmp.value = true;
+	},1000)
 },isMobile.value ? 400 : 200);
 
 const setIdx = ()=>{
-
+	clearTimeout(scrollEndTimer);
 	SHORTS_IDX.value = Math.floor(shortScroll.value / shortItemHeight.value);
 	IDX.value = getCurrentVisibleElementIndex();
 
-	chageShortsVideo(ShortsList.value[SHORTS_IDX.value].video_id);
-
 	SHORTS_VIDEO.value = ShortsList.value[SHORTS_IDX.value];
-	if(isMobile.value) {
-		window.miniPlayer.seekSource(SHORTS_IDX.value);
-	}
-	activeTmp.value = true;
+	chageShortsVideo(ShortsList.value[SHORTS_IDX.value].video_id);
 
 }
 
 const chageShortsVideo = (video_id)=>{
 	router.replace('/shorts/'+video_id);
-
 }
 
+watch(()=>SHORTS_IDX.value , (to,from)=>{
+	if(to == from){
+		clearTimeout(scrollEndTimer);
+	}
+
+})
 
 
 const getCurrentVisibleElementIndex = () => {
@@ -213,9 +197,9 @@ const getCurrentVisibleElementIndex = () => {
 
 
 
-/*watch(()=>route.params , (to,from)=>{
-	console.log(to,from)
-})*/
+watch(()=>shortScrollStart.value , (to,from)=>{
+	console.log('shortScrollStart',to)
+})
 
 
 

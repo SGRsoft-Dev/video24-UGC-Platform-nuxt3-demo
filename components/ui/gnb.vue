@@ -22,11 +22,11 @@
 					</button>
 
 				</div>
-				<div>
+				<div class="py-2 md:py-0">
 					<a href="/">
 						<img
 							:src="logo"
-							class="  h-[20px]    "
+							class=" h-[24px] md:h-[20px]    "
 							alt=""
 						>
 					</a>
@@ -58,12 +58,11 @@
 
 
 				</div>
-				<div>
-
+				<div class="py-2 md:py-0">
 					<a href="/">
 						<img
 							:src="logo"
-							class="  h-[20px]    "
+							class=" h-[24px] md:h-[20px]    "
 							alt=""
 						>
 					</a>

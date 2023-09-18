@@ -162,7 +162,9 @@ const setupVPE = ()=>{
 			isMuted.value = false;
 		}
 		if(res.percent >=0.05){
-			shortScrollStart.value = false;
+			if(shortScrollStart.value) {
+				shortScrollStart.value = false;
+			}
 
 		}
 	})
