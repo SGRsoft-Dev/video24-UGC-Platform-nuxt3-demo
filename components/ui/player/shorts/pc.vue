@@ -163,6 +163,7 @@ const setupVPE = ()=>{
 		}
 		if(res.percent >=0.05){
 			shortScrollStart.value = false;
+
 		}
 	})
 	window.miniPlayer.on('volumechange',()=>{

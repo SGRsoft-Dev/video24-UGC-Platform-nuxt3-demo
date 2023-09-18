@@ -96,6 +96,7 @@ const isPlay = useState('isPlay',()=>false);
 const isInitPlay = ref(false);
 const uiStart = ref(false);
 const isHover = ref(false);
+const isNextEnd = ref(true);
 const isIos = useOsIOS();
 const isMobile = useIsMobile();
 
@@ -173,10 +174,12 @@ const setupVPE = ()=>{
 	});
 	window.miniPlayer.on('nextTrack',()=>{
 		isPercent.value = 0;
+
 		setTimeout(()=>{
 			shortScrollStart.value = false;
+			isNextEnd.value = true;
 			console.log('isNext')
-		},200);
+		},300);
 	});
 
 	window.miniPlayer.on('timeupdate',(res)=>{
@@ -187,7 +190,7 @@ const setupVPE = ()=>{
 		}else{
 			isMuted.value = false;
 		}
-		if (res.percent >= 0.5 && shortScrollStart.value) {
+		if (res.percent >= 1 && shortScrollStart.value && isNextEnd.value) {
 			shortScrollStart.value = false;
 		}
 	})

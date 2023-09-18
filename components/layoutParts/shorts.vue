@@ -1,8 +1,8 @@
 <template>
 
-	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
+<!--	<div class="fixed top-0 right-0 bg-black z-[9999999] text-white p-3">
 		{{activeTmp}} / {{SHORTS_IDX}}
-	</div>
+	</div>-->
 	<div v-if="!loading">
 		<div class="fixed top-0 left-0 z-[99999] p-3 md:hidden" v-if="isMobile">
 			<a href="/">
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 
-			<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute top-0 left-0 z-[2]">
+			<div v-if="route.params.shortsVideoId && route.path.split('/')[1] == 'shorts' &&  ShortPlayList.length > 0 && isMobile" class="absolute h-screen w-screen top-[-2px] left-0 z-[2]" v-show="!shortScrollStart">
 				<UiPlayerShortsMobile
 					:playlist="ShortPlayList"
 					aspectRatio="9/20"

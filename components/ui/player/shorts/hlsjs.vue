@@ -198,7 +198,7 @@ const mounted = ()=>{
 		}catch (e) {
 
 		}
-		if (res.percent >= 0.05) {
+		if (isPercent.value >= 0.05) {
 			shortScrollStart.value = false;
 		}
 
