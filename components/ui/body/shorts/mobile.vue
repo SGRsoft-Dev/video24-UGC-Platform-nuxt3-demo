@@ -12,6 +12,7 @@
 						<div class="bg-gra-v w-full h-full absolute z-[98] " @click="playStart" v-if="!shortScrollStart"></div>
 						<Transition name="fade">
 							<div class="bg-gra-v w-full  h-full absolute z-[99] text-white " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}"  v-show="shortScrollStart">
+								<UiPlayerShortsThumbHlsjs class="h-full"  ref="uiPlayerShortsThumbHlsjs" :playUrl="video.hls_play_url" :id="video.video_id"   v-if="SHORTS_IDX == idx || SHORTS_IDX == (idx+1) || SHORTS_IDX == (idx-1)"/>
 							</div>
 						</Transition>
 
