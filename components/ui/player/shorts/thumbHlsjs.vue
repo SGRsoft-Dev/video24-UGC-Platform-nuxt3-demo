@@ -1,8 +1,8 @@
 
 
 <template>
-	<div class="relative w-full h-full bg-black bg-gra-v">
-		<video class="w-full h-full object-contain bg-black" preload="none" :id="`thumbHlsJs_${id}`" playsinline muted></video>
+	<div class="relative w-full h-full bg-black bg-gra-v" >
+		<video class="w-full h-full object-contain bg-black" style="" :id="`thumbHlsJs_${id}`" playsinline muted></video>
 	</div>
 </template>
 
@@ -32,16 +32,23 @@ const props = defineProps({
 		type: String,
 		default: ''
 	},
+	autoplay: {
+		type: Boolean,
+		default: false
+	},
 })
 
+const thumbHlsJsPlay = ()=>{
+	let video = document.getElementById(`thumbHlsJs_${props.id}`);
+	video.play();
+}
+
+defineExpose({
+	thumbHlsJsPlay
+})
 
 const mounted = ()=>{
 	let video = document.getElementById(`thumbHlsJs_${props.id}`);
-	try{
-		hls.destroy();
-	}catch (e) {
-
-	}
 
 	let hls = new Hls();
 	if(Hls.isSupported()) {
@@ -52,6 +59,8 @@ const mounted = ()=>{
 	} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 		video.src = props.playUrl;
 	}
+
+
 }
 
 onMounted(()=>{

@@ -36,7 +36,7 @@
 			<div class="absolute  top-0 left-0 z-[3] w-full h-full ">
 				<div class="h-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)]  snap-y snap-mandatory overflow-y-auto shortsBody " id="shortsBody" tabindex="0"   @scroll="shortsScrollRun">
 					<div v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`" >
-						<UiBodyShortsMobile v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " />
+						<UiBodyShortsMobile v-if="isMobile" :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
 						<UiBodyShortsPc v-else :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
 					</div>
 				</div>
@@ -47,6 +47,7 @@
 					:playlist="ShortPlayList"
 					aspectRatio="9/20"
 					objectFit="cover"
+
 				/>
 			</div>
 
@@ -91,7 +92,7 @@ const route = useRoute();
 const router = useRouter();
 
 const shortScroll = ref(0);
-const shortScrollStart = useState('shortScrollStart',()=>false);
+const shortScrollStart = useState('shortScrollStart',()=>true);
 
 const shortItemHeight = useState('shortItemHeight',()=>0);
 const shortItemWidth = useState('shortItemWidth',()=>0);
@@ -165,7 +166,7 @@ const shortsScrollRun = (e)=>{
 			shortScrollStart.value = false;
 			isPlay.value = true;
 		}
-	},isMobile.value ? 2000 : 300);
+	},isMobile.value ? 2200 : 300);
 
 }
 const shortsScrollEnd = _.debounce((e)=>{

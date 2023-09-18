@@ -3,7 +3,7 @@
 <template>
 
 	<div class="w-full h-full bg-black  text-white  duration-200" :style="{'background':`url(${props.poster}) center / cover`,'--min-video-width': windowSize.width+'px','--min-video-height': windowSize.height+'px' }" @mouseover="isHover = true" @mouseout="isHover = false">
-		<div class="vpeMiniPlayer">
+		<div class="vpeMiniPlayer h-full">
 			<div :id="`vpeMiniPlayer`" v-show="uiStart"></div>
 		</div>
 
@@ -44,6 +44,7 @@
 
 		object-fit: contain !important;
 		z-index:1;
+		max-height:100vh;
 	}
 	.fade-enter-active, .fade-leave-active {
 		transition: opacity .2s;
@@ -122,7 +123,7 @@ const setupVPE = ()=>{
 		progressBarColor:"#ff0000",
 		startMutedInfoNotVisible:false,
 		aspectRatio:props.aspectRatio,
-		objectFit:props.objectFit,
+		objectFit:'contain',
 		autoPause:false,
 		repeat:true,
 		descriptionNotVisible:true
@@ -160,7 +161,7 @@ const setupVPE = ()=>{
 		isPlay.value = false;
 	});
 	window.miniPlayer.on('next',()=>{
-
+		isPercent.value = 0;
 	});
 
 
@@ -172,10 +173,8 @@ const setupVPE = ()=>{
 		}else{
 			isMuted.value = false;
 		}
-		if(!isMobile.value) {
-			if (res.percent >= 0.6) {
-				shortScrollStart.value = false;
-			}
+		if (res.percent >= 0.8 && shortScrollStart.value) {
+			shortScrollStart.value = false;
 		}
 	})
 	window.miniPlayer.on('volumechange',()=>{

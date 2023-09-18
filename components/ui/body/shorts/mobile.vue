@@ -8,10 +8,11 @@
 				<div class=" md:rounded-xl  h-full flex-auto shadow-md relative md:aspect-[9/20] " >
 					<div class=" w-full h-full md:rounded-xl overflow-hidden  " v-if="video" >
 
-						<div class="bg-gra-v w-full h-full absolute z-[99]"  @click="playStart"></div>
+
+						<div class="bg-gra-v w-full h-full absolute z-[98] " @click="playStart" v-if="!shortScrollStart"></div>
 						<Transition name="fade">
-							<div class="bg-gra-v w-full h-full absolute z-[99] " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}" v-if="shortScrollStart">
-								<div class="bg-gra-v w-full h-full absolute z-[99]" ></div>
+							<div class="bg-gra-v w-full  h-full absolute z-[99] text-white " :style="{'background':`url(${video.thumb_url}) center / contain no-repeat`,'backgroundColor':'#000'}"  v-show="shortScrollStart">
+								<UiPlayerShortsThumbHlsjs  ref="uiPlayerShortsThumbHlsjs" :playUrl="video.hls_play_url" :id="video.video_id"   v-if="SHORTS_IDX == idx || SHORTS_IDX == (idx+1) || SHORTS_IDX == (idx-1)"/>
 							</div>
 						</Transition>
 
@@ -35,7 +36,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="fixed right-[15px] min-[720px]:right-[20px] bottom-[25px] min-[980px]:hidden  z-[999999]">
+						<div class="fixed right-[15px] min-[720px]:right-[20px] bottom-[25px] min-[980px]:hidden  z-[999999]" v-if="SHORTS_IDX == idx" >
 							<UiShortsBtns :video="video" :isMobile="true"/>
 						</div>
 
@@ -79,6 +80,14 @@ const props = defineProps({
 		type: Number,
 		default: 0
 	},
+	SHORTS_IDX: {
+		type: Number,
+		default: 0
+	},
+	idx: {
+		type: Number,
+		default: 0
+	}
 });
 const runtimeConfig = useRuntimeConfig();
 const mpKey = runtimeConfig.public.mediaPlusApiKey;
@@ -89,6 +98,8 @@ const {$util} = useNuxtApp();
 const isMuted = useState('isMuted');
 const isIOS = useState('isIOS');
 const isPlay = useState('isPlay');
+
+const uiPlayerShortsThumbHlsjs = ref(null);
 
 const toggleMuted = ()=>{
 	if(isMuted.value) {
@@ -139,6 +150,7 @@ const playStart = ()=>{
 	}
 }
 
+
 onMounted(()=>{
 
 	let parser = ua(window.navigator.userAgent);
@@ -160,7 +172,7 @@ onMounted(()=>{
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-	transition: opacity .3s;
+	transition: opacity .5s;
 }
 .fade-enter, .fade-leave-active {
 	opacity: 0;
