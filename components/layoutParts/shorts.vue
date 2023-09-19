@@ -28,7 +28,7 @@
 		</div>
 
 
-		<div class="relative h-screen  " :style="{height:`${isMobile ? windowSize.height : windowSize.height - 54}px`}"  @mousewheel="mousewheelRun" @keydown="keydownRun">
+		<div class="relative h-screen  " :style="{height:`${isMobile ? windowSize.height : windowSize.height - 54}px`}" @click="shortsBodyFocus"  @mousewheel="mousewheelRun" @keydown="keydownRun">
 
 			<div class="absolute  top-0 left-0 z-[3] w-full h-full ">
 				<div class="h-full w-full max-h-[100vh] md:max-h-[calc(100vh_-_52px)] overflow-hidden  "  id="shortsBody" tabindex="0">
@@ -54,7 +54,7 @@
 					>
 
 						<SwiperSlide v-for="(s , i) in ShortsList" class="shortItemWarps " :id="`shortItem_${i}`"    :key="i">
-							<UiBodyShortsPc  :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
+							<UiBodyShorts  :video="s" class="snap-always snap-start shortItems" :active="activeTmp && SHORTS_IDX == i " :SHORTS_IDX="SHORTS_IDX" :idx="i" />
 						</SwiperSlide>
 
 						<UiSwiperControls ref="uiSwiperControls"/>
@@ -181,34 +181,54 @@ const slideChangeTransitionEnd = (e)=>{
 	activeTmp.value = true;
 }
 
-const mousewheelRun = _.debounce((e)=>{
-	if(e.deltaY > 0){
-		shortsNext();
+const scrollRunLock = ref(false);
+const mousewheelRun = (e)=>{
+
+	if(!scrollRunLock.value) {
+		scrollRunLock.value = true;
+		if (e.deltaY > 0) {
+			shortsNext();
+		} else {
+			shortsPrev();
+		}
 	}else{
-		shortsPrev();
+		e.preventDefault();
 	}
-},200);
+	kbAndMouseEnd();
+};
+
 const keydownRun = _.debounce((e)=>{
-	if(e.key == 'ArrowDown'){
-		shortsNext();
-	}else if(e.key == 'ArrowUp'){
-		shortsPrev();
-	}else if(e.key == ' '){
-		let videos = document.querySelectorAll('video');
-		for (let i = 0; i < videos.length; i++) {
-			if(isPlay.value){
-				videos[i].pause();
-			}else{
-				videos[i].play();
+	scrollRunLock.value = true;
+	if(!scrollRunLock.value) {
+		if (e.key == 'ArrowDown') {
+			shortsNext();
+		} else if (e.key == 'ArrowUp') {
+			shortsPrev();
+		} else if (e.key == ' ') {
+			let videos = document.querySelectorAll('video');
+			for (let i = 0; i < videos.length; i++) {
+				if (isPlay.value) {
+					videos[i].pause();
+				} else {
+					videos[i].play();
+				}
 			}
 		}
-	}
+	}else{
 
+	}
+	kbAndMouseEnd();
+
+},200);
+const kbAndMouseEnd = _.debounce(()=>{
+	scrollRunLock.value = false;
 },200);
 
 
 
-
+const shortsBodyFocus = ()=>{
+	document.getElementById("shortsBody").focus();
+}
 
 let parser = ref(null);
 
@@ -225,7 +245,6 @@ onMounted(async ()=>{
 
 
 	setTimeout(()=>{
-
 
 
 		if(isMobile.value) {
@@ -246,7 +265,7 @@ onMounted(async ()=>{
 		loading.value = false;
 
 		setTimeout(()=>{
-			document.getElementById("shortsBody").focus();
+			shortsBodyFocus();
 		},300)
 	},1000)
 })

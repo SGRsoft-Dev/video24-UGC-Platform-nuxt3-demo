@@ -11,7 +11,7 @@
 						<div class="bg-gra-v w-full h-full absolute z-[101] bg-red-900"  @click="togglePlay"  v-if=" !shortScrollStart"></div>
 						<div class=" w-full  h-full absolute z-[99] bg-black"  :style="{background:`url(${video.thumb_url}) center / cover no-repeat`,backgroundColor:'#000'}" ></div>
 
-						<UiPlayerShortsHlsjs
+						<UiPlayerShorts
 							:playUrl="video.hls_play_url"
 							:poster="video.thumb_url"
 

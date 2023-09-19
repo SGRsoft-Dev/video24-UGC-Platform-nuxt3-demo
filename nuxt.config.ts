@@ -12,9 +12,6 @@ export default defineNuxtConfig({
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
                 { src: 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=22045d89296ded00f659387a33b5a6fd&beta=22132222' },
-                //{ src: 'http://localhost:9000/ncplayer.js?access_key=22045d89296ded00f659387a33b5a6fd&beta=232223' },
-
-
             ],
         },
     },
@@ -25,14 +22,6 @@ export default defineNuxtConfig({
     ],
     devtools: { enabled: process.env.NODE_ENV === 'development' ? true : false },
     modules: ['@nuxthq/ui','@emanuele-em/nuxt-swipe','nuxt-swiper'],
-
-    swiper: {
-        // Swiper options
-        //----------------------
-        // prefix: 'Swiper',
-        // styleLang: 'css',
-        // modules: ['navigation', 'pagination'], // all modules are imported by default
-    },
 
     runtimeConfig:{
         public:{

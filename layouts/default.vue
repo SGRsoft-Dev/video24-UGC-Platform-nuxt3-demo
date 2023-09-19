@@ -44,8 +44,6 @@
 
 <script setup>
 import ua from "ua-parser-js";
-import {useState} from "#app";
-
 
 
 
