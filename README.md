@@ -10,11 +10,11 @@ VIDEO24를 이용한 UGC 플랫폼을 구현한 FrontEnd 데모코드입니다.
 
 
 ## 데모페이지
-[UGC 플랫폼 데모](https://VIDEO24-ugc-platform-nuxt3-demo.web.app/)
+[UGC 플랫폼 데모](https://mediaplus-ugc-platform-nuxt3-demo.web.app/)
 
 
 ## 데모페이지 소스코드
-[https://github.com/SGRsoft-Dev/VIDEO24-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/VIDEO24-UGC-Platform-nuxt3-demo)
+[https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo)
 
 
 *** 
