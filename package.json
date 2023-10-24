@@ -7,7 +7,6 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "clean": "cd .output/server && rm -rf node_modules && yarn install",
     "firebaseBuild": "NITRO_PRESET=firebase && NITRO_FIREBASE_GEN=2 && nuxt build",
     "firebaseDeploy": "NITRO_PRESET=firebase && NITRO_FIREBASE_GEN=2 && nuxt build && npx firebase deploy"
   },
