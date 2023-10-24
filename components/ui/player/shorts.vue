@@ -4,7 +4,11 @@
 
 	<div class="w-full h-full bg-black  text-white  duration-200 "  :style="{background:`url(${poster}) center / cover no-repeat`,backgroundColor:'#000'}"    @mouseover="isHover = true" @mouseout="isHover = false">
 		<div class="vpeMiniPlayer">
-			<video :id="`vpeMiniPlayer_${id}`"  :style="{objectFit: isMobile ? 'contain' : 'cover', }"  playsinline class="w-full h-full  bg-black" object-cover="" :loop="loop ? true : false"></video>
+			<video
+				:id="`vpeMiniPlayer_${id}`"
+				:style="{objectFit: isMobile ? 'contain' : 'cover', }"
+				playsinline
+				class="w-full h-full" object-cover="" :loop="loop ? true : false"></video>
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full h-full z-[9999] bg-neutral-900/10 flex justify-center items-center " v-if="uiStart && isInitPlay" @click="playStart" v-show="!isPlay">
