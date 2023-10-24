@@ -2,8 +2,9 @@
   "functions": [
     {
       "source": ".output/server",
-      "runtime": "nodejs16",
-      "codebase": "ugcserver"
+      "runtime": "nodejs18",
+      "codebase": "ugcserver",
+      "predeploy": ["cd .output/server && rm -rf ./node_modules && yarn install"]
     }
   ],
   "hosting": {
