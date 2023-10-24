@@ -1,37 +1,37 @@
 ## UGC Streaming / VOD Platform DEMO
 
-미디어플러스를 이용한 UGC 플랫폼을 구현한 FrontEnd 데모코드입니다.
+VIDEO24를 이용한 UGC 플랫폼을 구현한 FrontEnd 데모코드입니다.
 
 
 
 
-![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/639de76eff35933850360e675624236d.png)
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202310/6cd0539427c794dac116b6d4616eea1c.png)
 
 
 
 ## 데모페이지
-[UGC 플랫폼 데모](https://mediaplus-ugc-platform-nuxt3-demo.web.app/)
+[UGC 플랫폼 데모](https://VIDEO24-ugc-platform-nuxt3-demo.web.app/)
 
 
 ## 데모페이지 소스코드
-[https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/mediaplus-UGC-Platform-nuxt3-demo)
+[https://github.com/SGRsoft-Dev/VIDEO24-UGC-Platform-nuxt3-demo](https://github.com/SGRsoft-Dev/VIDEO24-UGC-Platform-nuxt3-demo)
 
 
 *** 
 
-![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202308/851b6ea05f1fcc1cb827d841ca32346d.png)
+![](https://nnbkegvqsbcu5297614.cdn.ntruss.com/profile/202310/4f8b9055fd11fe2a1595586c52a7ec29.png)
 
-# MEDIA PLUS for NAVERCLOUD PLATFORM
-미디어플러스는 네이버클라우드 플랫폼에서 동작하는 클라우드 네이티브앱입니다.
+# VIDEO24 for NAVERCLOUD PLATFORM
+VIDEO24는 네이버클라우드 플랫폼에서 동작하는 클라우드 네이티브앱입니다.
 
-## 미디어플러스 소개
-미디어플러스는 끊김 없이 안정적인 동영상 스트리밍 구축과 연동이 가능한 SaaS입니다.
+## VIDEO24 소개
+VIDEO24는 끊김 없이 안정적인 동영상 스트리밍 구축과 연동이 가능한 SaaS입니다.
 
 네이버클라우드 플랫폼의 인프라를 사용한 미디어 서비스를 구축을 고려하고 있다면,
 
-MEDIAPLUS는 이러한 번거로운 연동 작업을 단축시켜, 동영상 스트리밍에 필요한 솔루션을 ONESTOP 연동할 수 있습니다.
+VIDEO24는 이러한 번거로운 연동 작업을 단축시켜, 동영상 스트리밍에 필요한 솔루션을 ONESTOP 연동할 수 있습니다.
 
-끊김 없는 안정적인 동영상 재생을 위한 최신 스트리밍 구축/연동 SaaS, MEDIA PLUS를 이용해보세요.
+끊김 없는 안정적인 동영상 재생을 위한 최신 스트리밍 구축/연동 SaaS, VIDEO24를 이용해보세요.
 
 
 ***
@@ -40,14 +40,14 @@ MEDIAPLUS는 이러한 번거로운 연동 작업을 단축시켜, 동영상 스
 
 
 ## 사전 준비사항
-UGC 데모는 미디어플러스의 UGC 스트리밍 서비스를 이용하기 위해, 네이버클라우드 일부 제품의 SDK , 미디어플러스의 계정이 필요합니다.
+UGC 데모는 VIDEO24의 UGC 스트리밍 서비스를 이용하기 위해, 네이버클라우드 일부 제품의 SDK , VIDEO24의 계정이 필요합니다.
 
 ***
 
 ## 필수
 - 네이버클라우드 플랫폼 Video Player Enhancement SDK URL (v1.1.1 이상)
 - 네이버클라우드 플랫폼 Video Player Enhancement SDK KEY (유료 라이선스 필요)
-- 미디어플러스 프로젝트 API KEY
+- VIDEO24 프로젝트 API KEY
 
 ***
 
@@ -55,7 +55,7 @@ UGC 데모는 미디어플러스의 UGC 스트리밍 서비스를 이용하기 �
 
 현재 데모코드에 사용된 필수 요소들은 개발자 로컬 테스트에서만 동작합니다. (http://localhost:3000)
 
-실제 서비스를 위해서는 미디어플러스의 계정을 발급받아야 합니다. (2023년 9월 BETA 서비스 오픈 예정)
+실제 서비스를 위해서는 VIDEO24의 계정을 발급받아야 합니다. (2023년 9월 BETA 서비스 오픈 예정)
 
 ***
 
@@ -110,7 +110,7 @@ https://tailwindcss.nuxtjs.org/
 
 ```bash
 http://localhost.com
-https://mediaplus.co.kr
+https://VIDEO24.co.kr
 ```
 나머지는 서비스를 운영할 도메인을 입력합니다.
 
@@ -146,14 +146,14 @@ export default defineNuxtConfig({
     runtimeConfig:{
         public:{
             appName:'My UGC app',
-            mediaPlusApiKey:'{미디어플러스 프로젝트 API KEY}',
+            VIDEO24ApiKey:'{VIDEO24 프로젝트 API KEY}',
         },
 
     },
     // ...
 })
 ```
-nuxt.config.js 파일에 미디어플러스 프로젝트 API KEY를 추가합니다.
+nuxt.config.js 파일에 VIDEO24 프로젝트 API KEY를 추가합니다.
 
 ***
 
@@ -253,5 +253,5 @@ SGRSOFT 개발팀  : dev@sgrsoft.com
 SGRSOFT를 통하여 네이버클라우드 플랫폼 크래딧을 지원 받을 수 있습니다. (최대 300만원)
 
 
-미디어플러스 웹사이트 :
-[https://mediaplus.co.kr/](https://mediaplus.co.kr/)
+VIDEO24 웹사이트 :
+[https://video24.app/](https://video24.app/)
