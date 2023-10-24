@@ -26,7 +26,7 @@
 					<a href="/">
 						<img
 							:src="logo"
-							class=" h-[24px] md:h-[20px]    "
+							class=" h-[24px] md:h-[28px]    "
 							alt=""
 						>
 					</a>
