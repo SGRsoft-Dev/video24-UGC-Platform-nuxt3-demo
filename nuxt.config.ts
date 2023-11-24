@@ -11,7 +11,7 @@ export default defineNuxtConfig({
             ],
             script: [
                 { src: 'https://unpkg.com/@phosphor-icons/web' },
-                { src: 'https://player.vpe.naverncp.com/ncplayer.1.1.1.dev.beta.js?access_key=22045d89296ded00f659387a33b5a6fd&beta=22132222' },
+                { src: 'https://player.vpe.naverncp.com/ncplayer.js?access_key=22045d89296ded00f659387a33b5a6fd' },
             ],
         },
     },
