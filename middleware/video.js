@@ -34,7 +34,7 @@ export default defineNuxtRouteMiddleware( async (to, from) => {
 
     if(to.path.split('/')[1] == 'embed' || to.path.split('/')[1] == 'watch') {
 
-        let data = await $fetch(`https://mediaplus.co.kr/openApi/v1/content/${videoId.value}`, {
+        let data = await $fetch(`https://video24.app/openApi/v1/content/${videoId.value}`, {
             headers:{
                 'Authorization':mpKey
             }

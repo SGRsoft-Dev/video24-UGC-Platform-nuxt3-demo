@@ -95,7 +95,7 @@ const chkDuvideo = (video_id)=>{
 
 const getVodList = async (params)=>{
 	try {
-		let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content', {
+		let {data} = await axios.get('https://video24.app/openApi/v1/content', {
 			params: params,
 			headers: {
 				'Authorization': mpKey

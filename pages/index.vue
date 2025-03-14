@@ -136,7 +136,7 @@ const shuffle =  (array) =>{
 
 const getShortList = async ()=>{
 
-	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
+	let {data} = await axios.get('https://video24.app/openApi/v1/content',{
 		params:{
 			type:'vod',
 			pageNo:pageNo.value,
@@ -169,7 +169,7 @@ const getShortList = async ()=>{
 const getVodList = async ()=>{
 	if(endPage.value) return;
 
-	let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content',{
+	let {data} = await axios.get('https://video24.app/openApi/v1/content',{
 		params:{
 			type:'vod',
 			pageNo:pageNo.value,

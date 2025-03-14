@@ -20,7 +20,7 @@ const getShort = async ()=>{
 	if(idValue){
 		router.replace('/shorts/' + idValue);
 	}else {
-		let {data} = await axios.get('https://mediaplus.co.kr/openApi/v1/content', {
+		let {data} = await axios.get('https://video24.app/openApi/v1/content', {
 			params: {
 				type: 'vod',
 				pageNo: 1,
