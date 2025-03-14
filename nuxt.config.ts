@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
-    experimental: {
+    ssr:false,
+	experimental: {
         viewTransition: false
     },
     app: {
@@ -34,9 +35,9 @@ export default defineNuxtConfig({
         preference: 'light',
     },
 
-    nitro: {
+    /*nitro: {
         routeRules: {
-            '/api/**' : {cors : true},
+            '/api/!**' : {cors : true},
         },
         preset: "firebase",
         firebase: {
@@ -45,5 +46,5 @@ export default defineNuxtConfig({
             minInstances: 1,
             memory: '256MB'
         }
-    },
+    },*/
 })

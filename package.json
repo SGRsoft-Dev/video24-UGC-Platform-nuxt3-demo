@@ -8,14 +8,16 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "firebaseBuild": "NITRO_PRESET=firebase && NITRO_FIREBASE_GEN=2 && nuxt build",
-    "firebaseDeploy": "NITRO_PRESET=firebase && NITRO_FIREBASE_GEN=2 && nuxt build && npx firebase deploy"
+    "firebaseDeploy": "NITRO_PRESET=firebase && NITRO_FIREBASE_GEN=2 && nuxt build && npx firebase deploy",
+    "onlyDeploy": "npx firebase deploy",
+    "onlyHostingDeploy":     "yarn run generate && firebase deploy --only hosting:mediaplus-ugc-platform-nuxt3-demo --project ncplayer-for-sgr"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxthq/ui": "^2.7.0",
     "@types/node": "^18.17.3",
     "firebase-admin": "^11.10.1",
-    "firebase-functions": "^4.4.1",
+    "firebase-functions": "^6.3.2",
     "firebase-functions-test": "^3.1.0",
     "nuxt": "^3.8.0"
   },
